@@ -53,8 +53,7 @@
         <div class="card-body  ">
 
           <!-- Grid row -->
-          <form [formGroup]="searchForm">
-
+          
             <!-- Grid column -->
             <div class="col-md-12 ">
 
@@ -64,10 +63,10 @@
                         <button fromControl="search" type="button" class="margindown btn generaltext"> Search </button><br> -->
 
 
-              <label for="country"><strong> Filter by: </strong></label>
+              <label for="filterBy"><strong> Filter by: </strong></label>
               <div class="row">
                 <div class="form-group col-md-4 margindown">
-                  <select formControlName="filter" id="filter" class="form-control">
+                  <select  id="filter" class="form-control">
                     <option selected> All Jobs</option>
                     <option> Company </option>
                     <option> Location </option>
@@ -76,17 +75,16 @@
                   </select>
                 </div>
                 <div class="form-group col-md-7 margindown">
-                  <input type="search" id="search" class="form-control " style="margin-bottom: 5px;">
+                  <input type='text'
+                    [(ngModel)]='listFilter' />
                 </div>
-                <button fromControl="search" type="button" class="margindown btn generaltext col-md-1"> Search </button><br>
+                <button  type="button" class="margindown btn generaltext col-md-1"> Search </button><br>
               </div>
 
 
             </div>
             <!-- Grid column -->
 
-
-          </form>
 
 
           <div>
@@ -109,7 +107,7 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let job of availableJobs">
+                <tr *ngFor="let job of filteredJobs">
                   <td> {{job.jobName}} </td>
                   <td> {{job.company}}</td>
                   <td> {{job.city}} , {{job.country}} </td>
