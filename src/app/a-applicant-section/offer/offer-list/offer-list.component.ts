@@ -52,11 +52,14 @@ export class OfferListComponent implements OnInit {
       return this.availableJobs.filter((job: IJobOffer) =>
         job.company.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
-    // if (this.selectedFilter === 'Location')
-    // return this.availableJobs.filter((job: IJobOffer) => {
-    //   job.city.toLocaleLowerCase().indexOf(filterBy) !== -1),
-    //   job.countr.toLocaleLowerCase().indexOf(filterBy) !== -1),
-    // }
+    else if (this.selectedFilter === 'Location/City')
+      return this.availableJobs.filter((job: IJobOffer) =>
+        job.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
+
+    else if (this.selectedFilter === 'Location/Country')
+      return this.availableJobs.filter((job: IJobOffer) =>
+      job.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
 
     else if (this.selectedFilter === 'Category')
       return this.availableJobs.filter((job: IJobOffer) =>
@@ -65,7 +68,7 @@ export class OfferListComponent implements OnInit {
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
     else
-    return this.availableJobs.filter((job: IJobOffer) =>
+      return this.availableJobs.filter((job: IJobOffer) =>
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 

@@ -3,6 +3,7 @@ export interface IJobOffer {
     jobName: string,
     company?:string,
     city?:string,
+    country?: string,
     jobCategory?:string,
     jobType?:string,
     description?:string
