@@ -85,7 +85,12 @@ h5{
     background-image: linear-gradient(-90deg,#25326a,	#4577bb);
     text-align: center;
      position:auto;
-      height: 30em
+      height: 30em;
+     
+}
+
+.tabsmargin{
+    margin-top: 10em
 }
 .bg-1 { 
     background-image: linear-gradient(90deg,#25326a,#4577bb);
