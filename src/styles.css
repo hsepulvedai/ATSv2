@@ -1,52 +1,98 @@
 body {
-    font: 15px sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font: 15px ;
     line-height: 1.8;
     color:black;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color:white;
 }
 p {font-size: 16px;}
-h3{
-    font: sans-serif;
-    color: black
-}
+
 .margin {margin-bottom: 45px;}
-.bg-1 { 
-    background-color: #003399;
-    color: #ffffff;
-}
-.bg-2 { 
-    background-color: #474e5d; 
-    color: #ffffff;
-}
-.bg-3 { 
-    background-color: #ffffff; 
-    color: #555555;
-}
-.bg-4 { 
-    background-color: #2f2f2f; 
-    color: #fff;
-}
+
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
 }
+
+
+
 .navbar {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border: 0;
-    border-radius: 0;
-    margin-bottom: 0;
-    font-size: 12px;
-    letter-spacing: 5px;
+    color: white;
+   background-color:#25326a;
+   font-family: 'Montserrat', sans-serif;
 }
-.navbar-nav  li a:hover {
-    color: #e6005c !important;
-}
+
 button{
     
     color: black;
 }
 
 table{
-    font: sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: black;
 }
+
+    
+
+.descp {
+    font-size: 16px;
+    color: black;
+    text-align: justify;
+    padding-left: 200px;
+    padding-right: 200px;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 50px;
+}
+.jobsp{
+    font-size: 16px;
+    color: black;
+    text-align: justify;
+    padding-left: 30px;
+    padding-right: 0px;
+    font-family: 'Montserrat', sans-serif;
+}
+h3{
+    font-family: 'Montserrat', sans-serif;;
+    color: black;
+    text-align: center;
+    padding-top: 80px;
+    
+}
+h5{
+    font-family: 'Montserrat', sans-serif;;
+    color: black;
+    text-align: center;
+    
+}
+
+
+.backgroundG{
+    background-image: linear-gradient(-90deg,#25326a,	#4577bb);
+}
+.bg-1 { 
+    background-image: linear-gradient(90deg,#25326a,#4577bb);
+    padding-bottom: 100px;
+    color: #ffffff;
+   
+}
+.bg-2 { 
+    background-image: linear-gradient( 	#F62459, #F47983);
+    color: #ffffff;
+    
+}
+
+.generaltext{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+
+      .sidebar{
+        background-color:#25326a;
+        height:100%;
+        position: absolute;
+      }
+    

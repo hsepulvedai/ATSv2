@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule, FormsModule } from '../../node_modules/@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-
-
 import { RouterModule } from '@angular/router'
 import {appRoutes} from './routes';
 import { HrTasksComponent } from './c-candidate-management/hr/hr-tasks/hr-tasks.component';
@@ -23,8 +21,6 @@ import { OfferApplicationComponent } from './a-applicant-section/offer/offer-app
 import { OfferTrackingComponent } from './a-applicant-section/offer/offer-tracking/offer-tracking.component';
 import { OfferMaintenanceComponent } from './a-applicant-section/offer/offer-maintenance/offer-maintenance.component';
 import { ApplicantMaintenanceComponent } from './c-candidate-management/applicant/applicant-maintenance/applicant-maintenance.component';
-import { FilterdataPipe } from './shared/filterdata.pipe';
-
 
 @NgModule({
   declarations: [
@@ -43,7 +39,6 @@ import { FilterdataPipe } from './shared/filterdata.pipe';
     OfferTrackingComponent,
     OfferMaintenanceComponent,
     ApplicantMaintenanceComponent,
-    FilterdataPipe
 
     
   ],

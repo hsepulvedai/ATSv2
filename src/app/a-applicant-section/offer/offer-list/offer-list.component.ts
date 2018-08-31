@@ -12,47 +12,22 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 export class OfferListComponent implements OnInit {
 
   availableJobs:IJobOffer[]
-  job:IJobOffer
+  job:IJob
+
+  filteredJobs: IJobOffer[]
+
 
   searchForm: FormGroup 
   search: FormControl
   filter: FormControl
 
-  _listFilter: string;
-
-  get listFilter(): string {
-    return this._listFilter;
-    
-  }
-
-  set listFilter(value: string){
-    this._listFilter = value;
-    this.filteredJobs = this.listFilter ? this.performFilter(this.listFilter) : this.availableJobs;
-  }
-
-  filteredJobs: IJobOffer[]
-
- 
-
-  performFilter(filterBy: string) : IJobOffer[]{
-    filterBy = filterBy.toLocaleLowerCase();
-
-
-    return this.availableJobs.filter((job: IJobOffer) =>
-          job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
-  }
-
-
-
 
   constructor
   ( private router: Router,
     private jobService: JobService, 
-    private route: ActivatedRoute,
-   ) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-
 
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
@@ -64,18 +39,12 @@ export class OfferListComponent implements OnInit {
     this.filter = new FormControl(); 
 
 
-    this.searchForm = new FormGroup({
-      search: this.search,
-      filter: this.filter
-    })
-
-    
-
-  
-
-
-
-   
+    this.searchForm = new FormGroup(
+      {
+        search: this.search,
+        filter: this.filter
+      }
+    )
   }
 
   applyButtonClicked(jobId:number){
