@@ -72,6 +72,9 @@ h5{
 
 .backgroundG{
     background-image: linear-gradient(-90deg,#25326a,	#4577bb);
+    text-align: center;
+     position:auto;
+      height: 35em
 }
 .bg-1 { 
     background-image: linear-gradient(90deg,#25326a,#4577bb);
