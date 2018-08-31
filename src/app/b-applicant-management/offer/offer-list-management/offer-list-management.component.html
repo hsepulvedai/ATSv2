@@ -1,0 +1,33 @@
+<h1>B.1</h1>
+
+<div class="container" >
+  <div style="margin-top: 30px">
+
+    <div class="shadow p-3 mb-5 bg-white rounded" >
+     
+        <table class="table ">
+            <thead >
+                <th scope="col">Job ID</th>
+                <th scope="col">Job Title</th>
+                <th scope="col"># of Applicants</th>
+                <th scope="col">Status</th>
+                <th scope="col">Category</th>
+                <th scope="col">Type</th>
+                <th scope="col">Details</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let job of jobs">
+                <th scope="row">{{job.jobId}}</th>
+                <td> {{job.jobName}}</td>
+                <td>{{countApplication}}</td>
+                <td>{{job.jobStatus}}</td>
+                <td>{{job.jobCategory}}</td>
+                <td>{{job.jobType}}</td>
+                <td><button (click)="goToOfferDetail(job.jobId)">Details</button></td>
+              </tr>
+            
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>

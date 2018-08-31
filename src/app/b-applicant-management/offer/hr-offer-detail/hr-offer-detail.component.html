@@ -1,0 +1,107 @@
+
+<style>
+
+  th {
+    text-align: center;
+  }
+
+  tr { 
+    text-align: left;
+  }
+  
+  td { 
+    text-align: left;
+  }
+</style>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+    <div class="backgroundG " style="text-align: center">
+        <h1>B.2/B.3</h1>
+        <p> lorem impusm jfejhgfjhedjfvhbj ekjjehg jehgjfgjdshgfjahzgjefg ahegjr h jhfjeh rfh jehgfjer j</p>
+    </div>    
+<div  class="container-fluid">
+
+               
+
+                <button style="margin: 10px" class="btn btn-md" type="button" [routerLink]="['/offer-list-management']">
+                  <span class="glyphicon glyphicon-menu-left"> Back </span>
+              </button>
+
+                <div class="shadow p-3 mb-5 bg-white " >
+
+                  <h1>{{job?.jobName}}</h1>
+        
+                    <div>
+                        <div><strong> Company : </strong> {{job?.companyName}}</div>  
+                        <hr>
+                     <div><strong> City : </strong> {{job?.city}}</div>  
+                        <hr>
+                     <div><strong> Country : </strong> {{job?.country}}</div>  
+                        <hr>
+                     <div><strong> Category : </strong> {{job?.jobCategory}}</div>   
+                        <hr>
+                     <div><strong> Type : </strong> {{job?.jobType}}</div>  
+                        <hr>
+                      <div><strong> Description : </strong> {{job?.description}}</div>  
+                        <hr>
+                    </div>
+                  </div>
+
+
+<div class="container-fluid" >
+    <div>
+          <p># of Applicants</p>
+
+          <table class="table ">
+              <thead>
+                <tr>
+                  <th style="text-align: left" scope="col" >Applicant ID</th>
+                  <th style="text-align: left" scope="col">Applicant Name</th>
+                  <th scope="col">Application Status</th>
+                  <th scope="col">Recruiter</th>
+                  <th scope="col"> Resume</th>
+                  <th scope="col"> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let applicant of applicants">
+                  <th style="text-align: left" scope="row" >{{applicant.applicantId}}</th>
+                  <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
+
+                  <td>       
+                  <select class="form-control" id="sel1">
+                      <option *ngFor="let status of applicationStatus">{{status.status}}</option>
+                  </select>
+                  </td>
+                  <td>         
+                      <select class="form-control" id="sel2"
+                      [(ngModel)]="selectedRecruiter" (ngModelChange)="onEmployeeChange($event)">
+                        <option *ngFor="let recruiter of employees" [ngValue]="recruiter"> {{recruiter.employeeFullName}}</option>
+                          <!-- <option *ngFor="let emp of employees">{{emp.employeeId}} {{applicant.employeeId}}</option> -->
+                          <option selected> {{emp.employeeFullName}} </option>
+
+                          <!-- Tengo que cambiar
+                          {{emp.employeeId}}  -->
+                          
+                        <!-- El que necesito
+                          {{applicant.employeeId}} -->
+                          
+                          <!-- *ngIf="emp.employeeId === applicant.employeeId"   -->
+
+                      </select>
+                      </td>
+
+                  <td><a href="#">View</a></td>
+                  <td>
+                    <button class="btn btn-sm" type="button" (click)="save(applicant.applicationId, status.id)">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+       
+    </div>
+  </div>

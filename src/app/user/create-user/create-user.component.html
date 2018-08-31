@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <title>Create User Form</title>
+
+
+  <style>
+  .textBoxes {
+    width: 300px;
+  }
+
+  button {
+    margin-top: 12px;
+    width: 300px;
+
+  }
+
+  .submitButton {
+    padding: 12px;
+  }
+
+  .myContainer {
+    padding: 100px;
+    margin-top: 30px;
+    background: white;
+  }
+
+  .titleFont {
+    padding-bottom: 30px;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="container border myContainer" align="center">
+    <div>
+      <h1 class="text-center titleFont">User Information</h1>
+    </div>
+
+  <form [formGroup]="infoForm" (ngSubmit)="createUser(infoForm.value)"
+    autocomplete="off" novalidate>
+    <div class="textBoxes">
+      <div class="form-group">
+        <label for="firstName" align="left">First name</label>
+        <input formControlName="firstName" type="text" class="form-control" id="firstName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input formControlName= "lastName"type="text" class="form-control" id="lastName">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName="email" type="text" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input formControlName="password" type="text" class="form-control" id="password">
+        </div>
+
+      <div class="button-toolbar">
+        <div>
+          <button type="submit" class="btn btn-info form-control submitButton">Submit</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-outline-info form-control" (click)="cancel()">Cancel</button>
+
+        </div>
+      </div>
+    </div>
+  </form>
+  
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+
+<style>
+
+  th {
+    text-align: center;
+  }
+
+  tr {
+    text-align: left;
+  }
+
+  input {
+    margin: 8px;
+  }
+
+  button {
+    margin-bottom: 8px;
+  }
+</style>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<h1>A.3</h1>
+
+<div class="container" >
+    <div style="margin-top: 30px">
+
+        <div class="shadow p-3 mb-5 bg-white rounded" >
+
+          <h1>{{job?.jobName}}</h1>
+
+            <div>
+                <div><strong> Company : </strong> {{job?.companyName}}</div>  
+                <hr>
+             <div><strong> City : </strong> {{job?.city}}</div>  
+                <hr>
+             <div><strong> Country : </strong> {{job?.country}}</div>  
+                <hr>
+             <div><strong> Category : </strong> {{job?.jobCategory}}</div>   
+                <hr>
+             <div><strong> Type : </strong> {{job?.jobType}}</div>  
+                <hr>
+              <div><strong> Description : </strong> {{job?.description}}</div>  
+                <hr>
+            </div>
+          </div>
+
+      <div class="shadow p-3 mb-5 bg-white rounded" >
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title" style="padding-bottom: 8px;">Applicant Information</h3>
+            
+            <form [formGroup]="applicantInfo">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input formControlName="name" disabled type="name" class="form-control" id="email" placeholder="Email" value="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" value="">
+                </div>
+
+                  <div class="form-group">
+                      <label for="phone">Phone</label>
+                      <input type="phone" class="form-control" id="phone" placeholder="Phone Number"value="">
+                  </div>
+                  <div class="form-group">
+                      <label for="address">Address</label>
+                      <input type="address" class="form-control" id="address"  placeholder="Address Line" value="">
+                      <input type="address" class="form-control" id="address2"  placeholder="Address Line"value="">
+                      <input type="address" class="form-control" id="state"  placeholder="State/Province"value="">
+                      <input type="address" class="form-control" id="country"  placeholder="Country"value="">
+                      <input type="address" class="form-control" id="zipcode"  placeholder="Zip Code"value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Comments</label>
+                        <textarea style="resize: none;"class="form-control" rows="5" id="comment" value="Heellooo" maxlength="98"></textarea>
+                    </div>
+                    <div>
+                        <button  class="btn btn-sm" type="button">
+                            <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Upload Resume
+                        </button>
+                    </div>
+                    <div align="center">
+                        <button class="btn btn-lg" type="button" style="margin: 20px;"> Submit Application</button>
+                    </div>
+
+
+            </form>
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+      
+
+      <!-- <div class="container">
+        <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-login">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-6">
+                  <a href="#" class="active" id="login-form-link">Login</a>
+                </div>
+                <div class="col-xs-6">
+                  <a href="#" id="register-form-link">Register</a>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <form [formGroup]="logInForm" id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                    <div class="form-group">
+                      <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group text-center">
+                      <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                      <label for="remember"> Remember Me</label>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                          <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="text-center">
+                            <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <form [formGroup]="regForm" id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                    <div class="form-group">
+                      <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                          <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    </div>
+  </div>
