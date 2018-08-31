@@ -48,7 +48,6 @@ export class OfferListComponent implements OnInit {
   performFilter(filterBy: string) : IJobOffer[]{
     filterBy = filterBy.toLocaleLowerCase();
 
-
     return this.availableJobs.filter((job: IJobOffer) =>
           job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }

@@ -16,7 +16,6 @@
   tr {
     text-align: center;
   }
-
 </style>
 
 <html>
@@ -32,60 +31,53 @@
 </head>
 
 <body>
-   
-    <div class="backgroundG" style="padding-top: 100px;padding-bottom:50px;">
-        
 
-        <h1>A.2</h1>
-        <h3>Search Jobs</h3>
-        <p class="descp"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus.
-          Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend, sit amet consectetur sapien
-          auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
-        </p>
-        </div>
+  <div class="backgroundG" style="padding-top: 100px;padding-bottom:50px;">
+
+
+    <h1>A.2</h1>
+    <h3>Search Jobs</h3>
+    <p class="descp"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus.
+      Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, consectetur
+      adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend, sit amet consectetur sapien
+      auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
+    </p>
+  </div>
   <div class="container-fluid">
-      
+
     <div style="padding-top: 2%">
 
-
+      <h3>Start Searching</h3>
       <div class="card">
         <div class="card-body  ">
 
           <!-- Grid row -->
-          
-            <!-- Grid column -->
-            <div class="col-md-12 ">
 
-              <h3>Start Searching</h3>
-              <hr>
-              <!-- <input type="search" id="search" class="form-control " style="margin-bottom: 5px" >
-                        <button fromControl="search" type="button" class="margindown btn generaltext"> Search </button><br> -->
+          <!-- Grid column -->
+          <div class="col-md-12 ">
 
-
-              <label for="filterBy"><strong> Filter by: </strong></label>
-              <div class="row">
-                <div class="form-group col-md-4 margindown">
-                  <select (change)="selectDropdownChangeHandler($event)" id="filter" >
-                    <option selected> All Jobs</option>
-                    <option> Company </option>
-                    <option> Location </option>
-                    <option> Category </option>
-                    <option> Type </option>
-                  </select>
-                </div>
-                <div class="form-group col-md-7 margindown">
-                  <input type='text'
-                    [(ngModel)]='listFilter' />
-                </div>
-                <button  type="button" class="margindown btn generaltext col-md-1"> Search </button><br>
+            <label for="filterBy"><strong> Filter by: </strong></label>
+            <div class="row">
+              <div class="col-md-4 margindown">
+                <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                  <option selected> All Jobs</option>
+                  <option> Company </option>
+                  <option> Location </option>
+                  <option> Category </option>
+                  <option> Type </option>
+                </select>
               </div>
-
-
+              <div class="col-md-6">
+                <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 5px">
+              </div>
+              <div class="col-md-2">
+                <button fromControl="search" type="button" class="margindown btn generaltext"> Search </button><br>
+              </div>
             </div>
-            <!-- Grid column -->
 
 
+          </div>
+          <!-- Grid column -->
 
           <div>
 
