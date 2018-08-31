@@ -26,6 +26,7 @@ export class OfferMaintenanceComponent implements OnInit {
   categories:IJobCategory[]
  
   types:IJobType[]
+  selectedType: IJobType
 
   closeResult:string;
 
@@ -122,6 +123,8 @@ export class OfferMaintenanceComponent implements OnInit {
       description: this.description
     })
 
+    console.log(this.selectedType.id)
+
   }
 
   openEdit(content, job) {
@@ -157,7 +160,41 @@ export class OfferMaintenanceComponent implements OnInit {
 
 
   createJob(jobForm){
-    // this.job = entrarle data 
+
+  console.log(jobForm)
+
+  
+    let jcId
+ 
+    this.categories.forEach(element => {
+
+      if (jobForm.category = element.name)
+          jcId = element.id
+      
+    });
+
+       
+    this.job = {
+      name: jobForm.name,
+      companyId: 0,
+      jobCategoryId: jcId,
+       description: jobForm.description
+    }
+
+
+    this.types.forEach(element => {
+
+      if (jobForm.type = element.name)
+          this.job.jobTypeId = element.id
+      
+    });
+  
+
+   
+   
+  
+
+    console.log(this.job)
   }
 
 

@@ -17,6 +17,7 @@
     text-align: center;
   }
 
+
 </style>
 
 <html>
@@ -32,28 +33,26 @@
 </head>
 
 <body>
-   
-    <div class="backgroundG" style="padding-top: 100px;padding-bottom:50px;">
-        
+  <!-- <div class="backgroundGc" style="padding-top: 100px;padding-bottom:50px;">
+  </div> -->
+  <div class="container">
 
-        <h1>A.2</h1>
-        <h3>Search Jobs</h3>
-        <p class="descp"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus.
-          Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend, sit amet consectetur sapien
-          auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
-        </p>
-        </div>
-  <div class="container-fluid">
-      
-    <div style="padding-top: 2%">
+      <h1>A.2</h1>
+      <h3>Search Jobs</h3>
+      <p class="descp"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus.
+        Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend, sit amet consectetur sapien
+        auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
+      </p>
+
+    <div style="padding-top: 50px">
 
 
       <div class="card">
         <div class="card-body  ">
 
           <!-- Grid row -->
-          <form [formGroup]="searchForm">
+          
 
             <!-- Grid column -->
             <div class="col-md-12 ">
@@ -64,10 +63,10 @@
                         <button fromControl="search" type="button" class="margindown btn generaltext"> Search </button><br> -->
 
 
-              <label for="country"><strong> Filter by: </strong></label>
+              <label for="filterby"><strong> Filter by: </strong></label>
               <div class="row">
                 <div class="form-group col-md-4 margindown">
-                  <select formControlName="filter" id="filter" class="form-control">
+                  <select id="filter" >
                     <option selected> All Jobs</option>
                     <option> Company </option>
                     <option> Location </option>
@@ -76,9 +75,10 @@
                   </select>
                 </div>
                 <div class="form-group col-md-7 margindown">
-                  <input type="search" id="search" class="form-control " style="margin-bottom: 5px;">
+                    <input type='text'
+                    [(ngModel)]='listFilter' />
                 </div>
-                <button fromControl="search" type="button" class="margindown btn generaltext col-md-1"> Search </button><br>
+                <button type="button" class="margindown btn generaltext col-md-1"> Search </button><br>
               </div>
 
 
@@ -86,7 +86,6 @@
             <!-- Grid column -->
 
 
-          </form>
 
 
           <div>
@@ -109,7 +108,7 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let job of availableJobs">
+                <tr *ngFor="let job of filteredJobs">
                   <td> {{job.jobName}} </td>
                   <td> {{job.company}}</td>
                   <td> {{job.city}} , {{job.country}} </td>
