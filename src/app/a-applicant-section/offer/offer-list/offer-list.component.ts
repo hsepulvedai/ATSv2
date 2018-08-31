@@ -19,16 +19,15 @@ export class OfferListComponent implements OnInit {
   filter: FormControl
 
   _listFilter: string;
+  filteredJobs: IJobOffer[]
 
-
-  selectedFilter: string = '';
+  selectedFilter: string = 'All Jobs';
 
 
   //event handler for the select element's change event
   selectDropdownChangeHandler(event: any) {
     //update the ui
     this.selectedFilter = event.target.value;
-    console.log(this.selectedFilter)
   }
 
   get listFilter(): string {
@@ -37,11 +36,12 @@ export class OfferListComponent implements OnInit {
   }
 
   set listFilter(value: string) {
+
     this._listFilter = value;
     this.filteredJobs = this.listFilter ? this.performFilter(this.listFilter) : this.availableJobs;
   }
 
-  filteredJobs: IJobOffer[]
+
   performFilter(filterBy: string): IJobOffer[] {
     filterBy = filterBy.toLocaleLowerCase();
 
@@ -63,9 +63,11 @@ export class OfferListComponent implements OnInit {
     else if (this.selectedFilter === 'Type')
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
-    else
+    else if(this.selectedFilter === 'All Jobs')
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    else
+      return this.availableJobs
   }
 
 
@@ -79,10 +81,12 @@ export class OfferListComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log(this.selectedFilter)
 
     this.jobService.showAvalaibleJobs()
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
       })
 
 
