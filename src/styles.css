@@ -31,14 +31,19 @@ p {font-size: 16px;}
     font-family: 'Montserrat', sans-serif;
 }
 
-button{
+btn{
     
     color: black;
+
+}
+input{
+    margin-bottom: 5em
 }
 
 table{
     font-family: 'Montserrat', sans-serif;
     color: black;
+
 }
 th {
     text-align: center;
@@ -85,7 +90,12 @@ h5{
     background-image: linear-gradient(-90deg,#25326a,	#4577bb);
     text-align: center;
      position:auto;
-      height: 30em
+      height: 30em;
+     
+}
+
+.tabsmargin{
+    margin-top: 10em
 }
 .bg-1 { 
     background-image: linear-gradient(90deg,#25326a,#4577bb);

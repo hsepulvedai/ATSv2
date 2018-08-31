@@ -33,6 +33,10 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobShowById/" + id)
   }
 
+  showDraftJobs() {
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllDrafts/")
+  }
+
   getStatusByEmail(email){
     return this.http.get(environment.baseUrl + this.routePrefix + "getStatusByEmail/" + email)
   }

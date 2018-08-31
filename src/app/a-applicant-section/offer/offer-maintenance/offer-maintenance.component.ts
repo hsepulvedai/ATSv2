@@ -21,6 +21,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   availableJobs:IJobOffer[]
   inactiveJobs:IJobOffer[]
+  draftJobs:IJobOffer[]
   job:IJob
 
   categories:IJobCategory[]
@@ -67,7 +68,12 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobService.showPastJobs()
       .subscribe((data:IJobOffer[])=> {
         this.inactiveJobs = data['Data']
-        console.log(this.inactiveJobs);
+      })
+
+      this.jobService.showDraftJobs()
+      .subscribe((data:IJobOffer[])=> {
+        this.draftJobs = data['Data']
+        console.log(this.draftJobs);
       })
 
     this.jobCategoryService.showCategories()

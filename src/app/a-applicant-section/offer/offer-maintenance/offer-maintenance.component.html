@@ -1,5 +1,3 @@
-
-
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Job update</h4>
@@ -8,132 +6,175 @@
     </button>
   </div>
   <div class="modal-body">
-   
-      <form [formGroup]="jobEditForm"  autocomplete="off">
-                   
-          <div class="form-group col-md-6">
-            <label for="name"> <strong>Job Title</strong></label>
-            <input formControlName="name" type="text" class="form-control" id="name">
-          </div>
-       
-          
-          <!-- companyInput
-          cityInput
-          countryInput
-          jobCategoryInput
-          jobTypeInput
-          jobDescriptionInput -->
-          <div class="form-group col-md-6">
-            <label for="company"> <strong>Company</strong></label>
-            <input formControlName="company" type="text" class="form-control" id="company" >
-          </div>
-       
-      
-          <div class="form-group col-md-6">
-            <label for="city"><strong>City</strong></label>
-            <input formControlName="city" type="text" class="form-control" id="city">
-          </div>
-    
-          <div class="form-group col-md-4">
-            <label for="country"><strong>Country</strong></label>
-            <select formControlName="country" id="country" class="form-control">
-              <option selected>Puerto Rico</option>
-              <option>United States of America</option>
-            </select>
-          </div>
 
-          <div class="form-group col-md-4">
-              <label for="category"><strong>Category</strong></label>
-              <select  formControlName="category" id="category" class="form-control">
-                <option *ngFor= " let selectedCategory of categories" value="">{{selectedCategory.name}}</option>
-            </select>
-            </div>
+    <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px">
 
-            <div class="form-group col-md-4">
-              <label for="type"><strong> Type</strong></label>
-              <select  formControlName="type" id="type" class="form-control">
-                <option *ngFor= " let selectedType of types" value="">{{selectedType.name}}</option>
-            </select>
-            </div>
-       
-        <div class="form-group col-md-2">
-            <label for="description"><strong>Description</strong></label>
-              <textarea  formControlName="description" name="description" rows="7" cols="60" style="margin: 10px"> </textarea>
-          </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="name"> <strong>Job Title</strong></label>
+          <input formControlName="name" type="text" class="form-control" id="name">
+        </div>
 
+        <div class="form-group col-md-6">
+          <label for="company"> <strong>Company</strong></label>
+          <input formControlName="company" type="text" class="form-control" id="company">
+        </div>
+      </div>
 
-          <input type="submit" value="Submit">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="city"><strong>City</strong></label>
+          <input formControlName="city" type="text" class="form-control" id="city">
 
-      </form>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="country"><strong>Country</strong></label>
+          <select formControlName="country" id="country" class="form-control">
+            <option selected>Puerto Rico</option>
+            <option>United States of America</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="category"><strong>Category</strong></label>
+          <select formControlName="category" id="category" class="form-control">
+            <option *ngFor=" let selectedCategory of categories" value="">{{selectedCategory.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="type"><strong> Type</strong></label>
+          <select formControlName="type" id="type" class="form-control">
+            <option *ngFor=" let selectedType of types" value="">{{selectedType.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="description"><strong>Description</strong></label>
+          <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+        </div>
+      </div>
+
+    </form>
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    <button type="submit" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
   </div>
 </ng-template>
 
-<div class="backgroundG border" >
-    <h1> A.5 </h1>
-<h2>Job Maintenance Screen </h2>
-  <p> Lorem Ipsum fkjghejrfgvbaehjkerhkdjhkjshkrjhvks kdjfkjshk dkj hkjhkdjkj skgkdjkjgzksjkdf zksjdkfjzk dzkjksz  </p>
-  </div>
+<div class="backgroundG ">
+  <h1> A.5 </h1>
+  <h2>Job Maintenance Screen </h2>
+  <p> Lorem Ipsum fkjghejrfgvbaehjkerhkdjhkjshkrjhvks kdjfkjshk dkj hkjhkdjkj skgkdjkjgzksjkdf zksjdkfjzk dzkjksz </p>
+</div>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 <div class="container">
+
+=======
+=======
+>>>>>>> 9e628ce391f71e6550a8e315dcd98c3686675119
+<div class="container tabsmargin">
   
+>>>>>>> 9e628ce391f71e6550a8e315dcd98c3686675119
 
 
   <ngb-tabset>
     <ngb-tab title="Available Jobs">
       <ng-template ngbTabContent>
         <h3> Jobs </h3>
-   <div> 
+        <div>
 
           <!--Table-->
-     <table class="table table-striped">
-  
-           <!--Table head-->
-           <thead>
-             <tr>
-               <th >Job Title</th>
-               <th >Company</th>
-               <th >Location</th>
-               <th >Category</th>
-               <th >Type</th>
-               <th>Edit</th>
-               <th>Active/Inactive</th>
-             </tr>
-           </thead>
-           <!--Table head-->
-     
-           <!--Table body-->
-           <tbody>
-             <tr *ngFor="let job of availableJobs">
-                   <td> {{job.jobName}} </td>
-                   <td> {{job.company}}</td>
-                   <td> {{job.city}},  {{job.country}} </td>
-                   <td> {{job.jobCategory}} </td>
-                   <td>{{job.jobType}}</td>
-                   <td> <button type="button"   (click)="openEdit(content, job)" > &#9997; </button> </td>
-                   <td> <button type="button"   (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
-             </tr>
-           </tbody>
-           <!--Table body-->
-         </table>
-         <!--Table-->
-  
-   </div>
-  
+          <table class="table table-striped">
+
+            <!--Table head-->
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Edit</th>
+                <th>Active/Inactive</th>
+              </tr>
+            </thead>
+            <!--Table head-->
+
+            <!--Table body-->
+            <tbody>
+              <tr *ngFor="let job of availableJobs">
+                <td> {{job.jobName}} </td>
+                <td> {{job.company}}</td>
+                <td> {{job.city}}, {{job.country}} </td>
+                <td> {{job.jobCategory}} </td>
+                <td>{{job.jobType}}</td>
+                <td> <button type="button" (click)="openEdit(content, job)"> &#9997; </button> </td>
+                <td> <button type="button" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
+              </tr>
+            </tbody>
+            <!--Table body-->
+          </table>
+          <!--Table-->
+
+        </div>
+
       </ng-template>
     </ngb-tab>
     <ngb-tab>
       <ng-template ngbTabTitle> Past Jobs</ng-template>
-      <ng-template ngbTabContent> 
+      <ng-template ngbTabContent>
         <h3> Past Jobs </h3>
-      
-        <div> 
-  
+
+        <div>
+
           <!--Table-->
-     <table class="table table-striped">
+          <table class="table table-striped">
+
+            <!--Table head-->
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <!--Table head-->
+
+            <!--Table body-->
+            <tbody>
+              <tr *ngFor="let inactiveJob of inactiveJobs">
+                <td> {{inactiveJob.jobName}}</td>
+                <td> {{inactiveJob.company}}</td>
+                <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
+                <td> {{inactiveJob.jobCategory}} </td>
+                <td>{{inactiveJob.jobType}}</td>
+                <td> <button type="button" (click)="openEdit(content, inactiveJob)"> &#9997; </button> </td>
+                <td> <button type="button" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
+              </tr>
+            </tbody>
+            <!--Table body-->
+          </table>
+          <!--Table-->
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+        </div>
+
+=======
+=======
+>>>>>>> 9e628ce391f71e6550a8e315dcd98c3686675119
+     <table class="table table-striped"> <!-- can't remove table-striped until I figure out in what category it goes in the css file-->
   
            <!--Table head-->
            <thead>
@@ -166,42 +207,52 @@
   
    </div>
   
+>>>>>>> 9e628ce391f71e6550a8e315dcd98c3686675119
       </ng-template>
     </ngb-tab>
 
     <ngb-tab>
       <ng-template ngbTabTitle> Drafts(Jobs) </ng-template>
-      <ng-template ngbTabContent> 
+      <ng-template ngbTabContent>
         <h3> Drafts </h3>
-        <p>  </p>
-  
-        <div> 
-  
+        <p> </p>
+
+        <div>
+
           <!--Table-->
-     <table class="table table-striped">
-  
-           <!--Table head-->
-           <thead>
-             <tr>
-               <th>Job Title</th>
-               <th>Company </th>
-               <th>Location</th>
-               <th>Category</th>
-               <th>Type</th>
-               <th>Edit</th>
-             </tr>
-           </thead>
-           <!--Table head-->
-     
-           <!--Table body-->
-           <tbody>
-           </tbody>
-           <!--Table body-->
-         </table>
-         <!--Table-->
-  
-   </div>
-  
+          <table class="table table-striped">
+
+            <!--Table head-->
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Company </th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <!--Table head-->
+
+            <!--Table body-->
+            <!--Table body-->
+            <tbody>
+              <tr *ngFor="let draft of draftJobs">
+                <td> {{draft.jobName}}</td>
+                <td> {{draft.company}}</td>
+                <td> {{draft.city}}, {{draft.country}} </td>
+                <td> {{draft.jobCategory}} </td>
+                <td>{{draft.jobType}}</td>
+                <td> <button type="button" (click)="openEdit(content, draft)"> &#9997; </button> </td>
+              </tr>
+            </tbody>
+            <!--Table body-->
+          </table>
+          <!--Table-->
+
+        </div>
+
       </ng-template>
     </ngb-tab>
 
@@ -209,65 +260,65 @@
     <ngb-tab title="Add Job">
       <ng-template ngbTabContent>
         <p>
-            <h3> New Job </h3>
+          <h3> New Job </h3>
 
-            <div> 
-              <form [formGroup]="newJobForm"  autocomplete="off">
-                   
-                <div class="form-group col-md-6">
-                  <label for="jobName"> <strong>Job Title</strong></label>
-                  <input formControlName="jobName" type="text" class="form-control" id="name" >
-                </div>
-          
-          
-                <div class="form-group col-md-6">
-                  <label for="jobCompany"> <strong>Company</strong></label>
-                  <input formControlName="jobCompany" type="text" class="form-control" id="company" >
-                </div>
-             
-            
-                <div class="form-group col-md-6">
-                  <label for="jobCity"><strong>City</strong></label>
-                  <input formControlName="jobCity" type="text" class="form-control" id="city">
-                </div>
-          
-                <div class="form-group col-md-4">
-                  <label for="jobCountry"><strong>Country</strong></label>
-                  <select formControlName="jobCountry" id="country" class="form-control">
-                    <option selected>Puerto Rico</option>
-                    <option>United States of America</option>
-                  </select>
-                </div>
-      
-                <div class="form-group col-md-4">
-                    <label for="jobCategory"><strong>Category</strong></label>
-                    <select  formControlName="jobCategory" id="category" class="form-control">
-                      <option *ngFor= " let selectedCategory of categories" value="">{{selectedCategory.name}}</option>
-                  </select>
-                  </div>
-      
-                  <div class="form-group col-md-4">
-                    <label for="jobType"><strong> Type</strong></label>
-                    <select  formControlName="jobType" id="type" class="form-control">
-                      <option *ngFor= " let selectedType of types" value="">{{selectedType.name}}</option>
-                  </select>
-                  </div>
-             
-          
+          <div>
+            <form [formGroup]="newJobForm" autocomplete="off">
+
+              <div class="form-group col-md-6">
+                <label for="jobName"> <strong>Job Title</strong></label>
+                <input formControlName="jobName" type="text" class="form-control" id="name">
+              </div>
+
+
+              <div class="form-group col-md-6">
+                <label for="jobCompany"> <strong>Company</strong></label>
+                <input formControlName="jobCompany" type="text" class="form-control" id="company">
+              </div>
+
+
+              <div class="form-group col-md-6">
+                <label for="jobCity"><strong>City</strong></label>
+                <input formControlName="jobCity" type="text" class="form-control" id="city">
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="jobCountry"><strong>Country</strong></label>
+                <select formControlName="jobCountry" id="country" class="form-control">
+                  <option selected>Puerto Rico</option>
+                  <option>United States of America</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="jobCategory"><strong>Category</strong></label>
+                <select formControlName="jobCategory" id="category" class="form-control">
+                  <option *ngFor=" let selectedCategory of categories" value="">{{selectedCategory.name}}</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="jobType"><strong> Type</strong></label>
+                <select formControlName="jobType" id="type" class="form-control">
+                  <option *ngFor=" let selectedType of types" value="">{{selectedType.name}}</option>
+                </select>
+              </div>
+
+
               <div class="form-group col-md-2">
-                  <label for="jobDescription"><strong>Description</strong></label>
-                    <textarea  formControlName="jobDescription" name="description" rows="7" cols="60"> </textarea>
-                </div>
+                <label for="jobDescription"><strong>Description</strong></label>
+                <textarea formControlName="jobDescription" name="description" rows="7" cols="60"> </textarea>
+              </div>
 
 
-                <input type="submit" value="Submit" (click) = "createJob(newJobForm.value)" >
+              <input type="submit" value="Submit" (click)="createJob(newJobForm.value)">
 
             </form>
- 
 
-            </div>
 
-            
+          </div>
+
+
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

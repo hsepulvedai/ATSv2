@@ -42,9 +42,6 @@ export class OfferListComponent implements OnInit {
   }
 
   filteredJobs: IJobOffer[]
-
-
-
   performFilter(filterBy: string): IJobOffer[] {
     filterBy = filterBy.toLocaleLowerCase();
 
@@ -58,8 +55,7 @@ export class OfferListComponent implements OnInit {
 
     else if (this.selectedFilter === 'Location/Country')
       return this.availableJobs.filter((job: IJobOffer) =>
-      job.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
-
+        job.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
     else if (this.selectedFilter === 'Category')
       return this.availableJobs.filter((job: IJobOffer) =>

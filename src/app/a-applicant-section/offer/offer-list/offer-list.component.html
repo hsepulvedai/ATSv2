@@ -1,22 +1,5 @@
 <!DOCTYPE html>
 
-<style>
-  .margindown {
-    margin-bottom: 30px;
-  }
-
-  body {
-    height: 100%;
-  }
-
-  th {
-    text-align: center;
-  }
-
-  tr {
-    text-align: center;
-  }
-</style>
 
 <html>
 
@@ -32,7 +15,7 @@
 
 <body>
 
-  <div class="backgroundG" style="padding-top: 100px;padding-bottom:50px;">
+  <div class="backgroundG" >
 
 
     <h1>A.2</h1>
@@ -45,7 +28,7 @@
   </div>
   <div class="container-fluid">
 
-    <div style="padding-top: 2%">
+    <div >
 
       <h3>Start Searching</h3>
       <div class="card">
@@ -58,7 +41,7 @@
 
             <label for="filterBy"><strong> Filter by: </strong></label>
             <div class="row">
-              <div class="col-md-4 margindown">
+              <div class="col-md-4">
                 <select (change)="selectDropdownChangeHandler($event)" id="filter">
                   <option selected> All Jobs</option>
                   <option> Company </option>
@@ -69,10 +52,10 @@
                 </select>
               </div>
               <div class="col-md-6">
-                <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 5px">
+                <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
               </div>
               <div class="col-md-2">
-                <button fromControl="search" type="button" class="margindown btn generaltext"> Search </button><br>
+                <button fromControl="search" type="button" class=" btn "> Search </button><br>
               </div>
             </div>
           </div>
