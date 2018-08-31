@@ -154,8 +154,6 @@ export class OfferMaintenanceComponent implements OnInit {
     }
   }
 
-
-
   createJob(jobForm){
 
     console.log(jobForm)

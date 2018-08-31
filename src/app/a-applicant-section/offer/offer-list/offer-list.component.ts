@@ -20,6 +20,17 @@ export class OfferListComponent implements OnInit {
 
   _listFilter: string;
 
+
+  selectedFilter: string = '';
+  
+  
+   //event handler for the select element's change event
+   selectDropdownChangeHandler (event: any) {
+     //update the ui
+     this.selectedFilter = event.target.value;
+     console.log(this.selectedFilter)
+   }
+  
   get listFilter(): string {
     return this._listFilter;
     
