@@ -31,14 +31,19 @@ p {font-size: 16px;}
     font-family: 'Montserrat', sans-serif;
 }
 
-button{
+btn{
     
     color: black;
+
+}
+input{
+    margin-bottom: 5em
 }
 
 table{
     font-family: 'Montserrat', sans-serif;
     color: black;
+
 }
 th {
     text-align: center;
