@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ApplicationService } from '../../../shared/services/application.service';
+import { IApplicationStatusInfo } from 'src/app/shared/models/application-status-info.model';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class OfferTrackingComponent implements OnInit {
 
   closeResult: string;
 
-  result: string;
+  result: IApplicationStatusInfo[]
 
   trackForm: FormGroup
   email: FormControl
@@ -40,7 +41,10 @@ export class OfferTrackingComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
 
-    this.applicationService.getApplicationStatusByEmail(this.email);
+   // this.applicationService.getApplicationStatusByEmail(this.email)
+    // .subscribe((data: IApplicationStatusInfo[]) => {
+    //   this.result = data['Data'];
+     // })
 
 
   }
