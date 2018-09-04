@@ -27,8 +27,10 @@ p {font-size: 16px;}
 }
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color:#4577bb;
-    font-family: 'Montserrat', sans-serif;
+    color:#df136f;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 100%;
+    font: outline;
 }
 
 btn{
@@ -41,7 +43,7 @@ input{
 }
 
 table{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
 
 }
@@ -60,7 +62,7 @@ th {
     text-align: justify;
     padding-left: 200px;
     padding-right: 200px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding-bottom: 50px;
 }
 .jobsp{
@@ -69,17 +71,17 @@ th {
     text-align: justify;
     padding-left: 30px;
     padding-right: 0px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 h3{
-    font-family: 'Montserrat', sans-serif;;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 1em;
     
 }
 h5{
-    font-family: 'Montserrat', sans-serif;;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
     text-align: center;
     
@@ -87,6 +89,14 @@ h5{
 
 
 .backgroundG{
+    /* background-image: linear-gradient(-90deg,#25326a,#4577bb); */
+    text-align: center;
+     position:auto;
+      height: 5em;
+      background-color:#4577bb; 
+     
+}
+.backgroundWelcome{
     background-image: linear-gradient(-90deg,#25326a,	#4577bb);
     text-align: center;
      position:auto;
@@ -110,7 +120,7 @@ h5{
 }
 
 .generaltext{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
 }
 
