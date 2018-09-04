@@ -220,19 +220,21 @@
                       </div>
                       <div class="form-group col-sm-6">
                         <label for="jobCompany"> <strong>Company</strong></label>
-                        <input disabled formControlName="jobCompany" type="text" class="form-control" id="company" [value]="currentCompany.name">
+                        <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
                       </div>
                 </div>
 
                 <div class="row smallrow">
                     <div class="form-group col-sm-6">
                         <label for="jobCity"><strong>City</strong></label>
-                        <input formControlName="jobCity" type="text" class="form-control" id="city">
+                        <input formControlName="jobCity" type="text" class="form-control" id="city" 
+                        >
                       </div>
       
                       <div class="form-group col-sm-6">
                         <label for="jobCountry"><strong>Country</strong></label>
-                        <select formControlName="jobCountry" id="country" class="form-control">
+                        <select formControlName="jobCountry" id="country" class="form-control"
+                        >
                           <option selected>Puerto Rico</option>
                           <option>United States of America</option>
                         </select>

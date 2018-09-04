@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms'
+import { FormGroup,FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
 import { IJob } from '../../../shared/models/job.model';
@@ -12,7 +12,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
-
+import { AddressService } from '../../../shared/services/address.service';
+import { IAddress } from '../../../shared/models/address.model';
 
 
 
@@ -25,6 +26,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
 
   currentCompany:ICompany
+  currentAddress:IAddress
   selectedJobType: string ='Default'
   selectedJobCategory: string = 'Default'
   createdJob:IJobInsert
@@ -65,6 +67,7 @@ export class OfferMaintenanceComponent implements OnInit {
     private jobCategoryService: JobCategoryService,
     private jobTypeService: JobTypeService,
     private companyService: CompanyService,
+    private addressService: AddressService,
     private route: ActivatedRoute,
     private modalService: NgbModal) { }
 
@@ -73,7 +76,16 @@ export class OfferMaintenanceComponent implements OnInit {
     this.companyService.getCompanyById(1)
     .subscribe((data:ICompany) => {
       this.currentCompany = data['Data'];
+
+      this.addressService.getAddressById(this.currentCompany.addressId)
+      .subscribe((data:IAddress) => {
+        this.currentAddress = data['Data'];
+        console.log(this.currentAddress)
+      })
+
     })
+
+
 
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
@@ -104,7 +116,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
     // These are the controls for the edit job form.
     this.name = new FormControl(),
-    this.company = new FormControl(),
+    this.company = new FormControl({value:this.currentCompany.name, disabled:true}, Validators.required),
     this.city = new FormControl(),
     this.country = new FormControl(),
     this.category = new FormControl(),
