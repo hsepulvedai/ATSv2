@@ -215,7 +215,7 @@
             <div>
               <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value)">
 
-                <div class="row">
+                <div class="row smallrow">
                     <div class="form-group col-md-6">
                         <label for="jobName"> <strong>Job Title</strong></label>
                         <input formControlName="jobName" type="text" class="form-control" id="name">
@@ -226,13 +226,13 @@
                       </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobCity"><strong>City</strong></label>
                         <input formControlName="jobCity" type="text" class="form-control" id="city">
                       </div>
       
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-sm-6">
                         <label for="jobCountry"><strong>Country</strong></label>
                         <select formControlName="jobCountry" id="country" class="form-control">
                           <option selected>Puerto Rico</option>
@@ -241,8 +241,8 @@
                       </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobCategory"><strong>Category</strong></label>
                         <select formControlName="jobCategory" id="category" class="form-control"
                             (change)="selectJobCatChangeHandler($event)">
@@ -250,7 +250,7 @@
                         </select>
                       </div>
       
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-sm-6">
                         <label for="jobType"><strong> Type</strong></label>
                         <select formControlName="jobType" id="type" class="form-control"
                           (change)="selectJobTypeChangeHandler($event)">
@@ -259,8 +259,8 @@
                       </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobDescription"><strong>Description</strong></label>
                         <textarea class="form-control" formControlName="jobDescription" name="description" rows="7" cols="60" style="resize: none;"> </textarea>
                       </div>
