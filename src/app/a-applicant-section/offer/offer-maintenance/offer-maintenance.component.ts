@@ -12,7 +12,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
-import { create } from 'domain';
+
 
 
 
