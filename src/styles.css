@@ -24,6 +24,7 @@ p {font-size: 16px;}
 .navbar {
     /*Controla la barra de navegacion como tal */
    background-color:#df136f;
+   padding-bottom: 7em;
   
 }
 .nav-link{
@@ -103,7 +104,7 @@ h5{
     /* background-image: linear-gradient(-90deg,#25326a,#4577bb); */
     text-align: center;
      position:auto;
-      height: 5em;
+      height: 1em;
       background-color:#4577bb; 
       font-weight: 100;
 
