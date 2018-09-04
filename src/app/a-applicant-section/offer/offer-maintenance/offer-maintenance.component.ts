@@ -11,6 +11,8 @@ import { JobTypeService } from '../../../shared/services/job-type.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
+import { IJobInsert } from '../../../shared/models/job_insert.model';
+import { create } from 'domain';
 
 
 
@@ -25,6 +27,7 @@ export class OfferMaintenanceComponent implements OnInit {
   currentCompany:ICompany
   selectedJobType: string ='Default'
   selectedJobCategory: string = 'Default'
+  createdJob:IJobInsert
 
   availableJobs:IJobOffer[]
   inactiveJobs:IJobOffer[]
@@ -70,7 +73,6 @@ export class OfferMaintenanceComponent implements OnInit {
     this.companyService.getCompanyById(1)
     .subscribe((data:ICompany) => {
       this.currentCompany = data['Data'];
-      console.log(this.currentCompany)
     })
 
     this.jobService.showAvalaibleJobs()
@@ -170,14 +172,25 @@ export class OfferMaintenanceComponent implements OnInit {
   }
 
   createJob(newJobForm){
+ 
+    this.createdJob = {
+      jobName: newJobForm.jobName, 
+      companyId: this.currentCompany.id, 
+      jobCategory: newJobForm.jobCategory, 
+      jobType:newJobForm.jobType, 
+      jobDescription: newJobForm.jobDescription
 
-    console.log(newJobForm.jobName)
-    console.log(this.currentCompany.id)
-    console.log(this.selectedJobType)
-    console.log(this.selectedJobCategory)
-    console.log(newJobForm.jobDescription)
+    }
 
+    console.log(this.createdJob)
 
+    //this.jobService.addJobMaintenance(this.createdJob)
+
+    // console.log(newJobForm.jobName)
+    // console.log(this.currentCompany.id)
+    // console.log(newJobForm.jobCategory)
+    // console.log(newJobForm.jobType)
+    // console.log(newJobForm.jobDescription)
 
     // this.jobService.addJobMaintenance(job) {
 

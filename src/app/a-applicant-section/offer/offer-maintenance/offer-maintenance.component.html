@@ -246,15 +246,17 @@
                         <label for="jobCategory"><strong>Category</strong></label>
                         <select formControlName="jobCategory" id="category" class="form-control"
                             (change)="selectJobCatChangeHandler($event)">
-                          <option *ngFor=" let selectedCategory of categories" value="">{{selectedCategory.name}}</option>
+                            <option value="null" disabled="true" [selected]="true">- Select Category -</option>
+                          <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
                         </select>
                       </div>
       
                       <div class="form-group col-sm-6">
                         <label for="jobType"><strong> Type</strong></label>
                         <select formControlName="jobType" id="type" class="form-control"
-                          (change)="selectJobTypeChangeHandler($event)">
-                          <option *ngFor=" let selectedType of types" value="">{{selectedType.name}}</option>
+                          (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
+                          <option value="null" disabled="true" [selected]="true">- Select Type -</option>
+                          <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
                         </select>
                       </div>
                 </div>
@@ -264,9 +266,15 @@
                         <label for="jobDescription"><strong>Description</strong></label>
                         <textarea class="form-control" formControlName="jobDescription" name="description" rows="7" cols="60" style="resize: none;"> </textarea>
                       </div>
+                      <div class="col-sm-6">
+                        <button class="btn btn-md"type="submit">Submit</button>
+                      </div>
+                      
                 </div>
 
-                <button class="btn btn-md"type="submit">Submit</button>
+
+
+
 
                 <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
 

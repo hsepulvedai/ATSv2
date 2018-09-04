@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
-import { IJob } from '../../../shared/models/job.model';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 @Component({
   selector: 'app-view-available-jobs',
@@ -69,9 +68,6 @@ export class OfferListComponent implements OnInit {
     else
       return this.availableJobs
   }
-
-
-
 
   constructor
     (private router: Router,
