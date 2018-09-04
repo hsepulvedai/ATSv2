@@ -85,8 +85,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
     })
 
-
-
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
       this.availableJobs = data['Data'];
