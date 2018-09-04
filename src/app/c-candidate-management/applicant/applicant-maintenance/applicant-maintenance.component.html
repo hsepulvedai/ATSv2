@@ -97,64 +97,67 @@
           <div>
             <form [formGroup]="addApplicantForm" autocomplete="off">
 
-              <div class="row">
-                <div class="form-group col-md-6">
+              <div class="row smallrow">
+                <div class="form-group col-sm-6">
                   <label for="fName"> <strong>First Name</strong></label>
                   <input formControlName="applicantFirstName" type="text" class="form-control" id="fName">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-sm-6">
                   <label for="lName"> <strong>Last Name</strong></label>
                   <input formControlName="applicantLastName" type="text" class="form-control" id="lName">
                 </div>
               </div>
 
-              <div class="row">
-                <div class="form-group col-md-6">
+              <div class="row smallrow">
+                <div class="form-group col-sm-6">
                   <label for="email"> <strong>Email</strong></label>
                   <input formControlName="applicantEmail" type="text" class="form-control" id="email">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-sm-6">
                     <label for="password"> <strong>Password</strong></label>
                     <input formControlName="applicantPassword" type="text" class="form-control" id="password">
                 </div>
               </div>
 
-              <div class="row">
-                  <label for="password"> <strong>Password</strong></label>
-                  <input formControlName="applicantName" type="text" class="form-control" id="email">
-              </div>
+             
 
-              <div class="row">
+              <div class="row mdrow  ">
+                  <div class="form-group col-sm-12">
                   <label for="addressLine"> <strong>Address</strong></label>
-                  <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
-                  <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
+                  <input formControlName="addressLine" type="text" class="form-control" id="addressLine" >
+                  </div>
+              </div>
+              <div class="row smallrow">
+                  <div class="form-group col-sm-12">
+                <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
+                </div>
               </div>
 
-              <div class="row">
-                  <div class="form-group col-md-6">
+              <div class="row smallrow">
+                  <div class="form-group col-sm-6">
                       <label for="city"> <strong>City</strong></label>
                       <input formControlName="city" type="text" class="form-control" id="city">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                         <label for="password"> <strong>State/Province</strong></label>
                         <input formControlName="state" type="text" class="form-control" id="password">
                     </div>
               </div>
 
-              <div class="row">
-                  <div class="form-group col-md-6">
+              <div class="row smallrow ">
+                  <div class="form-group col-sm-6">
                       <label for="country"> <strong>Country</strong></label>
                       <input formControlName="country" type="text" class="form-control" id="country">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                         <label for="zipcode"> <strong>Zip Code</strong></label>
                         <input formControlName="state" type="text" class="form-control" id="zipcode">
                     </div>
               </div>
 
-              <div class="row"></div>
+              <div class="row smallrow"></div>
 
-              <input type="submit" value="Submit">
+              <input class="btn" type="submit" value="Submit"> <!-- Class btn for style purposes-->
 
             </form>
 

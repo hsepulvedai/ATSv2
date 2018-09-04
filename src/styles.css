@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Quicksand;
     font: 15px ;
     line-height: 1.8;
     color:black;
@@ -22,28 +23,39 @@ p {font-size: 16px;}
 
 .navbar {
     /*Controla la barra de navegacion como tal */
-   background-color:#25326a;
+   background-color:#df136f;
+   padding-bottom: 7em;
   
 }
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color:#df136f;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:#25326a;
+    font-family: Quicksand;
     font-size: 100%;
-    font: outline;
+
+    
 }
 
-btn{
+img{
+    width: 8em;    
+    position: left;
+
+}
+
+button{
     
-    color: black;
+    color: white;
+    background-color: #25326a;
 
 }
 input{
-    margin-bottom: 5em
+    margin-bottom: 5em;
+    color: white;
+    background-color: #25326a;
 }
 
 table{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Quicksand;
     color: black;
 
 }
@@ -55,14 +67,19 @@ th {
     text-align: left;
   }
     
-
+.smallrow{
+    height: 5em;
+}
+.mdrow{
+    height: 7em;
+}
 .descp {
     font-size: 16px;
-    color: black;
+    color: white;
     text-align: justify;
     padding-left: 200px;
     padding-right: 200px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Quicksand;
     padding-bottom: 50px;
 }
 .jobsp{
@@ -71,17 +88,17 @@ th {
     text-align: justify;
     padding-left: 30px;
     padding-right: 0px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Quicksand;
 }
 h3{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Quicksand;
     color: black;
     text-align: center;
     padding-top: 1em;
     
 }
 h5{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Quicksand;
     color: black;
     text-align: center;
     
@@ -92,8 +109,10 @@ h5{
     /* background-image: linear-gradient(-90deg,#25326a,#4577bb); */
     text-align: center;
      position:auto;
-      height: 5em;
+      height: 1em;
       background-color:#4577bb; 
+      font-weight: 100;
+
      
 }
 .backgroundWelcome{
@@ -101,6 +120,7 @@ h5{
     text-align: center;
      position:auto;
       height: 30em;
+      color: white;
      
 }
 
@@ -120,7 +140,7 @@ h5{
 }
 
 .generaltext{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Quicksand;
     color: black;
 }
 

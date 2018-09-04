@@ -67,15 +67,13 @@
 </ng-template>
 
 <div class="backgroundG ">
-  <h3> A.5 Job Maintenance Screen</h3>
+ 
  
   
 </div>
 
-<div class="container">
-
-  <div class="container tabsmargin">
-
+  <div class="container ">
+    <h3> A.5 Job Maintenance Screen</h3>
     <ngb-tabset>
       <ngb-tab title="Available Jobs">
         <ng-template ngbTabContent>
@@ -215,24 +213,24 @@
             <div>
               <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value)">
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobName"> <strong>Job Title</strong></label>
                         <input formControlName="jobName" type="text" class="form-control" id="name">
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-sm-6">
                         <label for="jobCompany"> <strong>Company</strong></label>
-                        <input formControlName="jobCompany" type="text" class="form-control" id="company">
+                        <input disabled formControlName="jobCompany" type="text" class="form-control" id="company" [value]="currentCompany.name">
                       </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobCity"><strong>City</strong></label>
                         <input formControlName="jobCity" type="text" class="form-control" id="city">
                       </div>
       
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-sm-6">
                         <label for="jobCountry"><strong>Country</strong></label>
                         <select formControlName="jobCountry" id="country" class="form-control">
                           <option selected>Puerto Rico</option>
@@ -241,31 +239,38 @@
                       </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobCategory"><strong>Category</strong></label>
-                        <select formControlName="jobCategory" id="category" class="form-control">
-                          <option *ngFor=" let selectedCategory of categories" value="">{{selectedCategory.name}}</option>
+                        <select formControlName="jobCategory" id="category" class="form-control"
+                            (change)="selectJobCatChangeHandler($event)">
+                            <option value="null" disabled="true" [selected]="true">- Select Category -</option>
+                          <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
                         </select>
                       </div>
       
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-sm-6">
                         <label for="jobType"><strong> Type</strong></label>
-                        <select formControlName="jobType" id="type" class="form-control">
-                          <option *ngFor=" let selectedType of types" value="">{{selectedType.name}}</option>
+                        <select formControlName="jobType" id="type" class="form-control"
+                          (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
+                          <option value="null" disabled="true" [selected]="true">- Select Type -</option>
+                          <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
                         </select>
                       </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-6">
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
                         <label for="jobDescription"><strong>Description</strong></label>
                         <textarea class="form-control" formControlName="jobDescription" name="description" rows="7" cols="60" style="resize: none;"> </textarea>
                       </div>
                 </div>
 
-                <button class="btn btn-md"type="submit">Submit</button>
-
+                <div class="row mdrow" style="margin-top: 12em" >
+                  <div class="col-sm-6">
+                <button class="btn btn-sm" type="submit">Submit</button>
+                </div>
+              </div>
                 <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
 
               </form>

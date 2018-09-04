@@ -51,6 +51,10 @@ export class JobService {
 
   }
 
+  addJobMaintenance(job) {
+    return this.http.post(environment.baseUrl + this.routePrefix + 'JobInsertFromWeb', job )
+  }
+
   // getAllActiveApplicationStatus() {
   //   return this.http.get(environment.baseUrl + "" + "/")
   // }
