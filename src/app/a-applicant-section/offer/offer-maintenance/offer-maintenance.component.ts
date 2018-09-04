@@ -76,16 +76,7 @@ export class OfferMaintenanceComponent implements OnInit {
     this.companyService.getCompanyById(1)
     .subscribe((data:ICompany) => {
       this.currentCompany = data['Data'];
-
-      this.addressService.getAddressById(this.currentCompany.addressId)
-      .subscribe((data:IAddress) => {
-        this.currentAddress = data['Data'];
-        console.log(this.currentAddress)
-      })
-
     })
-
-
 
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
@@ -116,7 +107,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
     // These are the controls for the edit job form.
     this.name = new FormControl(),
-    this.company = new FormControl({value:this.currentCompany.name, disabled:true}, Validators.required),
+    this.company = new FormControl(),
     this.city = new FormControl(),
     this.country = new FormControl(),
     this.category = new FormControl(),
