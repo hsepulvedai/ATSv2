@@ -181,10 +181,10 @@ export class OfferMaintenanceComponent implements OnInit {
       jobDescription: newJobForm.jobDescription
 
     }
-
-    console.log(this.createdJob)
-
-    //this.jobService.addJobMaintenance(this.createdJob)
+    //console.log(this.createdJob)
+    this.jobService.addJobMaintenance(this.createdJob)
+    .subscribe(data => { console.log("POST:" + data) },
+        error => { console.error("Error: ", error) })
 
     // console.log(newJobForm.jobName)
     // console.log(this.currentCompany.id)
