@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl } from '@angular/forms';
-import { JobService } from '../../../shared/services/job.service';
+import { ApplicationService } from '../../../shared/services/application.service';
+
 
 @Component({
   selector: 'app-offer-tracking',
@@ -12,11 +13,13 @@ export class OfferTrackingComponent implements OnInit {
 
   closeResult: string;
 
+  result: string;
+
   trackForm: FormGroup
   email: FormControl
 
   constructor(private modalService: NgbModal, 
-              private jobService: JobService) { }
+              private applicationService: ApplicationService) { }
 
   ngOnInit() {
 
@@ -26,9 +29,9 @@ export class OfferTrackingComponent implements OnInit {
       email: this.email
     })
 
+    console.log(this.email)
 
   }
-
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -36,6 +39,10 @@ export class OfferTrackingComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+
+    this.applicationService.getApplicationStatusByEmail(this.email);
+
+
   }
 
   private getDismissReason(reason: any): string {
