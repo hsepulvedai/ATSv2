@@ -20,8 +20,8 @@
      </div>    
 <div  class="container">
 
-               
-
+          <div class="row">
+            <div class="col-sm-3">
                 <button style="margin: 10px" class="btn btn-md" type="button" [routerLink]="['/offer-list-management']">
                   <span class="glyphicon glyphicon-menu-left"> Back </span>
               </button>
@@ -43,62 +43,62 @@
                         <hr>
                       <div><strong> Description : </strong> {{job?.description}}</div>  
                         <hr>
-                    </div>
+                    </div>                    
                   </div>
+              </div>
+              <div clas="col-sm-9">
+                  <p># of Applicants</p>
 
+                  <table class="table ">
+                      <thead>
+                        <tr>
+                          <th style="text-align: left" scope="col" >Applicant ID</th>
+                          <th style="text-align: left" scope="col">Applicant Name</th>
+                          <th scope="col">Application Status</th>
+                          <th scope="col">Recruiter</th>
+                          <th scope="col"> Resume</th>
+                          <th scope="col"> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let applicant of applicants">
+                          <th style="text-align: left" scope="row" >{{applicant.applicantId}}</th>
+                          <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
+        
+                          <td>       
+                          <select class="form-control" id="sel1">
+                              <option *ngFor="let status of applicationStatus">{{status.status}}</option>
+                          </select>
+                          </td>
+                          <td>         
+                              <select class="form-control" id="sel2"
+                              [(ngModel)]="selectedRecruiter" (ngModelChange)="onEmployeeChange($event)">
+                                <option *ngFor="let recruiter of employees" [ngValue]="recruiter"> {{recruiter.employeeFullName}}</option>
+                                  <!-- <option *ngFor="let emp of employees">{{emp.employeeId}} {{applicant.employeeId}}</option> -->
+                                  <option selected> {{emp.employeeFullName}} </option>
+        
+                                  <!-- Tengo que cambiar
+                                  {{emp.employeeId}}  -->
+                                  
+                                <!-- El que necesito
+                                  {{applicant.employeeId}} -->
+                                  
+                                  <!-- *ngIf="emp.employeeId === applicant.employeeId"   -->
+        
+                              </select>
+                              </td>
+        
+                          <td><a href="#">View</a></td>
+                          <td>
+                            <button class="btn btn-sm" type="button" (click)="save(applicant.applicationId, status.id)">
+                                <span class="glyphicon glyphicon-floppy-disk"></span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+               
 
-<div class="container-fluid" >
-    <div>
-          <p># of Applicants</p>
-
-          <table class="table ">
-              <thead>
-                <tr>
-                  <th style="text-align: left" scope="col" >Applicant ID</th>
-                  <th style="text-align: left" scope="col">Applicant Name</th>
-                  <th scope="col">Application Status</th>
-                  <th scope="col">Recruiter</th>
-                  <th scope="col"> Resume</th>
-                  <th scope="col"> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let applicant of applicants">
-                  <th style="text-align: left" scope="row" >{{applicant.applicantId}}</th>
-                  <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
-
-                  <td>       
-                  <select class="form-control" id="sel1">
-                      <option *ngFor="let status of applicationStatus">{{status.status}}</option>
-                  </select>
-                  </td>
-                  <td>         
-                      <select class="form-control" id="sel2"
-                      [(ngModel)]="selectedRecruiter" (ngModelChange)="onEmployeeChange($event)">
-                        <option *ngFor="let recruiter of employees" [ngValue]="recruiter"> {{recruiter.employeeFullName}}</option>
-                          <!-- <option *ngFor="let emp of employees">{{emp.employeeId}} {{applicant.employeeId}}</option> -->
-                          <option selected> {{emp.employeeFullName}} </option>
-
-                          <!-- Tengo que cambiar
-                          {{emp.employeeId}}  -->
-                          
-                        <!-- El que necesito
-                          {{applicant.employeeId}} -->
-                          
-                          <!-- *ngIf="emp.employeeId === applicant.employeeId"   -->
-
-                      </select>
-                      </td>
-
-                  <td><a href="#">View</a></td>
-                  <td>
-                    <button class="btn btn-sm" type="button" (click)="save(applicant.applicationId, status.id)">
-                        <span class="glyphicon glyphicon-floppy-disk"></span>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-       
-    </div>
-  </div>
+              </div>
+         </div> 
+</div> 
