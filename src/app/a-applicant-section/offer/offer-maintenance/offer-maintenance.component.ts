@@ -9,6 +9,8 @@ import { JobCategoryService } from '../../../shared/services/job-category.servic
 import { IJobType } from '../../../shared/models/job_type.model';
 import { JobTypeService } from '../../../shared/services/job-type.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CompanyService } from '../../../shared/services/company.service';
+import { ICompany } from '../../../shared/models/company.model';
 
 
 
@@ -18,6 +20,11 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   //styleUrls: ['./offer-maintenance.component.css']
 })
 export class OfferMaintenanceComponent implements OnInit {
+
+
+  currentCompany:ICompany
+  selectedJobType: string ='Default'
+  selectedJobCategory: string = 'Default'
 
   availableJobs:IJobOffer[]
   inactiveJobs:IJobOffer[]
@@ -29,7 +36,6 @@ export class OfferMaintenanceComponent implements OnInit {
   types:IJobType[]
 
   closeResult:string;
-
   
   newJobForm: FormGroup
   jobName: FormControl
@@ -55,10 +61,17 @@ export class OfferMaintenanceComponent implements OnInit {
     private jobService: JobService, 
     private jobCategoryService: JobCategoryService,
     private jobTypeService: JobTypeService,
+    private companyService: CompanyService,
     private route: ActivatedRoute,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+
+    this.companyService.getCompanyById(1)
+    .subscribe((data:ICompany) => {
+      this.currentCompany = data['Data'];
+      console.log(this.currentCompany)
+    })
 
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
@@ -73,7 +86,6 @@ export class OfferMaintenanceComponent implements OnInit {
       this.jobService.showDraftJobs()
       .subscribe((data:IJobOffer[])=> {
         this.draftJobs = data['Data']
-        console.log(this.draftJobs);
       })
 
     this.jobCategoryService.showCategories()
@@ -99,9 +111,9 @@ export class OfferMaintenanceComponent implements OnInit {
 
 
     // These are the controls for the add job form.
-    this.jobName = new FormControl(),
+    this.jobName = new FormControl()
     this.jobCompany = new FormControl()
-    this.jobCity = new FormControl( )
+    this.jobCity = new FormControl()
     this.jobCountry = new FormControl()
     this.jobCategory = new FormControl()
     this.jobType = new FormControl ()
@@ -116,7 +128,6 @@ export class OfferMaintenanceComponent implements OnInit {
       jobType: this.jobType,
       jobDescription: this.jobDescription,
     })
-
     
     this.jobEditForm = new FormGroup({
       name: this.name,
@@ -146,8 +157,6 @@ export class OfferMaintenanceComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-
-
   }
 
   private getDismissReason(reason: any): string {
@@ -160,37 +169,48 @@ export class OfferMaintenanceComponent implements OnInit {
     }
   }
 
-  createJob(jobForm){
+  createJob(newJobForm){
 
-    console.log(jobForm)
+    console.log(newJobForm.jobName)
+    console.log(this.currentCompany.id)
+    console.log(this.selectedJobType)
+    console.log(this.selectedJobCategory)
+    console.log(newJobForm.jobDescription)
+
+
+
+    // this.jobService.addJobMaintenance(job) {
+
+    // }
+
+    // console.log(jobForm)
   
-    
-      let jcId
+    //   let jcId
    
-      this.categories.forEach(element => {
+    //   this.categories.forEach(element => {
   
-        if (jobForm.category = element.name)
-            jcId = element.id
+    //     if (jobForm.category = element.name)
+    //         jcId = element.id
         
-      });
+    //   });
   
          
-      this.job = {
-        name: jobForm.name,
-        companyId: 0,
-        jobCategoryId: jcId,
-         description: jobForm.description
-      }
+      // this.job = {
+      //   name: jobForm.name,
+      //   companyId: 0,
+      //   jobCategoryId: jcId,
+      //    description: jobForm.description
+      // }
   
   
-      this.types.forEach(element => {
+      // this.types.forEach(element => {
   
-        if (jobForm.type = element.name)
-            this.job.jobTypeId = element.id
+      //   if (jobForm.type = element.name)
+      //       this.job.jobTypeId = element.id
         
-      });
+      // });
 
-      console.log(this.job)
+      // console.log(this.job)
     }
   
 
@@ -211,4 +231,18 @@ export class OfferMaintenanceComponent implements OnInit {
       error => {console.log("Error", error)}
                  );
   }
+
+
+    //event handler for the select element's change event
+    selectJobTypeChangeHandler (event: any) {
+      //update the ui
+      this.selectedJobType = event.target.value;
+    }
+
+    selectJobCatChangeHandler (event: any) {
+      //update the ui
+      this.selectedJobCategory = event.target.value;
+    }
+
+
 }
