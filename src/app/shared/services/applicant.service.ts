@@ -37,6 +37,11 @@ export class ApplicantService {
     return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicantSetActive/' + id, JSON.stringify(id)) 
   }
 
+  addApplicantMaintenance(applicant) {
+    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicantInsertFromWeb', applicant )
+  }
+
+
 
 
   
