@@ -15,4 +15,10 @@ export class ApplicationService {
   updateApplicationStatus(applicationId, applicationStatusId) {
     return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicantSelectAll', applicationId, applicationStatusId);
   }
+
+  getApplicationStatusByEmail(email){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationSelectStatusByEmail', email )
+  }
+
+
 }
