@@ -67,15 +67,13 @@
 </ng-template>
 
 <div class="backgroundG ">
-  <h3> A.5 Job Maintenance Screen</h3>
+ 
  
   
 </div>
 
-<div class="container">
-
-  <div class="container tabsmargin">
-
+  <div class="container ">
+    <h3> A.5 Job Maintenance Screen</h3>
     <ngb-tabset>
       <ngb-tab title="Available Jobs">
         <ng-template ngbTabContent>
@@ -216,11 +214,11 @@
               <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value)">
 
                 <div class="row smallrow">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                         <label for="jobName"> <strong>Job Title</strong></label>
                         <input formControlName="jobName" type="text" class="form-control" id="name">
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-sm-6">
                         <label for="jobCompany"> <strong>Company</strong></label>
                         <input disabled formControlName="jobCompany" type="text" class="form-control" id="company" [value]="currentCompany.name">
                       </div>
@@ -272,10 +270,18 @@
                       
                 </div>
 
+<<<<<<< HEAD
 
 
 
 
+=======
+                <div class="row mdrow" style="margin-top: 12em" >
+                  <div class="col-sm-6">
+                <button class="btn btn-sm" type="submit">Submit</button>
+                </div>
+              </div>
+>>>>>>> 8d78ef4b72fb3fdb53fbb53352517311104d2748
                 <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
 
               </form>
