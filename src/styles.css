@@ -23,16 +23,22 @@ p {font-size: 16px;}
 
 .navbar {
     /*Controla la barra de navegacion como tal */
-   background-color:#25326a;
+   background-color:#df136f;
   
 }
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color:#df136f;
+    color:#25326a;
     font-family: Quicksand;
     font-size: 100%;
-    font: outline;
+
     
+}
+
+img{
+    width: 8em;    
+    position: left;
+
 }
 
 button{
@@ -63,7 +69,7 @@ th {
 
 .descp {
     font-size: 16px;
-    color: black;
+    color: white;
     text-align: justify;
     padding-left: 200px;
     padding-right: 200px;
@@ -100,6 +106,7 @@ h5{
       height: 5em;
       background-color:#4577bb; 
       font-weight: 100;
+
      
 }
 .backgroundWelcome{
@@ -107,6 +114,7 @@ h5{
     text-align: center;
      position:auto;
       height: 30em;
+      color: white;
      
 }
 
