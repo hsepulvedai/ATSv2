@@ -174,7 +174,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
   openEdit(content, applicant) {
 
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
 
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
