@@ -21,5 +21,11 @@ export class JobTypeService {
   }
 
 
+  getJobTypeById(id){
+    return this.http.get(environment.baseUrl + this.routePrefix+ "/JobTypeSelectById/" + id)
+  }
+
+
+
 
 }

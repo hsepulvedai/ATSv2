@@ -16,6 +16,10 @@ export class JobCategoryService {
   constructor(private http: HttpClient) {}
 
 
+getJobCategoryById(id){
+  return this.http.get(environment.baseUrl + this.routePrefix+ "/JobCategorySelectById/" + id)
+}
+
   showCategories(){
     return this.http.get(environment.baseUrl + this.routePrefix + "/JobCategorySelectActive");
 

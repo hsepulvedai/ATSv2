@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicantService } from '../../../shared/services/applicant.service';
 import { IApplicantInfo } from '../../../shared/models/applicant_info.model';
 import { FormGroup, FormControl, Form } from '@angular/forms';
+import { NgbModal,  ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-applicant-maintenance',
@@ -11,6 +12,8 @@ import { FormGroup, FormControl, Form } from '@angular/forms';
   //styleUrls: ['./applicant-maintenance.component.css']
 })
 export class ApplicantMaintenanceComponent implements OnInit {
+
+
 
   allApplicants: IApplicantInfo[]
   allPastApplicants: IApplicantInfo[]
@@ -20,6 +23,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
   applicantFirstName: FormControl
   applicantLastName:FormControl
   applicantEmail:FormControl
+  applicantPhoneNumber: FormControl
   applicantPassword:FormControl
   applicantAddressLine:FormControl
   applicantAddressLine2:FormControl
@@ -28,14 +32,30 @@ export class ApplicantMaintenanceComponent implements OnInit {
   applicantCountry:FormControl
   applicantZipCode:FormControl
   
-
   newApplicant:IApplicantInsert
 
+  
+  applicantEditForm: FormGroup 
+  firstName: FormControl
+  lastName:FormControl
+  email:FormControl
+  phone:FormControl
+  password:FormControl
+  addressLine:FormControl
+  addressLine2:FormControl
+  city:FormControl
+  state:FormControl
+  country:FormControl
+  zipCode:FormControl
+
+  closeResult:string;
+ 
 
   constructor(
     private router: Router,
     private applicantService: ApplicantService, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -43,6 +63,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantFirstName= new FormControl()
     this.applicantLastName= new FormControl()
     this.applicantEmail= new FormControl()
+    this.applicantPhoneNumber = new FormControl()
     this.applicantPassword= new FormControl()
     this.applicantAddressLine= new FormControl()
     this.applicantAddressLine2= new FormControl()
@@ -57,6 +78,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
       applicantFirstName: this.applicantFirstName,
       applicantLastName:this.applicantLastName,
       applicantEmail:this.applicantEmail,
+      applicantPhoneNumber:this.applicantPhoneNumber,
       applicantPassword:this.applicantPassword,
       addressLine:this.applicantAddressLine,
       addressLine2:this.applicantAddressLine2,
@@ -75,6 +97,37 @@ export class ApplicantMaintenanceComponent implements OnInit {
      .subscribe((data:IApplicantInfo[]) => {
        this.allPastApplicants = data['Data'];
       }) 
+
+
+     
+     this.firstName = new FormControl();
+     this.lastName = new FormControl();
+     this.email = new FormControl();
+     this.phone = new FormControl();
+     this.password = new FormControl();
+     this.addressLine = new FormControl();
+     this.addressLine2 = new FormControl();
+     this.city = new FormControl();
+     this.state = new FormControl();
+     this.country = new FormControl();
+     this.zipCode = new FormControl();
+
+     
+     
+     
+       this.applicantEditForm = new FormGroup({
+         firstName: this.firstName,
+         lastName:this.lastName,
+         email:this.email,
+         phone:this.phone,
+         password:this.password,
+         addressLine:this.addressLine,
+         addressLine2:this.addressLine2,
+         city:this.city,
+         state:this.state,
+         country:this.country,
+         zipCode:this.zipCode,
+       })
 
   }
 
@@ -96,6 +149,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
       lastName: newApplicantForm.applicantLastName,
       email: newApplicantForm.applicantEmail,
       password: newApplicantForm.applicantPassword,
+      phone: newApplicantForm.applicantPhoneNumber,
       addressLine: newApplicantForm.addressLine,
       addressLine2: newApplicantForm.addressLine2,
       city: newApplicantForm.city,
@@ -104,11 +158,41 @@ export class ApplicantMaintenanceComponent implements OnInit {
       zipCode: newApplicantForm.zipCode
     }
 
+
+    console.log(this.newApplicant)
+    
+
     this.applicantService.addApplicantMaintenance(this.newApplicant)
     .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
+   
+      
 
-    //console.log(this.newApplicant)
+   
   }
+
+  openEdit(content, applicant) {
+
+   
+
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+ 
 
 }

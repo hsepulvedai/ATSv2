@@ -106,7 +106,7 @@
                   <td> {{job.city}}, {{job.country}} </td>
                   <td> {{job.jobCategory}} </td>
                   <td>{{job.jobType}}</td>
-                  <td> <button type="button" (click)="openEdit(content, job)"> &#9997; </button> </td>
+                  <td> <button type="button" (click)="openEdit(content, job, job.id)"> &#9997; </button> </td>
                   <td> <button type="button" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
                 </tr>
               </tbody>
@@ -137,6 +137,7 @@
                   <th>Category</th>
                   <th>Type</th>
                   <th>Edit</th>
+                  <th>Active/Inactive</th>
                 </tr>
               </thead>
               <!--Table head-->

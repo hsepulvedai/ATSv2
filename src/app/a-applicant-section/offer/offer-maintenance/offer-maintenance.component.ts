@@ -34,6 +34,10 @@ export class OfferMaintenanceComponent implements OnInit {
   draftJobs:IJobOffer[]
   job:IJob
 
+  currentJobId: number = 0
+
+
+
   categories:IJobCategory[]
  
   types:IJobType[]
@@ -58,6 +62,9 @@ export class OfferMaintenanceComponent implements OnInit {
   type: FormControl
   description: FormControl
 
+  currentJobType: string =''
+  currentJobCategory: string = ''
+
 
 
   constructor( private router: Router,
@@ -75,6 +82,8 @@ export class OfferMaintenanceComponent implements OnInit {
       this.currentCompany = data['Data'];
     })
 
+    
+
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
       this.availableJobs = data['Data'];
@@ -90,10 +99,14 @@ export class OfferMaintenanceComponent implements OnInit {
         this.draftJobs = data['Data']
       })
 
+    
+
     this.jobCategoryService.showCategories()
        .subscribe((data:IJobCategory[]) => {
          this.categories = data['Data'];
        })
+
+   
 
 
     this.jobTypeService.showTypes()
@@ -143,15 +156,32 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
-  openEdit(content, job) {
+  openEdit(content, job, id) {
+
+
+    this.jobService.showJobById(id)
+       .subscribe((data:IJob) => {
+         this.currentJobId= data.id;
+       })
+
+    this.jobCategoryService.getJobCategoryById(this.currentJobId)
+    .subscribe((data:IJobCategory) => {
+      this.currentJobCategory = data.name
+    })
+
+    this.jobTypeService.getJobTypeById(this.currentJobId)
+    .subscribe((data:IJobType) => {
+      this.currentJobType = data.name
+    })
+    
+    console.log(this.currentJobCategory)
+
 
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.get('company').setValue(job.company)
     this.jobEditForm.get('city').setValue(job.city)
-    // this.jobEditForm.get('country').setValue(job.country)
-    // this.jobEditForm.get('category').setValue(job.jobCategory)
-    // this.jobEditForm.get('type').setValue(job.jobType)
-    this.jobEditForm.get('description').setValue(job.description)
+     this.jobEditForm.get('country').setValue(job.country)
+  
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
 
@@ -250,6 +280,12 @@ export class OfferMaintenanceComponent implements OnInit {
     selectJobTypeChangeHandler (event: any) {
       //update the ui
       this.selectedJobType = event.target.value;
+
+      this.categories.forEach(category=> {
+        if(this.currentJobCategory = category.name)
+        this.selectedJobCategory = category.name
+        
+      });
     }
 
     selectJobCatChangeHandler (event: any) {

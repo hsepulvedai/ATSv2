@@ -84,10 +84,6 @@ export class JobService {
   //  return this.http.get(environment.baseUrl + "/Job/JobShowAll/");
   // }
 
-  // getJob(id:number){
-    
-  //   return this.http.get( environment.baseUrl + " " + id);
-  // }
   
 
   
