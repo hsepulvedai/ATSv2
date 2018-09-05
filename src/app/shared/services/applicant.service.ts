@@ -30,11 +30,11 @@ export class ApplicantService {
   }
 
   setInactiveApplicant(id){
-    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicantSetInactive/' + id , JSON.stringify(id)) 
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicantSetInactive/' + id, id) 
   }
 
   setActiveApplicant(id){
-    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicantSetActive/' + id, JSON.stringify(id)) 
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicantSetActive/' + id, id) 
   }
 
   addApplicantMaintenance(applicant) {

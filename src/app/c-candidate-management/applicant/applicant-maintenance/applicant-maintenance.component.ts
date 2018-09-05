@@ -3,6 +3,7 @@ import { IApplicantInsert } from '../../../shared/models/applicant_insert.model'
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicantService } from '../../../shared/services/applicant.service';
 import { IApplicantInfo } from '../../../shared/models/applicant_info.model';
+import { IApplicantMaintInfo } from '../../../shared/models/applicant_maintenance.model'
 import { FormGroup, FormControl, Form } from '@angular/forms';
 import { NgbModal,  ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
@@ -15,8 +16,8 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
 
 
-  allApplicants: IApplicantInfo[]
-  allPastApplicants: IApplicantInfo[]
+  allApplicants: IApplicantMaintInfo[]
+  allPastApplicants: IApplicantMaintInfo[]
   applicant: IApplicantInfo
   addApplicantForm:FormGroup
 
@@ -91,6 +92,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantService.showAllActiveApplicants()
     .subscribe((data:IApplicantInfo[]) => {
       this.allApplicants = data['Data'];
+      console.log(this.allApplicants)
      }) 
 
      this.applicantService.showAllInactiveApplicants()
@@ -98,8 +100,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
        this.allPastApplicants = data['Data'];
       }) 
 
-
-     
      this.firstName = new FormControl();
      this.lastName = new FormControl();
      this.email = new FormControl();
@@ -162,9 +162,9 @@ export class ApplicantMaintenanceComponent implements OnInit {
     console.log(this.newApplicant)
     
 
-    this.applicantService.addApplicantMaintenance(this.newApplicant)
-    .subscribe(data => { console.log("POST:" + data) },
-        error => { console.error("Error: ", error) })
+    // this.applicantService.addApplicantMaintenance(this.newApplicant)
+    // .subscribe(data => { console.log("POST:" + data) },
+    //     error => { console.error("Error: ", error) })
    
       
 
