@@ -106,9 +106,6 @@ export class OfferMaintenanceComponent implements OnInit {
          this.categories = data['Data'];
        })
 
-   
-
-
     this.jobTypeService.showTypes()
        .subscribe((data:IJobType[]) => {
          this.types = data['Data']
@@ -274,7 +271,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   setJobInactive(id){
 
-    this.jobService.setInActiveJob(id)
+    this.jobService.setInactiveJob(id)
     .subscribe(
       data => {console.log("UPDATED: ", data)},
       error => {console.log("Error", error)}
