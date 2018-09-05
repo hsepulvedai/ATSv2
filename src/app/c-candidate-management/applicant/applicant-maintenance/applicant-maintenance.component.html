@@ -1,7 +1,7 @@
 <div class="backgroundG">
-  <h3> C.1 Applicant Maintenance Screen  </h3>
- 
-  
+  <h3> C.1 Applicant Maintenance Screen </h3>
+
+
 </div>
 
 <div class="container tabsmargin ">
@@ -72,12 +72,12 @@
             <tbody>
               <tr *ngFor="let applicant of allPastApplicants">
                 <!-- <tr *ngFor="let applicant of allApplicants"> -->
-                  <td>{{applicant.firstName}} {{applicant.lastName}}</td>
-                  <td>{{applicant.email}}</td>
-                  <td>{{applicant.phone}}</td>
-                  <td>{{applicant.city}}, {{applicant.country}}</td>
-                  <td> <button type="button" (click)="makeApplicantActive(applicant.applicantId)"> Activate </button> </td>
-                </tr>
+                <td>{{applicant.firstName}} {{applicant.lastName}}</td>
+                <td>{{applicant.email}}</td>
+                <td>{{applicant.phone}}</td>
+                <td>{{applicant.city}}, {{applicant.country}}</td>
+                <td> <button type="button" (click)="makeApplicantActive(applicant.applicantId)"> Activate </button> </td>
+              </tr>
             </tbody>
             <!--Table body-->
           </table>
@@ -95,7 +95,7 @@
           <hr>
 
           <div>
-            <form [formGroup]="addApplicantForm" autocomplete="off">
+            <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value)">
 
               <div class="row smallrow">
                 <div class="form-group col-sm-6">
@@ -114,50 +114,61 @@
                   <input formControlName="applicantEmail" type="text" class="form-control" id="email">
                 </div>
                 <div class="form-group col-sm-6">
-                    <label for="password"> <strong>Password</strong></label>
-                    <input formControlName="applicantPassword" type="text" class="form-control" id="password">
+                  <label for="applicantPhoneNumber"> <strong>Phone</strong></label>
+                  <input formControlName="applicantPhoneNumber" type="text" class="form-control" id="applicantPhoneNumber">
                 </div>
               </div>
-
-             
 
               <div class="row mdrow  ">
-                  <div class="form-group col-sm-12">
+                <div class="form-group col-sm-12">
                   <label for="addressLine"> <strong>Address</strong></label>
-                  <input formControlName="addressLine" type="text" class="form-control" id="addressLine" >
-                  </div>
+                  <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
+                </div>
               </div>
               <div class="row smallrow">
-                  <div class="form-group col-sm-12">
-                <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
+                <div class="form-group col-sm-12">
+                  <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
                 </div>
               </div>
 
               <div class="row smallrow">
-                  <div class="form-group col-sm-6">
-                      <label for="city"> <strong>City</strong></label>
-                      <input formControlName="city" type="text" class="form-control" id="city">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="password"> <strong>State/Province</strong></label>
-                        <input formControlName="state" type="text" class="form-control" id="password">
-                    </div>
+                <div class="form-group col-sm-6">
+                  <label for="city"> <strong>City</strong></label>
+                  <input formControlName="city" type="text" class="form-control" id="city">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="state"> <strong>State/Province</strong></label>
+                  <input formControlName="state" type="text" class="form-control" id="state">
+                </div>
               </div>
 
               <div class="row smallrow ">
-                  <div class="form-group col-sm-6">
-                      <label for="country"> <strong>Country</strong></label>
-                      <input formControlName="country" type="text" class="form-control" id="country">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="zipcode"> <strong>Zip Code</strong></label>
-                        <input formControlName="zipcode" type="text" class="form-control" id="zipcode">
-                    </div>
+                <div class="form-group col-sm-6">
+                  <label for="country"> <strong>Country</strong></label>
+                  <input formControlName="country" type="text" class="form-control" id="country">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="zipCode"> <strong>Zip Code</strong></label>
+                  <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
+                </div>
               </div>
 
-              <div class="row smallrow"></div>
+              
+              <div class="row smallrow">
+                  <div class="form-group col-sm-6">
+                    <label for="applicantPassword"> <strong> Password</strong></label>
+                    <input formControlName="applicantPassword" type="text" class="form-control" id="applicantPassword">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="confirmPassword"> <strong> Confirm Password</strong></label>
+                    <input formControlName="confirmPassword" type="text" class="form-control" id="confirmPassword">
+                  </div>
+                </div>
 
-              <input class="btn" type="submit" value="Submit"> <!-- Class btn for style purposes-->
+              <button class="btn btn-sm" type="submit">Submit</button>
+
+              <!-- <input class="btn" type="submit" value="Submit"> -->
+              <!-- Class btn for style purposes-->
 
             </form>
 

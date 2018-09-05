@@ -32,6 +32,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
   applicantState:FormControl
   applicantCountry:FormControl
   applicantZipCode:FormControl
+  confirmPassword:FormControl
   
   newApplicant:IApplicantInsert
 
@@ -72,6 +73,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantState= new FormControl()
     this.applicantCountry= new FormControl()
     this.applicantZipCode= new FormControl()
+    this.confirmPassword = new FormControl()
 
     
 
@@ -87,6 +89,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
       state:this.applicantState,
       country:this.applicantCountry,
       zipCode:this.applicantZipCode,
+      confirmPassword:this.confirmPassword
     })
 
     this.applicantService.showAllActiveApplicants()
@@ -111,9 +114,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
      this.state = new FormControl();
      this.country = new FormControl();
      this.zipCode = new FormControl();
-
-     
-     
      
        this.applicantEditForm = new FormGroup({
          firstName: this.firstName,
@@ -154,17 +154,18 @@ export class ApplicantMaintenanceComponent implements OnInit {
       addressLine2: newApplicantForm.addressLine2,
       city: newApplicantForm.city,
       stateProvince: newApplicantForm.state,
-      country: newApplicantForm.state,
+      country: newApplicantForm.country,
       zipCode: newApplicantForm.zipCode
     }
+  
 
 
     console.log(this.newApplicant)
     
 
-    // this.applicantService.addApplicantMaintenance(this.newApplicant)
-    // .subscribe(data => { console.log("POST:" + data) },
-    //     error => { console.error("Error: ", error) })
+    this.applicantService.addApplicantMaintenance(this.newApplicant)
+    .subscribe(data => { console.log("POST:" + data) },
+        error => { console.error("Error: ", error) })
    
       
 
@@ -172,8 +173,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
   }
 
   openEdit(content, applicant) {
-
-   
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
 
