@@ -1,160 +1,163 @@
-<div class="backgroundG">
-  <h3> C.1 Applicant Maintenance Screen </h3>
+<!-- -------------------------------- -->
+
+  <div class="backgroundG">
+    <h3> C.1 Applicant Maintenance Screen </h3>
 
 
-</div>
+  </div>
 
-<div class="container tabsmargin ">
+  <div class="container tabsmargin ">
 
-  <ngb-tabset>
-    <ngb-tab title="Applicants">
-      <ng-template ngbTabContent>
-        <h3> Applicants </h3>
-
-        <div>
-
-          <!--Table-->
-          <table class="table table-striped">
-
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th> Name </th>
-                <th> Email</th>
-                <th> Phone </th>
-                <th> Location </th>
-                <th> Edit </th>
-              </tr>
-            </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody>
-              <tr *ngFor="let applicant of allApplicants">
-                <td>{{applicant.firstName}} {{applicant.lastName}}</td>
-                <td>{{applicant.email}}</td>
-                <td>{{applicant.phone}}</td>
-                <td>{{applicant.city}}, {{applicant.country}}</td>
-                <td> <button type="button" (click)="makeApplicantInactive(applicant.applicantId)"> Deactivate </button> </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-
-        </div>
-
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab>
-      <ng-template ngbTabTitle> Past Applicants</ng-template>
-      <ng-template ngbTabContent>
-        <h3> Past Applicants </h3>
-
-        <div>
-
-          <!--Table-->
-          <table class="table table-striped">
-
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th> Name </th>
-                <th> Email</th>
-                <th> Phone </th>
-                <th> Location </th>
-                <th> Edit </th>
-              </tr>
-            </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody>
-              <tr *ngFor="let applicant of allPastApplicants">
-                <!-- <tr *ngFor="let applicant of allApplicants"> -->
-                <td>{{applicant.firstName}} {{applicant.lastName}}</td>
-                <td>{{applicant.email}}</td>
-                <td>{{applicant.phone}}</td>
-                <td>{{applicant.city}}, {{applicant.country}}</td>
-                <td> <button type="button" (click)="makeApplicantActive(applicant.applicantId)"> Activate </button> </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-
-        </div>
-
-      </ng-template>
-    </ngb-tab>
-
-    <ngb-tab title="Add Applicant">
-      <ng-template ngbTabContent>
-        <p>
-          <h3> New Applicant </h3>
-          <hr>
+    <ngb-tabset>
+      <ngb-tab title="Applicants">
+        <ng-template ngbTabContent>
+          <h3> Applicants </h3>
 
           <div>
-            <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value)">
 
-              <div class="row smallrow">
-                <div class="form-group col-sm-6">
-                  <label for="fName"> <strong>First Name</strong></label>
-                  <input formControlName="applicantFirstName" type="text" class="form-control" id="fName">
-                </div>
-                <div class="form-group col-sm-6">
-                  <label for="lName"> <strong>Last Name</strong></label>
-                  <input formControlName="applicantLastName" type="text" class="form-control" id="lName">
-                </div>
-              </div>
+            <!--Table-->
+            <table class="table table-striped">
 
-              <div class="row smallrow">
-                <div class="form-group col-sm-6">
-                  <label for="email"> <strong>Email</strong></label>
-                  <input formControlName="applicantEmail" type="text" class="form-control" id="email">
-                </div>
-                <div class="form-group col-sm-6">
-                  <label for="applicantPhoneNumber"> <strong>Phone</strong></label>
-                  <input formControlName="applicantPhoneNumber" type="text" class="form-control" id="applicantPhoneNumber">
-                </div>
-              </div>
+              <!--Table head-->
+              <thead>
+                <tr>
+                  <th> Name </th>
+                  <th> Email</th>
+                  <th> Phone </th>
+                  <th> Location </th>
+                  <th> Edit </th>
+                </tr>
+              </thead>
+              <!--Table head-->
 
-              <div class="row mdrow  ">
-                <div class="form-group col-sm-12">
-                  <label for="addressLine"> <strong>Address</strong></label>
-                  <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
-                </div>
-              </div>
-              <div class="row smallrow">
-                <div class="form-group col-sm-12">
-                  <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
-                </div>
-              </div>
+              <!--Table body-->
+              <tbody>
+                <tr *ngFor="let applicant of allApplicants">
+                  <td>{{applicant.firstName}} {{applicant.lastName}}</td>
+                  <td>{{applicant.email}}</td>
+                  <td>{{applicant.phone}}</td>
+                  <td>{{applicant.city}}, {{applicant.country}}</td>
+                  <td> <button type="button" (click)="makeApplicantInactive(applicant.applicantId)"> Deactivate </button>
+                    </td>
+                </tr>
+              </tbody>
+              <!--Table body-->
+            </table>
+            <!--Table-->
 
-              <div class="row smallrow">
-                <div class="form-group col-sm-6">
-                  <label for="city"> <strong>City</strong></label>
-                  <input formControlName="city" type="text" class="form-control" id="city">
-                </div>
-                <div class="form-group col-sm-6">
-                  <label for="state"> <strong>State/Province</strong></label>
-                  <input formControlName="state" type="text" class="form-control" id="state">
-                </div>
-              </div>
+          </div>
 
-              <div class="row smallrow ">
-                <div class="form-group col-sm-6">
-                  <label for="country"> <strong>Country</strong></label>
-                  <input formControlName="country" type="text" class="form-control" id="country">
-                </div>
-                <div class="form-group col-sm-6">
-                  <label for="zipCode"> <strong>Zip Code</strong></label>
-                  <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
-                </div>
-              </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle> Past Applicants</ng-template>
+        <ng-template ngbTabContent>
+          <h3> Past Applicants </h3>
 
-              
-              <div class="row smallrow">
+          <div>
+
+            <!--Table-->
+            <table class="table table-striped">
+
+              <!--Table head-->
+              <thead>
+                <tr>
+                  <th> Name </th>
+                  <th> Email</th>
+                  <th> Phone </th>
+                  <th> Location </th>
+                  <th> Edit </th>
+                </tr>
+              </thead>
+              <!--Table head-->
+
+              <!--Table body-->
+              <tbody>
+                <tr *ngFor="let applicant of allPastApplicants">
+                  <!-- <tr *ngFor="let applicant of allApplicants"> -->
+                  <td>{{applicant.firstName}} {{applicant.lastName}}</td>
+                  <td>{{applicant.email}}</td>
+                  <td>{{applicant.phone}}</td>
+                  <td>{{applicant.city}}, {{applicant.country}}</td>
+                  <td> <button type="button" (click)="makeApplicantActive(applicant.applicantId)"> Activate </button> </td>
+                </tr>
+              </tbody>
+              <!--Table body-->
+            </table>
+            <!--Table-->
+
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab title="Add Applicant">
+        <ng-template ngbTabContent>
+          <p>
+            <h3> New Applicant </h3>
+            <hr>
+
+            <div>
+              <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value)">
+
+                <div class="row smallrow">
+                  <div class="form-group col-sm-6">
+                    <label for="fName"> <strong>First Name</strong></label>
+                    <input formControlName="applicantFirstName" type="text" class="form-control" id="fName">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="lName"> <strong>Last Name</strong></label>
+                    <input formControlName="applicantLastName" type="text" class="form-control" id="lName">
+                  </div>
+                </div>
+
+                <div class="row smallrow">
+                  <div class="form-group col-sm-6">
+                    <label for="email"> <strong>Email</strong></label>
+                    <input formControlName="applicantEmail" type="text" class="form-control" id="email">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="applicantPhoneNumber"> <strong>Phone</strong></label>
+                    <input formControlName="applicantPhoneNumber" type="text" class="form-control" id="applicantPhoneNumber">
+                  </div>
+                </div>
+
+                <div class="row mdrow  ">
+                  <div class="form-group col-sm-12">
+                    <label for="addressLine"> <strong>Address</strong></label>
+                    <input formControlName="applicantAddressLine" type="text" class="form-control" id="addressLine">
+                  </div>
+                </div>
+                <div class="row smallrow">
+                  <div class="form-group col-sm-12">
+                    <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
+                  </div>
+                </div>
+
+                <div class="row smallrow">
+                  <div class="form-group col-sm-6">
+                    <label for="city"> <strong>City</strong></label>
+                    <input formControlName="city" type="text" class="form-control" id="city">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="state"> <strong>State/Province</strong></label>
+                    <input formControlName="state" type="text" class="form-control" id="state">
+                  </div>
+                </div>
+
+                <div class="row smallrow ">
+                  <div class="form-group col-sm-6">
+                    <label for="country"> <strong>Country</strong></label>
+                    <input formControlName="country" type="text" class="form-control" id="country">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="zipCode"> <strong>Zip Code</strong></label>
+                    <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
+                  </div>
+                </div>
+
+
+                <div class="row smallrow">
                   <div class="form-group col-sm-6">
                     <label for="applicantPassword"> <strong> Password</strong></label>
                     <input formControlName="applicantPassword" type="text" class="form-control" id="applicantPassword">
@@ -165,18 +168,18 @@
                   </div>
                 </div>
 
-              <button class="btn btn-sm" type="submit">Submit</button>
+                <button class="btn btn-sm" type="submit">Submit</button>
 
-              <!-- <input class="btn" type="submit" value="Submit"> -->
-              <!-- Class btn for style purposes-->
+                <!-- <input class="btn" type="submit" value="Submit"> -->
+                <!-- Class btn for style purposes-->
 
-            </form>
+              </form>
 
-          </div>
+            </div>
 
 
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
 
-</div>
+  </div>

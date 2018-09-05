@@ -15,6 +15,7 @@ import { NgbModal,  ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class ApplicantMaintenanceComponent implements OnInit {
 
 
+  currentApplicant
 
   allApplicants: IApplicantMaintInfo[]
   allPastApplicants: IApplicantMaintInfo[]
@@ -173,6 +174,31 @@ export class ApplicantMaintenanceComponent implements OnInit {
   }
 
   openEdit(content, applicant) {
+
+
+    // this.applicantService.(applicant.id)
+    //    .subscribe((data:IJob) => {
+    //      this.currentApplicant= data.id;
+    //    })
+
+    // this.jobCategoryService.getJobCategoryById(this.currentJobId)
+    // .subscribe((data:IJobCategory) => {
+    //   this.currentJobCategory = data.name
+    // })
+
+    // this.jobTypeService.getJobTypeById(this.currentJobId)
+    // .subscribe((data:IJobType) => {
+    //   this.currentJobType = data.name
+    // })
+    
+    // console.log(this.currentJobCategory)
+
+
+    // this.jobEditForm.get('name').setValue(job.jobName)
+    // this.jobEditForm.get('company').setValue(job.company)
+    // this.jobEditForm.get('city').setValue(job.city)
+    //  this.jobEditForm.get('country').setValue(job.country)
+  
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
 
