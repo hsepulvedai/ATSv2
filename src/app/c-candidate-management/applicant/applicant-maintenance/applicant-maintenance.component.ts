@@ -16,12 +16,14 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
 
   currentApplicant
+  newApplicant:IApplicantInsert
 
   allApplicants: IApplicantMaintInfo[]
   allPastApplicants: IApplicantMaintInfo[]
   applicant: IApplicantInfo
-  addApplicantForm:FormGroup
 
+
+  applicantEditForm: FormGroup 
   applicantFirstName: FormControl
   applicantLastName:FormControl
   applicantEmail:FormControl
@@ -34,11 +36,8 @@ export class ApplicantMaintenanceComponent implements OnInit {
   applicantCountry:FormControl
   applicantZipCode:FormControl
   confirmPassword:FormControl
-  
-  newApplicant:IApplicantInsert
 
-  
-  applicantEditForm: FormGroup 
+  addApplicantForm:FormGroup
   firstName: FormControl
   lastName:FormControl
   email:FormControl
@@ -61,8 +60,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
-  ngOnInit() {
-
+  initilalizeEditApplicantForm() {
     this.applicantFirstName= new FormControl()
     this.applicantLastName= new FormControl()
     this.applicantEmail= new FormControl()
@@ -74,24 +72,59 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantState= new FormControl()
     this.applicantCountry= new FormControl()
     this.applicantZipCode= new FormControl()
-    this.confirmPassword = new FormControl()
 
-    
 
-    this.addApplicantForm = new FormGroup({
+    this.applicantEditForm = new FormGroup({
       applicantFirstName: this.applicantFirstName,
       applicantLastName:this.applicantLastName,
       applicantEmail:this.applicantEmail,
       applicantPhoneNumber:this.applicantPhoneNumber,
       applicantPassword:this.applicantPassword,
-      addressLine:this.applicantAddressLine,
-      addressLine2:this.applicantAddressLine2,
-      city:this.applicantCity,
-      state:this.applicantState,
-      country:this.applicantCountry,
-      zipCode:this.applicantZipCode,
-      confirmPassword:this.confirmPassword
+      applicantAddressLine:this.applicantAddressLine,
+      applicantAddressLine2:this.applicantAddressLine2,
+      applicantCity:this.applicantCity,
+      applicantState:this.applicantState,
+      applicantCountry:this.applicantCountry,
+      applicantZipCode:this.applicantZipCode
     })
+
+  }
+
+  initializeAddApplicantForm() {
+   this.firstName = new FormControl();
+   this.lastName = new FormControl();
+   this.email = new FormControl();
+   this.phone = new FormControl();
+   this.password = new FormControl();
+   this.addressLine = new FormControl();
+   this.addressLine2 = new FormControl();
+   this.city = new FormControl();
+   this.state = new FormControl();
+   this.country = new FormControl();
+   this.zipCode = new FormControl();
+   this.confirmPassword = new FormControl()
+
+   this.addApplicantForm = new FormGroup({
+     firstName: this.firstName,
+     lastName:this.lastName,
+     email:this.email,
+     phone:this.phone,
+     password:this.password,
+     addressLine:this.addressLine,
+     addressLine2:this.addressLine2,
+     city:this.city,
+     state:this.state,
+     country:this.country,
+     zipCode:this.zipCode,
+     confirmPassword:this.confirmPassword
+   })
+   
+  }
+
+  ngOnInit() {
+
+    this.initilalizeEditApplicantForm()
+    this.initializeAddApplicantForm()
 
     this.applicantService.showAllActiveApplicants()
     .subscribe((data:IApplicantInfo[]) => {
@@ -103,32 +136,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
      .subscribe((data:IApplicantInfo[]) => {
        this.allPastApplicants = data['Data'];
       }) 
-
-     this.firstName = new FormControl();
-     this.lastName = new FormControl();
-     this.email = new FormControl();
-     this.phone = new FormControl();
-     this.password = new FormControl();
-     this.addressLine = new FormControl();
-     this.addressLine2 = new FormControl();
-     this.city = new FormControl();
-     this.state = new FormControl();
-     this.country = new FormControl();
-     this.zipCode = new FormControl();
-     
-       this.applicantEditForm = new FormGroup({
-         firstName: this.firstName,
-         lastName:this.lastName,
-         email:this.email,
-         phone:this.phone,
-         password:this.password,
-         addressLine:this.addressLine,
-         addressLine2:this.addressLine2,
-         city:this.city,
-         state:this.state,
-         country:this.country,
-         zipCode:this.zipCode,
-       })
 
   }
 
@@ -158,18 +165,10 @@ export class ApplicantMaintenanceComponent implements OnInit {
       country: newApplicantForm.country,
       zipCode: newApplicantForm.zipCode
     }
-  
-
-
-    console.log(this.newApplicant)
-    
 
     this.applicantService.addApplicantMaintenance(this.newApplicant)
     .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
-   
-      
-
    
   }
 
@@ -200,7 +199,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     //  this.jobEditForm.get('country').setValue(job.country)
   
 
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered:true, size:'lg'}).result.then((result) => {
 
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
