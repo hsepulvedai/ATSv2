@@ -167,6 +167,7 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobCategoryService.getJobCategoryById(this.currentJobId)
     .subscribe((data:IJobCategory) => {
       this.currentJobCategory = data.name
+      console.log(this.currentJobCategory)
     })
 
     this.jobTypeService.getJobTypeById(this.currentJobId)
@@ -180,7 +181,12 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.get('company').setValue(job.company)
     this.jobEditForm.get('city').setValue(job.city)
-     this.jobEditForm.get('country').setValue(job.country)
+    this.jobEditForm.get('country').setValue(job.country)
+
+    // console.log(job.category)
+    // this.jobEditForm.get('category').setValue(job.category)
+
+    
   
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
