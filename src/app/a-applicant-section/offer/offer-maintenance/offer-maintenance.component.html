@@ -102,7 +102,7 @@
                 </div>
 
             <!--Table-->
-            <table class="table table-striped">
+            <table class="table table-striped" >
 
               <!--Table head-->
               <thead>
@@ -126,8 +126,13 @@
                   <td> {{job.city}}, {{job.country}} </td>
                   <td> {{job.jobCategory}} </td>
                   <td>{{job.jobType}}</td>
+<<<<<<< HEAD
                   <td> <button type="button" (click)="openEdit(content, job, jobEditForm.value)"> &#9997; </button> </td>
                   <td> <button type="button" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
+=======
+                  <td> <button type="button" class="btn" (click)="openEdit(content, job)"> &#9997; </button> </td>
+                  <td> <button type="button" class="btn" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
+>>>>>>> 1911805bddfba4ef13ec16b6fa6a5faa6215d529
                 </tr>
               </tbody>
               <!--Table body-->
@@ -195,8 +200,8 @@
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
                   <td> {{inactiveJob.jobCategory}} </td>
                   <td>{{inactiveJob.jobType}}</td>
-                  <td> <button type="button" (click)="openEdit(content, inactiveJob)"> &#9997; </button> </td>
-                  <td> <button type="button" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
+                  <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> &#9997; </button> </td>
+                  <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
                 </tr>
               </tbody>
               <!--Table body-->
@@ -239,7 +244,7 @@
                 <td> {{draft.city}}, {{draft.country}} </td>
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
-                <td> <button type="button" (click)="openEdit(content, draft)"> &#9997; </button> </td>
+                <td> <button type="button" class="btn" (click)="openEdit(content, draft)"> &#9997; </button> </td>
               </tr>
             </tbody>
             <!--Table body-->

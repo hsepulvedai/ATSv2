@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 body {
     font-family: Quicksand;
     font: 15px ;
@@ -24,7 +25,9 @@ p {font-size: 16px;}
 .navbar {
     /*Controla la barra de navegacion como tal */
    background-color:#df136f;
-   padding-bottom: 7em;
+   /* padding-bottom: 10%; */
+  
+
   
 }
 .nav-link{
@@ -45,7 +48,7 @@ img{
 button{
     
     color: white;
-    background-color: #25326a;
+    background-color: lightgray;
 
 }
 input{
@@ -144,9 +147,5 @@ h5{
     color: black;
 }
 
-      .sidebar{
-        background-color:#25326a;
-        height:100%;
-        position: absolute;
-      }
+  
     

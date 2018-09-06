@@ -4,7 +4,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons--?
 </head>
 
 <body>
@@ -42,7 +42,9 @@
                 <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
               </div>
               <div class="col-md-2">
-                <button fromControl="search" type="button" class=" btn " click="listFilter(listFilter)"> Search </button><br>
+                <button fromControl="search" type="button" class=" btn " click="listFilter(listFilter)">  <i class="material-icons">
+                  search
+                  </i></button><br>
               </div>
             </div>
           </div>
@@ -74,7 +76,7 @@
                   <td>{{job.city}}, {{job.country}}</td>
                   <td>{{job.jobCategory}}</td>
                   <td>{{job.jobType}}</td>
-                  <td> <button type="button" (click)="applyButtonClicked(job.jobId)"> Apply</button> </td>
+                  <td> <button type="button" class=" btn"(click)="applyButtonClicked(job.jobId)"> Apply</button> </td>
                 </tr>
               </tbody>
               <!--Table body-->
