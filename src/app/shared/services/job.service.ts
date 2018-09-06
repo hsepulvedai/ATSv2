@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http'
 import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
+import { IJobUpdate } from '../models/job_update.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,11 @@ export class JobService {
 
   addJobMaintenance(job) {
     return this.http.post(environment.baseUrl + this.routePrefix + 'JobInsertFromWeb', job )
+  }
+
+
+  updateJob(job){
+    return this.http.put(environment.baseUrl + this.routePrefix + 'JobEditAll', job )
   }
 
 }

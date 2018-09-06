@@ -12,6 +12,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
+import { IJobUpdate } from '../../../shared/models/job_update.model';
+
 
 
 
@@ -65,6 +67,8 @@ export class OfferMaintenanceComponent implements OnInit {
   currentJobType: string =''
   currentJobCategory: string = ''
 
+
+  updatedJob: IJobUpdate
 
 
   constructor( private router: Router,
@@ -153,7 +157,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
-  openEdit(content, job, id) {
+  openEdit(content, job, form) {
 
 
     // this.jobService.showJobById(id)
@@ -186,15 +190,31 @@ export class OfferMaintenanceComponent implements OnInit {
     // console.log(job.category)
     // this.jobEditForm.get('category').setValue(job.category)
 
-    
-  
+    this.updatedJob = {
+      id: job.id,
+      name: job.jobName,
+      category: job.jobcategory,
+      type:job.jobType,
+      description:job.description
+
+    }
+
+   
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-
-      this.closeResult = `Closed with: ${result}`;
+         
+    
+      if(this.closeResult = `Closed with: ${result}`)
+             this.updateJob(form)
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+
+    
+
+  
+
+
   }
 
   private getDismissReason(reason: any): string {
@@ -299,5 +319,24 @@ export class OfferMaintenanceComponent implements OnInit {
       this.selectedJobCategory = event.target.value;
     }
 
+
+    updateJob(updatedJobForm){
+
+      this.updatedJob = {
+        id: 1,
+        name: 'Manager', 
+        category: 'Customer Service', 
+        type: 'Full-time', 
+        description: 'lorem ipsum - new description'
+      }
+
+      console.log(this.updatedJob)
+
+     this.jobService.updateJob(this.updatedJob)
+    .subscribe(data => { console.log("Updated:" + data) },
+     error => { console.error("Error: ", error) })
+  
+    }
+  
 
 }

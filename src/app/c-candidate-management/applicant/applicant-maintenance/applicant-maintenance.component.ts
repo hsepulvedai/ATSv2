@@ -173,6 +173,20 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
   openEdit(content, applicant) {
 
+
+    this.applicantEditForm.get('applicantFirstName').setValue(applicant.firstName)
+    this.applicantEditForm.get('applicantLastName').setValue(applicant.lastName)
+    this.applicantEditForm.get('applicantEmail').setValue(applicant.email)
+    this.applicantEditForm.get('applicantPhoneNumber').setValue(applicant.phone)
+    this.applicantEditForm.get('applicantAddressLine').setValue(applicant.addressLine)
+    this.applicantEditForm.get('applicantAddressLine2').setValue(applicant.addressLine2)
+    this.applicantEditForm.get('applicantCity').setValue(applicant.city)
+    this.applicantEditForm.get('applicantCountry').setValue(applicant.country)
+    this.applicantEditForm.get('applicantState').setValue(applicant.stateProvince)
+    this.applicantEditForm.get('applicantZipCode').setValue(applicant.zipCode)
+
+
+
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
 
       this.closeResult = `Closed with: ${result}`;
