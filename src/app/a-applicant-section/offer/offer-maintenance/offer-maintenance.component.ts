@@ -89,6 +89,64 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
+  inactiveFilteredJobs: IJobOffer[]
+  _listInactiveFilter: string;
+
+  get listInactiveFilter(): string {
+    return this._listInactiveFilter;
+
+  }
+
+  set listInactiveFilter(value: string) {
+
+    this._listInactiveFilter = value;
+    this.inactiveFilteredJobs = this.listInactiveFilter ? this.performInactiveFilter(this.listInactiveFilter) : this.inactiveJobs;
+  }
+
+
+  performInactiveFilter(filterBy: string): IJobOffer[] {
+    filterBy = filterBy.toLocaleLowerCase();
+
+
+    if (this.selectedFilter === 'Job Title')
+     return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Company')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.company.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Location/City')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
+
+    else if (this.selectedFilter === 'Location/Country')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Category')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Type')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if(this.selectedFilter === 'All Jobs')
+    // Universal search (if no filter selected default all jobs) 
+          return this.inactiveJobs.filter( (job: IJobOffer) => {
+            return    job.company.toLocaleLowerCase().indexOf(filterBy) !== -1 
+                   ||  job.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
+
+          })
+
+  }
+
+
 
   currentCompany:ICompany
   selectedJobType: string ='Default'
@@ -161,6 +219,7 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobService.showPastJobs()
       .subscribe((data:IJobOffer[])=> {
         this.inactiveJobs = data['Data']
+
       })
 
       this.jobService.showDraftJobs()

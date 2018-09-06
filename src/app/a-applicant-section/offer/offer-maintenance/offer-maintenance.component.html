@@ -120,7 +120,7 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let job of availableJobs">
+                <tr *ngFor="let job of filteredJobs">
                   <td> {{job.jobName}} </td>
                   <td> {{job.company}}</td>
                   <td> {{job.city}}, {{job.country}} </td>
@@ -189,7 +189,7 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let job of filteredJobs">
+                <tr *ngFor="let job of inactiveJobs">
                   <td> {{inactiveJob.jobName}}</td>
                   <td> {{inactiveJob.company}}</td>
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
