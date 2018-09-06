@@ -218,7 +218,8 @@ export class OfferMaintenanceComponent implements OnInit {
      
     this.jobService.showPastJobs()
       .subscribe((data:IJobOffer[])=> {
-        this.inactiveJobs = data['Data']
+        this.inactiveJobs = data['Data'];
+        this.inactiveFilteredJobs = this.inactiveJobs
 
       })
 
