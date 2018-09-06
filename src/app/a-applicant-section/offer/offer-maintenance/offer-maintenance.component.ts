@@ -38,8 +38,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   currentJobId: number
 
-
-
   categories:IJobCategory[]
  
   types:IJobType[]

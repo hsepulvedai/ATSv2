@@ -20,5 +20,9 @@ export class ApplicationService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationSelectStatusByEmail', email )
   }
 
+  getAllApplicationStatus(){
+    return this.http.get(environment.baseUrl + '/ApplicationStatus/ApplicationStatusSelectActive' )
+  }
+
 
 }
