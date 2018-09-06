@@ -1,8 +1,13 @@
 <head>
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
   </head>
 
+=======
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+</head>
+>>>>>>> 79ac3600aed16058c0b01a226618e8ce3c599865
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Job update</h4>
@@ -101,9 +106,15 @@
                       <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
                     </div>
                     <div class="col-md-2">
+<<<<<<< HEAD
                         <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
                             search
                           </i></button><br>
+=======
+                      <button  type="button" class=" btn " click="listFilter(listFilter)"> <i class="material-icons">
+                        search
+                        </i></button><br>
+>>>>>>> 79ac3600aed16058c0b01a226618e8ce3c599865
                     </div>
                   </div>
                 </div>
@@ -133,7 +144,11 @@
                   <td> {{job.city}}, {{job.country}} </td>
                   <td> {{job.jobCategory}} </td>
                   <td>{{job.jobType}}</td>
-                  <td> <button type="button" class="btn" (click)="openEdit(content, job)"> &#9997; </button> </td>
+                  
+                  <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
+                    edit
+                    </i> </button> </td>
+                 
                   <td>
                     <button type="button" class=" btn " (click)=" setJobInactive(job.jobId)" >  <i class="material-icons">
                         subdirectory_arrow_right
@@ -141,6 +156,8 @@
                   
                   </td> 
                 
+                 
+    
                 </tr>
               </tbody>
               
