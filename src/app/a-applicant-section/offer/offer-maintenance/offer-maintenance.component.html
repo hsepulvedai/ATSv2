@@ -77,6 +77,29 @@
           <h3> Jobs </h3>
           <div>
 
+              <div class="col-md-12 ">
+
+                  <label for="filterBy"><strong> Filter by: </strong></label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                        <option selected> All Jobs</option>
+                        <option> Job Title </option>
+                        <option> Company </option>
+                        <option> Location/City </option>
+                        <option> Location/Country </option>
+                        <option> Category </option>
+                        <option> Type </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
+                    </div>
+                    <div class="col-md-2">
+                      <button  type="button" class=" btn " click="listFilter(listFilter)"> Search </button><br>
+                    </div>
+                  </div>
+                </div>
 
             <!--Table-->
             <table class="table table-striped">
@@ -120,7 +143,32 @@
         <ng-template ngbTabContent>
           <h3> Past Jobs </h3>
 
+
           <div>
+
+              <div class="col-md-12 ">
+
+                  <label for="filterBy"><strong> Filter by: </strong></label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                        <option selected> All Jobs</option>
+                        <option> Job Title </option>
+                        <option> Company </option>
+                        <option> Location/City </option>
+                        <option> Location/Country </option>
+                        <option> Category </option>
+                        <option> Type </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
+                    </div>
+                    <div class="col-md-2">
+                      <button fromControl="search" type="button" class=" btn " click="listFilter(listFilter)"> Search </button><br>
+                    </div>
+                  </div>
+                </div>
 
             <!--Table-->
             <table class="table table-striped">
@@ -141,7 +189,7 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let inactiveJob of inactiveJobs">
+                <tr *ngFor="let job of filteredJobs">
                   <td> {{inactiveJob.jobName}}</td>
                   <td> {{inactiveJob.company}}</td>
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
