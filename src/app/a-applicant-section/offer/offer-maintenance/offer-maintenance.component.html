@@ -1,3 +1,6 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+</head>
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Job update</h4>
@@ -96,7 +99,9 @@
                       <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
                     </div>
                     <div class="col-md-2">
-                      <button  type="button" class=" btn " click="listFilter(listFilter)"> Search </button><br>
+                      <button  type="button" class=" btn " click="listFilter(listFilter)"> <i class="material-icons">
+                        search
+                        </i></button><br>
                     </div>
                   </div>
                 </div>
@@ -126,13 +131,10 @@
                   <td> {{job.city}}, {{job.country}} </td>
                   <td> {{job.jobCategory}} </td>
                   <td>{{job.jobType}}</td>
-<<<<<<< HEAD
-                  <td> <button type="button" (click)="openEdit(content, job, jobEditForm.value)"> &#9997; </button> </td>
-                  <td> <button type="button" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
-=======
-                  <td> <button type="button" class="btn" (click)="openEdit(content, job)"> &#9997; </button> </td>
+                  <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
+                    edit
+                    </i> </button> </td>
                   <td> <button type="button" class="btn" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
->>>>>>> 1911805bddfba4ef13ec16b6fa6a5faa6215d529
                 </tr>
               </tbody>
               <!--Table body-->
