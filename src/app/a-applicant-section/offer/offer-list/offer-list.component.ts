@@ -62,12 +62,17 @@ export class OfferListComponent implements OnInit {
     else if (this.selectedFilter === 'Type')
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
     else if(this.selectedFilter === 'All Jobs')
-      return this.availableJobs.filter((job: IJobOffer) =>
+      return this.availableJobs.filter((job: IJobOffer) => 
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     else
       return this.availableJobs
   }
+
+  // filterAll(){
+    
+  // }
 
   constructor
     (private router: Router,
