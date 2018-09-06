@@ -36,8 +36,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   currentJobId: number
 
-
-
   categories:IJobCategory[]
  
   types:IJobType[]
@@ -153,27 +151,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
-  openEdit(content, job, id) {
-
-
-    // this.jobService.showJobById(id)
-    //    .subscribe((data:IJobOffer) => {
-    //      this.currentJobId= data;
-    //    })
-
-    // this.jobCategoryService.getJobCategoryById(this.currentJobId)
-    // .subscribe((data:IJobCategory) => {
-    //   this.currentJobCategory = data.name
-    //   console.log(this.currentJobCategory)
-    // })
-
-    // this.jobTypeService.getJobTypeById(this.currentJobId)
-    // .subscribe((data:IJobType) => {
-    //   this.currentJobType = data.name
-    // })
-    
-    console.log(this.currentJobCategory)
-
+  openEdit(content, job) {
 
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.get('company').setValue(job.company)
@@ -183,11 +161,6 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobEditForm.controls['type'].setValue(job.jobType, {onlySelf: true})
     this.jobEditForm.get('description').setValue(job.description)
 
-    // console.log(job.category)
-    // this.jobEditForm.get('category').setValue(job.category)
-
-    
-  
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
 

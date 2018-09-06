@@ -23,10 +23,12 @@ export class HrOfferDetailComponent implements OnInit {
   applicationStatus: IApplicationStatus[]
   //status:IApplicationStatus
   employees:IEmployeeFromCompany[]
-  applicationStatusOption:FormControl
-  recruiterOption:FormControl
-  selectedOptions:FormGroup
+  // applicationStatusOption:FormControl
+  // recruiterOption:FormControl
+  // selectedOptions:FormGroup
+
   selectedRecruiter
+  selectedApplicationStatus
 
   constructor(private jobService: JobService, private router: Router
     , private applicantService: ApplicantService, private employeeService:EmployeeService
@@ -34,40 +36,32 @@ export class HrOfferDetailComponent implements OnInit {
 
   ngOnInit() {
     
-    // this.applicationStatusOption = new FormControl()
-    // this.recruiterOption = new FormControl()
-    // this.selectedOptions = new FormGroup({
-    //   applicationStatusOption: this.applicationStatusOption,
-    //   recruiterOption: this.recruiterOption
-
-      
-    // })
-
-    this.selectedRecruiter = 
-
     this.jobService.showJobOfferDetail(this.jobService.currentJobId)
       .subscribe((data: IJobOffer) => {
         this.job = data['Data'];
+        console.log(this.job)
       })
 
+      this.applicationService.getAllApplicationStatus()
+      .subscribe((data: IApplicationStatus[]) => {
+        this.applicationStatus = data['Data'];
+      })
 
     this.applicantService.offerDetailGetApplicants(this.jobService.currentJobId)
       .subscribe((data: IOfferHrEdit[]) => {
         this.applicants = data['Data'];
+        console.log(this.applicants)
       })
 
-    // this.jobService.getAllActiveApplicationStatus()
-    //   .subscribe((data: IApplicationStatus[]) => {
-    //     this.applicationStatus = data['Data'];
-    //   })
+      // this.jobEditForm.controls['category'].setValue(job.jobCategory, {onlySelf: true})
+      // this.jobEditForm.controls['type'].setValue(job.jobType, {onlySelf: true})
 
       this.employeeService.getActiveCompanyEmployees(this.jobService.currentJobId)
-      .subscribe((data: IApplicationStatus[]) => {
+      .subscribe((data: IEmployeeFromCompany[]) => {
         this.employees = data['Data'];
-        console.log(this.employees)
       })
-
   }
+
   save(applicationId, statusId) {
     console.log("Application id: " + applicationId)
     console.log("Status id: " + statusId)
