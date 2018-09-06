@@ -172,7 +172,9 @@
                       <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
                     </div>
                     <div class="col-md-2">
-                      <button fromControl="search" type="button" class=" btn " click="listFilter(listFilter)"> Search </button><br>
+                      <button fromControl="search" type="button" class=" btn " click="listFilter(listFilter)">  <i class="material-icons">
+                          search
+                          </i> </button><br>
                     </div>
                   </div>
                 </div>
@@ -202,7 +204,9 @@
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
                   <td> {{inactiveJob.jobCategory}} </td>
                   <td>{{inactiveJob.jobType}}</td>
-                  <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> &#9997; </button> </td>
+                  <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
+                      edit
+                      </i> </button> </td>
                   <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
                 </tr>
               </tbody>
@@ -246,7 +250,9 @@
                 <td> {{draft.city}}, {{draft.country}} </td>
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
-                <td> <button type="button" class="btn" (click)="openEdit(content, draft)"> &#9997; </button> </td>
+                <td> <button type="button" class="btn" (click)="openEdit(content, draft)"> <i class="material-icons">
+                    edit
+                    </i>  </button> </td>
               </tr>
             </tbody>
             <!--Table body-->
