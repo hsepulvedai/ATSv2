@@ -1,3 +1,7 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+
+</head>
 <div class="backgroundG">
     <h3> C.1 Applicant Maintenance Screen  </h3>
   
@@ -119,8 +123,10 @@
                   <td>{{applicant.email }}</td>
                   <td>{{applicant.phone}}</td>
                   <td>{{applicant.city}}, {{applicant.country}}</td>
-                  <td> <button type="button" (click)="openEdit(content, applicant)"> &#9997; </button> </td>
-                  <td> <button type="button" (click)="makeApplicantInactive(applicant.applicantId)"> Deactivate </button> </td>
+                  <td> <button type="button" class="btn" (click)="openEdit(content, applicant)">  <i class="material-icons">
+                    search
+                    </i> </button> </td>
+                  <td> <button type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> Deactivate </button> </td>
                 </tr>
               </tbody>
               <!--Table body-->
