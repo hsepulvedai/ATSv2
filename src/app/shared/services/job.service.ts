@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
 import { IJob } from '../../shared/models/job.model'
 
-
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -25,8 +24,8 @@ export class JobService {
       return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllInactive")
    }
 
-   showJobOfferDetail(id) {
-    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowOfferDetail/" + id)
+  showJobOfferDetail(id) {
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowById/" + id)
   }
 
   showJobById(id) {
@@ -37,6 +36,7 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllDrafts/")
   }
 
+  // Change to application
   getStatusByEmail(email){
     return this.http.get(environment.baseUrl + this.routePrefix + "getStatusByEmail/" + email)
   }
@@ -54,54 +54,6 @@ export class JobService {
   addJobMaintenance(job) {
     return this.http.post(environment.baseUrl + this.routePrefix + 'JobInsertFromWeb', job )
   }
-
-  // getAllActiveApplicationStatus() {
-  //   return this.http.get(environment.baseUrl + "" + "/")
-  // }
-
-  setInActiveJob(id:number){
-    return this.http.patch(environment.baseUrl + this.routePrefix+ "JobSetInactive/" + id, id)
-  }
-
-   insertJob(newJob:IJob){
-
-    return this.http.post( environment.baseUrl + this.routePrefix + "JobCompleteInsert/", newJob).subscribe(
-          data => {console.log("POST: ", data)},
-           error => {console.log("Error", error)}
-                      );
-  }
-  
-  // updateJob(updatedJob:IJob){
-
-  //   return this.http.put( environment.baseUrl + "/Job/Modify/", updatedJob).subscribe(
-  //          data => {console.log("UPDATED: ", data)},
-  //          error => {console.log("Error", error)}
-  //                     );
-  // }
-
-
-  // getJobs(){
-  //  return this.http.get(environment.baseUrl + "/Job/JobShowAll/");
-  // }
-
-  
-
-  
-  // getActiveJobs(){
-  //   return this.http.get(environment.baseUrl + "/Job/JobSelectActive/");
-  //  }  
-
-   
-  // getInactiveJobs(){
-  //   return this.http.get(environment.baseUrl + "/Job/JobSelectInactive/");
-  //  }
-
-
-     
-
-
-
-
 
 }
 

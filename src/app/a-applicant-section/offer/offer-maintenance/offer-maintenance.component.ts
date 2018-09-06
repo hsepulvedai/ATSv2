@@ -34,7 +34,7 @@ export class OfferMaintenanceComponent implements OnInit {
   draftJobs:IJobOffer[]
   job:IJob
 
-  currentJobId: number = 0
+  currentJobId: number
 
 
 
@@ -106,9 +106,6 @@ export class OfferMaintenanceComponent implements OnInit {
          this.categories = data['Data'];
        })
 
-   
-
-
     this.jobTypeService.showTypes()
        .subscribe((data:IJobType[]) => {
          this.types = data['Data']
@@ -159,21 +156,21 @@ export class OfferMaintenanceComponent implements OnInit {
   openEdit(content, job, id) {
 
 
-    this.jobService.showJobById(id)
-       .subscribe((data:IJob) => {
-         this.currentJobId= data.id;
-       })
+    // this.jobService.showJobById(id)
+    //    .subscribe((data:IJobOffer) => {
+    //      this.currentJobId= data;
+    //    })
 
-    this.jobCategoryService.getJobCategoryById(this.currentJobId)
-    .subscribe((data:IJobCategory) => {
-      this.currentJobCategory = data.name
-      console.log(this.currentJobCategory)
-    })
+    // this.jobCategoryService.getJobCategoryById(this.currentJobId)
+    // .subscribe((data:IJobCategory) => {
+    //   this.currentJobCategory = data.name
+    //   console.log(this.currentJobCategory)
+    // })
 
-    this.jobTypeService.getJobTypeById(this.currentJobId)
-    .subscribe((data:IJobType) => {
-      this.currentJobType = data.name
-    })
+    // this.jobTypeService.getJobTypeById(this.currentJobId)
+    // .subscribe((data:IJobType) => {
+    //   this.currentJobType = data.name
+    // })
     
     console.log(this.currentJobCategory)
 
@@ -182,6 +179,9 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobEditForm.get('company').setValue(job.company)
     this.jobEditForm.get('city').setValue(job.city)
     this.jobEditForm.get('country').setValue(job.country)
+    this.jobEditForm.controls['category'].setValue(job.jobCategory, {onlySelf: true})
+    this.jobEditForm.controls['type'].setValue(job.jobType, {onlySelf: true})
+    this.jobEditForm.get('description').setValue(job.description)
 
     // console.log(job.category)
     // this.jobEditForm.get('category').setValue(job.category)
@@ -274,7 +274,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   setJobInactive(id){
 
-    this.jobService.setInActiveJob(id)
+    this.jobService.setInactiveJob(id)
     .subscribe(
       data => {console.log("UPDATED: ", data)},
       error => {console.log("Error", error)}

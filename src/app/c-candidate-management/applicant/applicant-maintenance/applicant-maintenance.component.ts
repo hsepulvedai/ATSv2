@@ -129,7 +129,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantService.showAllActiveApplicants()
     .subscribe((data:IApplicantInfo[]) => {
       this.allApplicants = data['Data'];
-      console.log(this.allApplicants)
      }) 
 
      this.applicantService.showAllInactiveApplicants()
