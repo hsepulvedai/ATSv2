@@ -203,8 +203,6 @@ export class OfferMaintenanceComponent implements OnInit {
         this.currentCompany = data['Data'];
       })
 
-
-
     this.jobService.showAvalaibleJobs()
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];

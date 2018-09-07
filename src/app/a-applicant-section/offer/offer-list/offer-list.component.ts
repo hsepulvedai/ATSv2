@@ -11,6 +11,7 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 export class OfferListComponent implements OnInit {
 
   searchBarInput: string
+  sortBy:string
 
   availableJobs: IJobOffer[]
   job: IJobOffer
@@ -25,7 +26,7 @@ export class OfferListComponent implements OnInit {
   selectedFilter: string = 'All Jobs';
 
   selectedSort
-  sortBy
+
 
 
   //event handler for the select element's change event

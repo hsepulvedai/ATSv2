@@ -4,13 +4,14 @@ import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
 import { IJobUpdate } from '../models/job_update.model';
+import { IJobOffer } from '../models/job-offer.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
 
-   currentJob: IJob
+   currentJob: IJobOffer
    currentJobId:number
 
    routePrefix = "Job/"

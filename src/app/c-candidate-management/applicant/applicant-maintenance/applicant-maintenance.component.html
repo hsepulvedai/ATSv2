@@ -116,8 +116,7 @@
                   <th> Email</th>
                   <th> Phone </th>
                   <th> Location </th>
-                  <th> Edit </th>
-                  <th>Active/Inactive</th>
+                  <th> Actions </th>
                 </tr>
               </thead>
               <!--Table head-->
@@ -131,10 +130,10 @@
                   <td>{{applicant.city}}, {{applicant.country}}</td>
                   <td> <button type="button" class="btn" (click)="openEdit(content, applicant)">  <i class="material-icons">
                       edit
-                      </i>Edit </button> </td>
-                  <td> <button type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> <i class="material-icons">
-                      subdirectory_arrow_right
-                    </i> Remove </button> </td>
+                      </i>Edit </button> 
+                      <button style="margin-left: 10px;"type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> <i class="material-icons">
+                          subdirectory_arrow_right
+                      </i> Remove </button> </td>
                 </tr>
               </tbody>
               <!--Table body-->
@@ -162,8 +161,7 @@
                   <th> Email</th>
                   <th> Phone </th>
                   <th> Location </th>
-                  <th> Edit </th>
-                  <th>Active/Inactive</th>
+                  <th> Actions </th>
                 </tr>
               </thead>
               <!--Table head-->
@@ -177,10 +175,10 @@
                     <td>{{applicant.city}}, {{applicant.country}}</td>
                     <td> <button type="button" class="btn"(click)="openEdit(content, applicant)"> <i class="material-icons">
                       edit
-                      </i>Edit </button> </td>
-                    <td> <button type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> <i class="material-icons">
-                        subdirectory_arrow_left
-                        </i> Re-Post </button> </td>
+                      </i>Edit </button> 
+                      <button style="margin-left:10px;" type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> <i class="material-icons">
+                          subdirectory_arrow_left
+                          </i> Re-Post </button> </td>
                   </tr>
               </tbody>
               <!--Table body-->
