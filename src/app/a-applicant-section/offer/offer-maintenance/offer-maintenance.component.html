@@ -85,7 +85,7 @@
     <div align="right">
         <button type="button" class="btn"> <i class="material-icons">
             note_add
-            </i> </button>  
+            </i> Add New Job </button>  
     </div>
 
     <ngb-tabset>
@@ -115,7 +115,7 @@
                     <div class="col-md-2">
                         <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
                             search
-                          </i></button><br>
+                          </i>Search</button><br>
                     </div>
 
                    
@@ -151,12 +151,12 @@
                   
                   <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
                     edit
-                    </i> </button> </td>
+                    </i>Edit </button> </td> 
                  
                   <td>
                     <button type="button" class=" btn " (click)=" setJobInactive(job.jobId)" >  <i class="material-icons">
                         subdirectory_arrow_right
-                      </i></button><br>
+                      </i> Remove </button><br>
                   
                   </td> 
                 
@@ -233,8 +233,10 @@
                   <td>{{inactiveJob.jobType}}</td>
                   <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
                       edit
-                      </i> </button> </td>
-                  <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
+                      </i> Edit</button> </td>
+                  <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
+                      subdirectory_arrow_left
+                      </i> Re-Post</button></td>
                 </tr>
               </tbody>
               <!--Table body-->
@@ -279,7 +281,7 @@
                 <td>{{draft.jobType}}</td>
                 <td> <button type="button" class="btn" (click)="openEdit(content, draft)"> <i class="material-icons">
                     edit
-                    </i>  </button> </td>
+                    </i> Edit </button> </td>
               </tr>
             </tbody>
             <!--Table body-->
