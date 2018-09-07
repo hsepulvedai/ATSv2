@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http'
+import { HttpClient, HttpParams} from '@angular/common/http'
 import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
@@ -70,7 +70,8 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTitleAZ')
   }
 
-  // Sorting
+  // Sorting and sorting
+
   sortByCompanyAsc(){
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCompanyAZ')
   }
@@ -110,6 +111,22 @@ export class JobService {
   sortByJobTypeDesc() {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeZA')
   }
+
+  universalSearch(keyword){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' + keyword)
+}
+
+  universalSearchSortAsc(keyword, sortBy){
+        return this.http.get(environment.baseUrl + this.routePrefix 
+          + 'JobUniversalSearchSortAZ/search=' + keyword + 'sortBy=' + sortBy)
+  }
+
+  universalSearchSortDesc(keyword, sortBy){
+    return this.http.get(environment.baseUrl + this.routePrefix
+      + 'JobUniversalSearchSortZA/search=' + keyword + 'sortBy=' + sortBy)
+  }
+
+
 }
 
 

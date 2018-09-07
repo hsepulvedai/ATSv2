@@ -10,6 +10,8 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 })
 export class OfferListComponent implements OnInit {
 
+  searchBarInput: string
+
   availableJobs: IJobOffer[]
   job: IJobOffer
 
@@ -21,7 +23,7 @@ export class OfferListComponent implements OnInit {
   filteredJobs: IJobOffer[]
 
   selectedFilter: string = 'All Jobs';
-  
+
   selectedSort
   sortBy
 
@@ -42,104 +44,135 @@ export class OfferListComponent implements OnInit {
     this.sortBy = event.target.value;
   }
 
+  universalSearch() {
+
+    if (this.sortBy === 'Sort A-Z') {
+      this.jobService.universalSearchSortAsc(this.searchBarInput, 'Job Title')
+      .subscribe((data: IJobOffer[]) => {
+        this.filteredJobs = data['Data'];
+        console.log(this.searchBarInput)
+      })
+    }
+
+    else if (this.sortBy === 'Sort Z-A') {
+      this.jobService.universalSearchSortDesc(this.searchBarInput, 'Job Title')
+      .subscribe((data: IJobOffer[]) => {
+        this.filteredJobs = data['Data'];
+        console.log(this.searchBarInput)
+      })
+    }
+    else if (this.searchBarInput == null) {
+      this.jobService.showAvalaibleJobs()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else
+    {
+      this.jobService.universalSearch(this.searchBarInput)
+      .subscribe((data: IJobOffer[]) => {
+        this.filteredJobs = data['Data'];
+        console.log(this.searchBarInput)
+      })
+    }
+  }
+
 
   performSort() {
 
-    if(this._listFilter != null)
-    this.performFilter(this._listFilter);
+    // if (this.selectedSort === 'Job Title' && this.sortBy === 'Sort A-Z') {
+    //   this.jobService.sortByJobTitleAsc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    //   if(this._listFilter != null)
+    //   this.performFilter(this._listFilter);
+    // }
+    // else if (this.selectedSort === 'Job Title' && this.sortBy === 'Sort Z-A') {
+    //   this.jobService.sortByJobTitleDesc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    //   if(this._listFilter != null)
+    //   this.performFilter(this._listFilter);
+    // }
+    // else if (this.selectedSort === 'Company' && this.sortBy === 'Sort A-Z') {
+    //   this.jobService.sortByCompanyAsc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else if (this.selectedSort === 'Company' && this.sortBy === 'Sort Z-A') {
+    //   this.jobService.sortByCompanyDesc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
 
-    if (this.selectedSort === 'Job Title' && this.sortBy === 'Sort A-Z') {
-      this.jobService.sortByJobTitleAsc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-      if(this._listFilter != null)
-      this.performFilter(this._listFilter);
-    }
-    else if (this.selectedSort === 'Job Title' && this.sortBy === 'Sort Z-A') {
-      this.jobService.sortByJobTitleDesc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-      if(this._listFilter != null)
-      this.performFilter(this._listFilter);
-    }
-    else if (this.selectedSort === 'Company' && this.sortBy === 'Sort A-Z') {
-      this.jobService.sortByCompanyAsc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else if (this.selectedSort === 'Company' && this.sortBy === 'Sort Z-A') {
-      this.jobService.sortByCompanyDesc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
+    // else if (this.selectedSort === 'Location/City' && this.sortBy === 'Sort A-Z') {
+    //   this.jobService.sortByJobLocationCityAsc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else if (this.selectedSort === 'Location/City' && this.sortBy === 'Sort Z-A') {
+    //   this.jobService.sortByJobLocationCityDesc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
 
-    else if (this.selectedSort === 'Location/City' && this.sortBy === 'Sort A-Z') {
-      this.jobService.sortByJobLocationCityAsc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else if (this.selectedSort === 'Location/City' && this.sortBy === 'Sort Z-A') {
-      this.jobService.sortByJobLocationCityDesc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
+    // else if (this.selectedSort === 'Location/Country' && this.sortBy === 'Sort A-Z') {
+    //   this.jobService.sortByJobLocationCountryAsc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else if (this.selectedSort === 'Location/Country' && this.sortBy === 'Sort Z-A') {
+    //   this.jobService.sortByJobLocationCountryDesc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else if (this.selectedSort === 'Category' && this.sortBy === 'Sort A-Z') {
+    //   this.jobService.sortByJobCateogoryAsc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else if (this.selectedSort === 'Category' && this.sortBy === 'Sort Z-A') {
+    //   this.jobService.sortByJobCateogoryDesc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
 
-    else if (this.selectedSort === 'Location/Country' && this.sortBy === 'Sort A-Z') {
-      this.jobService.sortByJobLocationCountryAsc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else if (this.selectedSort === 'Location/Country' && this.sortBy === 'Sort Z-A') {
-      this.jobService.sortByJobLocationCountryDesc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else if (this.selectedSort === 'Category' && this.sortBy === 'Sort A-Z') {
-      this.jobService.sortByJobCateogoryAsc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else if (this.selectedSort === 'Category' && this.sortBy === 'Sort Z-A') {
-      this.jobService.sortByJobCateogoryDesc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-
-    else if (this.selectedSort === 'Type' && this.sortBy === 'Sort A-Z') {
-      this.jobService.sortByJobTypeAsc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else if (this.selectedSort === 'Type' && this.sortBy === 'Sort Z-A') {
-      this.jobService.sortByJobTypeDesc()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else ;
+    // else if (this.selectedSort === 'Type' && this.sortBy === 'Sort A-Z') {
+    //   this.jobService.sortByJobTypeAsc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else if (this.selectedSort === 'Type' && this.sortBy === 'Sort Z-A') {
+    //   this.jobService.sortByJobTypeDesc()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else ;
 
   }
 
@@ -162,7 +195,7 @@ export class OfferListComponent implements OnInit {
 
 
     if (this.selectedFilter === 'Job Title')
-     return this.availableJobs.filter((job: IJobOffer) =>
+      return this.availableJobs.filter((job: IJobOffer) =>
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
     else if (this.selectedFilter === 'Company')
@@ -185,26 +218,26 @@ export class OfferListComponent implements OnInit {
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
-    else if(this.selectedFilter === 'Job Title')
-      return this.availableJobs.filter((job: IJobOffer) => 
+    else if (this.selectedFilter === 'Job Title')
+      return this.availableJobs.filter((job: IJobOffer) =>
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     else
       // return this.availableJobs
-    // Universal search (if no filter selected default all jobs) 
-          return this.availableJobs.filter( (job: IJobOffer) => {
-            return    job.company.toLocaleLowerCase().indexOf(filterBy) !== -1 
-                   ||  job.city.toLocaleLowerCase().indexOf(filterBy) !== -1
-                   || job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1
-                   || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
-                   || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
-                   || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
-                   || job.company.toLocaleLowerCase().indexOf(filterBy) !== -1
-          })
+      // Universal search (if no filter selected default all jobs) 
+      return this.availableJobs.filter((job: IJobOffer) => {
+        return job.company.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || job.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || job.company.toLocaleLowerCase().indexOf(filterBy) !== -1
+      })
 
   }
 
   // filterAll(){
-    
+
   // }
 
   constructor
