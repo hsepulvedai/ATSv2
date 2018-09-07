@@ -44,7 +44,7 @@
               <div class="col-md-2">
                 <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
                   search
-                  </i></button><br>
+                  </i> Search</button><br>
               </div>
             </div>
           </div>
@@ -76,7 +76,9 @@
                   <td>{{job.city}}, {{job.country}}</td>
                   <td>{{job.jobCategory}}</td>
                   <td>{{job.jobType}}</td>
-                  <td> <button type="button" class=" btn"(click)="applyButtonClicked(job.jobId)"> Apply</button> </td>
+                  <td> <button type="button" class=" btn"(click)="applyButtonClicked(job.jobId)"><i class="material-icons">
+                      input
+                      </i> Apply</button> </td>
                 </tr>
               </tbody>
               <!--Table body-->
