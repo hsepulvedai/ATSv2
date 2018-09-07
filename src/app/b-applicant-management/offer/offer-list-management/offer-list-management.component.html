@@ -1,4 +1,8 @@
 
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+
+</head>
 <div class="backgroundG " >
     
  </div>   
@@ -6,9 +10,9 @@
 
   <div style="margin-top: 30px">
       <h3>B.1 Manage Submissions</h3>
-    <div class="shadow p-3 mb-5 bg-white rounded" >
+    <div  >
      
-        <table class="table ">
+        <table class="table table-striped">
             <thead >
                 <th scope="col">Job ID</th>
                 <th scope="col">Job Title</th>
@@ -26,7 +30,9 @@
                 <td>{{job.jobStatus}}</td>
                 <td>{{job.jobCategory}}</td>
                 <td>{{job.jobType}}</td>
-                <td><button (click)="goToOfferDetail(job.jobId)">Details</button></td>
+                <td><button class="btn" (click)="goToOfferDetail(job.jobId)"><i class="material-icons">
+                    notes
+                    </i></button></td>
               </tr>
             
             </tbody>

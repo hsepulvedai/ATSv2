@@ -12,6 +12,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
+import { IJobUpdate } from '../../../shared/models/job_update.model';
+
 
 
 
@@ -22,6 +24,128 @@ import { IJobInsert } from '../../../shared/models/job_insert.model';
   //styleUrls: ['./offer-maintenance.component.css']
 })
 export class OfferMaintenanceComponent implements OnInit {
+
+  _listFilter: string;
+  filteredJobs: IJobOffer[]
+
+  selectedFilter: string = 'All Jobs';
+
+  selectDropdownChangeHandler(event: any) {
+    //update the ui
+    this.selectedFilter = event.target.value;
+  }
+
+  get listFilter(): string {
+    return this._listFilter;
+
+  }
+
+  set listFilter(value: string) {
+
+    this._listFilter = value;
+    this.filteredJobs = this.listFilter ? this.performFilter(this.listFilter) : this.availableJobs;
+  }
+
+
+  performFilter(filterBy: string): IJobOffer[] {
+    filterBy = filterBy.toLocaleLowerCase();
+
+
+    if (this.selectedFilter === 'Job Title')
+     return this.availableJobs.filter((job: IJobOffer) =>
+        job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Company')
+      return this.availableJobs.filter((job: IJobOffer) =>
+        job.company.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Location/City')
+      return this.availableJobs.filter((job: IJobOffer) =>
+        job.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
+
+    else if (this.selectedFilter === 'Location/Country')
+      return this.availableJobs.filter((job: IJobOffer) =>
+        job.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Category')
+      return this.availableJobs.filter((job: IJobOffer) =>
+        job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Type')
+      return this.availableJobs.filter((job: IJobOffer) =>
+        job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if(this.selectedFilter === 'All Jobs')
+    // Universal search (if no filter selected default all jobs) 
+          return this.availableJobs.filter( (job: IJobOffer) => {
+            return    job.company.toLocaleLowerCase().indexOf(filterBy) !== -1 
+                   ||  job.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
+
+          })
+
+  }
+
+  inactiveFilteredJobs: IJobOffer[]
+  _listInactiveFilter: string;
+
+  get listInactiveFilter(): string {
+    return this._listInactiveFilter;
+
+  }
+
+  set listInactiveFilter(value: string) {
+
+    this._listInactiveFilter = value;
+    this.inactiveFilteredJobs = this.listInactiveFilter ? this.performInactiveFilter(this.listInactiveFilter) : this.inactiveJobs;
+  }
+
+
+  performInactiveFilter(filterBy: string): IJobOffer[] {
+    filterBy = filterBy.toLocaleLowerCase();
+
+
+    if (this.selectedFilter === 'Job Title')
+     return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Company')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.company.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Location/City')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
+
+    else if (this.selectedFilter === 'Location/Country')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Category')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Type')
+      return this.inactiveJobs.filter((job: IJobOffer) =>
+        job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if(this.selectedFilter === 'All Jobs')
+    // Universal search (if no filter selected default all jobs) 
+          return this.inactiveJobs.filter( (job: IJobOffer) => {
+            return    job.company.toLocaleLowerCase().indexOf(filterBy) !== -1 
+                   ||  job.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
+
+          })
+
+  }
+
 
 
   currentCompany:ICompany
@@ -64,6 +188,8 @@ export class OfferMaintenanceComponent implements OnInit {
   currentJobCategory: string = ''
 
 
+  updatedJob: IJobUpdate
+
 
   constructor( private router: Router,
     private jobService: JobService, 
@@ -85,11 +211,16 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobService.showAvalaibleJobs()
     .subscribe((data:IJobOffer[]) => {
       this.availableJobs = data['Data'];
+      this.filteredJobs = this.availableJobs;
+      
      })
+     
      
     this.jobService.showPastJobs()
       .subscribe((data:IJobOffer[])=> {
-        this.inactiveJobs = data['Data']
+        this.inactiveJobs = data['Data'];
+        this.inactiveFilteredJobs = this.inactiveJobs
+
       })
 
       this.jobService.showDraftJobs()
@@ -151,7 +282,27 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
-  openEdit(content, job) {
+  openEdit(content, job, form) {
+
+
+    // this.jobService.showJobById(id)
+    //    .subscribe((data:IJobOffer) => {
+    //      this.currentJobId= data;
+    //    })
+
+    // this.jobCategoryService.getJobCategoryById(this.currentJobId)
+    // .subscribe((data:IJobCategory) => {
+    //   this.currentJobCategory = data.name
+    //   console.log(this.currentJobCategory)
+    // })
+
+    // this.jobTypeService.getJobTypeById(this.currentJobId)
+    // .subscribe((data:IJobType) => {
+    //   this.currentJobType = data.name
+    // })
+    
+    console.log(this.currentJobCategory)
+
 
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.get('company').setValue(job.company)
@@ -161,13 +312,33 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobEditForm.controls['type'].setValue(job.jobType, {onlySelf: true})
     this.jobEditForm.get('description').setValue(job.description)
 
+    // console.log(job.category)
+    // this.jobEditForm.get('category').setValue(job.category)
 
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
+    // this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
+    // this.updatedJob = {
+    //   id: job.id,
+    //   name: job.jobName,
+    //   category: job.jobcategory,
+    //   type:job.jobType,
+    //   description:job.description
 
-      this.closeResult = `Closed with: ${result}`;
+    // }
+
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+         
+    
+      if(this.closeResult = `Closed with: ${result}`)
+             this.updateJob(form)
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+
+    
+
+  
+
+
   }
 
   private getDismissReason(reason: any): string {
@@ -272,5 +443,24 @@ export class OfferMaintenanceComponent implements OnInit {
       this.selectedJobCategory = event.target.value;
     }
 
+
+    updateJob(updatedJobForm){
+
+      this.updatedJob = {
+        id: 1,
+        name: 'Manager', 
+        category: 'Customer Service', 
+        type: 'Full-time', 
+        description: 'lorem ipsum - new description'
+      }
+
+      console.log(this.updatedJob)
+
+     this.jobService.updateJob(this.updatedJob)
+    .subscribe(data => { console.log("Updated:" + data) },
+     error => { console.error("Error: ", error) })
+  
+    }
+  
 
 }

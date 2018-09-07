@@ -44,7 +44,12 @@ export class OfferListComponent implements OnInit {
   performFilter(filterBy: string): IJobOffer[] {
     filterBy = filterBy.toLocaleLowerCase();
 
-    if (this.selectedFilter === 'Company')
+
+    if (this.selectedFilter === 'Job Title')
+     return this.availableJobs.filter((job: IJobOffer) =>
+        job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Company')
       return this.availableJobs.filter((job: IJobOffer) =>
         job.company.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
@@ -59,15 +64,30 @@ export class OfferListComponent implements OnInit {
     else if (this.selectedFilter === 'Category')
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
     else if (this.selectedFilter === 'Type')
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
     else if(this.selectedFilter === 'All Jobs')
+<<<<<<< HEAD
       return this.availableJobs.filter((job: IJobOffer) => 
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     else
       return this.availableJobs
+=======
+    // Universal search (if no filter selected default all jobs) 
+          return this.availableJobs.filter( (job: IJobOffer) => {
+            return    job.company.toLocaleLowerCase().indexOf(filterBy) !== -1 
+                   ||  job.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+                   || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
+
+          })
+
+>>>>>>> 49bade12b708846c5235c48b21daaceba09c4b3d
   }
 
   // filterAll(){

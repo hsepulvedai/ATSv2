@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
 <style>
 /*Keep here because if style css input is used, all fields loose position */
@@ -9,35 +13,40 @@
     margin-bottom: 8px;
   }
 </style>
+</head>
 
-
+<body>
 <div class="backgroundG "></div>
 <h1>A.3 Offer Application</h1>
 
 <div class="container" >
-    <div style="margin-top: 30px">
+  <div class="row">
+    <div class="col-sm-3">
+    
 
-        <div class="shadow p-3 mb-5 bg-white rounded" >
+        <div class="card" >
+          <div class="card-body">
 
           <h1>{{job?.jobName}}</h1>
-
+          <i class="material-icons" style="font-size: 4em; ">  perm_identity </i>
             <div>
                 <div><strong> Company : </strong> {{job?.companyName}}</div>  
-                <hr>
+                
              <div><strong> City : </strong> {{job?.city}}</div>  
-                <hr>
+               
              <div><strong> Country : </strong> {{job?.country}}</div>  
-                <hr>
+                
              <div><strong> Category : </strong> {{job?.jobCategory}}</div>   
-                <hr>
+                
              <div><strong> Type : </strong> {{job?.jobType}}</div>  
-                <hr>
+                
               <div><strong> Description : </strong> {{job?.description}}</div>  
-                <hr>
+                
             </div>
           </div>
-
-      <div class="shadow p-3 mb-5 bg-white rounded" >
+          </div>
+        </div>
+      <div class="col-sm-9">
         <div class="card">
           <div class="card-body">
             <h3 class="card-title" style="padding-bottom: 8px;">Applicant Information</h3>
@@ -166,6 +175,8 @@
       </div>
     </div> -->
 
-
-    </div>
+  
   </div>
+  </div>
+</body>
+  </html>

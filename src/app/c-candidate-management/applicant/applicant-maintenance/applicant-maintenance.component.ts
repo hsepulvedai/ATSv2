@@ -174,31 +174,20 @@ export class ApplicantMaintenanceComponent implements OnInit {
   openEdit(content, applicant) {
 
 
-    // this.applicantService.(applicant.id)
-    //    .subscribe((data:IJob) => {
-    //      this.currentApplicant= data.id;
-    //    })
-
-    // this.jobCategoryService.getJobCategoryById(this.currentJobId)
-    // .subscribe((data:IJobCategory) => {
-    //   this.currentJobCategory = data.name
-    // })
-
-    // this.jobTypeService.getJobTypeById(this.currentJobId)
-    // .subscribe((data:IJobType) => {
-    //   this.currentJobType = data.name
-    // })
-    
-    // console.log(this.currentJobCategory)
+    this.applicantEditForm.get('applicantFirstName').setValue(applicant.firstName)
+    this.applicantEditForm.get('applicantLastName').setValue(applicant.lastName)
+    this.applicantEditForm.get('applicantEmail').setValue(applicant.email)
+    this.applicantEditForm.get('applicantPhoneNumber').setValue(applicant.phone)
+    this.applicantEditForm.get('applicantAddressLine').setValue(applicant.addressLine)
+    this.applicantEditForm.get('applicantAddressLine2').setValue(applicant.addressLine2)
+    this.applicantEditForm.get('applicantCity').setValue(applicant.city)
+    this.applicantEditForm.get('applicantCountry').setValue(applicant.country)
+    this.applicantEditForm.get('applicantState').setValue(applicant.stateProvince)
+    this.applicantEditForm.get('applicantZipCode').setValue(applicant.zipCode)
 
 
-    // this.jobEditForm.get('name').setValue(job.jobName)
-    // this.jobEditForm.get('company').setValue(job.company)
-    // this.jobEditForm.get('city').setValue(job.city)
-    //  this.jobEditForm.get('country').setValue(job.country)
-  
 
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered:true, size:'lg'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
 
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

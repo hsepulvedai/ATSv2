@@ -1,3 +1,6 @@
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+
 <style>
   th {
     text-align: center;
@@ -11,43 +14,51 @@
     text-align: left;
   }
 </style>
-
+</head>
 
 <div class="backgroundG ">
-  <h3>B.2/B.3</h3>
+ 
 </div>
 <div class="container">
-
+    <h3>B.2/B.3</h3>
   <div class="row">
-    <div class="col-sm-4">
-      <button style="margin: 10px" class="btn btn-md" type="button" [routerLink]="['/offer-list-management']">
-        <span class="glyphicon glyphicon-menu-left"> Back </span>
+    <div class="col-sm-3">
+      <button style="margin: 10px" class="btn btn-sm" type="button" [routerLink]="['/offer-list-management']">
+         <i class="material-icons">
+          arrow_back_ios
+          </i>
       </button>
-
-      <div class="shadow p-3 mb-5 bg-white ">
-
+   
+    
+        <div class="card" >
+          <div class="card-body">
+             
         <h1>{{job?.jobName}}</h1>
 
         <div>
+            <i class="material-icons" style="font-size: 4em; ">  perm_identity </i>
           <div><strong> Company : </strong> {{job?.companyName}}</div>
-          <hr>
+          
           <div><strong> City : </strong> {{job?.city}}</div>
-          <hr>
+         
           <div><strong> Country : </strong> {{job?.country}}</div>
-          <hr>
+          
           <div><strong> Category : </strong> {{job?.jobCategory}}</div>
-          <hr>
+          
           <div><strong> Type : </strong> {{job?.jobType}}</div>
-          <hr>
+          
           <div><strong> Description : </strong> {{job?.description}}</div>
-          <hr>
+        </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-8">
+
+      </div>
+    
+ 
+    <div class="col-sm-9">
       <p># of Applicants</p>
 
-      <table class="table ">
+      <table class="table table-striped ">
         <thead>
           <tr>
             <th style="text-align: left" scope="col">Applicant ID</th>

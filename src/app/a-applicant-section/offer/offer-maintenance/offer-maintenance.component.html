@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+  
+
+
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Job update</h4>
@@ -17,20 +24,20 @@
 
         <div class="form-group col-md-6">
           <label for="company"> <strong>Company</strong></label>
-          <input formControlName="company" type="text" class="form-control" id="company">
+          <input formControlName="company" type="text" class="form-control" id="company" disabled>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6">
           <label for="city"><strong>City</strong></label>
-          <input formControlName="city" type="text" class="form-control" id="city">
+          <input formControlName="city" type="text" class="form-control" id="city" disabled>
 
         </div>
 
         <div class="form-group col-md-6">
           <label for="country"><strong>Country</strong></label>
-          <input formControlName="country" type="text" id="country" class="form-control">
+          <input formControlName="country" type="text" id="country" class="form-control" disabled>
         </div>
       </div>
 
@@ -62,6 +69,9 @@
     <button type="submit" class="btn " (click)="c('Save click')">Save</button>
   </div>
 </ng-template>
+</head>
+
+<body>
 
 <div class="backgroundG ">
  
@@ -71,15 +81,50 @@
 
   <div class="container ">
     <h3> A.5 Job Maintenance Screen</h3>
+   
+    <div align="right">
+        <button type="button" class="btn"> <i class="material-icons">
+            note_add
+            </i> </button>  
+    </div>
+
     <ngb-tabset>
       <ngb-tab title="Available Jobs">
         <ng-template ngbTabContent>
           <h3> Jobs </h3>
           <div>
+     
+              <div class="col-md-12 ">
 
+                  <label for="filterBy"><strong> Filter by: </strong></label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                        <option selected> All Jobs</option>
+                        <option> Job Title </option>
+                        <option> Company </option>
+                        <option> Location/City </option>
+                        <option> Location/Country </option>
+                        <option> Category </option>
+                        <option> Type </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
+                    </div>
+                    <div class="col-md-2">
+                        <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
+                            search
+                          </i></button><br>
+                    </div>
+
+                   
+                         
+                  </div>
+                </div>
 
             <!--Table-->
-            <table class="table table-striped">
+            <table class="table table-striped" >
 
               <!--Table head-->
               <thead>
@@ -90,26 +135,38 @@
                   <th>Category</th>
                   <th>Type</th>
                   <th>Edit</th>
-                  <th>Active/Inactive</th>
+                  <th> Remove </th>
                 </tr>
               </thead>
               <!--Table head-->
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let job of availableJobs">
+                <tr *ngFor="let job of filteredJobs">
                   <td> {{job.jobName}} </td>
                   <td> {{job.company}}</td>
                   <td> {{job.city}}, {{job.country}} </td>
                   <td> {{job.jobCategory}} </td>
                   <td>{{job.jobType}}</td>
-                  <td> <button type="button" (click)="openEdit(content, job)"> &#9997; </button> </td>
-                  <td> <button type="button" (click)=" setJobInactive(job.jobId)">Deactivate</button></td>
+                  
+                  <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
+                    edit
+                    </i> </button> </td>
+                 
+                  <td>
+                    <button type="button" class=" btn " (click)=" setJobInactive(job.jobId)" >  <i class="material-icons">
+                        subdirectory_arrow_right
+                      </i></button><br>
+                  
+                  </td> 
+                
+                 
+    
                 </tr>
               </tbody>
-              <!--Table body-->
+              
             </table>
-            <!--Table-->
+         
 
           </div>
 
@@ -120,7 +177,34 @@
         <ng-template ngbTabContent>
           <h3> Past Jobs </h3>
 
+
           <div>
+
+              <div class="col-md-12 ">
+
+                  <label for="filterBy"><strong> Filter by: </strong></label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                        <option selected> All Jobs</option>
+                        <option> Job Title </option>
+                        <option> Company </option>
+                        <option> Location/City </option>
+                        <option> Location/Country </option>
+                        <option> Category </option>
+                        <option> Type </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <input [(ngModel)]='listInactiveFilter' type="search" id="searchBar" class="form-control " >
+                    </div>
+                    <div class="col-md-2">
+                        <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
+                            search
+                          </i></button><br>
+                    </div>
+                  </div>
+                </div>
 
             <!--Table-->
             <table class="table table-striped">
@@ -141,14 +225,16 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let inactiveJob of inactiveJobs">
+                <tr *ngFor="let inactiveJob of inactiveFilteredJobs">
                   <td> {{inactiveJob.jobName}}</td>
                   <td> {{inactiveJob.company}}</td>
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
                   <td> {{inactiveJob.jobCategory}} </td>
                   <td>{{inactiveJob.jobType}}</td>
-                  <td> <button type="button" (click)="openEdit(content, inactiveJob)"> &#9997; </button> </td>
-                  <td> <button type="button" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
+                  <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
+                      edit
+                      </i> </button> </td>
+                  <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)">Activate</button></td>
                 </tr>
               </tbody>
               <!--Table body-->
@@ -191,7 +277,9 @@
                 <td> {{draft.city}}, {{draft.country}} </td>
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
-                <td> <button type="button" (click)="openEdit(content, draft)"> &#9997; </button> </td>
+                <td> <button type="button" class="btn" (click)="openEdit(content, draft)"> <i class="material-icons">
+                    edit
+                    </i>  </button> </td>
               </tr>
             </tbody>
             <!--Table body-->
@@ -203,6 +291,8 @@
       </ngb-tab>
 
 
+      
+      <!-- Put content in a model-->
       <ngb-tab title="Add Job">
         <ng-template ngbTabContent>
           <p>
@@ -280,6 +370,10 @@
 
         </ng-template>
       </ngb-tab>
+
+
     </ngb-tabset>
 
   </div>
+</body>
+  </html>
