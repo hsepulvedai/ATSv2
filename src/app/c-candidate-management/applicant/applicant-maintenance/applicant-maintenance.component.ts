@@ -60,6 +60,112 @@ export class ApplicantMaintenanceComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
+
+  ngOnInit() {
+
+    this.initilalizeEditApplicantForm()
+    this.initializeAddApplicantForm()
+
+    this.applicantService.showAllActiveApplicants()
+    .subscribe((data:IApplicantInfo[]) => {
+      this.allApplicants = data['Data'];
+     }) 
+
+     this.applicantService.showAllInactiveApplicants()
+     .subscribe((data:IApplicantInfo[]) => {
+       this.allPastApplicants = data['Data'];
+      }) 
+
+  }
+
+  makeApplicantInactive(id) {
+    this.applicantService.setInactiveApplicant(id)
+    .subscribe(data => { console.log("Patched:" + data) },
+    error => { console.error("Error: ", error) })
+
+    this.applicantService.showAllActiveApplicants()
+    .subscribe((data:IApplicantInfo[]) => {
+      this.allApplicants = data['Data'];
+     }) 
+
+     this.applicantService.showAllInactiveApplicants()
+     .subscribe((data:IApplicantInfo[]) => {
+       this.allPastApplicants = data['Data'];
+      }) 
+  }
+
+  makeApplicantActive(id) {
+    this.applicantService.setActiveApplicant(id)
+    .subscribe(data => { console.log("Patched:" + data) },
+    error => { console.error("Error: ", error) })
+
+    this.applicantService.showAllActiveApplicants()
+    .subscribe((data:IApplicantInfo[]) => {
+      this.allApplicants = data['Data'];
+     }) 
+
+     this.applicantService.showAllInactiveApplicants()
+     .subscribe((data:IApplicantInfo[]) => {
+       this.allPastApplicants = data['Data'];
+      }) 
+  }
+
+  createApplicant(newApplicantForm){
+    this.newApplicant = {
+      firstName: newApplicantForm.applicantFirstName, 
+      lastName: newApplicantForm.applicantLastName,
+      email: newApplicantForm.applicantEmail,
+      password: newApplicantForm.applicantPassword,
+      phone: newApplicantForm.applicantPhoneNumber,
+      addressLine: newApplicantForm.addressLine,
+      addressLine2: newApplicantForm.addressLine2,
+      city: newApplicantForm.city,
+      stateProvince: newApplicantForm.state,
+      country: newApplicantForm.country,
+      zipCode: newApplicantForm.zipCode
+    }
+
+    this.applicantService.addApplicantMaintenance(this.newApplicant)
+    .subscribe(data => { console.log("POST:" + data) },
+        error => { console.error("Error: ", error) })
+   
+  }
+
+  openEdit(content, applicant) {
+
+
+    this.applicantEditForm.get('applicantFirstName').setValue(applicant.firstName)
+    this.applicantEditForm.get('applicantLastName').setValue(applicant.lastName)
+    this.applicantEditForm.get('applicantEmail').setValue(applicant.email)
+    this.applicantEditForm.get('applicantPhoneNumber').setValue(applicant.phone)
+    this.applicantEditForm.get('applicantAddressLine').setValue(applicant.addressLine)
+    this.applicantEditForm.get('applicantAddressLine2').setValue(applicant.addressLine2)
+    this.applicantEditForm.get('applicantCity').setValue(applicant.city)
+    this.applicantEditForm.get('applicantCountry').setValue(applicant.country)
+    this.applicantEditForm.get('applicantState').setValue(applicant.stateProvince)
+    this.applicantEditForm.get('applicantZipCode').setValue(applicant.zipCode)
+
+
+
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
+
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+  
   initilalizeEditApplicantForm() {
     this.applicantFirstName= new FormControl()
     this.applicantLastName= new FormControl()
@@ -120,91 +226,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
    })
    
   }
-
-  ngOnInit() {
-
-    this.initilalizeEditApplicantForm()
-    this.initializeAddApplicantForm()
-
-    this.applicantService.showAllActiveApplicants()
-    .subscribe((data:IApplicantInfo[]) => {
-      this.allApplicants = data['Data'];
-     }) 
-
-     this.applicantService.showAllInactiveApplicants()
-     .subscribe((data:IApplicantInfo[]) => {
-       this.allPastApplicants = data['Data'];
-      }) 
-
-  }
-
-  makeApplicantInactive(id) {
-    this.applicantService.setInactiveApplicant(id)
-    .subscribe(data => { console.log("Patched:" + data) },
-    error => { console.error("Error: ", error) })
-  }
-
-  makeApplicantActive(id) {
-    this.applicantService.setActiveApplicant(id)
-    .subscribe(data => { console.log("Patched:" + data) },
-    error => { console.error("Error: ", error) })
-  }
-
-  createApplicant(newApplicantForm){
-    this.newApplicant = {
-      firstName: newApplicantForm.applicantFirstName, 
-      lastName: newApplicantForm.applicantLastName,
-      email: newApplicantForm.applicantEmail,
-      password: newApplicantForm.applicantPassword,
-      phone: newApplicantForm.applicantPhoneNumber,
-      addressLine: newApplicantForm.addressLine,
-      addressLine2: newApplicantForm.addressLine2,
-      city: newApplicantForm.city,
-      stateProvince: newApplicantForm.state,
-      country: newApplicantForm.country,
-      zipCode: newApplicantForm.zipCode
-    }
-
-    this.applicantService.addApplicantMaintenance(this.newApplicant)
-    .subscribe(data => { console.log("POST:" + data) },
-        error => { console.error("Error: ", error) })
-   
-  }
-
-  openEdit(content, applicant) {
-
-
-    this.applicantEditForm.get('applicantFirstName').setValue(applicant.firstName)
-    this.applicantEditForm.get('applicantLastName').setValue(applicant.lastName)
-    this.applicantEditForm.get('applicantEmail').setValue(applicant.email)
-    this.applicantEditForm.get('applicantPhoneNumber').setValue(applicant.phone)
-    this.applicantEditForm.get('applicantAddressLine').setValue(applicant.addressLine)
-    this.applicantEditForm.get('applicantAddressLine2').setValue(applicant.addressLine2)
-    this.applicantEditForm.get('applicantCity').setValue(applicant.city)
-    this.applicantEditForm.get('applicantCountry').setValue(applicant.country)
-    this.applicantEditForm.get('applicantState').setValue(applicant.stateProvince)
-    this.applicantEditForm.get('applicantZipCode').setValue(applicant.zipCode)
-
-
-
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
-
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
-
  
 
 }

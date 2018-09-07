@@ -21,6 +21,9 @@ export class OfferListComponent implements OnInit {
   filteredJobs: IJobOffer[]
 
   selectedFilter: string = 'All Jobs';
+  
+  selectedSort
+  sortBy
 
 
   //event handler for the select element's change event
@@ -28,6 +31,119 @@ export class OfferListComponent implements OnInit {
     //update the ui
     this.selectedFilter = event.target.value;
   }
+
+  sortDropdownChangeHandler(event: any) {
+    //update the ui
+    this.selectedSort = event.target.value;
+  }
+
+  sortParamDropdownChangeHandler(event: any) {
+    //update the ui
+    this.sortBy = event.target.value;
+  }
+
+
+  performSort() {
+
+    if(this._listFilter != null)
+    this.performFilter(this._listFilter);
+
+    if (this.selectedSort === 'Job Title' && this.sortBy === 'Sort A-Z') {
+      this.jobService.sortByJobTitleAsc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+      if(this._listFilter != null)
+      this.performFilter(this._listFilter);
+    }
+    else if (this.selectedSort === 'Job Title' && this.sortBy === 'Sort Z-A') {
+      this.jobService.sortByJobTitleDesc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+      if(this._listFilter != null)
+      this.performFilter(this._listFilter);
+    }
+    else if (this.selectedSort === 'Company' && this.sortBy === 'Sort A-Z') {
+      this.jobService.sortByCompanyAsc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else if (this.selectedSort === 'Company' && this.sortBy === 'Sort Z-A') {
+      this.jobService.sortByCompanyDesc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+
+    else if (this.selectedSort === 'Location/City' && this.sortBy === 'Sort A-Z') {
+      this.jobService.sortByJobLocationCityAsc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else if (this.selectedSort === 'Location/City' && this.sortBy === 'Sort Z-A') {
+      this.jobService.sortByJobLocationCityDesc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+
+    else if (this.selectedSort === 'Location/Country' && this.sortBy === 'Sort A-Z') {
+      this.jobService.sortByJobLocationCountryAsc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else if (this.selectedSort === 'Location/Country' && this.sortBy === 'Sort Z-A') {
+      this.jobService.sortByJobLocationCountryDesc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else if (this.selectedSort === 'Category' && this.sortBy === 'Sort A-Z') {
+      this.jobService.sortByJobCateogoryAsc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else if (this.selectedSort === 'Category' && this.sortBy === 'Sort Z-A') {
+      this.jobService.sortByJobCateogoryDesc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+
+    else if (this.selectedSort === 'Type' && this.sortBy === 'Sort A-Z') {
+      this.jobService.sortByJobTypeAsc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else if (this.selectedSort === 'Type' && this.sortBy === 'Sort Z-A') {
+      this.jobService.sortByJobTypeDesc()
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
+    }
+    else ;
+
+  }
+
+
 
   get listFilter(): string {
     return this._listFilter;
@@ -69,13 +185,11 @@ export class OfferListComponent implements OnInit {
       return this.availableJobs.filter((job: IJobOffer) =>
         job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
-    else if(this.selectedFilter === 'All Jobs')
-<<<<<<< HEAD
+    else if(this.selectedFilter === 'Job Title')
       return this.availableJobs.filter((job: IJobOffer) => 
         job.jobName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     else
-      return this.availableJobs
-=======
+      // return this.availableJobs
     // Universal search (if no filter selected default all jobs) 
           return this.availableJobs.filter( (job: IJobOffer) => {
             return    job.company.toLocaleLowerCase().indexOf(filterBy) !== -1 
@@ -84,10 +198,9 @@ export class OfferListComponent implements OnInit {
                    || job.jobType.toLocaleLowerCase().indexOf(filterBy) !== -1
                    || job.country.toLocaleLowerCase().indexOf(filterBy) !== -1
                    || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
-
+                   || job.company.toLocaleLowerCase().indexOf(filterBy) !== -1
           })
 
->>>>>>> 49bade12b708846c5235c48b21daaceba09c4b3d
   }
 
   // filterAll(){
@@ -119,7 +232,6 @@ export class OfferListComponent implements OnInit {
       search: this.search,
       filter: this.filter
     })
-
 
 
   }

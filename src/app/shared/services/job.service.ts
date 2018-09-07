@@ -61,6 +61,55 @@ export class JobService {
     return this.http.put(environment.baseUrl + this.routePrefix + 'JobEditAll', job )
   }
 
+  // Sorting
+  sortByJobTitleAsc(){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTitleAZ')
+  }
+
+  sortByJobTitleDesc(){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTitleAZ')
+  }
+
+  // Sorting
+  sortByCompanyAsc(){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCompanyAZ')
+  }
+
+  sortByCompanyDesc(){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCompanyZA')
+  }
+
+  sortByJobLocationCityAsc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveLocationCityAZ')
+  }
+
+  sortByJobLocationCityDesc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveLocationCityZA')
+  }
+
+  sortByJobLocationCountryAsc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveLocationCountryAZ')
+  }
+
+  sortByJobLocationCountryDesc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveLocationCountryZA')
+  }
+
+  sortByJobCateogoryAsc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCategoryAZ')
+  }
+
+  sortByJobCateogoryDesc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCategoryZA')
+  }
+
+  sortByJobTypeAsc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeAZ')
+  }
+
+  sortByJobTypeDesc() {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeZA')
+  }
 }
 
 
