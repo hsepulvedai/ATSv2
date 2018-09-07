@@ -2,6 +2,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
   </head>
 
+
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Job update</h4>
@@ -67,6 +68,9 @@
   </div>
 </ng-template>
 
+
+
+
 <div class="backgroundG ">
  
  
@@ -75,12 +79,19 @@
 
   <div class="container ">
     <h3> A.5 Job Maintenance Screen</h3>
+   
+    <div align="right">
+        <button type="button" class="btn"> <i class="material-icons">
+            note_add
+            </i> </button>  
+    </div>
+
     <ngb-tabset>
       <ngb-tab title="Available Jobs">
         <ng-template ngbTabContent>
           <h3> Jobs </h3>
           <div>
-
+     
               <div class="col-md-12 ">
 
                   <label for="filterBy"><strong> Filter by: </strong></label>
@@ -104,6 +115,9 @@
                             search
                           </i></button><br>
                     </div>
+
+                   
+                         
                   </div>
                 </div>
 
@@ -275,6 +289,8 @@
       </ngb-tab>
 
 
+      
+      <!-- Put content in a model-->
       <ngb-tab title="Add Job">
         <ng-template ngbTabContent>
           <p>
@@ -352,6 +368,8 @@
 
         </ng-template>
       </ngb-tab>
+
+
     </ngb-tabset>
 
   </div>
