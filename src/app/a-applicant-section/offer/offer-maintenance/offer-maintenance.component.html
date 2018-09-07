@@ -1,150 +1,154 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
-  
-    <ng-template #content1 let-c="close" let-d="dismiss">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-add"> New Job</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    
-        <p>
-                <div>
-                  <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value);c('Save click')">
-    
-                    <div class="row smallrow">
-                        <div class="form-group col-sm-6">
-                            <label for="jobName"> <strong>Job Title</strong></label>
-                            <input formControlName="jobName" type="text" class="form-control" id="name">
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="jobCompany"> <strong>Company</strong></label>
-                            <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
-                          </div>
-                    </div>
-  
-                    <div class="row smallrow">
-                        <div class="form-group col-sm-6">
-                            <label for="jobCategory"><strong>Category</strong></label>
-                            <select formControlName="jobCategory" id="category" class="form-control"
-                                (change)="selectJobCatChangeHandler($event)">
-                                <option value="null" disabled="true" [selected]="true">- Select Category -</option>
-                              <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
-                            </select>
-                          </div>
-          
-                          <div class="form-group col-sm-6">
-                            <label for="jobType"><strong> Type</strong></label>
-                            <select formControlName="jobType" id="type" class="form-control"
-                              (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
-                              <option value="null" disabled="true" [selected]="true">- Select Type -</option>
-                              <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
-                            </select>
-                          </div>
-                    </div>
-    
-                    <div class="row smallrow">
-                        <div class="form-group col-sm-6">
-                            <label for="jobDescription"><strong>Description</strong></label>
-                            <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
-                          </div>
-                    </div>
-    
-                    <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
-    
-                    <div class="modal-footer">
-                      <button type="submit" class="btn "><i class="material-icons">
-                        save_alt
-                        </i>Save</button>
-                    </div> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-                  </form>
-    
-                </div>
-    
-    
-      </div>
-      
-    </ng-template>
+  <ng-template #content1 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-add"> New Job</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Job update</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
+      <p>
+        <div>
+          <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value);c('Save click')">
 
-    <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateJob(jobEditForm.value, job);c('Save click')" >
+            <div class="row smallrow">
+              <div class="form-group col-sm-6">
+                <label for="jobName"> <strong>Job Title</strong></label>
+                <input formControlName="jobName" type="text" class="form-control" id="name">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="jobCompany"> <strong>Company</strong></label>
+                <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
+              </div>
+            </div>
 
-      <div class="row">
+            <div class="row smallrow">
+              <div class="form-group col-sm-6">
+                <label for="jobCategory"><strong>Category</strong></label>
+                <select formControlName="jobCategory" id="category" class="form-control" (change)="selectJobCatChangeHandler($event)">
+                  <option value="null" disabled="true" [selected]="true">- Select Category -</option>
+                  <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
+                </select>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label for="jobType"><strong> Type</strong></label>
+                <select formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
+                  <option value="null" disabled="true" [selected]="true">- Select Type -</option>
+                  <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row smallrow">
+              <div class="form-group col-sm-6">
+                <label for="jobDescription"><strong>Description</strong></label>
+                <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+              </div>
+            </div>
+
+            <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline"><i class="material-icons">
+                    save_alt
+                  </i>Save as Draft</button>
+                  
+              <button type="submit" class="btn "><i class="material-icons">
+                  save_alt</i>Save</button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+
+    </div>
+
+  </ng-template>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Job update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateJob(jobEditForm.value, job);c('Save click')">
+
+        <div class="row">
 
           <div class="form-group col-md-6">
-              <label for="name"> <strong>Job Title</strong></label>
-              <input formControlName="name" type="text" class="form-control" id="name">
-            </div> 
+            <label for="name"> <strong>Job Title</strong></label>
+            <input formControlName="name" type="text" class="form-control" id="name">
+          </div>
 
 
-        <div class="form-group col-md-6">
-          <label for="category"><strong>Category</strong></label>
-          <select formControlName="category" id="category" class="form-control">
-            <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
-          </select>
-        </div>
+          <div class="form-group col-md-6">
+            <label for="category"><strong>Category</strong></label>
+            <select formControlName="category" id="category" class="form-control">
+              <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
+            </select>
+          </div>
 
-        <div class="form-group col-md-6">
-          <label for="type"><strong>Type</strong></label>
-          <select formControlName="type" id="type" class="form-control">
-            <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
-          </select>
-        </div>
+          <div class="form-group col-md-6">
+            <label for="type"><strong>Type</strong></label>
+            <select formControlName="type" id="type" class="form-control">
+              <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
+            </select>
+          </div>
 
 
-        <div class="form-group col-md-6">
+          <div class="form-group col-md-6">
             <label for="description"><strong>Description</strong></label>
             <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
           </div>
 
 
-      </div>
+        </div>
 
-      <div class="modal-footer">
-        <button type="submit" class="btn "><i class="material-icons">
-            save_alt
+        <div class="modal-footer">
+          <button type="submit" class="btn "><i class="material-icons">
+              save_alt
             </i>Save</button>
-      </div>
+        </div>
 
-    </form>
+      </form>
 
 
 
-  </div>
-  
-</ng-template>
+    </div>
+
+  </ng-template>
 
 
 </head>
 
 <body>
 
-<div class="backgroundG ">
- 
- 
-  
-</div>
+  <div class="backgroundG ">
+
+
+
+  </div>
 
   <div class="container ">
     <h3> A.5 Job Maintenance Screen</h3>
-   
+
     <div align="right">
-        <button type="button" class="btn"  (click)="openAddJob(content1)" > <i class="material-icons">
-            note_add
-            </i> Add New Job </button>  
+      <button type="button" class="btn" (click)="openAddJob(content1)"> <i class="material-icons">
+          note_add
+        </i> Add New Job </button>
     </div>
 
     <ngb-tabset>
@@ -152,38 +156,38 @@
         <ng-template ngbTabContent>
           <h3> Jobs </h3>
           <div>
-     
-              <div class="col-md-12 ">
 
-                  <label for="filterBy"><strong> Filter by: </strong></label>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <select (change)="selectDropdownChangeHandler($event)" id="filter">
-                        <option selected> All Jobs</option>
-                        <option> Job Title </option>
-                        <option> Company </option>
-                        <option> Location/City </option>
-                        <option> Location/Country </option>
-                        <option> Category </option>
-                        <option> Type </option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " >
-                    </div>
-                    <div class="col-md-2">
-                        <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
-                            search
-                          </i>Search</button><br>
-                    </div>
+            <div class="col-md-12 ">
 
-                   
-                         
-                  </div>
+              <label for="filterBy"><strong> Filter by: </strong></label>
+              <div class="row">
+                <div class="col-md-4">
+                  <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                    <option selected> All Jobs</option>
+                    <option> Job Title </option>
+                    <option> Company </option>
+                    <option> Location/City </option>
+                    <option> Location/Country </option>
+                    <option> Category </option>
+                    <option> Type </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control ">
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class=" btn "> <i class="material-icons">
+                      search
+                    </i>Search</button><br>
                 </div>
 
+
+
+              </div>
+            </div>
+
             <!--Table-->
-            <table class="table table-striped" >
+            <table class="table table-striped">
 
               <!--Table head-->
               <thead>
@@ -207,25 +211,25 @@
                   <td> {{job.city}}, {{job.country}} </td>
                   <td> {{job.jobCategory}} </td>
                   <td>{{job.jobType}}</td>
-                  
+
                   <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
-                    edit
-                    </i>Edit </button> </td> 
-                 
+                        edit
+                      </i>Edit </button> </td>
+
                   <td>
-                    <button type="button" class=" btn " (click)=" setJobInactive(job.jobId)" >  <i class="material-icons">
+                    <button type="button" class=" btn " (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
                         subdirectory_arrow_right
                       </i> Remove </button><br>
-                  
-                  </td> 
-                
-                 
-    
+
+                  </td>
+
+
+
                 </tr>
               </tbody>
-              
+
             </table>
-         
+
 
           </div>
 
@@ -239,31 +243,31 @@
 
           <div>
 
-              <div class="col-md-12 ">
+            <div class="col-md-12 ">
 
-                  <label for="filterBy"><strong> Filter by: </strong></label>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <select (change)="selectDropdownChangeHandler($event)" id="filter">
-                        <option selected> All Jobs</option>
-                        <option> Job Title </option>
-                        <option> Company </option>
-                        <option> Location/City </option>
-                        <option> Location/Country </option>
-                        <option> Category </option>
-                        <option> Type </option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <input [(ngModel)]='listInactiveFilter' type="search" id="searchBar" class="form-control " >
-                    </div>
-                    <div class="col-md-2">
-                        <button fromControl="search" type="button" class=" btn ">  <i class="material-icons">
-                            search
-                          </i></button><br>
-                    </div>
-                  </div>
+              <label for="filterBy"><strong> Filter by: </strong></label>
+              <div class="row">
+                <div class="col-md-4">
+                  <select (change)="selectDropdownChangeHandler($event)" id="filter">
+                    <option selected> All Jobs</option>
+                    <option> Job Title </option>
+                    <option> Company </option>
+                    <option> Location/City </option>
+                    <option> Location/Country </option>
+                    <option> Category </option>
+                    <option> Type </option>
+                  </select>
                 </div>
+                <div class="col-md-6">
+                  <input [(ngModel)]='listInactiveFilter' type="search" id="searchBar" class="form-control ">
+                </div>
+                <div class="col-md-2">
+                  <button fromControl="search" type="button" class=" btn "> <i class="material-icons">
+                      search
+                    </i></button><br>
+                </div>
+              </div>
+            </div>
 
             <!--Table-->
             <table class="table table-striped">
@@ -291,10 +295,10 @@
                   <td> {{inactiveJob.jobCategory}} </td>
                   <td>{{inactiveJob.jobType}}</td>
                   <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
-                      edit
+                        edit
                       </i> Edit</button> </td>
                   <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
-                      subdirectory_arrow_left
+                        subdirectory_arrow_left
                       </i> Re-Post</button></td>
                 </tr>
               </tbody>
@@ -339,7 +343,7 @@
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
                 <td> <button type="button" class="btn" (click)="openEdit(content, draft)"> <i class="material-icons">
-                    edit
+                      edit
                     </i> Edit </button> </td>
               </tr>
             </tbody>
@@ -354,4 +358,5 @@
 
   </div>
 </body>
-  </html>
+
+</html>
