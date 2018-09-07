@@ -88,11 +88,11 @@
               <label for="name"> <strong>Job Title</strong></label>
               <input formControlName="name" type="text" class="form-control" id="name">
             </div> 
-
+ 
 
         <div class="form-group col-md-6">
           <label for="category"><strong>Category</strong></label>
-          <select formControlName="category" id="category" class="form-control">
+          <select formControlName="category" id="category" class="form-control ">
             <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
           </select>
         </div>
