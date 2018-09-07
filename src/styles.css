@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 body {
     font-family: Quicksand;
@@ -33,8 +34,8 @@ p {font-size: 16px;}
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
     color:#25326a;
-    font-family: Quicksand;
-    font-size: 100%;
+    font-family: Poppins;
+    font-size:130%;
 
     
 }
