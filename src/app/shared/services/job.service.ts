@@ -17,6 +17,11 @@ export class JobService {
 
    constructor(private http: HttpClient) { }
 
+   
+   setCurrentJobId(id){
+    this.currentJobId = id;
+  }
+
    showAvalaibleJobs() {
       return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")
    }
