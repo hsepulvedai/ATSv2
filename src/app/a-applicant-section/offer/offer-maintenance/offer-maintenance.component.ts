@@ -271,26 +271,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
-  openEdit(content, job, form) {
-
-
-    // this.jobService.showJobById(id)
-    //    .subscribe((data:IJobOffer) => {
-    //      this.currentJobId= data;
-    //    })
-
-    // this.jobCategoryService.getJobCategoryById(this.currentJobId)
-    // .subscribe((data:IJobCategory) => {
-    //   this.currentJobCategory = data.name
-    //   console.log(this.currentJobCategory)
-    // })
-
-    // this.jobTypeService.getJobTypeById(this.currentJobId)
-    // .subscribe((data:IJobType) => {
-    //   this.currentJobType = data.name
-    // })
-
-
+  openEdit(content, job) {
 
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
@@ -301,20 +282,6 @@ export class OfferMaintenanceComponent implements OnInit {
     console.log(job.jobId)
 
     this.jobService.setCurrentJobId(job.jobId)
-
-    console.log(this.jobService.currentJobId)
-    // console.log(job.category)
-    // this.jobEditForm.get('category').setValue(job.category)
-
-    // this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
-    // this.updatedJob = {
-    //   id: job.id,
-    //   name: job.jobName,
-    //   category: job.jobcategory,
-    //   type:job.jobType,
-    //   description:job.description
-
-    // }
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
 
@@ -357,45 +324,6 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobService.addJobMaintenance(this.createdJob)
       .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
-
-    // console.log(newJobForm.jobName)
-    // console.log(this.currentCompany.id)
-    // console.log(newJobForm.jobCategory)
-    // console.log(newJobForm.jobType)
-    // console.log(newJobForm.jobDescription)
-
-    // this.jobService.addJobMaintenance(job) {
-
-    // }
-
-    // console.log(jobForm)
-
-    //   let jcId
-
-    //   this.categories.forEach(element => {
-
-    //     if (jobForm.category = element.name)
-    //         jcId = element.id
-
-    //   });
-
-
-    // this.job = {
-    //   name: jobForm.name,
-    //   companyId: 0,
-    //   jobCategoryId: jcId,
-    //    description: jobForm.description
-    // }
-
-
-    // this.types.forEach(element => {
-
-    //   if (jobForm.type = element.name)
-    //       this.job.jobTypeId = element.id
-
-    // });
-
-    // console.log(this.job)
   }
 
 

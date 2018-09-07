@@ -62,7 +62,7 @@ export class OfferListComponent implements OnInit {
         console.log(this.searchBarInput)
       })
     }
-    else if (this.searchBarInput == null) {
+    else if (this.searchBarInput == '') {
       this.jobService.showAvalaibleJobs()
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];
