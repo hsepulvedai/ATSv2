@@ -46,12 +46,12 @@
               </div>
             </div>
           </div>
-          
-          <div class="col-md-12 ">
-            <label for="filterBy"><strong> Sort by: </strong></label>
+
+          <div>
+            <label for="sortBy"><strong> Search: </strong></label>
             <div class="row">
-              <div class="col-md-4">
-                <select (change)="sortDropdownChangeHandler($event)" id="filter">
+              <div>
+                <select (change)="sortDropdownChangeHandler($event)" id="sortBy">
                   <option selected> All Jobs</option>
                   <option> Job Title </option>
                   <option> Company </option>
@@ -60,16 +60,18 @@
                   <option> Category </option>
                   <option> Type </option>
                 </select>
-                <select (change)="sortParamDropdownChangeHandler($event)" id="filter">
-                  <option selected> Sort A-Z </option>
+                <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy">
+                  <option selected value="">Sort Type</option>
+                  <option> Sort A-Z </option>
                   <option> Sort Z-A </option>
                 </select>
-                <button type="button" class=" btn " (click)="performSort()"> 
+                <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control ">
+                <button type="button" class=" btn " (click)="universalSearch()">
                   <i class="material-icons">search</i></button><br>
               </div>
             </div>
           </div>
-          
+
           <div>
 
             <!--Table-->
@@ -96,11 +98,11 @@
                   <td>{{job.city}}, {{job.country}}</td>
                   <td>{{job.jobCategory}}</td>
                   <td>{{job.jobType}}</td>
-                  <td> <button type="button" class=" btn"(click)="applyButtonClicked(job.jobId)"><i class="material-icons">
-                      input
+                  <td> <button type="button" class=" btn" (click)="applyButtonClicked(job.jobId)"><i class="material-icons">
+                        input
                       </i> Apply</button> </td>
                 </tr>
-              </tbody> 
+              </tbody>
               <!--Table body-->
             </table>
             <!--Table-->

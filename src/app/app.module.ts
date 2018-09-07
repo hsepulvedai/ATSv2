@@ -22,6 +22,7 @@ import { OfferTrackingComponent } from './a-applicant-section/offer/offer-tracki
 import { OfferMaintenanceComponent } from './a-applicant-section/offer/offer-maintenance/offer-maintenance.component';
 import { ApplicantMaintenanceComponent } from './c-candidate-management/applicant/applicant-maintenance/applicant-maintenance.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { ApplicantMaintenanceComponent } from './c-candidate-management/applican
     OfferTrackingComponent,
     OfferMaintenanceComponent,
     ApplicantMaintenanceComponent,
+    
 
     
   ],
@@ -48,7 +50,8 @@ import { ApplicantMaintenanceComponent } from './c-candidate-management/applican
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
