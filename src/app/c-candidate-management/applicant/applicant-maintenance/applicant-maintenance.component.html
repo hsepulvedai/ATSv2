@@ -8,9 +8,106 @@
 <body>
 <div class="backgroundG">
     <h3> C.1 Applicant Maintenance Screen  </h3>
+
+  
+    
   
   </div>
   
+  <ng-template #content1 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-add">Applicant update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    
+        
+       <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value);c('Save click')">
+    
+                    <div class="row smallrow">
+                      <div class="form-group col-sm-6">
+                        <label for="firstName"> <strong>First Name</strong></label>
+                        <input formControlName="firstName" type="text" class="form-control" id="firstName">
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label for="lastName"> <strong>Last Name</strong></label>
+                        <input formControlName="lastName" type="text" class="form-control" id="lastName">
+                      </div>
+                    </div>
+    
+                    <div class="row smallrow">
+                      <div class="form-group col-sm-6">
+                        <label for="email"> <strong>Email</strong></label>
+                        <input formControlName="email" type="text" class="form-control" id="email">
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label for="phone"> <strong>Phone</strong></label>
+                        <input formControlName="phone" type="text" class="form-control" id="phone">
+                      </div>
+                    </div>
+    
+                    <div class="row mdrow  ">
+                      <div class="form-group col-sm-12">
+                        <label for="addressLine"> <strong>Address</strong></label>
+                        <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
+                      </div>
+                    </div>
+                    <div class="row smallrow">
+                      <div class="form-group col-sm-12">
+                        <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
+                      </div>
+                    </div>
+    
+                    <div class="row smallrow">
+                      <div class="form-group col-sm-6">
+                        <label for="city"> <strong>City</strong></label>
+                        <input formControlName="city" type="text" class="form-control" id="city">
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label for="state"> <strong>State/Province</strong></label>
+                        <input formControlName="state" type="text" class="form-control" id="state">
+                      </div>
+                    </div>
+    
+                    <div class="row smallrow ">
+                      <div class="form-group col-sm-6">
+                        <label for="country"> <strong>Country</strong></label>
+                        <input formControlName="country" type="text" class="form-control" id="country">
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label for="zipCode"> <strong>Zip Code</strong></label>
+                        <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
+                      </div>
+                    </div>
+    
+    
+                    <div class="row smallrow">
+                      <div class="form-group col-sm-6">
+                        <label for="password"> <strong> Password</strong></label>
+                        <input formControlName="password" type="text" class="form-control" id="password">
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label for="confirmPassword"> <strong> Confirm Password</strong></label>
+                        <input formControlName="confirmPassword" type="text" class="form-control" id="confirmPassword">
+                      </div>
+                    </div>
+    
+                
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn "><i class="material-icons">
+                                save_alt
+                                </i>Save</button>
+                          </div>
+    
+                </form>
+          
+      </div>
+      
+    </ng-template>
+
   <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Applicant update</h4>
@@ -20,7 +117,7 @@
     </div>
     <div class="modal-body">
   
-      <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px">
+      <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateApplicant(applicantEditForm.value);" >
   
     <div class="row smallrow" >
                   <div class="form-group col-sm-6">
@@ -86,24 +183,34 @@
                 </div>
   
                 <div class="row smallrow"></div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn " (click)="c('Save click')"><i class="material-icons">
+                        save_alt
+                        </i>Save</button>
+                  </div>
   
       </form>
   
     </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn " (click)="c('Save click')"><i class="material-icons">
-          save_alt
-          </i>Save</button>
-    </div>
+   
   </ng-template>
   
   <div class="container tabsmargin " >
-  
+
+      <div align="right">
+          <button type="button" class="btn"  (click)="openAddApplicant(content1)" > <i class="material-icons">
+              note_add
+              </i> Add New Applicant </button>  
+      </div> 
+
     <ngb-tabset>
+
       <ngb-tab title="Applicants">
         <ng-template ngbTabContent>
-          <h3> Applicants </h3>
-  
+
+              <h3> Applicants </h3>
+
           <div>
   
             <!--Table-->
@@ -192,94 +299,6 @@
         </ng-template>
       </ngb-tab>
   
-      <ngb-tab title="Add Applicant">
-          <ng-template ngbTabContent>
-            <p>
-              <h3> New Applicant </h3>
-              <hr>
-  
-              <div>
-                <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value)">
-  
-                  <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                      <label for="firstName"> <strong>First Name</strong></label>
-                      <input formControlName="firstName" type="text" class="form-control" id="firstName">
-                    </div>
-                    <div class="form-group col-sm-6">
-                      <label for="lastName"> <strong>Last Name</strong></label>
-                      <input formControlName="lastName" type="text" class="form-control" id="lastName">
-                    </div>
-                  </div>
-  
-                  <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                      <label for="email"> <strong>Email</strong></label>
-                      <input formControlName="email" type="text" class="form-control" id="email">
-                    </div>
-                    <div class="form-group col-sm-6">
-                      <label for="phone"> <strong>Phone</strong></label>
-                      <input formControlName="phone" type="text" class="form-control" id="phone">
-                    </div>
-                  </div>
-  
-                  <div class="row mdrow  ">
-                    <div class="form-group col-sm-12">
-                      <label for="addressLine"> <strong>Address</strong></label>
-                      <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
-                    </div>
-                  </div>
-                  <div class="row smallrow">
-                    <div class="form-group col-sm-12">
-                      <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
-                    </div>
-                  </div>
-  
-                  <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                      <label for="city"> <strong>City</strong></label>
-                      <input formControlName="city" type="text" class="form-control" id="city">
-                    </div>
-                    <div class="form-group col-sm-6">
-                      <label for="state"> <strong>State/Province</strong></label>
-                      <input formControlName="state" type="text" class="form-control" id="state">
-                    </div>
-                  </div>
-  
-                  <div class="row smallrow ">
-                    <div class="form-group col-sm-6">
-                      <label for="country"> <strong>Country</strong></label>
-                      <input formControlName="country" type="text" class="form-control" id="country">
-                    </div>
-                    <div class="form-group col-sm-6">
-                      <label for="zipCode"> <strong>Zip Code</strong></label>
-                      <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
-                    </div>
-                  </div>
-  
-  
-                  <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                      <label for="password"> <strong> Password</strong></label>
-                      <input formControlName="password" type="text" class="form-control" id="password">
-                    </div>
-                    <div class="form-group col-sm-6">
-                      <label for="confirmPassword"> <strong> Confirm Password</strong></label>
-                      <input formControlName="confirmPassword" type="text" class="form-control" id="confirmPassword">
-                    </div>
-                  </div>
-  
-                  <button class="btn btn-sm" type="submit"><i class="material-icons">
-                      arrow_forward_ios
-                      </i>Submit</button>
-  
-              </form>
-  
-            </div>
-  
-  
-        </ng-template>
-      </ngb-tab>
     </ngb-tabset>
   
   </div>

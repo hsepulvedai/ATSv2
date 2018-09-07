@@ -486,7 +486,10 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })
 
+  
   }
+
+  
 
 
 }
