@@ -60,7 +60,7 @@
                 <button type="submit" class="btn btn-outline"><i class="material-icons">
                     save_alt
                   </i>Save as Draft</button>
-                  
+  
               <button type="submit" class="btn "><i class="material-icons">
                   save_alt</i>Save</button>
 
@@ -197,8 +197,7 @@
                   <th>Location</th>
                   <th>Category</th>
                   <th>Type</th>
-                  <th>Edit</th>
-                  <th> Remove </th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <!--Table head-->
@@ -214,16 +213,11 @@
 
                   <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
                         edit
-                      </i>Edit </button> </td>
-
-                  <td>
-                    <button type="button" class=" btn " (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
-                        subdirectory_arrow_right
-                      </i> Remove </button><br>
-
-                  </td>
-
-
+                      </i>Edit </button>
+                      <button style="margin-left: 10px" type="button" class="btn" (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
+                          subdirectory_arrow_right
+                        </i> Remove </button>
+                    </td>
 
                 </tr>
               </tbody>

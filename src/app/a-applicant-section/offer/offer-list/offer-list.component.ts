@@ -11,6 +11,7 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 export class OfferListComponent implements OnInit {
 
   searchBarInput: string
+  sortBy:string
 
   availableJobs: IJobOffer[]
   job: IJobOffer
@@ -25,7 +26,7 @@ export class OfferListComponent implements OnInit {
   selectedFilter: string = 'All Jobs';
 
   selectedSort
-  sortBy
+
 
 
   //event handler for the select element's change event
@@ -61,7 +62,7 @@ export class OfferListComponent implements OnInit {
         console.log(this.searchBarInput)
       })
     }
-    else if (this.searchBarInput == null) {
+    else if (this.searchBarInput == '') {
       this.jobService.showAvalaibleJobs()
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];

@@ -26,8 +26,8 @@ export class OfferListManagementComponent implements OnInit {
 
   }
 
-  goToOfferDetail(id){
-    this.jobService.currentJobId = id;
+  goToOfferDetail(job){
+    this.jobService.currentJob = job
 
   this.router.navigate(['hr-offer-detail'])
 }
