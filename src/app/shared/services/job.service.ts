@@ -20,7 +20,7 @@ export class JobService {
 
    constructor(private http: HttpClient) { }
 
-   setCurrentJobId(id){
+   setCurrentJobId(id, testing){
      this.currentJobId = id;
    }
 
