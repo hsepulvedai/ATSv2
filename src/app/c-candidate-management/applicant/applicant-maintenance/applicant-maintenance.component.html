@@ -1,7 +1,11 @@
+<!DOCTYPE html>
+<html>
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
 </head>
+
+<body>
 <div class="backgroundG">
     <h3> C.1 Applicant Maintenance Screen  </h3>
   
@@ -87,7 +91,9 @@
   
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn " (click)="c('Save click')">Save</button>
+      <button type="submit" class="btn " (click)="c('Save click')"><i class="material-icons">
+          save_alt
+          </i>Save</button>
     </div>
   </ng-template>
   
@@ -124,9 +130,11 @@
                   <td>{{applicant.phone}}</td>
                   <td>{{applicant.city}}, {{applicant.country}}</td>
                   <td> <button type="button" class="btn" (click)="openEdit(content, applicant)">  <i class="material-icons">
-                    search
-                    </i> </button> </td>
-                  <td> <button type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> Deactivate </button> </td>
+                      edit
+                      </i>Edit </button> </td>
+                  <td> <button type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> <i class="material-icons">
+                      subdirectory_arrow_right
+                    </i> Remove </button> </td>
                 </tr>
               </tbody>
               <!--Table body-->
@@ -168,9 +176,11 @@
                     <td>{{applicant.phone}}</td>
                     <td>{{applicant.city}}, {{applicant.country}}</td>
                     <td> <button type="button" class="btn"(click)="openEdit(content, applicant)"> <i class="material-icons">
-                      search
-                      </i> </button> </td>
-                    <td> <button type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> Activate </button> </td>
+                      edit
+                      </i>Edit </button> </td>
+                    <td> <button type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> <i class="material-icons">
+                        subdirectory_arrow_left
+                        </i> Re-Post </button> </td>
                   </tr>
               </tbody>
               <!--Table body-->
@@ -259,7 +269,9 @@
                     </div>
                   </div>
   
-                  <button class="btn btn-sm" type="submit">Submit</button>
+                  <button class="btn btn-sm" type="submit"><i class="material-icons">
+                      arrow_forward_ios
+                      </i>Submit</button>
   
               </form>
   
@@ -271,3 +283,5 @@
     </ngb-tabset>
   
   </div>
+</body>
+</html>

@@ -1,5 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
 
+  </head>
   
+  <body>
+    <div class="container">
 <h1>A.4</h1>
 
 <div class="card">
@@ -11,41 +17,34 @@
           <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title"> Job Status </h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-              <span aria-hidden="true">&times;</span>
+              <span aria-hidden="true">&times;</span> 
             </button>
-          </div>
+          </div>        
           <div class="modal-body">
-
             <p>
-              Job Title:
-              
+              Job Title:              
               Status: {{result.value}}
-            </p>
-            
-            
+            </p>           
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
           </div>
         </ng-template>
+              <form [formGroup]="trackForm"  autocomplete="off">                  
+                <div class="form-group col-md-6">
+                  <label for="name"> <strong> Email</strong></label>
+                  <input formControlName="email" type="text" class="form-control" id="name" >
+                </div>
+            <button class="btn btn-lg btn" (click)="open(content)"><i class="material-icons">
+                arrow_forward_ios
+                </i> Submit </button>
+              </form>             
+           <hr>        
+           <pre>{{closeResult}}</pre>
 
-          <form [formGroup]="trackForm"  autocomplete="off">
-               
-            <div class="form-group col-md-6">
-              <label for="name"> <strong> Email</strong></label>
-              <input formControlName="email" type="text" class="form-control" id="name" >
-            </div>
-        <button class="btn btn-lg btn-outline-primary" (click)="open(content)"> Submit </button>
-
-          </form>
-        
-      
-        
-        <hr>
-        
-        <pre>{{closeResult}}</pre>
-        
-
-
-
-
+          </div>
+        </div>
+      </div>
+      </body>
+ </html>
+ 
