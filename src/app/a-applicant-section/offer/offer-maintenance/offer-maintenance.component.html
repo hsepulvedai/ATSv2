@@ -3,7 +3,73 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
   
+    <ng-template #content1 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-add"> New Job</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    
+        <p>
+                <div>
+                  <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value);c('Save click')">
+    
+                    <div class="row smallrow">
+                        <div class="form-group col-sm-6">
+                            <label for="jobName"> <strong>Job Title</strong></label>
+                            <input formControlName="jobName" type="text" class="form-control" id="name">
+                          </div>
+                          <div class="form-group col-sm-6">
+                            <label for="jobCompany"> <strong>Company</strong></label>
+                            <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
+                          </div>
+                    </div>
+  
+                    <div class="row smallrow">
+                        <div class="form-group col-sm-6">
+                            <label for="jobCategory"><strong>Category</strong></label>
+                            <select formControlName="jobCategory" id="category" class="form-control"
+                                (change)="selectJobCatChangeHandler($event)">
+                                <option value="null" disabled="true" [selected]="true">- Select Category -</option>
+                              <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
+                            </select>
+                          </div>
+          
+                          <div class="form-group col-sm-6">
+                            <label for="jobType"><strong> Type</strong></label>
+                            <select formControlName="jobType" id="type" class="form-control"
+                              (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
+                              <option value="null" disabled="true" [selected]="true">- Select Type -</option>
+                              <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
+                            </select>
+                          </div>
+                    </div>
+    
+                    <div class="row smallrow">
+                        <div class="form-group col-sm-6">
+                            <label for="jobDescription"><strong>Description</strong></label>
+                            <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+                          </div>
+                    </div>
+    
+                    <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
+    
+                    <div class="modal-footer">
+                      <button type="submit" class="btn "><i class="material-icons">
+                        save_alt
+                        </i>Save</button>
+                    </div> 
 
+                  </form>
+    
+                </div>
+    
+    
+      </div>
+      
+    </ng-template>
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
@@ -14,62 +80,51 @@
   </div>
   <div class="modal-body">
 
-    <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px">
+    <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateJob(jobEditForm.value, job);c('Save click')" >
 
       <div class="row">
-        <div class="form-group col-md-6">
-          <label for="name"> <strong>Job Title</strong></label>
-          <input formControlName="name" type="text" class="form-control" id="name">
-        </div>
 
-        <div class="form-group col-md-6">
-          <label for="company"> <strong>Company</strong></label>
-          <input formControlName="company" type="text" class="form-control" id="company" disabled>
-        </div>
-      </div>
+          <div class="form-group col-md-6">
+              <label for="name"> <strong>Job Title</strong></label>
+              <input formControlName="name" type="text" class="form-control" id="name">
+            </div> 
 
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="city"><strong>City</strong></label>
-          <input formControlName="city" type="text" class="form-control" id="city" disabled>
 
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="country"><strong>Country</strong></label>
-          <input formControlName="country" type="text" id="country" class="form-control" disabled>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="form-group col-md-6">
           <label for="category"><strong>Category</strong></label>
           <select formControlName="category" id="category" class="form-control">
             <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
           </select>
         </div>
+
         <div class="form-group col-md-6">
           <label for="type"><strong>Type</strong></label>
           <select formControlName="type" id="type" class="form-control">
             <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
           </select>
         </div>
+
+
+        <div class="form-group col-md-6">
+            <label for="description"><strong>Description</strong></label>
+            <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+          </div>
+
+
       </div>
 
-      <div class="row">
-        <div class="form-group col-md-12">
-          <label for="description"><strong>Description</strong></label>
-          <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
-        </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn "><i class="material-icons">
+            save_alt
+            </i>Save</button>
       </div>
+
     </form>
 
+
+
   </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn " (click)="c('Save click')"><i class="material-icons">
-        save_alt
-        </i>Save</button>
-  </div>
+  
 </ng-template>
 </head>
 
@@ -85,7 +140,7 @@
     <h3> A.5 Job Maintenance Screen</h3>
    
     <div align="right">
-        <button type="button" class="btn" > <i class="material-icons">
+        <button type="button" class="btn"  (click)="openAddJob(content1)" > <i class="material-icons">
             note_add
             </i> Add New Job </button>  
     </div>
@@ -293,91 +348,6 @@
 
         </ng-template>
       </ngb-tab>
-
-
-      
-      <!-- Put content in a model-->
-      <ngb-tab title="Add Job">
-        <ng-template ngbTabContent>
-          <p>
-            <h3> New Job </h3>
-
-            <div>
-              <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value)">
-
-                <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                        <label for="jobName"> <strong>Job Title</strong></label>
-                        <input formControlName="jobName" type="text" class="form-control" id="name">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="jobCompany"> <strong>Company</strong></label>
-                        <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
-                      </div>
-                </div>
-
-                <!-- <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                        <label for="jobCity"><strong>City</strong></label>
-                        <input formControlName="jobCity" type="text" class="form-control" id="city" 
-                        disabled [value]="currentAddress.city">
-                      </div>
-      
-                      <div class="form-group col-sm-6">
-                        <label for="jobCountry"><strong>Country</strong></label>
-                        <select formControlName="jobCountry" id="country" class="form-control"
-                        disabled [value]="currentAddress.country">
-                          <option selected>Puerto Rico</option>
-                          <option>United States of America</option>
-                        </select>
-                      </div>
-                </div> -->
-
-                <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                        <label for="jobCategory"><strong>Category</strong></label>
-                        <select formControlName="jobCategory" id="category" class="form-control"
-                            (change)="selectJobCatChangeHandler($event)">
-                            <option value="null" disabled="true" [selected]="true">- Select Category -</option>
-                          <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
-                        </select>
-                      </div>
-      
-                      <div class="form-group col-sm-6">
-                        <label for="jobType"><strong> Type</strong></label>
-                        <select formControlName="jobType" id="type" class="form-control"
-                          (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
-                          <option value="null" disabled="true" [selected]="true">- Select Type -</option>
-                          <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
-                        </select>
-                      </div>
-                </div>
-
-                <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                        <label for="jobDescription"><strong>Description</strong></label>
-                        <textarea class="form-control" formControlName="jobDescription" name="description" rows="7" cols="60" style="resize: none;"> </textarea>
-                      </div>
-                </div>
-
-                <div class="row mdrow" style="margin-top: 12em" >
-                  <div class="col-sm-6">
-                <button class="btn btn-sm" type="submit"><i class="material-icons">
-                    arrow_forward_ios
-                    </i>Submit</button>
-                </div>
-              </div>
-                <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
-
-              </form>
-
-            </div>
-
-
-        </ng-template>
-      </ngb-tab>
-
-
     </ngb-tabset>
 
   </div>

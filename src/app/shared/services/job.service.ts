@@ -10,12 +10,19 @@ import { IJobUpdate } from '../models/job_update.model';
 })
 export class JobService {
 
+
+
+
    currentJob: IJob
    currentJobId:number
 
    routePrefix = "Job/"
 
    constructor(private http: HttpClient) { }
+
+   setCurrentJobId(id){
+     this.currentJobId = id;
+   }
 
    showAvalaibleJobs() {
       return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")

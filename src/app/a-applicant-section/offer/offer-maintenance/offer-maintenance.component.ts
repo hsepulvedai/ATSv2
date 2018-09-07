@@ -177,9 +177,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   jobEditForm: FormGroup
   name: FormControl
-  company: FormControl
-  city: FormControl
-  country: FormControl
   category: FormControl
   type: FormControl
   description: FormControl
@@ -243,9 +240,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
     // These are the controls for the edit job form.
     this.name = new FormControl(),
-      this.company = new FormControl(),
-      this.city = new FormControl(),
-      this.country = new FormControl(),
       this.category = new FormControl(),
       this.type = new FormControl(),
       this.description = new FormControl()
@@ -272,9 +266,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
     this.jobEditForm = new FormGroup({
       name: this.name,
-      company: this.company,
-      city: this.city,
-      country: this.country,
       category: this.category,
       type: this.type,
       description: this.description
@@ -301,17 +292,19 @@ export class OfferMaintenanceComponent implements OnInit {
     //   this.currentJobType = data.name
     // })
 
-    console.log(this.currentJobCategory)
 
 
     this.jobEditForm.get('name').setValue(job.jobName)
-    this.jobEditForm.get('company').setValue(job.company)
-    this.jobEditForm.get('city').setValue(job.city)
-    this.jobEditForm.get('country').setValue(job.country)
     this.jobEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
     this.jobEditForm.controls['type'].setValue(job.jobType, { onlySelf: true })
     this.jobEditForm.get('description').setValue(job.description)
 
+
+    console.log(job.jobId)
+
+    this.jobService.setCurrentJobId(job.jobId)
+
+    console.log(this.jobService.currentJobId)
     // console.log(job.category)
     // this.jobEditForm.get('category').setValue(job.category)
 
@@ -328,8 +321,7 @@ export class OfferMaintenanceComponent implements OnInit {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size:'lg'}).result.then((result) => {
 
 
-      if (this.closeResult = `Closed with: ${result}`)
-        this.updateJob(form)
+      (this.closeResult = `Closed with: ${result}`)
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -345,6 +337,14 @@ export class OfferMaintenanceComponent implements OnInit {
     }
   }
 
+  openAddJob(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-add', size:'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
   createJob(newJobForm) {
 
     this.createdJob = {
@@ -468,14 +468,16 @@ export class OfferMaintenanceComponent implements OnInit {
   }
 
 
-  updateJob(updatedJobForm) {
+  updateJob(updatedJobForm, job) {
+
+    console.log(this.jobService.currentJobId)
 
     this.updatedJob = {
-      id: 1,
-      name: 'Manager',
-      category: 'Customer Service',
-      type: 'Full-time',
-      description: 'lorem ipsum - new description'
+      id: this.jobService.currentJobId,
+      name: updatedJobForm.name,
+      category: updatedJobForm.category,
+      type: updatedJobForm.type,
+      description: updatedJobForm.description
     }
 
     console.log(this.updatedJob)
