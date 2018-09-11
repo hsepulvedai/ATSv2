@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'offer-list',
@@ -18,11 +19,11 @@ export class OfferListComponent implements OnInit {
     //private route: ActivatedRoute,
     private pagination: PaginationService) { }
 
-  searchButtonClicked:boolean = false
+  searchButtonClicked: boolean = false
   page: number = this.pagination.pageNumber;
-  paginatorSize: number = this.pagination.paginatorSize *10
+  paginatorSize: number
   totalJobs: number
-  // paginatorCollectionSize: number
+  paginatorCollectionSize:number
 
   searchBarInput: string
   sortBy: string
@@ -95,16 +96,31 @@ export class OfferListComponent implements OnInit {
     //   //     console.log(this.totalJobs)
     //   //   })
 
+    if (this.searchBarInput != undefined) {
 
-    //     this.jobService.universalSearch(this.searchBarInput, 1, 20)
-    //       //this.pagination.pageNumber, this.pagination.pageSize)
-    //       .subscribe((data: IJobOffer[]) =>{
-    //       this.availableJobs = data['Data'];
-    //       this.filteredJobs = this.availableJobs;
-    //       })
-    //       this.searchButtonClicked = true;
-    // }
+      this.jobService.universalSearchCount('_', 
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      })
+
+      // var paginator = document.getElementById("paginator").attr
+      // var content = paginator
+      // $('paginator').data()
+      
+
+      this.jobService.universalSearch(this.searchBarInput, this.pagination.pageNumber,
+        this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
   }
+
 
   performSort() {
 
@@ -264,32 +280,35 @@ export class OfferListComponent implements OnInit {
 
   loadPage(page: number) {
 
-    // if (this.searchButtonClicked) {
-    // this.jobService.universalSearch(this.searchBarInput, page, this.pagination.pageSize)
-    //   .subscribe((data: IJobOffer[]) => {
-    //     this.availableJobs = data['Data'];
-    //     this.filteredJobs = this.availableJobs;
-    //   })
-    // }
-    // else {
-    this.jobService.showAvalaibleJobs(page, this.pagination.pageSize)
-    .subscribe((data: IJobOffer[]) => {
-      this.availableJobs = data['Data'];
-      this.filteredJobs = this.availableJobs;
-    })
-    // }
-
+    if (this.searchBarInput === undefined) {
+      this.jobService.universalSearch('_', page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
+    else {
+      this.jobService.universalSearch(this.searchBarInput, page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
   }
 
   ngOnInit() {
 
-    this.jobService.countActiveJobs()
-      .subscribe((data: number) => {
-        this.totalJobs = data['Data'][0]
-        this.pagination.setPageRange(this.totalJobs)
-      })
+  
+        this.jobService.universalSearchCount('_', 
+        this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: number) => {
+          this.totalJobs = data['Data'][0]
+          this.pagination.setPageRange(this.totalJobs)
+          this.paginatorSize = this.pagination.paginatorSize
+          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+        })
 
-    this.jobService.showAvalaibleJobs(this.pagination.pageNumber, this.pagination.pageSize)
+    this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];
         this.filteredJobs = this.availableJobs;

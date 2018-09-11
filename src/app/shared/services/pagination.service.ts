@@ -48,7 +48,7 @@ export class PaginationService {
 
   setPageRange(totalRows): void {
     this.paginatorSize = Math.ceil(totalRows / this.pageSize)
-    console.log(this.paginatorSize)
+    console.log("Pagination size on pagination service = " + this.paginatorSize)
 
     //console.log('totalRows', totalRows)
     //this.pages = [];

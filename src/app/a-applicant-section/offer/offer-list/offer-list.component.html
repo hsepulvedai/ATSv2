@@ -6,15 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Keep link for icons/ make sure to add to all htmls with icons-->
-<style>
-
-  ngb-pagination /deep/ .page-link {
-    color: white;
-    background-color: #25326a !important;
-}
-
-
-</style>
 
 </head>
 
@@ -80,7 +71,7 @@
 
           </div>
 
-          <ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="20" 
+          <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
           [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
           (pageChange)="loadPage($event)" class="d-flex justify-content-end">
           </ngb-pagination>
