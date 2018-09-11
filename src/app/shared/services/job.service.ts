@@ -72,7 +72,7 @@ export class JobService {
   }
 
 
-  updateJob(job){
+  updateJob(job:IJobUpdate){
     return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job )
   }
 

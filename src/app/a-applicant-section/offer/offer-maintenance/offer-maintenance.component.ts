@@ -471,7 +471,7 @@ export class OfferMaintenanceComponent implements OnInit {
   }
 
 
-  updateJob(updatedJobForm, job) {
+  updateJob(updatedJobForm) {
 
     console.log(this.jobService.currentJobId)
 
@@ -483,11 +483,13 @@ export class OfferMaintenanceComponent implements OnInit {
       description: updatedJobForm.description
     }
 
-    console.log(this.updatedJob)
 
     this.jobService.updateJob(this.updatedJob)
       .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })
+
+
+     
 
   
   }
