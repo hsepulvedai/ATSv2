@@ -12,7 +12,7 @@ import { ApplicationService } from '../../../shared/services/application.service
 export class OfferListManagementComponent implements OnInit {
 
   jobs:IJobOfferHR[]
-  job:IJobOffer
+  job:IJobOfferHR
   counts:number[]
   applicationCount:number[]
   jobId:number

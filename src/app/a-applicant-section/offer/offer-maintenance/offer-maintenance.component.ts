@@ -13,6 +13,7 @@ import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
 import { IJobUpdate } from '../../../shared/models/job_update.model';
+import { PaginationService } from '../../../shared/services/pagination.service';
 
 
 
@@ -21,18 +22,64 @@ import { IJobUpdate } from '../../../shared/models/job_update.model';
 @Component({
   selector: 'app-offer-maintenance',
   templateUrl: './offer-maintenance.component.html',
-  //styleUrls: ['./offer-maintenance.component.css']
+  styleUrls: ['./offer-maintenance.component.css']
 })
 export class OfferMaintenanceComponent implements OnInit {
+
+  searchButtonClicked: boolean = false
+  page: number = this.pagination.pageNumber;
+  paginatorSize: number
+  totalJobs: number
+  paginatorCollectionSize:number
+  pageSize:number
+
+  searchBarInput: string
+  sortBy: string
+
+  availableJobs: IJobOffer[]
+  job: IJobOffer
+
+  searchForm: FormGroup
+  search: FormControl
+  filter: FormControl
 
   _listFilter: string;
   filteredJobs: IJobOffer[]
 
   selectedFilter: string = 'All Jobs';
+  selectedSort
 
   selectDropdownChangeHandler(event: any) {
     //update the ui
     this.selectedFilter = event.target.value;
+  }
+
+  sortParamDropdownChangeHandler(event: any) {
+    //update the ui
+    this.sortBy = event.target.value;
+  } 
+
+
+  universalSearch() {
+
+    if (this.searchBarInput != undefined) {
+
+      this.jobService.universalSearchCount(this.searchBarInput, 
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      })
+
+      this.jobService.universalSearch(this.searchBarInput, this.pagination.pageNumber,
+        this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.  availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
   }
 
   get listFilter(): string {
@@ -87,6 +134,24 @@ export class OfferMaintenanceComponent implements OnInit {
 
       })
 
+  }
+
+  loadPage(page: number) {
+
+    if (this.searchBarInput === undefined) {
+      this.jobService.universalSearch('_', page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
+    else {
+      this.jobService.universalSearch(this.searchBarInput, page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
   }
 
   inactiveFilteredJobs: IJobOffer[]
@@ -153,10 +218,10 @@ export class OfferMaintenanceComponent implements OnInit {
   selectedJobCategory: string = 'Default'
   createdJob: IJobInsert
 
-  availableJobs: IJobOffer[]
+ 
   inactiveJobs: IJobOffer[]
   draftJobs: IJobOffer[]
-  job: IJob
+
 
   currentJobId: number
 
@@ -193,6 +258,7 @@ export class OfferMaintenanceComponent implements OnInit {
     private jobCategoryService: JobCategoryService,
     private jobTypeService: JobTypeService,
     private companyService: CompanyService,
+    private pagination: PaginationService,
     private route: ActivatedRoute,
     private modalService: NgbModal) { }
 
@@ -203,12 +269,23 @@ export class OfferMaintenanceComponent implements OnInit {
         this.currentCompany = data['Data'];
       })
 
-    // this.jobService.showAvalaibleJobs()
-    //   .subscribe((data: IJobOffer[]) => {
-    //     this.availableJobs = data['Data'];
-    //     this.filteredJobs = this.availableJobs;
+      this.jobService.universalSearchCount('_', 
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      })
 
-    //   })
+  this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+    .subscribe((data: IJobOffer[]) => {
+      this.availableJobs = data['Data'];
+      this.filteredJobs = this.availableJobs;
+    })
+
+    this.pageSize =  this.pagination.pageSize
+
 
 
     this.jobService.showPastJobs()

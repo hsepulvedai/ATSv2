@@ -62,7 +62,7 @@ export class OfferListComponent implements OnInit {
     this.sortBy = event.target.value;
   }
 
-  universalSearch() {
+universalSearch() {
 
     if (this.searchBarInput != undefined) {
 
