@@ -22,7 +22,7 @@ export class OfferListManagementComponent implements OnInit {
   constructor(private router : Router, private jobService:JobService, private applicantionService:ApplicationService) { }
 
   ngOnInit() {
-    this.jobService.showAvalaibleJobs()
+    this.jobService.showAvalaibleJobsHR()
     .subscribe((data:IJobOfferHR[]) => {
       this.jobs = data['Data'];
 
