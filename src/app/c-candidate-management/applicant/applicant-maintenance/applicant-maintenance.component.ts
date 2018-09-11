@@ -110,6 +110,14 @@ export class ApplicantMaintenanceComponent implements OnInit {
       }) 
   }
 
+  openAddApplicant(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-add', size:'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   createApplicant(newApplicantForm){
     this.newApplicant = {
       firstName: newApplicantForm.applicantFirstName, 
@@ -154,6 +162,17 @@ export class ApplicantMaintenanceComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
+
+  
+  editApplicant(updatedApplicantForm){
+   
+  }
+
+
+
+
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

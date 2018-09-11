@@ -19,6 +19,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class HrOfferDetailComponent implements OnInit {
 
   job: IJobOffer
+  selectedJob:IJobOffer
+
   applicants: IOfferHrEdit[]
   applicationStatus: IApplicationStatus[]
   //status:IApplicationStatus
@@ -36,10 +38,9 @@ export class HrOfferDetailComponent implements OnInit {
 
   ngOnInit() {
     
-    this.jobService.showJobOfferDetail(this.jobService.currentJobId)
+    this.jobService.showJobOfferDetail(this.jobService.currentJob.jobId)
       .subscribe((data: IJobOffer) => {
-        this.job = data['Data'];
-        console.log(this.job)
+        this.job = data['Data'][0];
       })
 
       this.applicationService.getAllApplicationStatus()
@@ -47,16 +48,15 @@ export class HrOfferDetailComponent implements OnInit {
         this.applicationStatus = data['Data'];
       })
 
-    this.applicantService.offerDetailGetApplicants(this.jobService.currentJobId)
+    this.applicantService.offerDetailGetApplicants(this.jobService.currentJob.jobId)
       .subscribe((data: IOfferHrEdit[]) => {
         this.applicants = data['Data'];
-        console.log(this.applicants)
       })
 
       // this.jobEditForm.controls['category'].setValue(job.jobCategory, {onlySelf: true})
       // this.jobEditForm.controls['type'].setValue(job.jobType, {onlySelf: true})
 
-      this.employeeService.getActiveCompanyEmployees(this.jobService.currentJobId)
+      this.employeeService.getActiveCompanyEmployees(this.jobService.currentJob.jobId)
       .subscribe((data: IEmployeeFromCompany[]) => {
         this.employees = data['Data'];
       })

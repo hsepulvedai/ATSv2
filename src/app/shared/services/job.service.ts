@@ -4,27 +4,37 @@ import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
 import { IJobUpdate } from '../models/job_update.model';
+import { IJobOffer } from '../models/job-offer.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
 
-   currentJob: IJob
+   currentJob: IJobOffer
    currentJobId:number
 
    routePrefix = "Job/"
 
    constructor(private http: HttpClient) { }
 
-   
    setCurrentJobId(id){
-    this.currentJobId = id;
+     this.currentJobId = id;
+   }
+
+  //  showAvalaibleJobs() {
+  //     return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")
+  //  }
+
+   showAvalaibleJobs(pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActivePagination/pageNumber=" 
+    + pageNumber +'/pageSize=' + pageSize)
+}
+
+  countActiveJobs(){
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobAllActiveCount")
   }
 
-   showAvalaibleJobs() {
-      return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")
-   }
 
   showPastJobs() {
       return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllInactive")
@@ -63,7 +73,7 @@ export class JobService {
 
 
   updateJob(job){
-    return this.http.put(environment.baseUrl + this.routePrefix + 'JobEditAll', job )
+    return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job )
   }
 
   // Sorting
@@ -117,8 +127,9 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeZA')
   }
 
-  universalSearch(keyword){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' + keyword)
+  universalSearch(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' 
+     + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
 }
 
   universalSearchSortAsc(keyword, sortBy){
@@ -130,6 +141,11 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix
       + 'JobUniversalSearchSortZA/search=' + keyword + 'sortBy=' + sortBy)
   }
+
+  universalSearchCount(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCount/search=' 
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+}
 
 }
 

@@ -19,15 +19,15 @@ export class OfferListManagementComponent implements OnInit {
   constructor(private router : Router, private jobService:JobService) { }
 
   ngOnInit() {
-    this.jobService.showAvalaibleJobs()
-    .subscribe((data:IJobOfferHR[]) => {
-      this.jobs = data['Data'];
-    })
+    // this.jobService.showAvalaibleJobs()
+    // .subscribe((data:IJobOfferHR[]) => {
+    //   this.jobs = data['Data'];
+    // })
 
   }
 
-  goToOfferDetail(id){
-    this.jobService.currentJobId = id;
+  goToOfferDetail(job){
+    this.jobService.currentJob = job
 
   this.router.navigate(['hr-offer-detail'])
 }
