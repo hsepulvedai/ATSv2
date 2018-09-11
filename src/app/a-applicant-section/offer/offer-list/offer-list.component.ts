@@ -5,6 +5,7 @@ import { JobService } from '../../../shared/services/job.service';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
+import {document} from'jquery'
 
 @Component({
   selector: 'offer-list',
@@ -261,7 +262,7 @@ export class OfferListComponent implements OnInit {
   ngOnInit() {
 
     // $(document).ready(function () {
-    //   $('#dtBasicExample').DataTable();
+    //   $('jobTable').DataTable();
     //   $('.dataTables_length').addClass('bs-select');
     // });
   

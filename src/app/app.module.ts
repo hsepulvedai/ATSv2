@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule, FormsModule } from '../../node_modules/@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md'
 
 import { RouterModule } from '@angular/router'
 import {appRoutes} from './routes';
@@ -40,9 +41,6 @@ import { ApplicantMaintenanceComponent } from './c-candidate-management/applican
     OfferTrackingComponent,
     OfferMaintenanceComponent,
     ApplicantMaintenanceComponent,
-    
-
-    
   ],
   imports: [
     BrowserModule,
@@ -51,6 +49,7 @@ import { ApplicantMaintenanceComponent } from './c-candidate-management/applican
     ReactiveFormsModule,
     NgbModule,
     FormsModule,
+    MDBBootstrapModule.forRoot()
     
   ],
   providers: [],
