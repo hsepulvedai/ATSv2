@@ -489,7 +489,7 @@ export class OfferMaintenanceComponent implements OnInit {
         error => { console.error("Error: ", error) })
 
 
-     
+    
 
   
   }
