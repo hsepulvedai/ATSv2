@@ -24,6 +24,7 @@ export class OfferListComponent implements OnInit {
   paginatorSize: number
   totalJobs: number
   paginatorCollectionSize:number
+  pageSize:number
 
   searchBarInput: string
   sortBy: string
@@ -259,6 +260,10 @@ export class OfferListComponent implements OnInit {
 
   ngOnInit() {
 
+    // $(document).ready(function () {
+    //   $('#dtBasicExample').DataTable();
+    //   $('.dataTables_length').addClass('bs-select');
+    // });
   
         this.jobService.universalSearchCount('_', 
         this.pagination.pageNumber, this.pagination.pageSize)
@@ -274,6 +279,8 @@ export class OfferListComponent implements OnInit {
         this.availableJobs = data['Data'];
         this.filteredJobs = this.availableJobs;
       })
+
+      this.pageSize =  this.pagination.pageSize
 
     this.search = new FormControl();
     this.filter = new FormControl();

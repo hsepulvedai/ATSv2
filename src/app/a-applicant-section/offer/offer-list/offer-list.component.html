@@ -71,15 +71,24 @@
 
           </div>
 
-          <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
-          [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
-          (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-          </ngb-pagination>
+          <div class="row">
+            <div class="col-md-3">
+                <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
+                <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
+            </div>
+            <div class="col-md-9">
+                <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
+                [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
+                (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                </ngb-pagination>
+            </div>
+        
+          </div>
 
           <div>
 
             <!--Table-->
-            <table class="table table-striped">
+            <table id="jobTable" class="table table-striped">
 
               <!--Table head-->
               <thead>
@@ -97,6 +106,7 @@
               <!--Table body-->
               <tbody>
                 <tr *ngFor="let job of filteredJobs">
+                  <td *ngIf="filteredJobs == []"> No items to show</td>
                   <td>{{job.jobName}}</td>
                   <td>{{job.company}}</td>
                   <td>{{job.city}}, {{job.country}}</td>
