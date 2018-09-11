@@ -19,43 +19,51 @@
 </head>
 <body>
 <div class="backgroundG ">
- 
+
 </div>
 <div class="container">
     <h3>B.2/B.3</h3>
   <div class="row">
     <div class="col-sm-3">
-      <button style="margin: 10px" class="btn btn-sm" type="button" [routerLink]="['/offer-list-management']">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="offer-list-management">List</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+          </nav>
+
+      <!-- <button style="margin: 10px" class="btn btn-sm" type="button" [routerLink]="['/offer-list-management']">
          <i class="material-icons">
           arrow_back_ios
-          </i>Back </button>
-   
-    
+          </i>Back </button> -->
+
+
         <div class="card" >
           <div class="card-body">
-             
+
         <h1>{{job?.jobName}}</h1>
 
         <div>
             <i class="material-icons" style="font-size: 4em; ">  perm_identity </i>
           <div><strong> Company : </strong> {{job?.company}}</div>
-          
+
           <div><strong> City : </strong> {{job?.city}}</div>
-         
+
           <div><strong> Country : </strong> {{job?.country}}</div>
-          
+
           <div><strong> Category : </strong> {{job?.jobCategory}}</div>
-          
+
           <div><strong> Type : </strong> {{job?.jobType}}</div>
-          
+
           <div><strong> Description : </strong> {{job?.description}}</div>
         </div>
         </div>
       </div>
 
       </div>
-    
- 
+
+
     <div class="col-sm-9">
       <p># of Applicants: {{job?.numberOfApplicants}}</p>
 
@@ -108,5 +116,7 @@
       </div>
     </div>
   </div>
+
+
 </body>
 </html>
