@@ -3,15 +3,29 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
+import { PaginationService } from '../../../shared/services/pagination.service';
+
 @Component({
-  selector: 'app-view-available-jobs',
+  selector: 'offer-list',
   templateUrl: './offer-list.component.html',
-  //styleUrls: ['./view-available-jobs.component.css']
+  styleUrls: ['./offer-list.component.css']
 })
 export class OfferListComponent implements OnInit {
 
+  constructor
+    (private router: Router,
+    private jobService: JobService,
+    //private route: ActivatedRoute,
+    private pagination: PaginationService) { }
+
+  searchButtonClicked:boolean = false
+  page: number = this.pagination.pageNumber;
+  paginatorSize: number = this.pagination.paginatorSize *10
+  totalJobs: number
+  // paginatorCollectionSize: number
+
   searchBarInput: string
-  sortBy:string
+  sortBy: string
 
   availableJobs: IJobOffer[]
   job: IJobOffer
@@ -47,38 +61,50 @@ export class OfferListComponent implements OnInit {
 
   universalSearch() {
 
-    if (this.sortBy === 'Sort A-Z') {
-      this.jobService.universalSearchSortAsc(this.searchBarInput, 'Job Title')
-      .subscribe((data: IJobOffer[]) => {
-        this.filteredJobs = data['Data'];
-        console.log(this.searchBarInput)
-      })
-    }
+    // if (this.sortBy === 'Sort A-Z') {
+    //   this.jobService.universalSearchSortAsc(this.searchBarInput, 'Job Title')
+    //     .subscribe((data: IJobOffer[]) => {
+    //       this.filteredJobs = data['Data'];
+    //       console.log(this.searchBarInput)
+    //     })
+    // }
 
-    else if (this.sortBy === 'Sort Z-A') {
-      this.jobService.universalSearchSortDesc(this.searchBarInput, 'Job Title')
-      .subscribe((data: IJobOffer[]) => {
-        this.filteredJobs = data['Data'];
-        console.log(this.searchBarInput)
-      })
-    }
-    else if (this.searchBarInput == '') {
-      this.jobService.showAvalaibleJobs()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-    }
-    else
-    {
-      this.jobService.universalSearch(this.searchBarInput)
-      .subscribe((data: IJobOffer[]) => {
-        this.filteredJobs = data['Data'];
-        console.log(this.searchBarInput)
-      })
-    }
+    // else if (this.sortBy === 'Sort Z-A') {
+    //   this.jobService.universalSearchSortDesc(this.searchBarInput, 'Job Title')
+    //     .subscribe((data: IJobOffer[]) => {
+    //       this.filteredJobs = data['Data'];
+    //       console.log(this.searchBarInput)
+    //     })
+    // }
+    // else
+    //  if (this.searchBarInput == '') {
+    //   this.jobService.showAvalaibleJobs(this.pagination.pageNumber, this.pagination.pageSize)
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //     this.searchButtonClicked = false;
+    //   })
+    // }
+    // // else {
+
+    //   // this.jobService.universalSearchCount(this.searchBarInput, 
+    //   //   this.pagination.pageNumber, this.pagination.pageSize)
+    //   //   .subscribe((data: number) => {
+    //   //     this.totalJobs = data['Data'][0]
+    //   //     //this.pagination.setPageRange(this.totalJobs)
+    //   //     console.log(this.totalJobs)
+    //   //   })
+
+
+    //     this.jobService.universalSearch(this.searchBarInput, 1, 20)
+    //       //this.pagination.pageNumber, this.pagination.pageSize)
+    //       .subscribe((data: IJobOffer[]) =>{
+    //       this.availableJobs = data['Data'];
+    //       this.filteredJobs = this.availableJobs;
+    //       })
+    //       this.searchButtonClicked = true;
+    // }
   }
-
 
   performSort() {
 
@@ -234,29 +260,40 @@ export class OfferListComponent implements OnInit {
           || job.jobCategory.toLocaleLowerCase().indexOf(filterBy) !== -1
           || job.company.toLocaleLowerCase().indexOf(filterBy) !== -1
       })
+  }
+
+  loadPage(page: number) {
+
+    // if (this.searchButtonClicked) {
+    // this.jobService.universalSearch(this.searchBarInput, page, this.pagination.pageSize)
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
+    //   })
+    // }
+    // else {
+    this.jobService.showAvalaibleJobs(page, this.pagination.pageSize)
+    .subscribe((data: IJobOffer[]) => {
+      this.availableJobs = data['Data'];
+      this.filteredJobs = this.availableJobs;
+    })
+    // }
 
   }
 
-  // filterAll(){
-
-  // }
-
-  constructor
-    (private router: Router,
-    private jobService: JobService,
-    private route: ActivatedRoute,
-  ) { }
-
   ngOnInit() {
 
-    console.log(this.selectedFilter)
+    this.jobService.countActiveJobs()
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+      })
 
-    this.jobService.showAvalaibleJobs()
+    this.jobService.showAvalaibleJobs(this.pagination.pageNumber, this.pagination.pageSize)
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];
         this.filteredJobs = this.availableJobs;
       })
-
 
     this.search = new FormControl();
     this.filter = new FormControl();
@@ -266,7 +303,6 @@ export class OfferListComponent implements OnInit {
       search: this.search,
       filter: this.filter
     })
-
 
   }
 

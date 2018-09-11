@@ -18,20 +18,23 @@ export class JobService {
 
    constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
    setCurrentJobId(id){
      this.currentJobId = id;
    }
-=======
-   
-   setCurrentJobId(id){
-    this.currentJobId = id;
-  }
->>>>>>> cd090cd8df02b5e0994237b057220ddd1d8f3839
 
-   showAvalaibleJobs() {
-      return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")
-   }
+  //  showAvalaibleJobs() {
+  //     return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")
+  //  }
+
+   showAvalaibleJobs(pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActivePagination/pageNumber=" 
+    + pageNumber +'/pageSize=' + pageSize)
+}
+
+  countActiveJobs(){
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobAllActiveCount")
+  }
+
 
   showPastJobs() {
       return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllInactive")
@@ -124,8 +127,9 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeZA')
   }
 
-  universalSearch(keyword){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' + keyword)
+  universalSearch(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' 
+     + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
 }
 
   universalSearchSortAsc(keyword, sortBy){
@@ -137,6 +141,11 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix
       + 'JobUniversalSearchSortZA/search=' + keyword + 'sortBy=' + sortBy)
   }
+
+  universalSearchCount(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCount/search=' 
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+}
 
 }
 

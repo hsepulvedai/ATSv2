@@ -203,12 +203,12 @@ export class OfferMaintenanceComponent implements OnInit {
         this.currentCompany = data['Data'];
       })
 
-    this.jobService.showAvalaibleJobs()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
+    // this.jobService.showAvalaibleJobs()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
 
-      })
+    //   })
 
 
     this.jobService.showPastJobs()
@@ -335,12 +335,12 @@ export class OfferMaintenanceComponent implements OnInit {
         error => { console.log("Error", error) }
       );
 
-    this.jobService.showAvalaibleJobs()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
+    // this.jobService.showAvalaibleJobs()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
 
-      })
+    //   })
 
 
     this.jobService.showPastJobs()
@@ -361,12 +361,12 @@ export class OfferMaintenanceComponent implements OnInit {
         error => { console.log("Error", error) }
       );
 
-    this.jobService.showAvalaibleJobs()
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
+    // this.jobService.showAvalaibleJobs()
+    //   .subscribe((data: IJobOffer[]) => {
+    //     this.availableJobs = data['Data'];
+    //     this.filteredJobs = this.availableJobs;
 
-      })
+    //   })
 
     this.jobService.showPastJobs()
       .subscribe((data: IJobOffer[]) => {
