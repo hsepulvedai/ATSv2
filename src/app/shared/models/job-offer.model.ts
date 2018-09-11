@@ -8,4 +8,5 @@ export interface IJobOffer {
     jobType?:string,
     description?:string
     jobStatus?:string
+    numberOfApplicants?:number
 }

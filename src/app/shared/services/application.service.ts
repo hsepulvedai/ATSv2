@@ -25,4 +25,9 @@ export class ApplicationService {
   }
 
 
+  getCount(id){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationCountById/'+ id )
+  }
+
+
 }

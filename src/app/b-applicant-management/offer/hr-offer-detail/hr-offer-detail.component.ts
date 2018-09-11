@@ -10,6 +10,7 @@ import { IEmployeeFromCompany } from '../../../shared/models/IEmployeeFromCompan
 import { EmployeeService } from '../../../shared/services/employee.service';
 import { ApplicationService } from '../../../shared/services/application.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { IJobOfferHR } from '../../../shared/models/job-offer-hr.model';
 
 @Component({
   selector: 'app-hr-offer-detail',
@@ -18,8 +19,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class HrOfferDetailComponent implements OnInit {
 
-  job: IJobOffer
-  selectedJob:IJobOffer
+  job: IJobOfferHR
+  selectedJob:IJobOfferHR
 
   applicants: IOfferHrEdit[]
   applicationStatus: IApplicationStatus[]
@@ -39,7 +40,7 @@ export class HrOfferDetailComponent implements OnInit {
   ngOnInit() {
     
     this.jobService.showJobOfferDetail(this.jobService.currentJob.jobId)
-      .subscribe((data: IJobOffer) => {
+      .subscribe((data: IJobOfferHR) => {
         this.job = data['Data'][0];
       })
 

@@ -4,14 +4,14 @@ import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
 import { IJobUpdate } from '../models/job_update.model';
-import { IJobOffer } from '../models/job-offer.model';
+import { IJobOfferHR } from '../models/job-offer-hr.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
 
-   currentJob: IJobOffer
+   currentJob: IJobOfferHR
    currentJobId:number
 
    routePrefix = "Job/"
@@ -24,7 +24,7 @@ export class JobService {
   }
 
    showAvalaibleJobs() {
-      return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActive")
+      return this.http.get(environment.baseUrl + this.routePrefix + "JobCompleteShowAll")
    }
 
   showPastJobs() {

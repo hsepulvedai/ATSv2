@@ -29,6 +29,12 @@ export class OfferApplicationComponent implements OnInit {
 
   ngOnInit() {
 
+    this.jobService.showJobOfferDetail(this.jobService.currentJobId)
+    .subscribe((data:IJobOffer) => {
+        this.job = data['Data'][0];
+        console.log(this.job)
+    })
+    
 
     this.name= new FormControl()
     this.email= new FormControl()
@@ -40,7 +46,6 @@ export class OfferApplicationComponent implements OnInit {
     this.zipCode = new FormControl()
 
     this.applicantInfo = new FormGroup({
-      applicantInfo: this.applicantInfo,
       name:this.name,
       email:this.email,
       phone:this.phone,
@@ -51,11 +56,7 @@ export class OfferApplicationComponent implements OnInit {
       zipCode:this.zipCode
     })
 
-    this.jobService.showJobOfferDetail(this.jobService.currentJobId)
-            .subscribe((data:IJobOffer) => {
-                this.job = data['Data'];
-                console.log(this.job)
-            })
+   
 
 
   //   this.jobService.showJobOfferDetail(this.jobService.currentJobId)
