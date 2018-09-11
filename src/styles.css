@@ -24,7 +24,7 @@ p {font-size: 16px;}
 
 .navbar {
     /*Controla la barra de navegacion como tal */
-   background-color:#df136f;
+   background-color:#25326a;
    /* padding-bottom: 10%; */
   
 
@@ -32,7 +32,7 @@ p {font-size: 16px;}
 }
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color:#25326a;
+    color:white;
     font-family: Poppins;
     font-size:130%;
 
@@ -118,7 +118,7 @@ h5{
     text-align: center;
      position:auto;
       height: 1em;
-      background-color:#4577bb; 
+      background-color:#F62459; 
       font-weight: 100;
 
      
@@ -140,9 +140,9 @@ footer{
    margin-top: 20%;
    position: relative;
    bottom: 0;
-    
+    color:white;
     width: 100%;
-    background-color: #4577bb;
+    background-color: #25326a;
 }
 .bg-1 { 
     background-image: linear-gradient(90deg,#25326a,#4577bb);
