@@ -62,43 +62,9 @@ export class OfferListComponent implements OnInit {
 
   universalSearch() {
 
-    // if (this.sortBy === 'Sort A-Z') {
-    //   this.jobService.universalSearchSortAsc(this.searchBarInput, 'Job Title')
-    //     .subscribe((data: IJobOffer[]) => {
-    //       this.filteredJobs = data['Data'];
-    //       console.log(this.searchBarInput)
-    //     })
-    // }
-
-    // else if (this.sortBy === 'Sort Z-A') {
-    //   this.jobService.universalSearchSortDesc(this.searchBarInput, 'Job Title')
-    //     .subscribe((data: IJobOffer[]) => {
-    //       this.filteredJobs = data['Data'];
-    //       console.log(this.searchBarInput)
-    //     })
-    // }
-    // else
-    //  if (this.searchBarInput == '') {
-    //   this.jobService.showAvalaibleJobs(this.pagination.pageNumber, this.pagination.pageSize)
-    //   .subscribe((data: IJobOffer[]) => {
-    //     this.availableJobs = data['Data'];
-    //     this.filteredJobs = this.availableJobs;
-    //     this.searchButtonClicked = false;
-    //   })
-    // }
-    // // else {
-
-    //   // this.jobService.universalSearchCount(this.searchBarInput, 
-    //   //   this.pagination.pageNumber, this.pagination.pageSize)
-    //   //   .subscribe((data: number) => {
-    //   //     this.totalJobs = data['Data'][0]
-    //   //     //this.pagination.setPageRange(this.totalJobs)
-    //   //     console.log(this.totalJobs)
-    //   //   })
-
     if (this.searchBarInput != undefined) {
 
-      this.jobService.universalSearchCount('_', 
+      this.jobService.universalSearchCount(this.searchBarInput, 
       this.pagination.pageNumber, this.pagination.pageSize)
       .subscribe((data: number) => {
         this.totalJobs = data['Data'][0]
@@ -106,11 +72,6 @@ export class OfferListComponent implements OnInit {
         this.paginatorSize = this.pagination.paginatorSize
         this.paginatorCollectionSize = this.pagination.paginatorSize * 10
       })
-
-      // var paginator = document.getElementById("paginator").attr
-      // var content = paginator
-      // $('paginator').data()
-      
 
       this.jobService.universalSearch(this.searchBarInput, this.pagination.pageNumber,
         this.pagination.pageSize)
