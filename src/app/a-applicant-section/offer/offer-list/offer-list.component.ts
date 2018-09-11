@@ -5,7 +5,7 @@ import { JobService } from '../../../shared/services/job.service';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
-import {document} from'jquery'
+import {document} from 'jquery'
 
 @Component({
   selector: 'offer-list',
