@@ -6,14 +6,32 @@ import { IApplicantInfo } from '../../../shared/models/applicant_info.model';
 import { IApplicantMaintInfo } from '../../../shared/models/applicant_maintenance.model'
 import { FormGroup, FormControl, Form } from '@angular/forms';
 import { NgbModal,  ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { PaginationService } from '../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-applicant-maintenance',
   templateUrl: './applicant-maintenance.component.html',
-  //styleUrls: ['./applicant-maintenance.component.css']
+  styleUrls: ['./applicant-maintenance.component.css']
 })
 export class ApplicantMaintenanceComponent implements OnInit {
 
+  searchButtonClicked: boolean = false
+  page: number = this.pagination.pageNumber;
+  paginatorSize: number
+  totalApplicants: number
+  paginatorCollectionSize:number
+  pageSize:number
+
+  searchBarInput: string
+  sortBy: string
+
+  
+  _listFilter: string;
+  filteredApplicants: IApplicantMaintInfo[]
+
+  selectedFilter: string = 'All Jobs';
+
+  selectedSort
 
   currentApplicant
   newApplicant:IApplicantInsert
@@ -57,19 +75,137 @@ export class ApplicantMaintenanceComponent implements OnInit {
     private router: Router,
     private applicantService: ApplicantService, 
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private pagination: PaginationService
   ) { }
 
+   //event handler for the select element's change event
+   selectDropdownChangeHandler(event: any) {
+    //update the ui
+    this.selectedFilter = event.target.value;
+  }
 
+  sortDropdownChangeHandler(event: any) {
+    //update the ui
+    this.selectedSort = event.target.value;
+  }
+
+  sortParamDropdownChangeHandler(event: any) {
+    //update the ui
+    this.sortBy = event.target.value;
+  }
+
+  universalSearch() {
+
+    if (this.searchBarInput != undefined) {
+
+      this.applicantService.universalSearchCount(this.searchBarInput, 
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalApplicants = data['Data'][0]
+        this.pagination.setPageRange(this.totalApplicants)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      })
+
+      this.applicantService.universalSearch(this.searchBarInput, this.pagination.pageNumber,
+        this.pagination.pageSize)
+        .subscribe((data: IApplicantMaintInfo[]) => {
+          this.allApplicants = data['Data'];
+          this.filteredApplicants = this.allApplicants;
+        })
+    }
+  }
+
+  get listFilter(): string {
+    return this._listFilter;
+
+  }
+
+  set listFilter(value: string) {
+
+    this._listFilter = value;
+    this.filteredApplicants = this.listFilter ? this.performFilter(this.listFilter) : this.allApplicants;
+  }
+
+  performFilter(filterBy: string): IApplicantMaintInfo[] {
+    filterBy = filterBy.toLocaleLowerCase();
+
+
+    if (this.selectedFilter === 'Name/FirstName')
+      return this.allApplicants.filter((applicant: IApplicantMaintInfo) =>
+        applicant.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+		
+	
+    else if (this.selectedFilter === 'Name/LastName')
+      return this.allApplicants.filter((applicant: IApplicantMaintInfo) =>
+        applicant.lastName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else if (this.selectedFilter === 'Location/City')
+      return this.allApplicants.filter((applicant: IApplicantMaintInfo) =>
+        applicant.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
+	
+	else if (this.selectedFilter === 'Email')
+      return this.allApplicants.filter((applicant: IApplicantMaintInfo) =>
+        applicant.email.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+
+    else if (this.selectedFilter === 'Location/Country')
+      return this.allApplicants.filter((applicant: IApplicantMaintInfo) =>
+        applicant.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+    else
+      // return this.allApplicants
+      // Universal search (if no filter selected default all applicants) 
+      return this.allApplicants.filter((applicant: IApplicantMaintInfo) => {
+        return applicant.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1
+		      || applicant.lastName.toLocaleLowerCase().indexOf(filterBy) !== -1
+		      || applicant.email.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || applicant.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+          || applicant.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+      })
+  }
+
+  
+  loadPage(page: number) {
+
+    if (this.searchBarInput === undefined) {
+      this.applicantService.universalSearch('_', page, this.pagination.pageSize)
+        .subscribe((data: IApplicantMaintInfo[]) => {
+          this.allApplicants = data['Data'];
+          this.filteredApplicants = this.allApplicants;
+        })
+    }
+    else {
+      this.applicantService.universalSearch(this.searchBarInput, page, this.pagination.pageSize)
+        .subscribe((data: IApplicantMaintInfo[]) => {
+          this.allApplicants = data['Data'];
+          this.filteredApplicants = this.allApplicants;
+        })
+    }
+  }
+  
   ngOnInit() {
+
+    this.applicantService.universalSearchCount('_', 
+    this.pagination.pageNumber, this.pagination.pageSize)
+    .subscribe((data: number) => {
+      this.totalApplicants = data['Data'][0]
+      this.pagination.setPageRange(this.totalApplicants)
+      this.paginatorSize = this.pagination.paginatorSize
+      this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+    })
+
+this.applicantService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+  .subscribe((data: IApplicantMaintInfo[]) => {
+    this.allApplicants = data['Data'];
+    this.filteredApplicants = this.allApplicants;
+  })
+
+  this.pageSize =  this.pagination.pageSize
 
     this.initilalizeEditApplicantForm()
     this.initializeAddApplicantForm()
-
-    this.applicantService.showAllActiveApplicants()
-    .subscribe((data:IApplicantInfo[]) => {
-      this.allApplicants = data['Data'];
-     }) 
 
      this.applicantService.showAllInactiveApplicants()
      .subscribe((data:IApplicantInfo[]) => {
@@ -168,10 +304,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
   editApplicant(updatedApplicantForm){
    
   }
-
-
-
-
 
 
   private getDismissReason(reason: any): string {

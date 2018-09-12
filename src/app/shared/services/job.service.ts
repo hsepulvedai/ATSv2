@@ -130,7 +130,7 @@ export class JobService {
   universalSearch(keyword, pageNumber, pageSize){
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' 
      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
-}
+  }
 
   universalSearchSortAsc(keyword, sortBy){
         return this.http.get(environment.baseUrl + this.routePrefix 
@@ -145,8 +145,18 @@ export class JobService {
   universalSearchCount(keyword, pageNumber, pageSize){
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCount/search=' 
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
-}
+  }
 
+  universalSearchInactive(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchInactive/search=' 
+     + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+  
+    universalSearchCountInactive(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCountInactive/search=' 
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+  
 }
 
 

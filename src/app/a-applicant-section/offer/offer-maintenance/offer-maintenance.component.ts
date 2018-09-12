@@ -154,6 +154,16 @@ export class OfferMaintenanceComponent implements OnInit {
     }
   }
 
+  searchButtonClickedInactive: boolean = false
+  pageInactive: number = this.pagination.pageNumber;
+  paginatorSizeInactive: number
+  totalInactiveJobs: number
+  paginatorCollectionSizeInactive:number
+  pageSizeInactive:number
+
+  searchBarInputInactive: string
+  sortByInactive: string
+
   inactiveFilteredJobs: IJobOffer[]
   _listInactiveFilter: string;
 
@@ -209,6 +219,47 @@ export class OfferMaintenanceComponent implements OnInit {
 
       })
 
+  }
+
+
+  universalSearchInactive() {
+
+    if (this.searchBarInputInactive != undefined) {
+
+      this.jobService.universalSearchCountInactive(this.searchBarInputInactive, 
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalInactiveJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalInactiveJobs)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      })
+
+      this.jobService.universalSearchInactive(this.searchBarInputInactive, this.pagination.pageNumber,
+        this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.inactiveJobs = data['Data'];
+          this.inactiveFilteredJobs = this.inactiveJobs;
+        })
+    }
+  }
+
+  loadPageInactive(page: number) {
+
+    if (this.searchBarInputInactive === undefined) {
+      this.jobService.universalSearchInactive('_', page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.availableJobs = data['Data'];
+          this.filteredJobs = this.availableJobs;
+        })
+    }
+    else {
+      this.jobService.universalSearchInactive(this.searchBarInputInactive, page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.inactiveJobs = data['Data'];
+          this.inactiveFilteredJobs = this.inactiveJobs;
+        })
+    }
   }
 
 
@@ -285,15 +336,25 @@ export class OfferMaintenanceComponent implements OnInit {
     })
 
     this.pageSize =  this.pagination.pageSize
+    this.pageSizeInactive = this.pagination.pageSize
 
 
 
-    this.jobService.showPastJobs()
-      .subscribe((data: IJobOffer[]) => {
-        this.inactiveJobs = data['Data'];
-        this.inactiveFilteredJobs = this.inactiveJobs
+    this.jobService.universalSearchCountInactive('_', 
+    this.pagination.pageNumber, this.pagination.pageSize)
+    .subscribe((data: number) => {
+      this.totalJobs = data['Data'][0]
+      this.pagination.setPageRange(this.totalInactiveJobs)
+      this.paginatorSizeInactive = this.pagination.paginatorSize
+      this.paginatorCollectionSizeInactive = this.pagination.paginatorSize * 10
+    })
 
-      })
+ this.jobService.universalSearchInactive('_', this.pagination.pageNumber, this.pagination.pageSize)
+  .subscribe((data: IJobOffer[]) => {
+    this.inactiveJobs = data['Data'];
+    this.filteredJobs = this.inactiveJobs;
+  })
+
 
     this.jobService.showDraftJobs()
       .subscribe((data: IJobOffer[]) => {

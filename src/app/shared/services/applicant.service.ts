@@ -111,4 +111,17 @@ export class ApplicantService {
                  );
   
   }
+
+  
+  universalSearch(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantUniversalSearch/search=' 
+     + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+}
+
+
+ universalSearchCount(keyword, pageNumber, pageSize){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantUniversalSearchCount/search=' 
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+}
+
 }
