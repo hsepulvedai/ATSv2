@@ -17,7 +17,7 @@
 
       <p>
         <div>
-          <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="createJob(newJobForm.value);c('Save click')">
+          <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
             <div class="row smallrow">
               <div class="form-group col-sm-6">
@@ -58,11 +58,11 @@
             <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-outline"><i class="material-icons">
+                <button (click)="createDraft(newJobForm.value)" id="draft" value="draft" type="submit" class="btn btn-outline-secondary"><i class="material-icons">
                     save_alt
                   </i>Save as Draft</button>
   
-              <button type="submit" class="btn "><i class="material-icons">
+              <button (click)="createJob(newJobForm.value)"id="save" value="save" type="submit" class="btn "><i class="material-icons">
                   save_alt</i>Save</button>
 
             </div>
@@ -140,6 +140,7 @@
 
   <div class="container ">
     <h3> A.5 Job Maintenance Screen</h3>
+    
 
     <div align="right">
       <button type="button" class="btn" (click)="openAddJob(content1)"> <i class="material-icons">
@@ -299,7 +300,7 @@
                       <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em" placeholder="Start Typing...">
                     </div>
                     <div class="col-sm-12">
-                      <button type="button" class=" btn " (click)="universalSearchInactive()">
+                      <button type="button" class=" btn " (click)="universalSearch()">
                         <i class="material-icons">search</i> Search</button><br>
                     </div>
                   </div>
@@ -384,6 +385,21 @@
         <ng-template ngbTabTitle> Drafts(Jobs) </ng-template>
         <ng-template ngbTabContent>
           <h3> Drafts </h3>
+
+          <div class="row">
+              <div class="col-md-3">
+                  <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalDrafts}}</p>
+                  <p *ngIf="page == paginatorSize">Showing {{totalDrafts}} of {{totalDrafts}}</p>
+              </div>
+              <div class="col-md-9">
+                  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
+                  [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
+                  (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                  </ngb-pagination>
+              </div>
+          
+            </div>
+          
 
 
           <!--Table-->

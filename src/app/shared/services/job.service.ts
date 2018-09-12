@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams} from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
@@ -11,34 +11,34 @@ import { IJobOfferHR } from '../models/job-offer-hr.model';
 })
 export class JobService {
 
-   currentJob: IJobOfferHR
-   currentJobId:number
+  currentJob: IJobOfferHR
+  currentJobId: number
 
-   routePrefix = "Job/"
+  routePrefix = "Job/"
 
-   constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-   setCurrentJobId(id){
-     this.currentJobId = id;
-   }
+  setCurrentJobId(id) {
+    this.currentJobId = id;
+  }
 
-   showAvalaibleJobsHR() {
+  showAvalaibleJobsHR() {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobCompleteShowAll")
   }
 
-   showAvalaibleJobs(pageNumber, pageSize) {
-    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActivePagination/pageNumber=" 
-    + pageNumber +'/pageSize=' + pageSize)
-}
+  showAvalaibleJobs(pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllActivePagination/pageNumber="
+      + pageNumber + '/pageSize=' + pageSize)
+  }
 
-  countActiveJobs(){
+  countActiveJobs() {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobAllActiveCount")
   }
 
 
   showPastJobs() {
-      return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllInactive")
-   }
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllInactive")
+  }
 
   showJobOfferDetail(id) {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobShowById/" + id)
@@ -48,50 +48,55 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobShowById/" + id)
   }
 
-  showDraftJobs() {
-    return this.http.get(environment.baseUrl + this.routePrefix + "JobShowAllDrafts/")
-  }
+  // showDraftJobs(pageNumber, pageSize) {
+  //   return this.http.get(environment.baseUrl + this.routePrefix + "JobDraftsShowAll/pageNumber="
+  //     + pageNumber + "/pageSize=" + pageSize)
+  // }
+
 
   // Change to application
-  getStatusByEmail(email){
+  getStatusByEmail(email) {
     return this.http.get(environment.baseUrl + this.routePrefix + "getStatusByEmail/" + email)
   }
-  
-    setActiveJob(id:number){
+
+  setActiveJob(id: number) {
     return this.http.patch(environment.baseUrl + this.routePrefix + "JobSetActive/" + id, id)
 
   }
 
-  setInactiveJob(id:number){
+  setInactiveJob(id: number) {
     return this.http.patch(environment.baseUrl + this.routePrefix + "JobSetInactive/" + id, id)
 
   }
 
   addJobMaintenance(job) {
-    return this.http.post(environment.baseUrl + this.routePrefix + 'JobInsertFromWeb', job )
+    return this.http.post(environment.baseUrl + this.routePrefix + 'JobInsertFromWeb', job)
   }
 
+  addDraft(job){
+    return this.http.post(environment.baseUrl + this.routePrefix + 'JobDraftInsert', job)
+  }
 
-  updateJob(job:IJobUpdate){
-    return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job )
+  updateJob(job: IJobUpdate) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
   }
 
   // Sorting
-  sortByJobTitleAsc(){
+  sortByJobTitleAsc() {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTitleAZ')
   }
 
-  sortByJobTitleDesc(){
+  sortByJobTitleDesc() {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTitleAZ')
   }
 
   // Sorting and sorting
 
-  sortByCompanyAsc(){
+  sortByCompanyAsc() {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCompanyAZ')
   }
 
-  sortByCompanyDesc(){
+  sortByCompanyDesc() {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveCompanyZA')
   }
 
@@ -127,36 +132,49 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeZA')
   }
 
-  universalSearch(keyword, pageNumber, pageSize){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search=' 
-     + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  universalSearch(keyword, pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
-  universalSearchSortAsc(keyword, sortBy){
-        return this.http.get(environment.baseUrl + this.routePrefix 
-          + 'JobUniversalSearchSortAZ/search=' + keyword + 'sortBy=' + sortBy)
+  universalSearchSortAsc(keyword, sortBy) {
+    return this.http.get(environment.baseUrl + this.routePrefix
+      + 'JobUniversalSearchSortAZ/search=' + keyword + 'sortBy=' + sortBy)
   }
 
-  universalSearchSortDesc(keyword, sortBy){
+  universalSearchSortDesc(keyword, sortBy) {
     return this.http.get(environment.baseUrl + this.routePrefix
       + 'JobUniversalSearchSortZA/search=' + keyword + 'sortBy=' + sortBy)
   }
 
-  universalSearchCount(keyword, pageNumber, pageSize){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCount/search=' 
+  universalSearchCount(keyword, pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCount/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
-  universalSearchInactive(keyword, pageNumber, pageSize){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchInactive/search=' 
-     + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
-  }
-  
-    universalSearchCountInactive(keyword, pageNumber, pageSize){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCountInactive/search=' 
+  universalSearchInactive(keyword, pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchInactive/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
-  
+
+  universalSearchCountInactive(keyword, pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCountInactive/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+
+  universalSearchDrafts(keyword, pageNumber, pageSize) {
+    return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchAllDrafts/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+
+  universalSearchCountDrafts() {
+    return this.http.get(environment.baseUrl + this.routePrefix + "JobDraftCount/")
+    
+  }
+
+
+
+
 }
 
 
