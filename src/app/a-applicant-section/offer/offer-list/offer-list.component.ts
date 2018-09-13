@@ -6,6 +6,7 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
 import {document} from 'jquery'
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'offer-list',

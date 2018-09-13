@@ -126,12 +126,12 @@ export class OfferMaintenanceComponent implements OnInit {
       description: this.description
     })
     
-    this.draftEditForm = new FormGroup ({
-      name: this.name,
-      category: this.category,
-      type: this.type,
-      description: this.description
-    })
+    // this.draftEditForm = new FormGroup ({
+    //   name: this.name,
+    //   category: this.category,
+    //   type: this.type,
+    //   description: this.description
+    // })
 
   }
 
@@ -576,5 +576,5 @@ export class OfferMaintenanceComponent implements OnInit {
 
 
 
-
 }
+
