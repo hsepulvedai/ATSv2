@@ -474,6 +474,14 @@ export class OfferMaintenanceComponent implements OnInit {
     }
   }
 
+  deleteDraft(id) {
+    console.log(id)
+    // this.jobService.deleteDraft(id).subscribe(
+    //   data => { console.log("UPDATED: ", data) },
+    //   error => { console.log("Error", error) }
+    // );
+  }
+
 
   //event handler for the select element's change event
   selectJobTypeChangeHandler(event: any) {
