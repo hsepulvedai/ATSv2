@@ -78,7 +78,7 @@ export class JobService {
   }
 
   updateJob(job: IJobUpdate) {
-    return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
+    return this.http.put(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
   }
 
   // Sorting
