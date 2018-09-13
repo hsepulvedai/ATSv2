@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
+
 body {
     font-family: Quicksand;
     font: 15px ;
@@ -22,22 +23,28 @@ p {font-size: 16px;}
 }
 
 
+
 .navbar {
     /*Controla la barra de navegacion como tal */
-   background-color:#25326a;
-   /* padding-bottom: 10%; */
-  
-
-  
+    background-color: #13316e;
+   /* background-color:#25326a; */
+   height: 65px;
 }
+
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
     color:white;
     font-family: Poppins;
-    font-size:130%;
+    font-size:100%;
 
     
 }
+
+.nav-link:hover {
+    color: #df136f;
+}
+
+
 select{
     /*something needs to go here */
 }
@@ -49,12 +56,31 @@ img{
 
 }
 
-button{
-    
-    color: white;
-    background-color: #25326a;
+
+
+.btn {
+
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  border: 1px solid #25326a;
+  color: #25326a;
+  text-align: center;
+  font-size: 14px;
+  margin: 5px;
 
 }
+
+.btn:hover {
+  border-radius: 4px;
+  background-color: #25326a;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  margin: 5px;
+}
+
+
 input{
     margin-bottom: 5em;
     color: white;
@@ -69,7 +95,8 @@ table{
 }
 th {
     text-align: center;
-  }
+
+}
 
   tr {
     text-align: left;
@@ -117,12 +144,11 @@ h5{
     /* background-image: linear-gradient(-90deg,#25326a,#4577bb); */
     text-align: center;
      position:auto;
-      height: 1em;
-      background-color:#F62459; 
+      height: 10px;
+      background-color:#df136f; 
       font-weight: 100;
-
-     
 }
+
 .backgroundWelcome{
     background-image: linear-gradient(-90deg,#25326a,	#4577bb);
     text-align: center;

@@ -26,6 +26,8 @@ import 'jquery'
 })
 export class OfferMaintenanceComponent implements OnInit {
 
+  draftEditForm: FormGroup
+
   searchButtonClicked: boolean = false
   page: number = this.pagination.pageNumber;
   paginatorSize: number
@@ -123,6 +125,13 @@ export class OfferMaintenanceComponent implements OnInit {
       type: this.type,
       description: this.description
     })
+    
+    this.draftEditForm = new FormGroup ({
+      name: this.name,
+      category: this.category,
+      type: this.type,
+      description: this.description
+    })
 
   }
 
@@ -201,21 +210,22 @@ export class OfferMaintenanceComponent implements OnInit {
 
   loadPage(page: number) {
 
+    this.loadActiveJobs(this.searchBarInput, page, this.pagination.pageSize)
+    this.loadInactiveJobs(this.searchBarInput, page, this.pagination.pageSize)
+    this.loadDrafts(this.searchBarInput, page, this.pagination.pageSize)
+
     if (this.searchBarInput === undefined) {
       this.loadActiveJobs('_', page, this.pagination.pageSize)
       this.loadInactiveJobs('_', page, this.pagination.pageSize)
       this.loadDrafts('_', page, this.pagination.pageSize)
     }
-    else {
-      this.loadActiveJobs(this.searchBarInput, page, this.pagination.pageSize)
-      this.loadInactiveJobs(this.searchBarInput, page, this.pagination.pageSize)
-      this.loadDrafts(this.searchBarInput, page, this.pagination.pageSize)
-    }
+  
+
+    
   }
 
   get listInactiveFilter(): string {
     return this._listInactiveFilter;
-
   }
 
   set listInactiveFilter(value: string) {
@@ -325,6 +335,8 @@ export class OfferMaintenanceComponent implements OnInit {
 
   openEdit(content, job) {
 
+    console.log(content.form)
+
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
     this.jobEditForm.controls['type'].setValue(job.jobType, { onlySelf: true })
@@ -332,6 +344,26 @@ export class OfferMaintenanceComponent implements OnInit {
 
 
     console.log(job.jobId)
+
+    this.jobService.setCurrentJobId(job.jobId)
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+
+
+      (this.closeResult = `Closed with: ${result}`)
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+
+  openDraftEdit(content, job) {
+
+    this.draftEditForm.get('name').setValue(job.jobName)
+    this.draftEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
+    this.draftEditForm.controls['type'].setValue(job.jobType, { onlySelf: true })
+    this.draftEditForm.get('description').setValue(job.description)
+
 
     this.jobService.setCurrentJobId(job.jobId)
 

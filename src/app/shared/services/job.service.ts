@@ -77,8 +77,12 @@ export class JobService {
     return this.http.post(environment.baseUrl + this.routePrefix + 'JobDraftInsert', job)
   }
 
+  deleteDraft(id) {
+    return this.http.delete(environment.baseUrl + this.routePrefix + 'JobDraftDelete/' + id)
+  }
+
   updateJob(job: IJobUpdate) {
-    return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
+    return this.http.put(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
   }
 
   // Sorting
