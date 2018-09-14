@@ -177,12 +177,14 @@ universalSearch() {
           this.pagination.setPageRange(this.totalJobs)
           this.paginatorSize = this.pagination.paginatorSize
           this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+          console.log('Ttal=' + this.totalJobs)
         })
 
     this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];
         this.filteredJobs = this.availableJobs;
+        console.log(this.availableJobs)
       })
 
       this.pageSize =  this.pagination.pageSize

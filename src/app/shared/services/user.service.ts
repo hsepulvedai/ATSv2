@@ -17,12 +17,6 @@ export class UserService {
   getAllUsers() {
     return this.http.get(environment.baseUrl + this.routePrefix + '/UsersSelectAll');
   }
-  
-  getUserById(id:number){
-    
-    return this.http.get( environment.baseUrl + ''+ id);
-
-  }
 
   insertUser(newApplicant:IUser){
     
@@ -42,29 +36,4 @@ export class UserService {
                     );
   }
 
-  // updateApplicant(updatedApplicant:IApplicant){
-
-  //   return this.http.put( environment.baseUrl + "", updatedApplicant).subscribe(
-  //          data => {console.log("UPDATED: ", data)},
-  //          error => {console.log("Error", error)}
-  //                     );
-  // }   
-
-  // setActiveAddress(id:number){
-  //   return this.http.put( environment.baseUrl + "", id).subscribe(
-  //     data => {console.log("UPDATED: ", data)},
-  //     error => {console.log("Error", error)}
-  //                );
-
-  // }
-
-
-      
-  // setIActiveAddress(id:number){
-  //   return this.http.put(environment.baseUrl + "", id).subscribe(
-  //     data => {console.log("UPDATED: ", data)},
-  //     error => {console.log("Error", error)}
-  //                );
-  
-  // }
 }

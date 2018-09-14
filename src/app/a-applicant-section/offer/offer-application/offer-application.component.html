@@ -55,7 +55,7 @@
 
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input formControlName="name" disabled type="name" class="form-control" id="name" placeholder="Name" value="John Doe">
+                    <input formControlName="name" type="name" class="form-control" id="name" placeholder="Name">
                 </div>
 
                 <div class="form-group">
@@ -67,18 +67,20 @@
                       <label for="phone">Phone</label>
                       <input formControlName="phone"type="phone" class="form-control" id="phone" placeholder="Phone Number"value="">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                       <label for="address">Address</label>
                       <input formControlName="addressLine" type="address" class="form-control" id="address"  placeholder="Address Line" value="">
                       <input formControlName="addressLine2" type="address" class="form-control" id="address2"  placeholder="Address Line"value="">
+                      <input formControlName="city" type="address" class="form-control" id="city"  placeholder="City"value="">
                       <input formControlName="state" type="address" class="form-control" id="state"  placeholder="State/Province"value="">
                       <input formControlName="country" type="address" class="form-control" id="country"  placeholder="Country"value="">
                       <input formControlName="zipCode" type="address" class="form-control" id="zipcode"  placeholder="Zip Code"value="">
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                         <label for="address">Comments</label>
-                        <textarea style="resize: none;"class="form-control" rows="5" id="comment" value="Heellooo" maxlength="98"></textarea>
-                    </div>
+                        <textarea style="resize: none;"class="form-control" rows="5" id="comment" 
+                        maxlength="98" placeholder="Enter comments..."></textarea>
+                    </div> -->
                     <div>
                         <button  class="btn btn-sm" type="button">
                             <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <i class="material-icons">
@@ -87,7 +89,7 @@
                         </button>
                     </div>
                     <div align="center">
-                        <button class="btn btn-lg" type="button" style="margin: 20px;"> <i class="material-icons">
+                        <button (click)="submitApplication(applicantInfo.value)" class="btn btn-lg" type="button" style="margin: 20px;"> <i class="material-icons">
                             arrow_forward_ios
                             </i>Submit Application</button> 
                     </div>

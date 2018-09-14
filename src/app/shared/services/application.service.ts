@@ -29,5 +29,9 @@ export class ApplicationService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationCountById/'+ id )
   }
 
+  insertApplication(application) {
+    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb', application)
+  }
+
 
 }

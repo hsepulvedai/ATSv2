@@ -16,6 +16,10 @@ export class ApplicantService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantSelectAll');
   }
 
+  getApplicantById(id) {
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantSelectById/' + id)
+  }
+
   offerDetailGetApplicants(jobId) {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowByJobIdHr/' + jobId);
   }
