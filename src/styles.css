@@ -22,21 +22,19 @@ p {font-size: 16px;}
     padding-bottom: 70px;
 }
 
-
-
 .navbar {
     /*Controla la barra de navegacion como tal */
     background-color: #13316e;
    /* background-color:#25326a; */
-   height: 65px;
+   height: 20%;
+   
 }
 
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color:white;
+    color: white;
     font-family: Poppins;
     font-size:100%;
-
     
 }
 
@@ -45,8 +43,8 @@ p {font-size: 16px;}
 }
 
 
-select{
-    /*something needs to go here */
+.navtext{
+    color: white;
 }
 
 
