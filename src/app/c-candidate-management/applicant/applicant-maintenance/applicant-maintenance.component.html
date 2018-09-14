@@ -291,6 +291,19 @@
                 </tr>
               </tbody>
               <!--Table body-->
+              <div class="row">
+                  <div class="col-md-5">
+                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalApplicants}}</p>
+                      <p *ngIf="page == paginatorSize">Showing {{totalApplicants}} of {{totalApplicants}}</p>
+                  </div>
+                  <div class="col-md-7">
+                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
+                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
+                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                      </ngb-pagination>
+                  </div>
+              
+                </div>
             </table>
             <!--Table-->
   
