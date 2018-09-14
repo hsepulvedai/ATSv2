@@ -15,6 +15,7 @@ import { OfferApplicationComponent } from './a-applicant-section/offer/offer-app
 import { OfferTrackingComponent } from './a-applicant-section/offer/offer-tracking/offer-tracking.component';
 import { OfferMaintenanceComponent } from './a-applicant-section/offer/offer-maintenance/offer-maintenance.component';
 import { ApplicantMaintenanceComponent } from './c-candidate-management/applicant/applicant-maintenance/applicant-maintenance.component';
+import { SortOverviewExampleComponent } from './a-applicant-section/offer/TestingMaterial/sort-overview-example/sort-overview-example.component';
 export const appRoutes: Routes = [
     
     { path: 'jobs', component: OfferListComponent },
@@ -31,6 +32,8 @@ export const appRoutes: Routes = [
     {path: 'offer-tracking', component: OfferTrackingComponent},
     {path: 'offer-maintenance', component: OfferMaintenanceComponent},
     {path: 'applicant-maintenance', component: ApplicantMaintenanceComponent},
+
+    {path: 'sort-overview-example', component: SortOverviewExampleComponent},
 
     
     { path: 'hr-tasks', component: HrTasksComponent},

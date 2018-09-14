@@ -1,25 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Sort, MatSort, MatTableDataSource} from '@angular/material';
+import { JobService } from 'src/app/shared/services/job.service';
+import { IJobOffer } from 'src/app/shared/models/job-offer.model';
+import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { JobService } from '../../../shared/services/job.service';
-import { IJobOffer } from '../../../shared/models/job-offer.model';
-import { PaginationService } from '../../../shared/services/pagination.service';
-import { $ } from 'protractor';
-import {document} from 'jquery'
-import {Sort} from '@angular/material';
+
+
+export interface Job {
+  jobName: string;
+  company: string;
+  city: string;
+  country: string;
+  jobType:string;
+  jobCategory:string;
+}
 
 @Component({
-  selector: 'offer-list',
-  templateUrl: './offer-list.component.html',
-  styleUrls: ['./offer-list.component.css']
+  selector: 'app-sort-overview-example',
+  templateUrl: './sort-overview-example.component.html',
+  styleUrls: ['./sort-overview-example.component.css']
 })
-export class OfferListComponent implements OnInit {
 
-  constructor
-    (private router: Router,
-    private jobService: JobService,
-    //private route: ActivatedRoute,
-    private pagination: PaginationService) { }
+
+
+export class SortOverviewExampleComponent implements OnInit{
 
   searchButtonClicked: boolean = false
   page: number = this.pagination.pageNumber;
@@ -45,8 +50,7 @@ export class OfferListComponent implements OnInit {
 
   selectedSort
 
-
-
+  
   //event handler for the select element's change event
   selectDropdownChangeHandler(event: any) {
     //update the ui
@@ -84,10 +88,7 @@ universalSearch() {
         })
     }
   }
-
-
-
-
+  
   get listFilter(): string {
     return this._listFilter;
 
@@ -163,46 +164,116 @@ universalSearch() {
     }
   }
 
+
+
   ngOnInit() {
 
-    // $(document).ready(function () {
-    //   $('jobTable').DataTable();
-    //   $('.dataTables_length').addClass('bs-select');
-    // });
-  
-        this.jobService.universalSearchCount('_', 
-        this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-        })
-
-    this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-      })
-
-      this.pageSize =  this.pagination.pageSize
-
-    this.search = new FormControl();
-    this.filter = new FormControl();
-
-
-    this.searchForm = new FormGroup({
-      search: this.search,
-      filter: this.filter
+    
+    this.jobService.universalSearchCount('_', 
+    this.pagination.pageNumber, this.pagination.pageSize)
+    .subscribe((data: number) => {
+      this.totalJobs = data['Data'][0]
+      this.pagination.setPageRange(this.totalJobs)
+      this.paginatorSize = this.pagination.paginatorSize
+      this.paginatorCollectionSize = this.pagination.paginatorSize * 10
     })
 
+this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+  .subscribe((data: IJobOffer[]) => {
+    this.availableJobs = data['Data'];
+    this.filteredJobs = this.availableJobs;
+  })
+
+  this.pageSize =  this.pagination.pageSize
+
+this.search = new FormControl();
+this.filter = new FormControl();
+
+
+this.searchForm = new FormGroup({
+  search: this.search,
+  filter: this.filter
+})
+
+
   }
 
-  applyButtonClicked(jobId: number) {
+  jobs: Job[] =  [
+    {
+        jobName: 'Accountant',
+        company: 'Apple',
+        city: 'San Francisco',
+        country: 'United States',
+        jobCategory: 'Finance',
+        jobType: 'Full-time'
+    },
+    {
+        jobName: 'Accountant',
+        company: 'Guitar Center',
+        city: 'Los Angeles',
+        country: 'United States',
+        jobCategory: 'Finance',
+        jobType: 'Full-time'
+    },
+    {
+        jobName: 'Assistant Manager',
+        company: 'Guitar Center',
+        city: 'Los Angeles',
+        country: 'United States',
+        jobCategory:'Customer Service',
+        jobType: 'Part-time'
+    },
+    {
+      "jobName": "Sales - test",
+      "company": "Guitar Center",
+      "city": "Los Angeles",
+      "country": "United States",
+      "jobCategory": "Customer Service",
+      "jobType": "Part-time"
+  },
+  {
+      "jobName": "Sales Asistent",
+      "company": "Guitar Center",
+      "city": "Los Angeles",
+      "country": "United States",
+      "jobCategory": "Customer Service",
+      "jobType": "Part-time"
+  },];
 
-    this.jobService.currentJobId = jobId;
-    this.router.navigate(['offer-application'])
+    sortedData: Job[]
 
+  sortData(sort: Sort) {
+    const data = this.jobs.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'jobName': return compare(a.jobName, b.jobName, isAsc);
+        case 'company': return compare(a.company, b.company, isAsc);
+        case 'city': return compare(a.city, b.city, isAsc);
+        case 'jobType': return compare(a.jobType, b.jobType, isAsc);
+        case 'jobCategory': return compare(a.jobCategory, b.jobCategory, isAsc);
+        default: return 0;
+      }
+    });
   }
 
+  constructor(private router: Router,
+    private jobService: JobService,
+    //private route: ActivatedRoute,
+    private pagination: PaginationService) {
+    this.sortedData = this.jobs.slice();
+   
+  }
+
+  
 }
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
