@@ -133,7 +133,7 @@
 
   </ng-template>
 
-  <!-- draftEdif -->
+  <!-- draftEdit -->
 
   <ng-template #contentDraft let-c="close" let-d="dismiss">
     <div class="modal-header">
@@ -144,34 +144,34 @@
     </div>
     <div class="modal-body">
 
-      <form [formGroup]="draftEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateJob(draftEditForm.value);c('Save click')">
+      <form [formGroup]="draftEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
 
         <div class="row">
 
           <div class="form-group col-md-6">
-            <label for="name"> <strong>Job Title</strong></label>
-            <input formControlName="name" type="text" class="form-control" id="name">
+            <label for="draftName"> <strong>Job Title</strong></label>
+            <input formControlName="draftName" type="text" class="form-control" id="draftName">
           </div>
 
 
           <div class="form-group col-md-6">
-            <label for="category"><strong>Category</strong></label>
-            <select formControlName="category" id="category" class="form-control">
+            <label for="draftCategory"><strong>Category</strong></label>
+            <select formControlName="draftCategory" id="draftCategory" class="form-control">
               <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
             </select>
           </div>
 
           <div class="form-group col-md-6">
-            <label for="type"><strong>Type</strong></label>
-            <select formControlName="type" id="type" class="form-control">
+            <label for="draftType"><strong>Type</strong></label>
+            <select formControlName="draftType" id="draftType" class="form-control">
               <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
             </select>
           </div>
 
 
           <div class="form-group col-md-6">
-            <label for="description"><strong>Description</strong></label>
-            <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+            <label for="draftDescription"><strong>Description</strong></label>
+            <textarea class="form-control" formControlName="draftDescription" name="draftDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
           </div>
         </div>
 
@@ -179,7 +179,7 @@
           <button (click)="deleteDraft()" type="submit" class="btn btn-outline-danger "><i class="material-icons">
               delete </i>Delete
           </button>
-          <button type="submit" class="btn "><i class="material-icons">
+          <button (click)="updateJob(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
               save_alt </i>Save
           </button>
 
@@ -502,7 +502,7 @@
                 <td> {{draft.city}}, {{draft.country}} </td>
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
-                <td> <button type="button" class="btn" (click)="openEdit(contentDraft, draft)"> <i class="material-icons">
+                <td> <button type="button" class="btn" (click)="openDraftEdit(contentDraft, draft)"> <i class="material-icons">
                       edit
                     </i> Edit </button> </td>
               </tr>
