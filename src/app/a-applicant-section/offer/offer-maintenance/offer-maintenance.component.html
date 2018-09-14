@@ -325,12 +325,12 @@
 
                 </tr>
               </tbody>
-              <div class="row" style="margin-top:50px">
-                  <div class="col-md-3">
+              <div class="row" style="margin-top:50px; ">
+                  <div class="col-md-5"style="margin-right:0.5em;">
                     <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
                     <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
                   </div>
-                  <div class="col-md-9">
+                  <div class="col-md-7">
                     <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
                       [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                     </ngb-pagination>
@@ -439,11 +439,11 @@
                 </tr>
               </tbody>
               <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-5">
                     <p *ngIf="!(pageInactive == paginatorSizeInactive)">Showing {{pageSizeInactive * pageSizeInactive}} of {{totalInactiveJobs}}</p>
                     <p *ngIf="pageInactive == paginatorSizeInactive">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
                   </div>
-                  <div class="col-md-9">
+                  <div class="col-md-7">
                     <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
                       [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                     </ngb-pagination>
@@ -501,11 +501,11 @@
             </tbody>
             <!--Table body-->
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-5">
                   <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalDrafts}}</p>
                   <p *ngIf="page == paginatorSize">Showing {{totalDrafts}} of {{totalDrafts}}</p>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-7">
                   <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
                     [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                   </ngb-pagination>
