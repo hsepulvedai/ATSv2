@@ -208,7 +208,7 @@
 
 
     <div align="right">
-      <button type="button" class="btn" (click)="openAddJob(content1)"> <i class="material-icons">
+      <button type="button" class="btn" (click)="openAddJob(content1)" style="color:white;background-color: #25326a"> <i class="material-icons">
           note_add
         </i> New Job </button>
     </div>
@@ -286,11 +286,11 @@
 
               <div class="row">
                 <div class="col-md-3">
-                  <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
-                  <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
+                  <p *ngIf="!(activePageNumber == activePaginatorSize)">Showing {{pageSize * activePageNumber}} of {{totalJobs}}</p>
+                  <p *ngIf="activePageNumber == activePaginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
                 </div>
                 <div class="col-md-9">
-                  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+                  <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize" [rotate]="true"
                     [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                   </ngb-pagination>
                 </div>
@@ -299,7 +299,7 @@
             </div>
 
             <!--Table-->
-            <table class="table table-striped">
+            <table class="table table-striped" >
 
               <!--Table head-->
               <thead>
@@ -402,15 +402,14 @@
 
             <div class="row">
               <div class="col-md-3">
-                <p *ngIf="!(pageInactive == paginatorSizeInactive)">Showing {{pageSizeInactive * pageSizeInactive}} of {{totalInactiveJobs}}</p>
-                <p *ngIf="pageInactive == paginatorSizeInactive">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
+                  <p *ngIf="!(inactivePageNumber == inactivePaginatorSize)">Showing {{pageSize * inactivePageNumber}} of {{totalInactiveJobs}}</p>
+                  <p *ngIf="inactivePageNumber == inactivePaginatorSize">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
               </div>
               <div class="col-md-9">
-                <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
-                  [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
+                  [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageInactive($event)" class="d-flex justify-content-end">
                 </ngb-pagination>
               </div>
-
 
             </div>
 
@@ -463,18 +462,18 @@
 
           <div class="row">
             <div class="col-md-3">
-              <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalDrafts}}</p>
+              <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * draftPageNumber}} of {{totalDrafts}}</p>
               <p *ngIf="page == paginatorSize">Showing {{totalDrafts}} of {{totalDrafts}}</p>
             </div>
             <div class="col-md-9">
-              <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-                [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+              <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize" [rotate]="true"
+                [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-end">
               </ngb-pagination>
+
+
             </div>
 
           </div>
-
-
 
           <!--Table-->
           <table class="table table-striped">
@@ -487,7 +486,7 @@
                 <th>Location</th>
                 <th>Category</th>
                 <th>Type</th>
-                <th>Edit</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <!--Table head-->
@@ -501,9 +500,16 @@
                 <td> {{draft.city}}, {{draft.country}} </td>
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
-                <td> <button type="button" class="btn" (click)="openDraftEdit(contentDraft, draft)"> <i class="material-icons">
+                <td> 
+                  <button type="button" class="btn" (click)="openDraftEdit(contentDraft, draft)"> <i class="material-icons">
                       edit
-                    </i> Edit </button> </td>
+                    </i> Edit 
+                  </button> 
+                  <button type="button" class="btn" (click)="deleteDraft()"> <i class="material-icons">
+                      delete
+                    </i> Delete 
+                  </button> 
+                </td>
               </tr>
             </tbody>
             <!--Table body-->

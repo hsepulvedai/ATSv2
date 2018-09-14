@@ -20,7 +20,7 @@ export class UserService {
   
   getUserById(id:number){
     
-    return this.http.get( environment.baseUrl + ''+ id);
+    return this.http.get( environment.baseUrl + this.routePrefix + '/UsersSelectById/'+ id);
 
   }
 

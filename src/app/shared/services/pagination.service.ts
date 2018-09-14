@@ -9,6 +9,7 @@ export class PaginationService {
   public paginatorSize:number
   public pageSize: number = 5;
   public pageNumber: number = 1;
+  public paginationCollectionSize:number
 
   constructor() { }
 
@@ -20,6 +21,11 @@ export class PaginationService {
 
   setPageRange(totalRows): void {
     this.paginatorSize = Math.ceil(totalRows / this.pageSize)
+  }
+
+  getCollectionSize(): number {
+    this.paginationCollectionSize = this.paginatorSize * 10
+    return this.paginationCollectionSize
   }
 
 }

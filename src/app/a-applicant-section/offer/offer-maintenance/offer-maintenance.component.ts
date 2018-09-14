@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
@@ -23,10 +23,20 @@ import 'jquery'
 })
 export class OfferMaintenanceComponent implements OnInit {
 
-  pageSize: number
+  pageSize: number = this.pagination.pageSize
 
-  activePageNumber: number
-  inactivePageNumber:number
+  activePageNumber: number = this.pagination.pageNumber
+  inactivePageNumber: number = this.pagination.pageNumber
+  draftPageNumber: number = this.pagination.pageNumber
+
+  activeCollectionSize: number
+  inactiveCollectionSize: number
+  draftsCollectionSize: number
+
+
+  activePaginatorSize: number
+  inactivePaginatorSize: number
+  draftPaginatorSize: number
 
   draftEditForm: FormGroup
   draftName: FormControl
@@ -35,15 +45,20 @@ export class OfferMaintenanceComponent implements OnInit {
   draftDescription: FormControl
 
   searchButtonClicked: boolean = false
-  page: number = this.pagination.pageNumber;
-  paginatorSize: number
+  //page: number = this.pagination.pageNumber;
   totalJobs: number
   paginatorCollectionSize: number
 
   searchBarInput: string
   sortBy: string
 
+// @Input() set(jobs: IJobOffer[]) {
+//   this.availableJobs = []
+// }
+
   availableJobs: IJobOffer[]
+
+
   job: IJobOffer
 
   searchForm: FormGroup
@@ -69,14 +84,13 @@ export class OfferMaintenanceComponent implements OnInit {
   totalDrafts: number
   draftsFilteredJobs: IJobOffer[]
   draftJobs: IJobOffer[]
-  pageSizeDrafts: number
 
   // _listDraftFilter: string;
 
   inactiveFilteredJobs: IJobOffer[]
   _listInactiveFilter: string;
 
-  changeTab(event){
+  changeTab(event) {
     console.log(event.title)
     console.log('yes')
   }
@@ -90,47 +104,60 @@ export class OfferMaintenanceComponent implements OnInit {
 
     // load active jobs
     this.jobService.universalSearchCount('_',
-        this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-        })
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+        this.activePaginatorSize = this.pagination.paginatorSize
+        this.activeCollectionSize = this.pagination.getCollectionSize()
+      })
 
-      this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: IJobOffer[]) => {
-          this.availableJobs = data['Data'];
-          this.filteredJobs = this.availableJobs;
-        })
+    this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+      })
 
-        // load inactive jobs
-        this.jobService.universalSearchCountInactive('_',
-        this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalInactiveJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalInactiveJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-        })
+    // load inactive jobs
+    this.jobService.universalSearchCountInactive('_',
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalInactiveJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalInactiveJobs)
+        this.inactivePaginatorSize = this.pagination.paginatorSize
+        this.inactiveCollectionSize = this.pagination.getCollectionSize()
+      })
 
-      this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: IJobOffer[]) => {
-          this.inactiveJobs = data['Data'];
-          this.inactiveFilteredJobs = this.inactiveJobs;
-        })
+    this.jobService.universalSearchInactive('_', this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: IJobOffer[]) => {
+        this.inactiveJobs = data['Data'];
+        this.inactiveFilteredJobs = this.inactiveJobs;
+      })
 
+      // load drafts
+      this.jobService.universalSearchCountDrafts()
+      .subscribe((data: number) => {
+        this.totalDrafts = data['Data'][0]
+        this.pagination.setPageRange(this.totalInactiveJobs)
+        this.draftPaginatorSize = this.pagination.paginatorSize
+        this.draftsCollectionSize = this.pagination.getCollectionSize()
+      })
 
-    // this.jobCategoryService.showCategories()
-    //   .subscribe((data: IJobCategory[]) => {
-    //     this.categories = data['Data'];
-    //   })
+    this.jobService.universalSearchDrafts('_', this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: IJobOffer[]) => {
+        this.draftJobs = data['Data'];
+        this.draftsFilteredJobs = this.draftJobs;
+      })
 
-    // this.jobTypeService.showTypes()
-    //   .subscribe((data: IJobType[]) => {
-    //     this.types = data['Data']
-    //   })
+    this.jobCategoryService.showCategories()
+      .subscribe((data: IJobCategory[]) => {
+        this.categories = data['Data'];
+      })
 
+    this.jobTypeService.showTypes()
+      .subscribe((data: IJobType[]) => {
+        this.types = data['Data']
+      })
 
     // These are the controls for the edit job form.
     this.name = new FormControl(),
@@ -194,8 +221,8 @@ export class OfferMaintenanceComponent implements OnInit {
   universalSearch() {
 
     if (this.searchBarInput != undefined) {
-      this.loadActiveJobs()
-      this.loadInactiveJobs()
+      // this.loadActiveJobs()
+      // this.loadInactiveJobs()
     }
   }
 
@@ -270,7 +297,37 @@ export class OfferMaintenanceComponent implements OnInit {
   }
 
   loadPageInactive(page: number) {
+    if (this.searchBarInput === undefined) {
+      this.jobService.universalSearchInactive('_', page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.inactiveJobs = data['Data'];
+          this.inactiveFilteredJobs = this.inactiveJobs;
+        })
+    }
+    else {
+      this.jobService.universalSearchInactive(this.searchBarInput, page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.inactiveJobs = data['Data'];
+          this.inactiveFilteredJobs = this.inactiveJobs;
+        })
+    }
+  }
 
+  loadPageDrafts(page: number) {
+    if (this.searchBarInput === undefined) {
+      this.jobService.universalSearchDrafts('_', page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.draftJobs = data['Data'];
+          this.draftsFilteredJobs = this.draftJobs;
+        })
+    }
+    else {
+      this.jobService.universalSearchDrafts(this.searchBarInput, page, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.draftJobs = data['Data'];
+          this.draftsFilteredJobs = this.draftJobs;
+        })
+    }
   }
 
   get listInactiveFilter(): string {
@@ -283,7 +340,6 @@ export class OfferMaintenanceComponent implements OnInit {
     this.inactiveFilteredJobs = this.listInactiveFilter ?
       this.performInactiveFilter(this.listInactiveFilter) : this.inactiveJobs;
   }
-
 
   performInactiveFilter(filterBy: string): IJobOffer[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -327,17 +383,17 @@ export class OfferMaintenanceComponent implements OnInit {
 
   universalSearchInactive() {
 
-    if (this.searchBarInputInactive != undefined)
-    this.loadActiveJobs()
-      this.loadInactiveJobs()
+    // if (this.searchBarInputInactive != undefined)
+    // this.loadActiveJobs()
+    // this.loadInactiveJobs()
 
   }
+
 
   currentCompany: ICompany
   selectedJobType: string = 'Default'
   selectedJobCategory: string = 'Default'
   createdJob: IJobInsert
-
 
   inactiveJobs: IJobOffer[]
 
@@ -384,8 +440,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   openEdit(content, job) {
 
-    console.log(content.form)
-
     this.jobEditForm.get('name').setValue(job.jobName)
     this.jobEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
     this.jobEditForm.controls['type'].setValue(job.jobType, { onlySelf: true })
@@ -422,6 +476,15 @@ export class OfferMaintenanceComponent implements OnInit {
     });
   }
 
+
+  openAddJob(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-add', size: 'lg' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -432,13 +495,6 @@ export class OfferMaintenanceComponent implements OnInit {
     }
   }
 
-  openAddJob(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-add', size: 'lg' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
 
   createJob(newJobForm) {
 
@@ -473,7 +529,7 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
 
-    this.loadDrafts('_', 1, this.pagination.pageSize)
+    // this.loadDrafts('_', 1, this.pagination.pageSize)
   }
 
   setJobActive(id) {
@@ -487,12 +543,12 @@ export class OfferMaintenanceComponent implements OnInit {
     if (this.searchBarInput != undefined) {
       // this.loadActiveJobs(this.searchBarInput,
       // this.pagination.pageNumber, this.pagination.pageSize)
-      this.loadInactiveJobs()
+      // this.loadInactiveJobs()
     }
     else {
       // this.loadActiveJobs('_',
       // this.pagination.pageNumber, this.pagination.pageSize)
-      this.loadInactiveJobs()
+      // this.loadInactiveJobs()
     }
   }
 
@@ -502,26 +558,15 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(
         data => { console.log("UPDATED: ", data) },
         error => { console.log("Error", error) }
-      );
+      )
 
-    if (this.searchBarInput != undefined) {
-      // this.loadActiveJobs(this.searchBarInput,
-      // this.pagination.pageNumber, this.pagination.pageSize)
-      this.loadInactiveJobs()
-    }
-    else {
-      // this.loadActiveJobs('_',
-      // this.pagination.pageNumber, this.pagination.pageSize)
-      this.loadInactiveJobs()
-    }
   }
 
-  deleteDraft(id) {
-    console.log(id)
-    // this.jobService.deleteDraft(id).subscribe(
-    //   data => { console.log("UPDATED: ", data) },
-    //   error => { console.log("Error", error) }
-    // );
+  deleteDraft() {
+    this.jobService.deleteDraft(this.jobService.currentJobId).subscribe(
+      data => { console.log("DELETED: ", data) },
+      error => { console.log("Error", error) }
+    );
   }
 
 
@@ -546,8 +591,6 @@ export class OfferMaintenanceComponent implements OnInit {
   // TODO: Check this method
   updateJob(updatedJobForm) {
 
-    console.log(this.jobService.currentJobId)
-
     this.updatedJob = {
       id: this.jobService.currentJobId,
       name: updatedJobForm.name,
@@ -556,103 +599,37 @@ export class OfferMaintenanceComponent implements OnInit {
       description: updatedJobForm.description
     }
 
-    console.log(this.updatedJob)
-
     this.jobService.updateJob(this.updatedJob)
       .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })
 
     if (this.searchBarInput != undefined) {
-      // this.loadActiveJobs(this.searchBarInput,
-      // this.pagination.pageNumber, this.pagination.pageSize)
-      this.loadInactiveJobs()
-    }
-    else {
-      // this.loadActiveJobs('_',
-      // this.pagination.pageNumber, this.pagination.pageSize)
-      this.loadInactiveJobs()
-    }
-
-
-
-  }
-
-  loadInactiveJobs() {
-
-    this.inactivePageNumber = this.pagination.pageNumber
-
-    if (this.searchBarInput === undefined) {
-
       this.jobService.universalSearchCount('_',
-        this.inactivePageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalInactiveJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalInactiveJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-        })
-
-      this.jobService.universalSearch('_', this.activePageNumber, this.pagination.pageSize)
-        .subscribe((data: IJobOffer[]) => {
-          this.inactiveJobs = data['Data'];
-          this.inactiveFilteredJobs = this.inactiveJobs;
-        })
-
-    }
-
-    else {
-      this.jobService.universalSearchCount(this.searchBarInput,
-        this.inactivePageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalInactiveJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalInactiveJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-        })
-
-      this.jobService.universalSearch(this.searchBarInput, this.activePageNumber, this.pagination.pageSize)
-        .subscribe((data: IJobOffer[]) => {
-          this.inactiveJobs = data['Data'];
-          this.inactiveFilteredJobs = this.inactiveJobs;
-        })
-    }
-   
-  }
-
-
-  loadActiveJobs() {
-
-    this.activePageNumber = this.pagination.pageNumber
-
-    if (this.searchBarInput === undefined) {
-      this.jobService.universalSearchCount('_',
-        this.activePageNumber, this.pagination.pageSize)
+        this.pagination.pageNumber, this.pagination.pageSize)
         .subscribe((data: number) => {
           this.totalJobs = data['Data'][0]
           this.pagination.setPageRange(this.totalJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+          this.activePaginatorSize = this.pagination.paginatorSize
+          this.activeCollectionSize = this.pagination.getCollectionSize()
         })
 
-      this.jobService.universalSearch('_', this.activePageNumber, this.pagination.pageSize)
+      this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
         })
-
     }
-
     else {
       this.jobService.universalSearchCount(this.searchBarInput,
-        this.activePageNumber, this.pagination.pageSize)
+        this.pagination.pageNumber, this.pagination.pageSize)
         .subscribe((data: number) => {
           this.totalJobs = data['Data'][0]
           this.pagination.setPageRange(this.totalJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+          this.activePaginatorSize = this.pagination.paginatorSize
+          this.activeCollectionSize = this.pagination.getCollectionSize()
         })
 
-      this.jobService.universalSearch(this.searchBarInput, this.activePageNumber, this.pagination.pageSize)
+      this.jobService.universalSearch(this.searchBarInput, this.pagination.pageNumber, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
@@ -660,24 +637,5 @@ export class OfferMaintenanceComponent implements OnInit {
     }
 
   }
-
-  loadDrafts(keyword, pageNumber, pageSize) {
-
-    this.jobService.universalSearchCountDrafts()
-      .subscribe((data: number) => {
-        this.totalDrafts = data['Data'][0]
-        this.pagination.setPageRange(this.totalDrafts)
-        this.paginatorSize = this.pagination.paginatorSize
-        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-      })
-
-    this.jobService.universalSearchDrafts(keyword, pageNumber, pageSize)
-      .subscribe((data: IJobOffer[]) => {
-        this.draftJobs = data['Data']
-      })
-  }
-
-
 
 }
-

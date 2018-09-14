@@ -6,7 +6,7 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
 import {document} from 'jquery'
-import {Sort} from '@angular/material';
+import {Sort, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'offer-list',
@@ -164,11 +164,6 @@ universalSearch() {
   }
 
   ngOnInit() {
-
-    // $(document).ready(function () {
-    //   $('jobTable').DataTable();
-    //   $('.dataTables_length').addClass('bs-select');
-    // });
   
         this.jobService.universalSearchCount('_', 
         this.pagination.pageNumber, this.pagination.pageSize)
@@ -185,6 +180,7 @@ universalSearch() {
         this.availableJobs = data['Data'];
         this.filteredJobs = this.availableJobs;
         console.log(this.availableJobs)
+        this.sortedData = this.availableJobs.slice();
       })
 
       this.pageSize =  this.pagination.pageSize
@@ -207,4 +203,34 @@ universalSearch() {
 
   }
 
+
+  /// Sorting
+  sortedData:IJobOffer[]
+
+  sortData(sort: Sort) {
+
+    const data = this.availableJobs.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'jobName': return compare(a.jobName, b.jobName, isAsc);
+        case 'company': return compare(a.company, b.company, isAsc);
+        case 'location': return compare(a.city, b.city, isAsc);
+        case 'jobType': return compare(a.jobType, b.jobType, isAsc);
+        case 'jobCategory': return compare(a.jobCategory, b.jobCategory, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+
+}
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

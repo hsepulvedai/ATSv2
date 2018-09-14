@@ -93,24 +93,27 @@
           <div>
 
             <!--Table-->
-            <table id="example" class="table table-striped">
+            <table matSort (matSortChange) = "sortData($event)" id="example" class="table table-striped">
 
               <!--Table head-->
               <thead>
                 <tr>
-                  <th>Job Title</th>
-                  <th>Company</th>
-                  <th>Location</th>
-                  <th>Category</th>
-                  <th>Type</th>
+                  <th mat-sort-header= "jobName">Job Title</th>
+                  <th mat-sort-header= "company">Company</th>
+                  <th mat-sort-header= "location">Location</th>
+                  <th mat-sort-header= "jobCategory">Category</th>
+                  <th mat-sort-header= "jobType">Type</th>
                   <th>Apply</th>
                 </tr>
               </thead>
               <!--Table head-->
 
               <!--Table body-->
+              <tbody align="center"*ngIf="sortedData === undefined">
+                  No jobs to show
+                </tbody>
               <tbody>
-                <tr *ngFor="let job of filteredJobs">
+                <tr *ngFor="let job of sortedData" >
                   <td *ngIf="filteredJobs == []"> No items to show</td>
                   <td>{{job.jobName}}</td>
                   <td>{{job.company}}</td>

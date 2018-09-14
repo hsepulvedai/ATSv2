@@ -17,7 +17,7 @@ import { OfferMaintenanceComponent } from './a-applicant-section/offer/offer-mai
 import { ApplicantMaintenanceComponent } from './c-candidate-management/applicant/applicant-maintenance/applicant-maintenance.component';
 import { SortOverviewExampleComponent } from './a-applicant-section/offer/TestingMaterial/sort-overview-example/sort-overview-example.component';
 export const appRoutes: Routes = [
-    
+
     { path: 'jobs', component: OfferListComponent },
   
     { path: 'editApplicant', component: EditApplicantComponent},

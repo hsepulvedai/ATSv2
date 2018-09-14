@@ -36,40 +36,41 @@ export class OfferApplicationComponent implements OnInit {
   city: FormControl
   zipCode: FormControl
 
-  dummyApplicant: IApplicantMaintInfo = {
-    applicantId: 6,
-    firstName: 'Dummy',
-    lastName: 'Dumm Dums',
-    email: 'mnpen@mail.com',
-    phone: '787-963-6654',
-    // addressLine: '123 Maple and Oak',
-    // addressLine2: 'Block A',
-    // city: 'Springfield',
-    // stateProvince: 'Massachussets',
-    // country: 'United States',
-    // zipCode: '265656'
-  }
+  dummyApplicant: IApplicantMaintInfo 
 
   constructor(private jobService: JobService, private router: Router,
     private applicationService: ApplicationService, private userService:UserService,
     private applicantService:ApplicantService) { }
 
   ngOnInit() {
+
+    this.dummyApplicant = {
+      applicantId: 6,
+      firstName: 'Dummy',
+      lastName: 'Dumm',
+      email: 'mnpen@mail.com',
+      phone: '787-963-6654',
+    }
   
     // this.applicantService.getApplicantById(4)
-    // .subscribe((data) => {
+    // .subscribe((data:IApplicant) => {
     //   this.applicant = data['Data']
     //   this.applicantId = this.applicant.id
-    //   console.log(this.applicantId)
+
+    //   this.userService.getUserById(this.applicantId)
+    //   .subscribe((data: IUser) => {
+    //     this.user = data['Data'][0]
+
+
+      // this.dummyApplicant.applicantId = this.applicant.id
+      // this.dummyApplicant.firstName = this.user.firstName
+      // this.dummyApplicant.lastName = this.user.lastName
+      // this.dummyApplicant.email = this.user.email
+      // this.dummyApplicant.phone = this.applicant.phone
+    //   })
     // })
 
 
-
-    this.userService.getAllUsers()
-    .subscribe((data: IUser[]) => {
-      this.user = data['Data']
-      console.log(this.user)
-    })
 
 
     // this.jobService.showJobOfferDetail(this.jobService.currentJobId)
