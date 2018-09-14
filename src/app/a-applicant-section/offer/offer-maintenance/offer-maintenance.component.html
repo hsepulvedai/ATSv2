@@ -443,7 +443,7 @@
                     <p *ngIf="!(pageInactive == paginatorSizeInactive)">Showing {{pageSizeInactive * pageSizeInactive}} of {{totalInactiveJobs}}</p>
                     <p *ngIf="pageInactive == paginatorSizeInactive">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
                   </div>
-                  <div class="col-md-7" style="background-color: white;">
+                  <div class="col-md-7" >
                     <ngb-pagination id="paginator"  [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
                       [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                     </ngb-pagination>
