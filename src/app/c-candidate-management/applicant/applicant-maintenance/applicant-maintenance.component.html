@@ -201,7 +201,7 @@
 
     <ngb-tabset>
 
-      <ngb-tab title="Applicants">
+      <ngb-tab title="Applicants" >
         <ng-template ngbTabContent>
 
               <h3> Applicants </h3>
@@ -257,20 +257,6 @@
       
                 </div>
       
-                <div class="row">
-                  <div class="col-md-3">
-                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalApplicants}}</p>
-                      <p *ngIf="page == paginatorSize">Showing {{totalApplicants}} of {{totalApplicants}}</p>
-                  </div>
-                  <div class="col-md-9">
-                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
-                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
-                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                      </ngb-pagination>
-                  </div>
-              
-                </div>
-      
 
           <div>
   
@@ -305,6 +291,19 @@
                 </tr>
               </tbody>
               <!--Table body-->
+              <div class="row">
+                  <div class="col-md-5">
+                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalApplicants}}</p>
+                      <p *ngIf="page == paginatorSize">Showing {{totalApplicants}} of {{totalApplicants}}</p>
+                  </div>
+                  <div class="col-md-7">
+                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
+                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
+                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                      </ngb-pagination>
+                  </div>
+              
+                </div>
             </table>
             <!--Table-->
   
@@ -313,7 +312,7 @@
         </ng-template>
       </ngb-tab>
       <ngb-tab>
-        <ng-template ngbTabTitle> Past Applicants</ng-template>
+        <ng-template ngbTabTitle > Past Applicants</ng-template>
         <ng-template ngbTabContent>
           <h3> Past Applicants </h3>
   
@@ -350,6 +349,19 @@
                   </tr>
               </tbody>
               <!--Table body-->
+              <div class="row">
+                  <div class="col-md-5">
+                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalApplicants}}</p>
+                      <p *ngIf="page == paginatorSize">Showing {{totalApplicants}} of {{totalApplicants}}</p>
+                  </div>
+                  <div class="col-md-7">
+                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
+                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
+                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                      </ngb-pagination>
+                  </div>
+              
+                </div>
             </table>
             <!--Table-->
   

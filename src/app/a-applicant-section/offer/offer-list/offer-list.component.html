@@ -16,12 +16,12 @@
 <body>
       
     
-  <div class="container">
+  <div class="container" >
 
     <div>
       <h3> A.2 Search Jobs</h3>
       <h3>Start Searching</h3>
-      <div class="card">
+      <div class="card" style="border-right: white; border-left: white;">
         <div class="card-body">
 
           <div class="row" style="margin-bottom: 2%">
@@ -76,24 +76,16 @@
 
           </div>
 
-          <div class="row">
-            <div class="col-md-3">
-                <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
-                <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
-            </div>
-            <div class="col-md-9">
-                <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
-                [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
-                (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                </ngb-pagination>
-            </div>
-        
-          </div>
+         
 
           <div>
 
             <!--Table-->
+<<<<<<< HEAD
             <table matSort (matSortChange) = "sortData($event)" id="example" class="table table-striped">
+=======
+            <table id="example" class="table table-striped" >
+>>>>>>> 7c1ace66b9de9ca17c7e68d439fb8f331750282e
 
               <!--Table head-->
               <thead>
@@ -126,6 +118,19 @@
                 </tr>
               </tbody>
               <!--Table body-->
+              <div class="row" style="margin-top:1em;">
+                  <div class="col-md-3">
+                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
+                      <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
+                  </div>
+                  <div class="col-md-9">
+                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
+                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
+                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                      </ngb-pagination>
+                  </div>
+              
+                </div>
             </table>
             <!--Table-->
 

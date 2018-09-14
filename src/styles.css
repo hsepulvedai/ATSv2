@@ -23,32 +23,43 @@ p {font-size: 16px;}
 }
 
 
-
 .navbar {
     /*Controla la barra de navegacion como tal */
     background-color: #13316e;
    /* background-color:#25326a; */
-   height: 65px;
+   height: 20%;
+   
 }
 
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color:white;
+    color: #25326a;
     font-family: Poppins;
     font-size:100%;
-
     
 }
-
+.breadcrumb{
+    background-color:white;
+    
+}
+.breadcrumb-item{
+    color: #df136f;
+}
 .nav-link:hover {
     color: #df136f;
 }
 
 
+<<<<<<< HEAD
 /* select{
     /*something needs to go here 
 }*/
 
+=======
+.navtext{
+    color: white;
+}
+>>>>>>> 7c1ace66b9de9ca17c7e68d439fb8f331750282e
 
 
 img{
