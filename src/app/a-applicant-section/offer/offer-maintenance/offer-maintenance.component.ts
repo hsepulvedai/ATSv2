@@ -13,6 +13,7 @@ import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
 import { IJobUpdate } from '../../../shared/models/job_update.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
+import { Sort } from '@angular/material';
 import 'jquery'
 
 
@@ -116,6 +117,7 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe((data: IJobOffer[]) => {
         this.availableJobs = data['Data'];
         this.filteredJobs = this.availableJobs;
+        this.sortedData = this.availableJobs.slice();
       })
 
     // load inactive jobs
@@ -284,6 +286,7 @@ export class OfferMaintenanceComponent implements OnInit {
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
+          this.sortedData = this.filteredJobs
         })
     }
     else {
@@ -291,6 +294,8 @@ export class OfferMaintenanceComponent implements OnInit {
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
+          this.sortedData = this.availableJobs
+
         })
     }
 
@@ -569,7 +574,6 @@ export class OfferMaintenanceComponent implements OnInit {
     );
   }
 
-
   //event handler for the select element's change event
   selectJobTypeChangeHandler(event: any) {
     //update the ui
@@ -638,4 +642,34 @@ export class OfferMaintenanceComponent implements OnInit {
 
   }
 
+  /// Sorting
+  sortedData:IJobOffer[]
+
+  sortData(sort: Sort) {
+
+    const data = this.availableJobs.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    console.log(this.sortedData)
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'jobName': return compare(a.jobName, b.jobName, isAsc);
+        case 'company': return compare(a.company, b.company, isAsc);
+        case 'location': return compare(a.city, b.city, isAsc);
+        case 'jobType': return compare(a.jobType, b.jobType, isAsc);
+        case 'jobCategory': return compare(a.jobCategory, b.jobCategory, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

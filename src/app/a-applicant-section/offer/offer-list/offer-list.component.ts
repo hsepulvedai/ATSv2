@@ -6,7 +6,7 @@ import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
 import {document} from 'jquery'
-import {Sort, MatSort, MatTableDataSource} from '@angular/material';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'offer-list',
@@ -152,6 +152,7 @@ universalSearch() {
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
+          this.sortedData = this.filteredJobs
         })
     }
     else {
@@ -159,6 +160,8 @@ universalSearch() {
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
+          this.sortedData = this.filteredJobs
+
         })
     }
   }

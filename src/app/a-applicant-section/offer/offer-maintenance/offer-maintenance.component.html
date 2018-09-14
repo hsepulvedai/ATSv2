@@ -299,16 +299,16 @@
             </div>
 
             <!--Table-->
-            <table class="table table-striped" >
+            <table matSort (matSortChange) = "sortData($event)"  class="table table-striped" >
 
               <!--Table head-->
               <thead>
                 <tr>
-                  <th>Job Title</th>
-                  <th>Company</th>
-                  <th>Location</th>
-                  <th>Category</th>
-                  <th>Type</th>
+                    <th mat-sort-header= "jobName">Job Title</th>
+                    <th mat-sort-header= "company">Company</th>
+                    <th mat-sort-header= "location">Location</th>
+                    <th mat-sort-header= "jobCategory">Category</th>
+                    <th mat-sort-header= "jobType">Type</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -316,7 +316,7 @@
 
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let job of filteredJobs">
+                <tr *ngFor="let job of sortedData">
                   <td> {{job.jobName}} </td>
                   <td> {{job.company}}</td>
                   <td> {{job.city}}, {{job.country}} </td>
@@ -424,8 +424,7 @@
                   <th>Location</th>
                   <th>Category</th>
                   <th>Type</th>
-                  <th>Edit</th>
-                  <th>Active/Inactive</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <!--Table head-->
@@ -438,12 +437,16 @@
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
                   <td> {{inactiveJob.jobCategory}} </td>
                   <td>{{inactiveJob.jobType}}</td>
-                  <td> <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
+                  <td> 
+                    <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
                         edit
-                      </i> Edit</button> </td>
-                  <td> <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
+                      </i> Edit
+                    </button> 
+                    <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
                         subdirectory_arrow_left
-                      </i> Re-Post</button></td>
+                      </i> Re-Post
+                    </button>
+                  </td>
                 </tr>
               </tbody>
               <!--Table body-->
