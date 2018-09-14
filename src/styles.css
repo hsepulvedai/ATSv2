@@ -21,6 +21,9 @@ p {font-size: 16px;}
     padding-top: 70px;
     padding-bottom: 70px;
 }
+#paginator{
+    background-color: white;
+}
 
 .navbar {
     /*Controla la barra de navegacion como tal */
@@ -39,7 +42,10 @@ p {font-size: 16px;}
 }
 .breadcrumb{
     background-color:white;
-    color:#25326a
+    
+}
+.breadcrumb-item{
+    color: #df136f;
 }
 .nav-link:hover {
     color: #df136f;

@@ -209,7 +209,7 @@
     <h3> A.5 Job Maintenance Screen</h3>
 
 
-    <div align="right">
+    <div align="right"> 
       <button type="button" class="btn" (click)="openAddJob(content1)"> <i class="material-icons">
           note_add
         </i> New Job </button>
@@ -246,8 +246,8 @@
                     <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:110%;">
                   </div>
              
-                  <div class="col-sm-2">
-                      <button type="button" class="btn" (click)="universalSearch()" style="margin-left: 50px;" >
+                  <div class="col-sm-2" >
+                      <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;" >
                       <i class="material-icons">search</i> Search</button>
                   </div>
               </div>
@@ -353,7 +353,7 @@
           <div class="col-md-12 ">
             <div class="row" style="margin-bottom: 2%">
 
-              <div class="col-sm-6">
+              <div class="col-sm-3">
                 <label for="sortBy"><strong> Search: </strong></label><br>
 
                 <select (change)="sortDropdownChangeHandler($event)" id="sortBy" style="margin-right: 2%" class=" custom-select">
@@ -366,28 +366,28 @@
                   <option> Type </option>
                 </select>
               </div>
-              <div class="col-sm-6" style="margin-top: 3%">
+              <div class="col-sm-3" style="margin-top: 3%">
                 <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
                   <option selected value="">Sort Type</option>
                   <option> Sort A-Z </option>
                   <option> Sort Z-A </option>
                 </select> <br>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
+           
+              <div class="col-sm-3">
                 <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em" placeholder="Start Typing...">
               </div>
-              <div class="col-sm-12">
+              <div class="col-sm-3">
                 <button type="button" class="btn myButton" (click)="universalSearch()">
                   <i class="material-icons">search</i> Search</button><br>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6" style="display: inline-block">
-                <label for="filterBy"><strong> Filter by: </strong></label> <br>
-                <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
+              <div class="col-sm-2" style="align-self: center;align-items: center; align-content: center;">
+               <label for="filterBy"><strong> Filter by: </strong></label> <br>
+              
+               <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
                   <option selected> All Jobs</option>
                   <option> Job Title </option>
                   <option> Company </option>
@@ -396,10 +396,10 @@
                   <option> Category </option>
                   <option> Type </option>
                 </select>
-
-                <input [(ngModel)]='listInactiveFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
-                  placeholder="Start Typing...">
-              </div>
+                </div>
+                <div class="col-sm-10" style="align-self: center;align-items: center;align-content: center;">
+                <input [(ngModel)]='listInactiveFilter' type="search" id="searchBar" class="form-control " placeholder="Start Typing...">
+                </div>
 
             </div>
 
@@ -443,8 +443,8 @@
                     <p *ngIf="!(pageInactive == paginatorSizeInactive)">Showing {{pageSizeInactive * pageSizeInactive}} of {{totalInactiveJobs}}</p>
                     <p *ngIf="pageInactive == paginatorSizeInactive">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
                   </div>
-                  <div class="col-md-7">
-                    <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
+                  <div class="col-md-7" style="background-color: white;">
+                    <ngb-pagination id="paginator"  [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
                       [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                     </ngb-pagination>
                   </div>
