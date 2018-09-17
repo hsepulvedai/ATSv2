@@ -136,37 +136,51 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobShowAllActiveTypeZA')
   }
 
-  universalSearch(keyword, pageNumber, pageSize) {
+  universalSearch(keyword:string, pageNumber:number, pageSize:number) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearch/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
-  universalSearchSortAsc(keyword, sortBy) {
+  universalSearchSortAsc(keyword:string, sortBy:string) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix
       + 'JobUniversalSearchSortAZ/search=' + keyword + 'sortBy=' + sortBy)
   }
 
-  universalSearchSortDesc(keyword, sortBy) {
+  universalSearchSortDesc(keyword:string, sortBy:string) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix
       + 'JobUniversalSearchSortZA/search=' + keyword + 'sortBy=' + sortBy)
   }
 
-  universalSearchCount(keyword, pageNumber, pageSize) {
+  universalSearchCount(keyword:string, pageNumber:number, pageSize:number) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCount/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
-  universalSearchInactive(keyword, pageNumber, pageSize) {
+  universalSearchInactive(keyword:string, pageNumber:number, pageSize:number) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchInactive/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
-  universalSearchCountInactive(keyword, pageNumber, pageSize) {
+  universalSearchCountInactive(keyword:string, pageNumber:number, pageSize:number) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchCountInactive/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
-  universalSearchDrafts(keyword, pageNumber, pageSize) {
+  universalSearchDrafts(keyword:string, pageNumber:number, pageSize:number) {
+    if(keyword === '')
+      keyword = '_'
     return this.http.get(environment.baseUrl + this.routePrefix + 'JobUniversalSearchAllDrafts/search='
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
@@ -175,9 +189,6 @@ export class JobService {
     return this.http.get(environment.baseUrl + this.routePrefix + "JobDraftCount/")
     
   }
-
-
-
 
 }
 

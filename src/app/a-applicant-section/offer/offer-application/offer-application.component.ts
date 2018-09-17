@@ -42,6 +42,9 @@ export class OfferApplicationComponent implements OnInit {
     private applicationService: ApplicationService, private userService:UserService,
     private applicantService:ApplicantService) { }
 
+
+
+
   ngOnInit() {
 
     this.dummyApplicant = {
@@ -52,32 +55,13 @@ export class OfferApplicationComponent implements OnInit {
       phone: '787-963-6654',
     }
   
-    // this.applicantService.getApplicantById(4)
-    // .subscribe((data:IApplicant) => {
-    //   this.applicant = data['Data']
-    //   this.applicantId = this.applicant.id
+  
 
-    //   this.userService.getUserById(this.applicantId)
-    //   .subscribe((data: IUser) => {
-    //     this.user = data['Data'][0]
-
-
-      // this.dummyApplicant.applicantId = this.applicant.id
-      // this.dummyApplicant.firstName = this.user.firstName
-      // this.dummyApplicant.lastName = this.user.lastName
-      // this.dummyApplicant.email = this.user.email
-      // this.dummyApplicant.phone = this.applicant.phone
-    //   })
-    // })
-
-
-
-
-    // this.jobService.showJobOfferDetail(this.jobService.currentJobId)
-    //   .subscribe((data: IJobOffer) => {
-    //     this.job = data['Data'][0];
-    //     console.log(this.job)
-    //   })
+    this.jobService.showJobOfferDetail(this.jobService.currentJobId)
+      .subscribe((data: IJobOffer) => {
+        this.job = data['Data'][0];
+        console.log(this.job)
+      })
 
     this.name = new FormControl({value: this.dummyApplicant.firstName + ' ' + this.dummyApplicant.lastName, disabled:true})
     this.email = new FormControl(this.dummyApplicant.email)

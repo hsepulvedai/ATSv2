@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
+  <style>
+  </style>
+
 </head>
 
 <body>
@@ -24,63 +27,89 @@
       <div class="card" style="border-right: white; border-left: white;">
         <div class="card-body">
 
-          <div class="row" style="margin-bottom: 2%">
+          <!-- <div class="row" style="padding-bottom: 10px;">
+            <div class="col-sm-6">
+              <button *ngIf="!pageFilterActive" type="button" class="btn" (click)="pageFilterActive = true"><i class="material-icons">
+                  filter_list</i> Show page filter
+              </button>
+              <button *ngIf="pageFilterActive" type="button" class="btn" (click)="pageFilterActive = false"><i class="material-icons">
+                  filter_list</i> Hide page filter
+              </button>
+            </div>
 
             <div class="col-sm-6">
-              <label for="sortBy"><strong> Search: </strong></label><br>
+              <button *ngIf="!searchActive" type="button" class="btn" (click)="searchActive = true"><i class="material-icons">
+                  search</i> Show Search
+              </button>
 
-              <select (change)="sortDropdownChangeHandler($event)" id="sortBy" style="margin-right: 2%" class=" custom-select">
-                <option selected> All Jobs</option>
-                <option> Job Title </option>
-                <option> Company </option>
-                <option> Location/City </option>
-                <option> Location/Country </option>
-                <option> Category </option>
-                <option> Type </option>
-              </select>
+              <button *ngIf="searchActive" type="button" class="btn" (click)="searchActive = false"><i class="material-icons">
+                  search</i> Hide Search
+              </button>
             </div>
-            <div class="col-sm-6" style="margin-top: 3%">
-              <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
-                <option selected value="">Sort Type</option>
-                <option> Sort A-Z </option>
-                <option> Sort Z-A </option>
-              </select> <br>
+          </div> -->
+
+          <!-- <div class="col-md-12 " *ngIf="searchActive"> -->
+            <label for="sortBy"><strong> Search: </strong></label><br>
+            <div class="row " style="height:3em;">
+              <!-- <div class="col-sm-2">
+                <select (change)="sortDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
+                  <option selected> All Jobs</option>
+                  <option> Job Title </option>
+                  <option> Company </option>
+                  <option> Location/City </option>
+                  <option> Location/Country </option>
+                  <option> Category </option>
+                  <option> Type </option>
+                </select>
+              </div>
+              <div class="col-sm-2">
+                <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
+                  <option selected value="">Sort Type</option>
+                  <option> Sort A-Z </option>
+                  <option> Sort Z-A </option>
+                </select> <br>
+              </div> -->
+              <div class="col-sm-6">
+                <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:110%;">
+              </div>
+
+              <div class="col-sm-2">
+                <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
+                  <i class="material-icons">search</i> Search</button>
+              </div>
+
             </div>
-          </div>
+          <!-- </div> -->
+
+          <!-- <div *ngIf="pageFilterActive">
+            <label for="filterBy"><strong> Filter by: </strong></label> <br>
+            <div class="row">
+              <div class="col-sm-2" style="align-self: center;align-items: center; align-content: center;">
+                <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
+                  <option selected> All Jobs</option>
+                  <option> Job Title </option>
+                  <option> Company </option>
+                  <option> Location/City </option>
+                  <option> Location/Country </option>
+                  <option> Category </option>
+                  <option> Type </option>
+                </select>
+              </div>
+              <div class="col-sm-10" style="align-self: center;align-items: center;align-content: center;">
+                <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
+                  placeholder="Start Typing...">
+              </div>
+            </div>
+          </div> -->
+
           <div class="row">
-            <div class="col-sm-12">
-              <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em" placeholder="Start Typing...">
-            </div>
-            <div class="col-sm-12">
-              <button type="button" class=" btn " (click)="universalSearch()">
-                <i class="material-icons">search</i> Search</button><br>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <label for="filterBy"><strong> Filter by: </strong></label> <br>
-              <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
-                <option selected> All Jobs</option>
-                <option> Job Title </option>
-                <option> Company </option>
-                <option> Location/City </option>
-                <option> Location/Country </option>
-                <option> Category </option>
-                <option> Type </option>
-              </select>
-
-              <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
-                placeholder="Start Typing...">
-            </div>
-
-          </div>
-
-          <div class="row" style="margin-top:1em;">
-            <div class="col-md-3">
-              <p *ngIf="totalJobs === undefined"> Showing 0 of 0 </p>
-              <p *ngIf="!(page == paginatorSize) && totalJobs != undefined ">Showing {{pageSize * page}} of {{totalJobs}}</p>
-              <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
+            <div class="col-md-4" style="text-anchor: end">
+              <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
+              <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize)">Showing {{pageSize * page}}
+                of {{totalJobs}}</p>
+              <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of
+                {{totalJobs}}
+              </p>
             </div>
           </div>
 
@@ -107,18 +136,26 @@
                 <td>{{job.jobType}}</td>
                 <td> <button type="button" class=" btn" (click)="applyButtonClicked(job.jobId)"><i class="material-icons">
                       input
-                    </i> Apply</button> </td>
+                    </i> Apply</button>
+                </td>
               </tr>
             </tbody>
-            <!--Table body-->
           </table>
+          <hr>
+
+          <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+            [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+          </ngb-pagination>
+
         </div>
       </div>
+
     </div>
+
   </div>
-  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-    [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
-  </ngb-pagination>
+
+
+
 </body>
 
 </html>

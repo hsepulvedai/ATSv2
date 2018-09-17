@@ -208,20 +208,22 @@
 
 
     <div align="right">
-      <button type="button" class="btn" (click)="openAddJob(content1)" style="color:white;background-color: #25326a"> <i class="material-icons">
+      <button type="button" class="btn" (click)="openAddJob(content1)" style="color:white;background-color: #25326a"> <i
+          class="material-icons">
           note_add
         </i> New Job </button>
     </div>
 
     <ngb-tabset>
-      <ngb-tab title="Available Jobs" >
+      <ngb-tab title="Available Jobs">
         <ng-template ngbTabContent>
           <h3> Jobs </h3>
+
           <div>
             <div class="col-md-12 ">
-                <label for="sortBy"><strong> Search: </strong></label><br>
-              <div class="row " style="height:3em;"> 
-                <div class="col-sm-2">
+              <label for="sortBy"><strong> Search: </strong></label><br>
+              <div class="row " style="height:3em;">
+                <!-- <div class="col-sm-2">
                   <select (change)="sortDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
                     <option selected> All Jobs</option>
                     <option> Job Title </option>
@@ -238,19 +240,19 @@
                     <option> Sort A-Z </option>
                     <option> Sort Z-A </option>
                   </select> <br>
-                  
-                </div>
+
+                </div> -->
                 <div class="col-sm-6">
-                    <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:110%;">
-                  </div>
-             
-                  <div class="col-sm-2" >
-                      <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;" >
-                      <i class="material-icons">search</i> Search</button>
-                  </div>
+                  <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:110%;">
+                </div>
+
+                <div class="col-sm-2">
+                  <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
+                    <i class="material-icons">search</i> Search</button>
+                </div>
               </div>
 
-              <label for="filterBy"><strong> Filter by: </strong></label> <br>
+            <!-- <label for="filterBy"><strong> Filter by: </strong></label> <br>
               <div class="row">
                 <div class="col-sm-2" style="align-self: center;align-items: center; align-content: center;">
                   <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
@@ -267,23 +269,7 @@
                   <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
                     placeholder="Start Typing...">
                 </div>
-
-
-                <!-- <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
-                  <option selected> All Jobs</option>
-                  <option> Job Title </option>
-                  <option> Company </option>
-                  <option> Location/City </option>
-                  <option> Location/Country </option>
-                  <option> Category </option>
-                  <option> Type </option>
-                </select>
-
-
-                <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
-                  placeholder="Start Typing..."> -->
-
-              </div>
+              </div> -->
 
               <div class="row">
                 <div class="col-md-3">
@@ -291,31 +277,25 @@
                   <p *ngIf="activePageNumber == activePaginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
                 </div>
                 <div class="col-md-9">
-                  <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize" [rotate]="true"
-                    [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                  <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize"
+                    [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
                   </ngb-pagination>
                 </div>
 
               </div>
             </div>
 
-            <!--Table-->
-            <table matSort (matSortChange) = "sortData($event)"  class="table table-striped" >
-
-              <!--Table head-->
+            <table matSort (matSortChange)="sortData($event)" class="table table-striped">
               <thead>
                 <tr>
-                    <th mat-sort-header= "jobName">Job Title</th>
-                    <th mat-sort-header= "company">Company</th>
-                    <th mat-sort-header= "location">Location</th>
-                    <th mat-sort-header= "jobCategory">Category</th>
-                    <th mat-sort-header= "jobType">Type</th>
+                  <th mat-sort-header="jobName">Job Title</th>
+                  <th mat-sort-header="company">Company</th>
+                  <th mat-sort-header="location">Location</th>
+                  <th mat-sort-header="jobCategory">Category</th>
+                  <th mat-sort-header="jobType">Type</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <!--Table head-->
-
-              <!--Table body-->
               <tbody>
                 <tr *ngFor="let job of sortedData">
                   <td> {{job.jobName}} </td>
@@ -335,17 +315,17 @@
                 </tr>
               </tbody>
               <div class="row" style="margin-top:50px; ">
-                  <div class="col-md-5"style="margin-right:0.5em;">
-                    <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
-                    <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
-                  </div>
-                  <div class="col-md-7">
-                    <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-                      [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                    </ngb-pagination>
-                  </div>
-  
+                <div class="col-md-5" style="margin-right:0.5em;">
+                  <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
+                  <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
                 </div>
+                <div class="col-md-7">
+                  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+                    [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                  </ngb-pagination>
+                </div>
+
+              </div>
             </table>
 
 
@@ -354,7 +334,7 @@
         </ng-template>
       </ngb-tab>
       <ngb-tab>
-        <ng-template ngbTabTitle > Past Jobs</ng-template>
+        <ng-template ngbTabTitle> Past Jobs</ng-template>
         <ng-template ngbTabContent>
           <h3> Past Jobs </h3>
 
@@ -382,7 +362,7 @@
                   <option> Sort Z-A </option>
                 </select> <br>
               </div>
-           
+
               <div class="col-sm-3">
                 <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em" placeholder="Start Typing...">
               </div>
@@ -394,9 +374,9 @@
 
             <div class="row">
               <div class="col-sm-2" style="align-self: center;align-items: center; align-content: center;">
-               <label for="filterBy"><strong> Filter by: </strong></label> <br>
-              
-               <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
+                <label for="filterBy"><strong> Filter by: </strong></label> <br>
+
+                <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
                   <option selected> All Jobs</option>
                   <option> Job Title </option>
                   <option> Company </option>
@@ -405,17 +385,17 @@
                   <option> Category </option>
                   <option> Type </option>
                 </select>
-                </div>
-                <div class="col-sm-10" style="align-self: center;align-items: center;align-content: center;">
+              </div>
+              <div class="col-sm-10" style="align-self: center;align-items: center;align-content: center;">
                 <input [(ngModel)]='listInactiveFilter' type="search" id="searchBar" class="form-control " placeholder="Start Typing...">
-                </div>
+              </div>
 
             </div>
 
             <div class="row">
               <div class="col-md-3">
-                  <p *ngIf="!(inactivePageNumber == inactivePaginatorSize)">Showing {{pageSize * inactivePageNumber}} of {{totalInactiveJobs}}</p>
-                  <p *ngIf="inactivePageNumber == inactivePaginatorSize">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
+                <p *ngIf="!(inactivePageNumber == inactivePaginatorSize)">Showing {{pageSize * inactivePageNumber}} of {{totalInactiveJobs}}</p>
+                <p *ngIf="inactivePageNumber == inactivePaginatorSize">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
               </div>
               <div class="col-md-9">
                 <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
@@ -425,35 +405,31 @@
 
             </div>
 
-            <!--Table-->
-            <table class="table table-striped">
+            <table matSort (matSortChange)="sortData($event)" class="table table-striped">
 
-              <!--Table head-->
               <thead>
                 <tr>
-                  <th>Job Title</th>
-                  <th>Company</th>
-                  <th>Location</th>
-                  <th>Category</th>
-                  <th>Type</th>
+                    <th mat-sort-header="jobName">Job Title</th>
+                    <th mat-sort-header="company">Company</th>
+                    <th mat-sort-header="location">Location</th>
+                    <th mat-sort-header="jobCategory">Category</th>
+                    <th mat-sort-header="jobType">Type</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <!--Table head-->
 
-              <!--Table body-->
               <tbody>
-                <tr *ngFor="let inactiveJob of inactiveFilteredJobs">
+                <tr *ngFor="let inactiveJob of sortedInactive">
                   <td> {{inactiveJob.jobName}}</td>
                   <td> {{inactiveJob.company}}</td>
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
                   <td> {{inactiveJob.jobCategory}} </td>
                   <td>{{inactiveJob.jobType}}</td>
-                  <td> 
+                  <td>
                     <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
                         edit
                       </i> Edit
-                    </button> 
+                    </button>
                     <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
                         subdirectory_arrow_left
                       </i> Re-Post
@@ -462,21 +438,23 @@
                 </tr>
               </tbody>
               <div class="row">
-                  <div class="col-md-5">
-                    <p *ngIf="!(pageInactive == paginatorSizeInactive)">Showing {{pageSizeInactive * pageSizeInactive}} of {{totalInactiveJobs}}</p>
-                    <p *ngIf="pageInactive == paginatorSizeInactive">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
-                  </div>
-                  <div class="col-md-7" >
-                    <ngb-pagination id="paginator"  [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
-                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                    </ngb-pagination>
-                  </div>
-    
-    
+                <div class="col-md-5">
+                  <p *ngIf="!(pageInactive == paginatorSizeInactive)">Showing {{pageSizeInactive * pageSizeInactive}} of
+                    {{totalInactiveJobs}}
+                  </p>
+                  <p *ngIf="pageInactive == paginatorSizeInactive">Showing {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
                 </div>
-              <!--Table body-->
+                <div class="col-md-7">
+                  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSizeInactive" [(page)]="pageInactive" [maxSize]="paginatorSizeInactive"
+                    [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                  </ngb-pagination>
+                </div>
+
+
+              </div>
+
             </table>
-            <!--Table-->
+
 
           </div>
 
@@ -494,8 +472,8 @@
               <p *ngIf="page == paginatorSize">Showing {{totalDrafts}} of {{totalDrafts}}</p>
             </div>
             <div class="col-md-9">
-              <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize" [rotate]="true"
-                [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-end">
+              <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize"
+                [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-end">
               </ngb-pagination>
 
 
@@ -503,58 +481,52 @@
 
           </div>
 
-          <!--Table-->
-          <table class="table table-striped">
-
-            <!--Table head-->
+          <table matSort (matSortChange)="sortData($event)" class="table table-striped">
             <thead>
               <tr>
-                <th>Job Title</th>
-                <th>Company </th>
-                <th>Location</th>
-                <th>Category</th>
-                <th>Type</th>
+                  <th mat-sort-header="jobName">Job Title</th>
+                  <th mat-sort-header="company">Company</th>
+                  <th mat-sort-header="location">Location</th>
+                  <th mat-sort-header="jobCategory">Category</th>
+                  <th mat-sort-header="jobType">Type</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <!--Table head-->
 
-            <!--Table body-->
-            <!--Table body-->
             <tbody>
-              <tr *ngFor="let draft of draftJobs">
+              <tr *ngFor="let draft of sortedDrafts">
                 <td> {{draft.jobName}}</td>
                 <td> {{draft.company}}</td>
                 <td> {{draft.city}}, {{draft.country}} </td>
                 <td> {{draft.jobCategory}} </td>
                 <td>{{draft.jobType}}</td>
-                <td> 
+                <td>
                   <button type="button" class="btn" (click)="openDraftEdit(contentDraft, draft)"> <i class="material-icons">
                       edit
-                    </i> Edit 
-                  </button> 
+                    </i> Edit
+                  </button>
                   <button type="button" class="btn" (click)="deleteDraft()"> <i class="material-icons">
                       delete
-                    </i> Delete 
-                  </button> 
+                    </i> Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
-            <!--Table body-->
+
             <div class="row">
-                <div class="col-md-5">
-                  <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalDrafts}}</p>
-                  <p *ngIf="page == paginatorSize">Showing {{totalDrafts}} of {{totalDrafts}}</p>
-                </div>
-                <div class="col-md-7">
-                  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-                    [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                  </ngb-pagination>
-                </div>
-    
+              <div class="col-md-5">
+                <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalDrafts}}</p>
+                <p *ngIf="page == paginatorSize">Showing {{totalDrafts}} of {{totalDrafts}}</p>
               </div>
+              <div class="col-md-7">
+                <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+                  [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
+                </ngb-pagination>
+              </div>
+
+            </div>
           </table>
-          <!--Table-->
+
 
 
         </ng-template>

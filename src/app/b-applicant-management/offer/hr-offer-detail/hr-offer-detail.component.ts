@@ -11,6 +11,7 @@ import { EmployeeService } from '../../../shared/services/employee.service';
 import { ApplicationService } from '../../../shared/services/application.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { IJobOfferHR } from '../../../shared/models/job-offer-hr.model';
+import 'jquery'
 
 @Component({
   selector: 'app-hr-offer-detail',
@@ -63,9 +64,14 @@ export class HrOfferDetailComponent implements OnInit {
       })
   }
 
-  save(applicationId, statusId) {
-    console.log("Application id: " + applicationId)
-    console.log("Status id: " + statusId)
+  save(applicationId,status, recruiter) {
+    // console.log("Application id: " + applicationId)
+    // console.log("Status: " + status)
+    // console.log("Recruiter: " + recruiter)
+    
+    var value = document.getElementById("sel1op1").nodeValue;
+    console.log(value)
+
     //this.applicationService.updateApplicationStatus()
   }
 

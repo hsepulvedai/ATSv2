@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
-import {document} from 'jquery'
-import {Sort} from '@angular/material';
+import { document } from 'jquery'
+import { Sort } from '@angular/material';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'offer-list',
   templateUrl: './offer-list.component.html',
   styleUrls: ['./offer-list.component.css']
 })
-export class OfferListComponent implements OnInit {
+export class OfferListComponent implements OnInit
+, OnDestroy 
+{
 
   constructor
     (private router: Router,
@@ -21,12 +24,20 @@ export class OfferListComponent implements OnInit {
     //private route: ActivatedRoute,
     private pagination: PaginationService) { }
 
-  searchButtonClicked: boolean = false
+
+  // public data$: BehaviorSubject<any> = new BehaviorSubject({});
+  private jobSubscription: Subscription = new Subscription();
+  private jobTotalSubscription: Subscription = new Subscription();
+  interval
+
+
+  searchActive: boolean = false
+  pageFilterActive: boolean = false
   page: number = this.pagination.pageNumber;
   paginatorSize: number
   totalJobs: number
-  paginatorCollectionSize:number
-  pageSize:number
+  paginatorCollectionSize: number
+  pageSize: number
 
   searchBarInput: string
   sortBy: string
@@ -45,7 +56,48 @@ export class OfferListComponent implements OnInit {
 
   selectedSort
 
+  
+  ngOnInit() {
 
+    // this.interval = setInterval(() => {
+    //   this.refreshData();
+    // }, 5000)
+
+    this.pageSize = this.pagination.pageSize
+
+    this.search = new FormControl();
+    this.filter = new FormControl();
+
+
+    this.searchForm = new FormGroup({
+      search: this.search,
+      filter: this.filter
+    })
+
+    this.jobTotalSubscription.add(this.jobService.universalSearchCount('_',
+    this.pagination.pageNumber, this.pagination.pageSize)
+    .subscribe((data: number) => {
+      this.totalJobs = data['Data'][0]
+      this.pagination.setPageRange(this.totalJobs)
+      this.paginatorSize = this.pagination.paginatorSize
+      this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+    }))
+
+  this.jobSubscription.add(this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+    .subscribe((data: IJobOffer[]) => {
+      this.availableJobs = data['Data'];
+      this.filteredJobs = this.availableJobs;
+      console.log(this.availableJobs)
+      this.sortedData = this.availableJobs.slice();
+    }))
+
+  }
+
+  ngOnDestroy() {
+    this.jobTotalSubscription.unsubscribe();
+    this.jobSubscription.unsubscribe
+    clearInterval(this.interval);
+  }
 
   //event handler for the select element's change event
   selectDropdownChangeHandler(event: any) {
@@ -63,30 +115,13 @@ export class OfferListComponent implements OnInit {
     this.sortBy = event.target.value;
   }
 
-universalSearch() {
+  universalSearch() {
 
-    if (this.searchBarInput != undefined) {
-
-      this.jobService.universalSearchCount(this.searchBarInput, 
-      this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: number) => {
-        this.totalJobs = data['Data'][0]
-        this.pagination.setPageRange(this.totalJobs)
-        this.paginatorSize = this.pagination.paginatorSize
-        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-      })
-
-      this.jobService.universalSearch(this.searchBarInput, this.pagination.pageNumber,
-        this.pagination.pageSize)
-        .subscribe((data: IJobOffer[]) => {
-          this.availableJobs = data['Data'];
-          this.filteredJobs = this.availableJobs;
-        })
-    }
+    console.log('hello' +this.searchBarInput+'hello')
+      this.refreshData()
+      this.loadPage(1)
+    
   }
-
-
-
 
   get listFilter(): string {
     return this._listFilter;
@@ -147,6 +182,8 @@ universalSearch() {
 
   loadPage(page: number) {
 
+    this.pagination.pageNumber = page
+
     if (this.searchBarInput === undefined) {
       this.jobService.universalSearch('_', page, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
@@ -166,41 +203,6 @@ universalSearch() {
     }
   }
 
-  ngOnInit() {
-  
-        this.jobService.universalSearchCount('_', 
-        this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalJobs)
-          this.paginatorSize = this.pagination.paginatorSize
-          this.paginatorCollectionSize = this.pagination.paginatorSize * 10
-          console.log('Ttal=' + this.totalJobs)
-        })
-
-    this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-        console.log(this.availableJobs)
-        this.sortedData = this.availableJobs.slice();
-      })
-
-      console.log(this.sortedData)
-
-      this.pageSize =  this.pagination.pageSize
-
-    this.search = new FormControl();
-    this.filter = new FormControl();
-
-
-    this.searchForm = new FormGroup({
-      search: this.search,
-      filter: this.filter
-    })
-
-  }
-
   applyButtonClicked(jobId: number) {
 
     this.jobService.currentJobId = jobId;
@@ -208,13 +210,53 @@ universalSearch() {
 
   }
 
+  refreshData() {
+
+    if (this.searchBarInput === undefined || this.searchBarInput === '') {
+      this.jobTotalSubscription.add(this.jobService.universalSearchCount('_',
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      }))
+
+    this.jobSubscription.add(this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+        this.sortedData = this.availableJobs.slice();
+      }))
+    }
+    else
+    {
+      this.jobTotalSubscription.add(this.jobService.universalSearchCount(this.searchBarInput,
+      this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: number) => {
+        this.totalJobs = data['Data'][0]
+        this.pagination.setPageRange(this.totalJobs)
+        this.paginatorSize = this.pagination.paginatorSize
+        this.paginatorCollectionSize = this.pagination.paginatorSize * 10
+      }))
+
+    this.jobSubscription.add(this.jobService.universalSearch(this.searchBarInput, this.pagination.pageNumber, this.pagination.pageSize)
+      .subscribe((data: IJobOffer[]) => {
+        this.availableJobs = data['Data'];
+        this.filteredJobs = this.availableJobs;
+        this.sortedData = this.availableJobs.slice();
+      }))
+    }
+
+  }
+
 
   /// Sorting
-  sortedData:IJobOffer[]
+  sortedData: IJobOffer[]
 
   sortData(sort: Sort) {
 
-    const data = this.availableJobs.slice();
+    const data = this.filteredJobs.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
@@ -232,10 +274,10 @@ universalSearch() {
       }
     });
   }
-
-
 }
 
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
+

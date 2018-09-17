@@ -14,7 +14,7 @@ import { IJobInsert } from '../../../shared/models/job_insert.model';
 import { IJobUpdate } from '../../../shared/models/job_update.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { Sort } from '@angular/material';
-import 'jquery'
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -23,6 +23,17 @@ import 'jquery'
   styleUrls: ['./offer-maintenance.component.css']
 })
 export class OfferMaintenanceComponent implements OnInit {
+
+
+  private jobSubscription: Subscription = new Subscription();
+  private jobTotalSubscription: Subscription = new Subscription();
+  private jobInactiveSubscription: Subscription = new Subscription();
+  private jobInactiveTotalSubscription: Subscription = new Subscription();
+  private draftSubscription: Subscription = new Subscription();
+  private draftTotalSubscription: Subscription = new Subscription();
+
+  interval
+
 
   pageSize: number = this.pagination.pageSize
 
@@ -52,10 +63,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   searchBarInput: string
   sortBy: string
-
-// @Input() set(jobs: IJobOffer[]) {
-//   this.availableJobs = []
-// }
 
   availableJobs: IJobOffer[]
 
@@ -134,10 +141,11 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe((data: IJobOffer[]) => {
         this.inactiveJobs = data['Data'];
         this.inactiveFilteredJobs = this.inactiveJobs;
+        this.sortedInactive = this.inactiveJobs.slice();
       })
 
-      // load drafts
-      this.jobService.universalSearchCountDrafts()
+    // load drafts
+    this.jobService.universalSearchCountDrafts()
       .subscribe((data: number) => {
         this.totalDrafts = data['Data'][0]
         this.pagination.setPageRange(this.totalInactiveJobs)
@@ -149,6 +157,7 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe((data: IJobOffer[]) => {
         this.draftJobs = data['Data'];
         this.draftsFilteredJobs = this.draftJobs;
+        this.sortedDrafts = this.draftJobs.slice();
       })
 
     this.jobCategoryService.showCategories()
@@ -281,12 +290,16 @@ export class OfferMaintenanceComponent implements OnInit {
   }
 
   loadPage(page: number) {
+
+    this.activePageNumber = page
+
+    // this.pagination.pageNumber = page
     if (this.searchBarInput === undefined) {
       this.jobService.universalSearch('_', page, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           // this.filteredJobs = this.availableJobs;
-          this.sortedData = this.filteredJobs
+          this.sortedData = this.availableJobs
         })
     }
     else {
@@ -302,11 +315,15 @@ export class OfferMaintenanceComponent implements OnInit {
   }
 
   loadPageInactive(page: number) {
+
+    this.inactivePageNumber = page
+
     if (this.searchBarInput === undefined) {
       this.jobService.universalSearchInactive('_', page, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.inactiveJobs = data['Data'];
           this.inactiveFilteredJobs = this.inactiveJobs;
+          this.sortedInactive = this.inactiveJobs
         })
     }
     else {
@@ -314,16 +331,21 @@ export class OfferMaintenanceComponent implements OnInit {
         .subscribe((data: IJobOffer[]) => {
           this.inactiveJobs = data['Data'];
           this.inactiveFilteredJobs = this.inactiveJobs;
+          this.sortedInactive = this.inactiveJobs
         })
     }
   }
 
   loadPageDrafts(page: number) {
+
+    this.draftPageNumber = page
+
     if (this.searchBarInput === undefined) {
       this.jobService.universalSearchDrafts('_', page, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.draftJobs = data['Data'];
           this.draftsFilteredJobs = this.draftJobs;
+          this.sortedDrafts = this.draftJobs
         })
     }
     else {
@@ -331,6 +353,7 @@ export class OfferMaintenanceComponent implements OnInit {
         .subscribe((data: IJobOffer[]) => {
           this.draftJobs = data['Data'];
           this.draftsFilteredJobs = this.draftJobs;
+          this.sortedDrafts = this.draftJobs
         })
     }
   }
@@ -539,22 +562,20 @@ export class OfferMaintenanceComponent implements OnInit {
 
   setJobActive(id) {
 
+
     this.jobService.setActiveJob(id)
       .subscribe(
         data => { console.log("UPDATED: ", data) },
         error => { console.log("Error", error) }
       );
 
-    if (this.searchBarInput != undefined) {
-      // this.loadActiveJobs(this.searchBarInput,
-      // this.pagination.pageNumber, this.pagination.pageSize)
-      // this.loadInactiveJobs()
-    }
-    else {
-      // this.loadActiveJobs('_',
-      // this.pagination.pageNumber, this.pagination.pageSize)
-      // this.loadInactiveJobs()
-    }
+      this.refreshData()
+
+      this.interval = setInterval(() => {
+      this.refreshData();
+    }, 500)
+
+    
   }
 
   setJobInactive(id) {
@@ -564,6 +585,12 @@ export class OfferMaintenanceComponent implements OnInit {
         data => { console.log("UPDATED: ", data) },
         error => { console.log("Error", error) }
       )
+
+    this.refreshData()
+
+    this.interval = setInterval(() => {
+      this.refreshData();
+    }, 500)
 
   }
 
@@ -607,23 +634,76 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })
 
-    if (this.searchBarInput != undefined) {
-      this.jobService.universalSearchCount('_',
-        this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: number) => {
-          this.totalJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalJobs)
-          this.activePaginatorSize = this.pagination.paginatorSize
-          this.activeCollectionSize = this.pagination.getCollectionSize()
-        })
+    this.refreshData()
 
-      this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
-        .subscribe((data: IJobOffer[]) => {
-          this.availableJobs = data['Data'];
-          this.filteredJobs = this.availableJobs;
-        })
+  }
+
+  refreshData() {
+
+    if (this.searchBarInput === undefined || this.searchBarInput === '') {
+      // load active jobs
+      this.jobTotalSubscription.add(
+        this.jobService.universalSearchCount('_',
+          this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: number) => {
+            this.totalJobs = data['Data'][0]
+            this.pagination.setPageRange(this.totalJobs)
+            this.activePaginatorSize = this.pagination.paginatorSize
+            this.activeCollectionSize = this.pagination.getCollectionSize()
+          })
+      )
+      this.jobSubscription.add(
+        this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: IJobOffer[]) => {
+            this.availableJobs = data['Data'];
+            // this.filteredJobs = this.availableJobs;
+            this.sortedData = this.availableJobs.slice();
+          })
+      )
+
+      // load inactive jobs
+      this.jobInactiveTotalSubscription.add(
+        this.jobService.universalSearchCountInactive('_',
+          this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: number) => {
+            this.totalInactiveJobs = data['Data'][0]
+            this.pagination.setPageRange(this.totalInactiveJobs)
+            this.inactivePaginatorSize = this.pagination.paginatorSize
+            this.inactiveCollectionSize = this.pagination.getCollectionSize()
+          })
+      )
+
+      this.jobInactiveSubscription.add(
+        this.jobService.universalSearchInactive('_', this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: IJobOffer[]) => {
+            this.inactiveJobs = data['Data'];
+            // this.inactiveFilteredJobs = this.inactiveJobs;
+            this.sortedInactive = this.inactiveJobs.slice();
+          })
+      )
+      // load drafts
+      this.draftTotalSubscription.add(
+        this.jobService.universalSearchCountDrafts()
+          .subscribe((data: number) => {
+            this.totalDrafts = data['Data'][0]
+            this.pagination.setPageRange(this.totalInactiveJobs)
+            this.draftPaginatorSize = this.pagination.paginatorSize
+            this.draftsCollectionSize = this.pagination.getCollectionSize()
+          })
+      )
+
+      this.draftSubscription.add(
+        this.jobService.universalSearchDrafts('_', this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: IJobOffer[]) => {
+            this.draftJobs = data['Data'];
+            // this.draftsFilteredJobs = this.draftJobs;
+            this.sortedDrafts = this.draftJobs.slice();
+          })
+      )
+
     }
     else {
+      // load active jobs
       this.jobService.universalSearchCount(this.searchBarInput,
         this.pagination.pageNumber, this.pagination.pageSize)
         .subscribe((data: number) => {
@@ -637,25 +717,88 @@ export class OfferMaintenanceComponent implements OnInit {
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
           this.filteredJobs = this.availableJobs;
+          this.sortedData = this.availableJobs.slice();
+        })
+
+      // load inactive jobs
+      this.jobService.universalSearchCountInactive(this.searchBarInput,
+        this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: number) => {
+          this.totalInactiveJobs = data['Data'][0]
+          this.pagination.setPageRange(this.totalInactiveJobs)
+          this.inactivePaginatorSize = this.pagination.paginatorSize
+          this.inactiveCollectionSize = this.pagination.getCollectionSize()
+        })
+
+      this.jobService.universalSearchInactive(this.searchBarInput, this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.inactiveJobs = data['Data'];
+          this.inactiveFilteredJobs = this.inactiveJobs;
+          this.sortedInactive = this.inactiveJobs.slice();
+        })
+
+      // load drafts
+      this.jobService.universalSearchCountDrafts()
+        .subscribe((data: number) => {
+          this.totalDrafts = data['Data'][0]
+          this.pagination.setPageRange(this.totalInactiveJobs)
+          this.draftPaginatorSize = this.pagination.paginatorSize
+          this.draftsCollectionSize = this.pagination.getCollectionSize()
+        })
+
+      this.jobService.universalSearchDrafts(this.searchBarInput, this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: IJobOffer[]) => {
+          this.draftJobs = data['Data'];
+          this.draftsFilteredJobs = this.draftJobs;
+          this.sortedDrafts = this.draftJobs.slice();
         })
     }
-
   }
 
+
   /// Sorting
-  sortedData:IJobOffer[]
+  sortedData: IJobOffer[]
+  sortedDrafts: IJobOffer[]
+  sortedInactive: IJobOffer[]
 
   sortData(sort: Sort) {
 
-    const data = this.availableJobs.slice();
+    const aJobs = this.availableJobs.slice();
+    const iJobs = this.inactiveJobs.slice();
+    const dJobs = this.draftJobs.slice();
+
     if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
+      this.sortedData = aJobs;
+      this.sortedInactive = iJobs;
+      this.sortedDrafts = dJobs;
       return;
     }
 
-    console.log(this.sortedData)
+    this.sortedData = aJobs.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'jobName': return compare(a.jobName, b.jobName, isAsc);
+        case 'company': return compare(a.company, b.company, isAsc);
+        case 'location': return compare(a.city, b.city, isAsc);
+        case 'jobType': return compare(a.jobType, b.jobType, isAsc);
+        case 'jobCategory': return compare(a.jobCategory, b.jobCategory, isAsc);
+        default: return 0;
+      }
+    });
 
-    this.sortedData = data.sort((a, b) => {
+    this.sortedInactive = iJobs.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'jobName': return compare(a.jobName, b.jobName, isAsc);
+        case 'company': return compare(a.company, b.company, isAsc);
+        case 'location': return compare(a.city, b.city, isAsc);
+        case 'jobType': return compare(a.jobType, b.jobType, isAsc);
+        case 'jobCategory': return compare(a.jobCategory, b.jobCategory, isAsc);
+        default: return 0;
+      }
+    });
+
+    this.sortedDrafts = dJobs.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'jobName': return compare(a.jobName, b.jobName, isAsc);
@@ -667,9 +810,10 @@ export class OfferMaintenanceComponent implements OnInit {
       }
     });
   }
-
 }
 
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
+

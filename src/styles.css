@@ -37,7 +37,6 @@ p {font-size: 16px;}
     /*Controla las palabras (links) en toda la aplicacion  */
     /* color: #25326a; */
     color: white;
-
     font-family: Poppins;
     font-size:100%;
     
@@ -54,6 +53,7 @@ p {font-size: 16px;}
 }
 
 
+
 /* select{
     /*something needs to go here 
 }*/
@@ -66,13 +66,23 @@ img{
 
 }
 
+ngb-pagination /deep/ .page-link {
+    color: #25326a;
+    background-color: white !important;
+}
+/* 
+ngb-pagination /deep/ .page-item.disabled {
+    color: #25326a;
+    background-color: #25326a ;
+} */
 
 
 .btn {
 
   border-radius: 4px;
   background-color: #FFFFFF;
-  border: 1px solid #25326a;
+  border: 1px solid #25326a !important;
+  border-color: #25326a;
   color: #25326a;
   text-align: center;
   font-size: 14px;

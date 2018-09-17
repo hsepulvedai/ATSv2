@@ -1,8 +1,3 @@
 /* ngb-pagination /deep/ .page-link .page-item.disabled {
     color: red;
 } */
-
-ngb-pagination /deep/ .page-link {
-    color: white;
-    background-color: #25326a !important;
-}

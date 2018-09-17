@@ -1,114 +1,116 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-<style>
-  th {
-    text-align: center;
-  }
+  <style>
+    th {
+      text-align: center;
+    }
 
-  tr {
-    text-align: left;
-  }
+    tr {
+      text-align: left;
+    }
 
-  td {
-    text-align: left;
-  }
-</style>
+    td {
+      text-align: left;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
+  <div class="container">
     <h3>B.2/B.3</h3>
-  <div class="row">
-    <div class="col-sm-3">
+    <div class="row">
+      <div class="col-sm-3">
 
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="offer-list-management">List</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Details</li>
-            </ol>
-          </nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="offer-list-management">List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Details</li>
+          </ol>
+        </nav>
 
-      <!-- <button style="margin: 10px" class="btn btn-sm" type="button" [routerLink]="['/offer-list-management']">
+        <!-- <button style="margin: 10px" class="btn btn-sm" type="button" [routerLink]="['/offer-list-management']">
          <i class="material-icons">
           arrow_back_ios
           </i>Back </button> -->
 
 
-        <div class="card" >
+        <div class="card">
           <div class="card-body">
 
-        <h1>{{job?.jobName}}</h1>
+            <h1>{{job?.jobName}}</h1>
 
-        <div>
-            <i class="material-icons" style="font-size: 4em; ">  perm_identity </i>
-          <div><strong> {{job?.company}}</strong></div>
+            <div>
+              <i class="material-icons" style="font-size: 4em; "> perm_identity </i>
+              <div><strong> {{job?.company}}</strong></div>
 
-          <div> {{job?.city}}</div>
+              <div> {{job?.city}}</div>
 
-          <div> {{job?.country}}</div>
+              <div> {{job?.country}}</div>
 
-          <div> {{job?.jobCategory}}</div>
+              <div> {{job?.jobCategory}}</div>
 
-          <div> {{job?.jobType}}</div>
+              <div> {{job?.jobType}}</div>
 
-          <div><strong> Description  </strong> {{job?.description}}</div>
+              <div><strong> Description </strong> {{job?.description}}</div>
+            </div>
+          </div>
         </div>
-        </div>
+
       </div>
 
-      </div>
+
+      <div class="col-sm-9">
+        <p># of Applicants: {{job?.numberOfApplicants}}</p>
+
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th style="text-align: left" scope="col">Applicant ID</th>
+              <th style="text-align: left" scope="col">Applicant Name</th>
+              <th scope="col">Application Status</th>
+              <th scope="col">Recruiter</th>
+              <th scope="col"> Resume</th>
+              <th scope="col"> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let applicant of applicants">
+              <td style="text-align: left" scope="row">{{applicant.applicantId}}</td>
+              <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
+
+              <td>
+                <select class="form-control" id="sel1">
+                  <option id="sel1op1" value="status.status" disabled="true" [selected]="true">{{applicant.applicationStatus}}</option>
+                  <option id="sel1op2" *ngFor="let appStatus of applicationStatus" style="color:#25326a;">{{appStatus.status}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-control" id="sel2" (ngModelChange)="onEmployeeChange($event)">
+
+                  <option value="applicant.employeeFirstName + applicant.employeeLastName" disabled="true" [selected]="true">{{applicant.employeeFirstName}}
+                    {{applicant.employeeLastName}}
+                  </option>
+                  <option *ngFor="let recruiter of employees" style="color:#25326a;"> {{recruiter.employeeFullName}}</option>
 
 
-    <div class="col-sm-9">
-      <p># of Applicants: {{job?.numberOfApplicants}}</p>
+                </select>
+              </td>
 
-      <table class="table table-striped ">
-        <thead>
-          <tr>
-            <th style="text-align: left" scope="col">Applicant ID</th>
-            <th style="text-align: left" scope="col">Applicant Name</th>
-            <th scope="col">Application Status</th>
-            <th scope="col">Recruiter</th>
-            <th scope="col"> Resume</th>
-            <th scope="col"> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let applicant of applicants">
-            <td style="text-align: left" scope="row">{{applicant.applicantId}}</td>
-            <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
-
-            <td>
-              <select class="form-control" id="sel1">
-                <option value="status.status" disabled="true" [selected]="true">{{applicant.applicationStatus}}</option>
-                <option *ngFor="let appStatus of applicationStatus" style="color:#25326a;">{{appStatus.status}}</option>
-
-              </select>
-            </td>
-            <td>
-              <select class="form-control" id="sel2" (ngModelChange)="onEmployeeChange($event)">
-
-                <option value="applicant.employeeFirstName + applicant.employeeLastName" disabled="true" [selected]="true">{{applicant.employeeFirstName}}
-                  {{applicant.employeeLastName}}
-                </option>
-                <option *ngFor="let recruiter of employees" style="color:#25326a;"> {{recruiter.employeeFullName}}</option>
-
-
-              </select>
-            </td>
-
-            <td><a href="#">View</a></td>
-            <td>
-              <button class="btn btn-sm" type="button" (click)="save(applicant.applicationId, status.id)">
-                <span class="glyphicon glyphicon-floppy-disk"></span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <td><a href="#">View</a></td>
+              <td>
+                <button class="btn btn-sm" type="button" (click)="save(applicant.applicationId)">
+                    <i class="material-icons"> save_alt </i> Save
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
 
       </div>
@@ -117,4 +119,5 @@
 
 
 </body>
+
 </html>
