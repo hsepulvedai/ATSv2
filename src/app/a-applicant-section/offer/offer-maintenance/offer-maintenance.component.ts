@@ -285,7 +285,7 @@ export class OfferMaintenanceComponent implements OnInit {
       this.jobService.universalSearch('_', page, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
-          this.filteredJobs = this.availableJobs;
+          // this.filteredJobs = this.availableJobs;
           this.sortedData = this.filteredJobs
         })
     }
@@ -293,7 +293,7 @@ export class OfferMaintenanceComponent implements OnInit {
       this.jobService.universalSearch(this.searchBarInput, page, this.pagination.pageSize)
         .subscribe((data: IJobOffer[]) => {
           this.availableJobs = data['Data'];
-          this.filteredJobs = this.availableJobs;
+          // this.filteredJobs = this.availableJobs;
           this.sortedData = this.availableJobs
 
         })
