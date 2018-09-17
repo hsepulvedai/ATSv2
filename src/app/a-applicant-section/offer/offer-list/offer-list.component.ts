@@ -186,6 +186,8 @@ universalSearch() {
         this.sortedData = this.availableJobs.slice();
       })
 
+      console.log(this.sortedData)
+
       this.pageSize =  this.pagination.pageSize
 
     this.search = new FormControl();

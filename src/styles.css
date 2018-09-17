@@ -11,6 +11,7 @@ body {
     margin: 0;
     padding: 0;
     background-color:white;
+    /* font-family:'PTSansRegular', Arial, Helvetica, sans-serif; */
 }
 p {font-size: 16px;}
 
@@ -24,16 +25,19 @@ p {font-size: 16px;}
 
 
 .navbar {
+
     /*Controla la barra de navegacion como tal */
-    background-color: #13316e;
-   /* background-color:#25326a; */
-   height: 20%;
+    /* background-color: #13316e; */
+   background-color:#25326a;
+   /* height: 20%; */
    
 }
 
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    color: #25326a;
+    /* color: #25326a; */
+    color: white;
+
     font-family: Poppins;
     font-size:100%;
     

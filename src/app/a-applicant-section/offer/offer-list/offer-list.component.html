@@ -76,10 +76,15 @@
 
           </div>
 
-          <!--Table-->
-          <table matSort (matSortChange)="sortData($event)" id="example" class="table table-striped">
+          <div class="row" style="margin-top:1em;">
+            <div class="col-md-3">
+              <p *ngIf="totalJobs === undefined"> Showing 0 of 0 </p>
+              <p *ngIf="!(page == paginatorSize) && totalJobs != undefined ">Showing {{pageSize * page}} of {{totalJobs}}</p>
+              <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
+            </div>
+          </div>
 
-            <!--Table head-->
+          <table matSort (matSortChange)="sortData($event)" id="example" class="table table-striped">
             <thead>
               <tr>
                 <th mat-sort-header="jobName">Job Title</th>
@@ -90,15 +95,11 @@
                 <th>Apply</th>
               </tr>
             </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody align="center" *ngIf="sortedData === undefined">
+            <tbody *ngIf="sortedData === undefined">
               No jobs to show
             </tbody>
-            <tbody>
-              <tr *ngFor="let job of sortedData">
-                <td *ngIf="filteredJobs == []"> No items to show</td>
+            <tbody *ngIf="!(sortedData === undefined)">
+              <tr align="center" *ngFor="let job of sortedData">
                 <td>{{job.jobName}}</td>
                 <td>{{job.company}}</td>
                 <td>{{job.city}}, {{job.country}}</td>
@@ -110,21 +111,14 @@
               </tr>
             </tbody>
             <!--Table body-->
-            <div class="row" style="margin-top:1em;">
-              <div class="col-md-3">
-                <p *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
-                <p *ngIf="page == paginatorSize">Showing {{totalJobs}} of {{totalJobs}}</p>
-              </div>
-              <div class="col-md-9">
-                <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-                  [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                </ngb-pagination>
-              </div>
-            </div>
           </table>
         </div>
       </div>
     </div>
   </div>
+  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+    [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+  </ngb-pagination>
 </body>
+
 </html>
