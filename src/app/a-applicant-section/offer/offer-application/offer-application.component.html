@@ -21,24 +21,17 @@
 
 <div class="container" >
   <div class="row">
-    <div class="col-sm-3">
-    
-
-        <div class="card" >
-          <div class="card-body">
-
-          <h1>{{job?.jobName}}</h1>
-          <i class="material-icons" style="font-size: 4em; ">  perm_identity </i>
+    <div class="col-sm-12">
+        <div class="card descriptionbox" >
+          <div class="card-body" >
             <div>
-                <div><strong> {{job?.company}}</strong> </div>  
-                
-             <div> {{job?.city}}</div>  
-               
-             <div> {{job?.country}}</div>  
-                
-             <div> {{job?.jobCategory}}</div>   
-                
-             <div> {{job?.jobType}}</div>  
+         <h5 style="align-content: left">{{job?.jobName}}</h5>
+          <i class="material-icons " style="font-size: 3em; ">  perm_identity </i>
+           
+          </div>
+            <div>
+                <strong> {{job?.company}}</strong><br>        
+             <p> {{job?.city}} , {{job?.country}} / {{job?.jobCategory}} /  {{job?.jobType}} </p>
                 
               <div><strong> Description : </strong> {{job?.description}}</div>  
                 
@@ -46,8 +39,10 @@
           </div>
           </div>
         </div>
-      <div class="col-sm-9">
-        <div class="card">
+  </div>
+        <div class="row"> 
+      <div class="col-sm-12">
+        <div class="card" style="border-bottom: white;border-right: white; border-left: white;border-top: white;">
           <div class="card-body">
             <h3 class="card-title" style="padding-bottom: 8px;">Applicant Information</h3>
             

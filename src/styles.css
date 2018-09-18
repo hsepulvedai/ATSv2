@@ -57,7 +57,11 @@ p {font-size: 16px;}
 /* select{
     /*something needs to go here 
 }*/
-
+.descriptionbox{
+    width: 70%;
+    margin-left:30%;
+    
+  }
 
 
 img{
