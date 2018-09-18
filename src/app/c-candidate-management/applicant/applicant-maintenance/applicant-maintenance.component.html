@@ -205,7 +205,7 @@
               <h3> Applicants </h3>
               <div class="row" style="margin-bottom: 2%">
                 
-                  <div class="col-sm-3">
+                  <div class="col-sm-6">
                     <label for="sortBy"><strong> Search: </strong></label><br>
       
                     <select (change)="sortDropdownChangeHandler($event)" id="sortBy" style="margin-right: 2%" class=" custom-select">
@@ -218,7 +218,7 @@
                      
                     </select>
                   </div>
-                  <div class="col-sm-3" style="margin-top: 3%">
+                  <div class="col-sm-6" style="margin-top: 3%">
                     <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
                       <option selected value="">Sort Type</option>
                       <option> Sort A-Z </option>
@@ -237,7 +237,7 @@
                 </div>
       
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <label for="filterBy"><strong> Filter by: </strong></label> <br>
                     <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
                        <option selected> All Applicants</option>
@@ -248,7 +248,7 @@
                       <option> Location/Country </option>
                     </select>
                     </div>
-                    <div class="col-md-3" style="margin-bottom: 2em">
+                    <div class="col-md-6" style="margin-bottom: 2em">
                     <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-top: 2em"
                       placeholder="Start Typing...">
                   </div>
