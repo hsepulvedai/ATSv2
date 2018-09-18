@@ -124,7 +124,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantService.universalSearchCountInactive('_', 
     this.pagination.pageNumber, this.pagination.pageSize)
     .subscribe((data: number) => {
-      this.totalApplicants = data['Data'][0]
+      this.totalInactiveApplicants = data['Data'][0]
       this.pagination.setPageRange(this.totalInactiveApplicants)
       this.inactivePaginatorSize = this.pagination.paginatorSize
       this.inactiveCollectionSize = this.pagination.getCollectionSize()

@@ -63,6 +63,8 @@ export class OfferListComponent implements OnInit
     //   this.refreshData();
     // }, 5000)
 
+ 
+
     this.pageSize = this.pagination.pageSize
 
     this.search = new FormControl();

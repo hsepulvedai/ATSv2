@@ -419,6 +419,7 @@ export class OfferMaintenanceComponent implements OnInit {
   currentCompany: ICompany
   selectedJobType: string = 'Default'
   selectedJobCategory: string = 'Default'
+  selectedJobStatus: string = 'Default'
   createdJob: IJobInsert
 
   inactiveJobs: IJobOffer[]
@@ -499,8 +500,6 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobService.setCurrentJobId(job.jobId)
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
-
-
       (this.closeResult = `Closed with: ${result}`)
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -630,9 +629,17 @@ export class OfferMaintenanceComponent implements OnInit {
     });
   }
 
+  
+
   selectJobCatChangeHandler(event: any) {
     //update the ui
     this.selectedJobCategory = event.target.value;
+  }
+
+  
+  selectJobStatChangeHandler(event: any) {
+    this.selectedJobStatus = event.target.value;
+
   }
 
 
@@ -654,6 +661,28 @@ export class OfferMaintenanceComponent implements OnInit {
 
     this.refreshData()
 
+  }
+
+  draftUpdate:IJobUpdate
+
+  updateJobDraft(updatedJobDraft){
+
+    this.draftUpdate = {
+       id: this.jobService.currentJobId,
+       name: updatedJobDraft.draftName, 
+       category: updatedJobDraft.draftCategory,
+       type: updatedJobDraft.draftType,
+       description: updatedJobDraft.draftDescription
+
+    }
+
+
+    this.jobService.updateJob(this.draftUpdate)
+    .subscribe(data => { console.log("Updated:" + data) },
+        error => { console.error("Error: ", error) })
+
+    this.refreshData()
+    
   }
 
   refreshData() {
