@@ -6,4 +6,5 @@ export interface IJobUpdate {
     type?:string,
     status?:string,
     description?: string
+
 }

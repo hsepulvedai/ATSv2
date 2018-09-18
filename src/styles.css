@@ -43,7 +43,7 @@ p {font-size: 16px;}
 }
 .breadcrumb{
     background-color:white;
-    
+    width: 25%;
 }
 .breadcrumb-item{
     color: #df136f;
@@ -57,8 +57,11 @@ p {font-size: 16px;}
 /* select{
     /*something needs to go here 
 }*/
-
-
+.descriptionbox{
+    width: 70%;
+    margin-left:30%;
+    
+}
 
 img{
     width: 8em;    
