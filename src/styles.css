@@ -43,7 +43,7 @@ p {font-size: 16px;}
 }
 .breadcrumb{
     background-color:white;
-    width: 30%;
+    width: 25%;
 }
 .breadcrumb-item{
     color: #df136f;
@@ -62,7 +62,6 @@ p {font-size: 16px;}
     margin-left:30%;
     
 }
-
 
 img{
     width: 8em;    
