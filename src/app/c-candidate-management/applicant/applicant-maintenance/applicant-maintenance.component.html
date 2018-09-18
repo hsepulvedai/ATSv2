@@ -255,15 +255,17 @@
       
                 </div>
 
+              
                 <div class="row">
-                  <div class="col-md-12" style="text-align: end">
-                    <p *ngIf="totalApplicants === undefined || totalApplicants === 0"> Showing 0 of 0 </p>
-                    <p *ngIf="!(totalApplicants === undefined || totalApplicants === 0) && !(activePageNumber == activePaginatorSize)">Showing
-                      {{pageSize * activePageNumber}} of {{totalJobs}}</p>
-                    <p *ngIf="activePageNumber == activePaginatorSize  && (totalApplicants != undefined || totalApplicants != 0)">Showing
-                      {{totalJobs}} of {{totalJobs}}</p>
-                  </div>
-                </div>
+                    <div class="col-md-12" style="text-align: end">
+                      <p *ngIf="totalApplicants === undefined || totalApplicants === 0"> Showing 0 of 0 </p>
+                      <p *ngIf="!(totalApplicants === undefined || totalApplicants === 0) && !(activePageNumber == activePaginatorSize)">Showing
+                        {{pageSize * activePageNumber}} of {{totalApplicants}}</p>
+                      <p *ngIf="activePageNumber == activePaginatorSize  && (totalApplicants != undefined || totalApplicants != 0)">Showing
+                        {{totalApplicants}} of {{totalApplicants}}</p>
+                    </div>
+                 </div>
+
 
           <div>
   
@@ -297,25 +299,13 @@
                       </i> Remove </button> </td>
                 </tr>
               </tbody>
-              <!--Table body-->
-              <div class="row">
-                  <div class="col-md-5">
-                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalApplicants}}</p>
-                      <p *ngIf="page == paginatorSize">Showing {{totalApplicants}} of {{totalApplicants}}</p>
-                  </div>
-                  <div class="col-md-7">
-                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
-                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
-                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                      </ngb-pagination>
-                  </div>
-              
-                </div>
             </table>
-            <!--Table-->
-  
           </div>
   
+          <hr>
+          <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize"
+          [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+          </ngb-pagination>
         </ng-template>
       </ngb-tab>
       <ngb-tab>
@@ -324,6 +314,17 @@
           <h3> Past Applicants </h3>
   
           <div >
+
+              <div class="row">
+                  <div class="col-md-12" style="text-align: end">
+                    <p *ngIf="totalInactiveApplicants === undefined || totalInactiveApplicants === 0"> Showing 0 of 0 </p>
+                    <p *ngIf="!(totalInactiveApplicants === undefined || totalInactiveApplicants === 0) && !(inactivePageNumber == inactivePaginatorSize)">Showing
+                      {{pageSize * inactivePageNumber}} of {{totalInactiveApplicants}}</p>
+                    <p *ngIf="inactivePageNumber == inactivePaginatorSize  && (totalInactiveApplicants != undefined || totalInactiveApplicants != 0)">Showing
+                      {{totalInactiveApplicants}} of {{totalInactiveApplicants}}</p>
+                  </div>
+               </div>
+
   
             <!--Table-->
             <table  matSort (matSortChange)="sortData($event)" class="table table-striped">
@@ -355,24 +356,16 @@
                           </i> Re-Post </button> </td>
                   </tr>
               </tbody>
-              <!--Table body-->
-              <div class="row">
-                  <div class="col-md-5">
-                      <p  *ngIf="!(page == paginatorSize)">Showing {{pageSize * page}} of {{totalApplicants}}</p>
-                      <p *ngIf="page == paginatorSize">Showing {{totalApplicants}} of {{totalApplicants}}</p>
-                  </div>
-                  <div class="col-md-7">
-                      <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" 
-                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" 
-                      (pageChange)="loadPage($event)" class="d-flex justify-content-end">
-                      </ngb-pagination>
-                  </div>
-              
-                </div>
+            
             </table>
-            <!--Table-->
+      
   
           </div>
+
+          <hr>
+          <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
+          [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageInactive($event)" class="d-flex justify-content-center">
+          </ngb-pagination> 
   
         </ng-template>
       </ngb-tab>
