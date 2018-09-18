@@ -24,6 +24,7 @@ p {font-size: 16px;}
     color:#df136f;
 }
 
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
@@ -78,8 +79,9 @@ img{
 ngb-pagination /deep/ .page-link {
     color: #25326a;
     background-color: white !important;
+    
 }
-/* 
+/*  Find way to change color on link text and current page
 ngb-pagination /deep/ .page-item.disabled {
     color: #25326a;
     background-color: #25326a ;
