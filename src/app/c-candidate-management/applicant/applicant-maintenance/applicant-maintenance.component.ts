@@ -125,9 +125,9 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.pagination.pageNumber, this.pagination.pageSize)
     .subscribe((data: number) => {
       this.totalApplicants = data['Data'][0]
-      this.pagination.setPageRange(this.totalApplicants)
-      this.activePaginatorSize = this.pagination.paginatorSize
-      this.activeCollectionSize = this.pagination.getCollectionSize()
+      this.pagination.setPageRange(this.totalInactiveApplicants)
+      this.inactivePaginatorSize = this.pagination.paginatorSize
+      this.inactiveCollectionSize = this.pagination.getCollectionSize()
     })
 
     this.applicantService.universalSearchInactive('_', this.pagination.pageNumber, this.pagination.pageSize)
@@ -303,7 +303,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
         .subscribe((data: IApplicantMaintInfo[]) => {
           this.allApplicants = data['Data'];
           this.inactiveFilteredApplicants = this.allPastApplicants;
-          this.sortedInactive = this.allApplicants
+          this.sortedInactive = this.allPastApplicants
         })
     }
     else {
@@ -311,7 +311,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
         .subscribe((data: IApplicantMaintInfo[]) => {
           this.allApplicants = data['Data'];
          this.inactiveFilteredApplicants = this.allPastApplicants;
-         this.sortedInactive = this.allApplicants;
+         this.sortedInactive = this.allPastApplicants;
         })
     }
   }
@@ -477,7 +477,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
   sortedData: IApplicantMaintInfo[]
   sortedInactive: IApplicantMaintInfo[]
 
-  
+
   sortData(sort:Sort){
 
     const aApplicants = this.allApplicants.slice();
