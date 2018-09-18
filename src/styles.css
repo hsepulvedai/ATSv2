@@ -105,8 +105,8 @@ ngb-pagination /deep/ .page-item.disabled {
 
 input{
     margin-bottom: 5em;
-    color: white;
-    background-color: #25326a;
+    color: #25326a;
+    background-color: white;
 }
 
 table{
