@@ -15,6 +15,8 @@ import { IJobUpdate } from '../../../shared/models/job_update.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { Sort } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { JobStatusService } from '../../../shared/services/job-status.service';
+import { IJobStatus } from '../../../shared/models/job_status.model';
 
 
 @Component({
@@ -66,7 +68,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   availableJobs: IJobOffer[]
 
-
   job: IJobOffer
 
   searchForm: FormGroup
@@ -84,11 +85,8 @@ export class OfferMaintenanceComponent implements OnInit {
   paginatorSizeInactive: number
   totalInactiveJobs: number
   paginatorCollectionSizeInactive: number
-
-  searchBarInputInactive: string
   sortByInactive: string
 
-  searchBarInputDrafts: string
   totalDrafts: number
   draftsFilteredJobs: IJobOffer[]
   draftJobs: IJobOffer[]
@@ -148,7 +146,7 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobService.universalSearchCountDrafts()
       .subscribe((data: number) => {
         this.totalDrafts = data['Data'][0]
-        this.pagination.setPageRange(this.totalInactiveJobs)
+        this.pagination.setPageRange(this.totalDrafts)
         this.draftPaginatorSize = this.pagination.paginatorSize
         this.draftsCollectionSize = this.pagination.getCollectionSize()
       })
@@ -170,10 +168,16 @@ export class OfferMaintenanceComponent implements OnInit {
         this.types = data['Data']
       })
 
+    this.jobStatusService.showAllStatus()
+      .subscribe((data: IJobStatus[]) => {
+        this.allStatus = data['Data']
+      })
+
     // These are the controls for the edit job form.
-    this.name = new FormControl(),
-      this.category = new FormControl(),
-      this.type = new FormControl(),
+    this.name = new FormControl()
+      this.category = new FormControl()
+      this.type = new FormControl()
+      this.status = new FormControl()
       this.description = new FormControl()
 
 
@@ -206,6 +210,7 @@ export class OfferMaintenanceComponent implements OnInit {
       name: this.name,
       category: this.category,
       type: this.type,
+      status: this.status,
       description: this.description
     })
 
@@ -232,10 +237,10 @@ export class OfferMaintenanceComponent implements OnInit {
   universalSearch() {
 
     if (this.searchBarInput != undefined) {
-      // this.loadActiveJobs()
-      // this.loadInactiveJobs()
+      this.refreshData()
     }
   }
+
 
   get listFilter(): string {
     return this._listFilter;
@@ -249,7 +254,6 @@ export class OfferMaintenanceComponent implements OnInit {
 
   performFilter(filterBy: string): IJobOffer[] {
     filterBy = filterBy.toLocaleLowerCase();
-
 
     if (this.selectedFilter === 'Job Title')
       return this.availableJobs.filter((job: IJobOffer) =>
@@ -409,13 +413,7 @@ export class OfferMaintenanceComponent implements OnInit {
       })
   }
 
-  universalSearchInactive() {
 
-    // if (this.searchBarInputInactive != undefined)
-    // this.loadActiveJobs()
-    // this.loadInactiveJobs()
-
-  }
 
 
   currentCompany: ICompany
@@ -430,6 +428,7 @@ export class OfferMaintenanceComponent implements OnInit {
   categories: IJobCategory[]
 
   types: IJobType[]
+  allStatus :IJobStatus[]
 
   closeResult: string;
 
@@ -442,10 +441,12 @@ export class OfferMaintenanceComponent implements OnInit {
   jobType: FormControl
   jobDescription: FormControl
 
+
   jobEditForm: FormGroup
   name: FormControl
   category: FormControl
   type: FormControl
+  status:FormControl
   description: FormControl
 
   currentJobType: string = ''
@@ -460,6 +461,7 @@ export class OfferMaintenanceComponent implements OnInit {
     private jobCategoryService: JobCategoryService,
     private jobTypeService: JobTypeService,
     private companyService: CompanyService,
+    private jobStatusService:JobStatusService,
     private pagination: PaginationService,
     private route: ActivatedRoute,
     private modalService: NgbModal) { }
@@ -472,6 +474,7 @@ export class OfferMaintenanceComponent implements OnInit {
     this.jobEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
     this.jobEditForm.controls['type'].setValue(job.jobType, { onlySelf: true })
     this.jobEditForm.get('description').setValue(job.description)
+    this.jobEditForm.controls['status'].setValue(job.jobStatus, { onlySelf: true })
 
     this.jobService.setCurrentJobId(job.jobId)
 
@@ -601,6 +604,20 @@ export class OfferMaintenanceComponent implements OnInit {
     );
   }
 
+  postDraft() {
+    this.jobService.setActiveJob(this.jobService.currentJobId)
+    .subscribe(
+      data => { console.log("UPDATED: ", data) },
+      error => { console.log("Error", error) }
+    );
+
+    // this.refreshData()
+
+    this.interval = setInterval(() => {
+      this.refreshData();
+    }, 500)
+  }
+
   //event handler for the select element's change event
   selectJobTypeChangeHandler(event: any) {
     //update the ui
@@ -627,6 +644,7 @@ export class OfferMaintenanceComponent implements OnInit {
       name: updatedJobForm.name,
       category: updatedJobForm.category,
       type: updatedJobForm.type,
+      status:updatedJobForm.status,
       description: updatedJobForm.description
     }
 
@@ -686,7 +704,7 @@ export class OfferMaintenanceComponent implements OnInit {
         this.jobService.universalSearchCountDrafts()
           .subscribe((data: number) => {
             this.totalDrafts = data['Data'][0]
-            this.pagination.setPageRange(this.totalInactiveJobs)
+            this.pagination.setPageRange(this.totalDrafts)
             this.draftPaginatorSize = this.pagination.paginatorSize
             this.draftsCollectionSize = this.pagination.getCollectionSize()
           })

@@ -102,14 +102,11 @@
             </div>
           </div> -->
 
-          <div class="row">
-            <div class="col-md-4" style="text-anchor: end">
+          <div class="row" >
+            <div class="col-md-12" style="text-align: end">
               <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
-              <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize)">Showing {{pageSize * page}}
-                of {{totalJobs}}</p>
-              <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of
-                {{totalJobs}}
-              </p>
+              <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
+              <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of {{totalJobs}}</p>
             </div>
           </div>
 
