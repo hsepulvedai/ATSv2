@@ -25,47 +25,37 @@
   <div class="container">
     <h3>B.2/B.3</h3>
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-5">
 
-        <nav aria-label="breadcrumb">
+        <nav aria-label="breadcrumb" style="margin-top:20%; position:relative;" >
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="offer-list-management">List</a></li>
             <li class="breadcrumb-item active" aria-current="page">Details</li>
           </ol>
         </nav>
+        </div>
+        <div class="col-sm-7">
 
-        <!-- <button style="margin: 10px" class="btn btn-sm" type="button" [routerLink]="['/offer-list-management']">
-         <i class="material-icons">
-          arrow_back_ios
-          </i>Back </button> -->
-
-
-        <div class="card">
+        <div class="card descriptionboxb2">
           <div class="card-body">
 
-            <h1>{{job?.jobName}}</h1>
+            <h5>{{job?.jobName}}</h5>
 
             <div>
-              <i class="material-icons" style="font-size: 4em; "> perm_identity </i>
+              <i class="material-icons" style="font-size: 3em; "> perm_identity </i>
               <div><strong> {{job?.company}}</strong></div>
 
-              <div> {{job?.city}}</div>
+               {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
 
-              <div> {{job?.country}}</div>
-
-              <div> {{job?.jobCategory}}</div>
-
-              <div> {{job?.jobType}}</div>
-
-              <div><strong> Description </strong> {{job?.description}}</div>
+              <div><strong> Description: </strong> {{job?.description}}</div>
             </div>
           </div>
         </div>
-
       </div>
+      </div>
+<div class="row">
 
-
-      <div class="col-sm-9">
+      <div class="col-sm-12">
         <p># of Applicants: {{job?.numberOfApplicants}}</p>
 
         <table class="table table-striped ">
