@@ -128,4 +128,15 @@ export class ApplicantService {
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
 }
 
+universalSearchInactive(keyword, pageNumber, pageSize){
+  return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantUniversalSearchInactive/search=' 
+   + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+}
+
+
+universalSearchCountInactive(keyword, pageNumber, pageSize){
+  return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantUniversalSearchCountInactive/search=' 
+    + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+}
+
 }
