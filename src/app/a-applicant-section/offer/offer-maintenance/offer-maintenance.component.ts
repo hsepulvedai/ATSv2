@@ -499,7 +499,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
     this.jobService.setCurrentJobId(job.jobId)
 
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-draft', size: 'lg' }).result.then((result) => {
       (this.closeResult = `Closed with: ${result}`)
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
