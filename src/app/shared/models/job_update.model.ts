@@ -4,5 +4,7 @@ export interface IJobUpdate {
     company?: string, 
     category?: string, 
     type?:string,
+    status?:string,
     description?: string
+
 }
