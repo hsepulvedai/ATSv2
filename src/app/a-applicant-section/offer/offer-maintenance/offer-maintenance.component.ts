@@ -683,7 +683,6 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
     }
 
-
     this.jobService.updateJob(this.draftUpdate)
       .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })

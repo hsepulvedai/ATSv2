@@ -254,43 +254,43 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.filteredApplicants = this.listInactiveFilter ? this.performFilter(this.listInactiveFilter) : this.allPastApplicants;
   }
 
-  performInactiveFilter(filterBy: string): IApplicantMaintInfo[] {
-    filterBy = filterBy.toLocaleLowerCase();
+  // performInactiveFilter(filterBy: string): IApplicantMaintInfo[] {
+  //   filterBy = filterBy.toLocaleLowerCase();
 
 
-    if (this.selectedFilter === 'Name/FirstName')
-      return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
-        applicant.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  //   if (this.selectedFilter === 'Name/FirstName')
+  //     return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
+  //       applicant.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
 		
 	
-    else if (this.selectedFilter === 'Name/LastName')
-      return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
-        applicant.lastName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  //   else if (this.selectedFilter === 'Name/LastName')
+  //     return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
+  //       applicant.lastName.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
-    else if (this.selectedFilter === 'Location/City')
-      return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
-        applicant.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
+  //   else if (this.selectedFilter === 'Location/City')
+  //     return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
+  //       applicant.city.toLocaleLowerCase().indexOf(filterBy) !== -1)
 	
-	else if (this.selectedFilter === 'Email')
-      return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
-        applicant.email.toLocaleLowerCase().indexOf(filterBy) !== -1);
+	// else if (this.selectedFilter === 'Email')
+  //     return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
+  //       applicant.email.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
 
-    else if (this.selectedFilter === 'Location/Country')
-      return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
-        applicant.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  //   else if (this.selectedFilter === 'Location/Country')
+  //     return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) =>
+  //       applicant.country.toLocaleLowerCase().indexOf(filterBy) !== -1);
 
-    else
-      // return this.allApplicants
-      // Universal search (if no filter selected default all applicants) 
-      return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) => {
-        return applicant.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1
-		      || applicant.lastName.toLocaleLowerCase().indexOf(filterBy) !== -1
-		      || applicant.email.toLocaleLowerCase().indexOf(filterBy) !== -1
-          || applicant.city.toLocaleLowerCase().indexOf(filterBy) !== -1
-          || applicant.country.toLocaleLowerCase().indexOf(filterBy) !== -1
-      })
-  }
+  //   else
+  //     // return this.allApplicants
+  //     // Universal search (if no filter selected default all applicants) 
+  //     return this.allPastApplicants.filter((applicant: IApplicantMaintInfo) => {
+  //       return applicant.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1
+	// 	      || applicant.lastName.toLocaleLowerCase().indexOf(filterBy) !== -1
+	// 	      || applicant.email.toLocaleLowerCase().indexOf(filterBy) !== -1
+  //         || applicant.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+  //         || applicant.country.toLocaleLowerCase().indexOf(filterBy) !== -1
+  //     })
+  // }
 
   
     
