@@ -137,10 +137,9 @@ export class ApplicantMaintenanceComponent implements OnInit {
        this.allPastApplicants = data['Data'];
        this.inactiveFilteredApplicants = this.allPastApplicants;
        this.sortedInactive = this.allPastApplicants.slice();
+       console.log(this.allPastApplicants)
     })
 
-
- 
     this.initilalizeEditApplicantForm()
     this.initializeAddApplicantForm()
 
@@ -624,7 +623,6 @@ export class ApplicantMaintenanceComponent implements OnInit {
         default:return 0;
       }
     });
-
 
   }
 

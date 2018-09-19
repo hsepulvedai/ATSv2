@@ -25,8 +25,8 @@ export class OfferListManagementComponent implements OnInit {
     this.jobService.showAvalaibleJobsHR()
     .subscribe((data:IJobOfferHR[]) => {
       this.jobs = data['Data'];
-
-      console.log(this.jobs[0])
+      
+      // console.log(this.jobs)
     
     
     })

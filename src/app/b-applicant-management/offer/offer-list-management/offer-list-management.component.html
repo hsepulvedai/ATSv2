@@ -30,6 +30,7 @@
                 <th scope="col">Status</th>
                 <th scope="col">Category</th>
                 <th scope="col">Type</th>
+                <th scope="col">Posted Status</th>
                 <th scope="col"></th>
             </thead>
             <tbody>
@@ -40,6 +41,8 @@
                 <td> {{job.jobStatus}}</td>
                 <td>{{job.jobCategory}}</td>
                 <td>{{job.jobType}}</td>
+                <td *ngIf="job.active === true">Posted</td>
+                <td *ngIf="job.active === false">Not Posted</td>
                 <td><button class="btn" (click)="goToOfferDetail(job)"><i class="material-icons">
                     notes
                     </i>Details</button></td>

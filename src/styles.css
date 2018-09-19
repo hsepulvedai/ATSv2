@@ -77,10 +77,11 @@ img{
 }
 
 ngb-pagination /deep/ .page-link {
-    color: #25326a;
+    color: #25326a !important;
     background-color: white !important;
-    
 }
+
+
 /*  Find way to change color on link text and current page
 ngb-pagination /deep/ .page-item.disabled {
     color: #25326a;
