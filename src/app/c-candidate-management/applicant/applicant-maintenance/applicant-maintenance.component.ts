@@ -9,6 +9,7 @@ import { NgbModal,  ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material';
+import { IApplicantUpdate } from '../../../shared/models/applicant_update.model';
 
 @Component({
   selector: 'app-applicant-maintenance',
@@ -68,6 +69,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
   currentApplicant
   newApplicant:IApplicantInsert
+  updatedApplicant:IApplicantUpdate
 
   allApplicants: IApplicantMaintInfo[]
   allPastApplicants: IApplicantMaintInfo[]
@@ -330,6 +332,8 @@ export class ApplicantMaintenanceComponent implements OnInit {
      .subscribe((data:IApplicantInfo[]) => {
        this.allPastApplicants = data['Data'];
       }) 
+
+      this.refreshData()
   }
 
   makeApplicantActive(id) {
@@ -346,6 +350,8 @@ export class ApplicantMaintenanceComponent implements OnInit {
      .subscribe((data:IApplicantInfo[]) => {
        this.allPastApplicants = data['Data'];
       }) 
+
+      this.refreshData()
   }
 
   openAddApplicant(content) {
@@ -374,6 +380,8 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.applicantService.addApplicantMaintenance(this.newApplicant)
     .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
+
+        this.refreshData()
    
   }
 
@@ -399,6 +407,29 @@ export class ApplicantMaintenanceComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  updateApplicant(updatedApplicantForm, applicant){
+
+    this.updatedApplicant = {
+      id: applicant.id,
+      firstName: updatedApplicantForm.applicantFirstName,
+      lastName:updatedApplicantForm.applicantLastName,
+      email: updatedApplicantForm.applicantEmail,
+      phone: updatedApplicantForm.applicantPhoneNumber,
+      addressLine: updatedApplicantForm.applicantAddressLine,
+      addressLine2: updatedApplicantForm.applicantAddressLine2,
+      country: updatedApplicantForm.applicantCountry,
+      city: updatedApplicantForm.applicantCity,
+      stateProvince: updatedApplicantForm.applicantState,
+      zipCode: updatedApplicantForm.applicantZipCode
+
+    }
+
+
+    this.applicantService.updateApplicant(this.updatedApplicant)
+
+    this.refreshData();
   }
 
 
@@ -473,6 +504,88 @@ export class ApplicantMaintenanceComponent implements OnInit {
    
   }
  
+  refreshData() {
+
+    if (this.searchBarInput === undefined || this.searchBarInput === '') {
+      // load active applicants
+      this.applicantTotalSubcription.add(
+        this.applicantService.universalSearchCount('_',
+          this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: number) => {
+            this.totalApplicants = data['Data'][0]
+            this.pagination.setPageRange(this.totalApplicants)
+            this.activePaginatorSize = this.pagination.paginatorSize
+            this.activeCollectionSize = this.pagination.getCollectionSize()
+          })
+      )
+      this.applicantSubscription.add(
+        this.applicantService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: IApplicantMaintInfo[]) => {
+            this.allApplicants = data['Data'];
+            this.sortedData = this.allApplicants.slice();
+          })
+      )
+
+      // load inactive applicants
+      this.applicantTotalInactiveSubcription.add(
+        this.applicantService.universalSearchCountInactive('_',
+          this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: number) => {
+            this.totalInactiveApplicants = data['Data'][0]
+            this.pagination.setPageRange(this.totalInactiveApplicants)
+            this.inactivePaginatorSize = this.pagination.paginatorSize
+            this.inactiveCollectionSize = this.pagination.getCollectionSize()
+          })
+      )
+
+      this.applicantInactiveSubscription.add(
+        this.applicantService.universalSearchInactive('_', this.pagination.pageNumber, this.pagination.pageSize)
+          .subscribe((data: IApplicantMaintInfo[]) => {
+            this.allPastApplicants = data['Data'];
+            this.sortedInactive = this.allPastApplicants.slice();
+          })
+      )
+   
+
+    }
+    else {
+      // load active applicants
+      this.applicantService.universalSearchCount(this.searchBarInput,
+        this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: number) => {
+          this.totalApplicants = data['Data'][0]
+          this.pagination.setPageRange(this.totalApplicants)
+          this.activePaginatorSize = this.pagination.paginatorSize
+          this.activeCollectionSize = this.pagination.getCollectionSize()
+        })
+
+      this.applicantService.universalSearch(this.searchBarInput, this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: IApplicantMaintInfo[]) => {
+          this.allApplicants = data['Data'];
+          this.filteredApplicants = this.allApplicants;
+          this.sortedData = this.allApplicants.slice();
+        })
+
+      // load inactive applicants
+      this.applicantService.universalSearchCountInactive(this.searchBarInput,
+        this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: number) => {
+          this.totalInactiveApplicants = data['Data'][0]
+          this.pagination.setPageRange(this.totalInactiveApplicants)
+          this.inactivePaginatorSize = this.pagination.paginatorSize
+          this.inactiveCollectionSize = this.pagination.getCollectionSize()
+        })
+
+      this.applicantService.universalSearchInactive(this.searchBarInput, this.pagination.pageNumber, this.pagination.pageSize)
+        .subscribe((data: IApplicantMaintInfo) => {
+          this.allPastApplicants = data['Data'];
+          this.inactiveFilteredApplicants = this.allPastApplicants;
+          this.sortedInactive = this.allPastApplicants.slice();
+        })
+
+ 
+    }
+  }
   
   sortedData: IApplicantMaintInfo[]
   sortedInactive: IApplicantMaintInfo[]

@@ -112,7 +112,7 @@
     </div>
     <div class="modal-body">
   
-      <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateApplicant(applicantEditForm.value);" >
+      <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px"  (ngSubmit)="updateApplicant(applicantEditForm.value);c('Save click')" >
   
     <div class="row smallrow" >
                   <div class="form-group col-sm-6">
@@ -180,7 +180,7 @@
                 <div class="row smallrow"></div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn " (click)="c('Save click')"><i class="material-icons">
+                    <button type="submit" class="btn " ><i class="material-icons">
                         save_alt
                         </i>Save</button>
                   </div>
