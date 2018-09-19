@@ -173,7 +173,6 @@
             </select>
           </div>
 
-
           <div class="form-group col-md-6">
             <label for="draftDescription"><strong>Description</strong></label>
             <textarea class="form-control" formControlName="draftDescription" name="draftDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
@@ -285,7 +284,6 @@
                 <td> {{job.city}}, {{job.country}} </td>
                 <td> {{job.jobCategory}} </td>
                 <td>{{job.jobType}}</td>
-
                 <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
                       edit
                     </i>Edit </button>
@@ -340,11 +338,11 @@
                   <td>
                     <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
                         edit
-                      </i> Edit
+                      </i>Edit
                     </button>
                     <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
                         subdirectory_arrow_left
-                      </i> Re-Post
+                      </i>Post
                     </button>
                   </td>
                 </tr>
@@ -401,7 +399,7 @@
                       edit
                     </i> Edit
                   </button>
-                  <button type="button" class="btn" (click)="deleteDraft()"> <i class="material-icons">
+                  <button type="button" class="btn" (click)="deleteDraft(draft.jobId)"> <i class="material-icons">
                       delete
                     </i> Delete
                   </button>

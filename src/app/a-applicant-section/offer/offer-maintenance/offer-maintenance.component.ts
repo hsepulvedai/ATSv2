@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
@@ -14,7 +14,7 @@ import { IJobInsert } from '../../../shared/models/job_insert.model';
 import { IJobUpdate } from '../../../shared/models/job_update.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { Sort } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { JobStatusService } from '../../../shared/services/job-status.service';
 import { IJobStatus } from '../../../shared/models/job_status.model';
 
@@ -24,7 +24,7 @@ import { IJobStatus } from '../../../shared/models/job_status.model';
   templateUrl: './offer-maintenance.component.html',
   styleUrls: ['./offer-maintenance.component.css']
 })
-export class OfferMaintenanceComponent implements OnInit {
+export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
 
   private jobSubscription: Subscription = new Subscription();
@@ -33,6 +33,8 @@ export class OfferMaintenanceComponent implements OnInit {
   private jobInactiveTotalSubscription: Subscription = new Subscription();
   private draftSubscription: Subscription = new Subscription();
   private draftTotalSubscription: Subscription = new Subscription();
+
+
 
   interval
 
@@ -68,6 +70,7 @@ export class OfferMaintenanceComponent implements OnInit {
 
   availableJobs: IJobOffer[]
 
+
   job: IJobOffer
 
   searchForm: FormGroup
@@ -99,6 +102,13 @@ export class OfferMaintenanceComponent implements OnInit {
   changeTab(event) {
     console.log(event.title)
     console.log('yes')
+  }
+
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+
   }
 
   ngOnInit() {
@@ -175,10 +185,10 @@ export class OfferMaintenanceComponent implements OnInit {
 
     // These are the controls for the edit job form.
     this.name = new FormControl()
-      this.category = new FormControl()
-      this.type = new FormControl()
-      this.status = new FormControl()
-      this.description = new FormControl()
+    this.category = new FormControl()
+    this.type = new FormControl()
+    this.status = new FormControl()
+    this.description = new FormControl()
 
 
     // These are the controls for the add job form.
@@ -429,7 +439,7 @@ export class OfferMaintenanceComponent implements OnInit {
   categories: IJobCategory[]
 
   types: IJobType[]
-  allStatus :IJobStatus[]
+  allStatus: IJobStatus[]
 
   closeResult: string;
 
@@ -447,7 +457,7 @@ export class OfferMaintenanceComponent implements OnInit {
   name: FormControl
   category: FormControl
   type: FormControl
-  status:FormControl
+  status: FormControl
   description: FormControl
 
   currentJobType: string = ''
@@ -462,7 +472,7 @@ export class OfferMaintenanceComponent implements OnInit {
     private jobCategoryService: JobCategoryService,
     private jobTypeService: JobTypeService,
     private companyService: CompanyService,
-    private jobStatusService:JobStatusService,
+    private jobStatusService: JobStatusService,
     private pagination: PaginationService,
     private route: ActivatedRoute,
     private modalService: NgbModal) { }
@@ -541,7 +551,9 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
 
-    // this.loadActiveJobs('_', 1, this.pagination.pageSize)
+    setTimeout(() => {this.refreshData()}, 200)
+
+    this.newJobForm.reset();
   }
 
   createDraft(newJobForm) {
@@ -559,7 +571,8 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(data => { console.log("POST:" + data) },
         error => { console.error("Error: ", error) })
 
-    // this.loadDrafts('_', 1, this.pagination.pageSize)
+    setTimeout(() => {this.refreshData()}, 200)
+
   }
 
   setJobActive(id) {
@@ -571,13 +584,9 @@ export class OfferMaintenanceComponent implements OnInit {
         error => { console.log("Error", error) }
       );
 
-      this.refreshData()
+      setTimeout(() => {this.refreshData()}, 200)
 
-      this.interval = setInterval(() => {
-      this.refreshData();
-    }, 500)
 
-    
   }
 
   setJobInactive(id) {
@@ -588,33 +597,28 @@ export class OfferMaintenanceComponent implements OnInit {
         error => { console.log("Error", error) }
       )
 
-    this.refreshData()
-
-    this.interval = setInterval(() => {
-      this.refreshData();
-    }, 500)
+      setTimeout(() => {this.refreshData()}, 200)
 
   }
 
-  deleteDraft() {
-    this.jobService.deleteDraft(this.jobService.currentJobId).subscribe(
+  deleteDraft(id) {
+    this.jobService.deleteDraft(id).subscribe(
       data => { console.log("DELETED: ", data) },
       error => { console.log("Error", error) }
     );
+
+    setTimeout(() => {this.refreshData()}, 200)
+
   }
 
   postDraft() {
     this.jobService.setActiveJob(this.jobService.currentJobId)
-    .subscribe(
-      data => { console.log("UPDATED: ", data) },
-      error => { console.log("Error", error) }
-    );
+      .subscribe(
+        data => { console.log("UPDATED: ", data) },
+        error => { console.log("Error", error) }
+      );
 
-    // this.refreshData()
-
-    this.interval = setInterval(() => {
-      this.refreshData();
-    }, 500)
+    setTimeout(() => {this.refreshData()}, 200)
   }
 
   //event handler for the select element's change event
@@ -629,14 +633,14 @@ export class OfferMaintenanceComponent implements OnInit {
     });
   }
 
-  
+
 
   selectJobCatChangeHandler(event: any) {
     //update the ui
     this.selectedJobCategory = event.target.value;
   }
 
-  
+
   selectJobStatChangeHandler(event: any) {
     this.selectedJobStatus = event.target.value;
 
@@ -651,7 +655,7 @@ export class OfferMaintenanceComponent implements OnInit {
       name: updatedJobForm.name,
       category: updatedJobForm.category,
       type: updatedJobForm.type,
-      status:updatedJobForm.status,
+      status: updatedJobForm.status,
       description: updatedJobForm.description
     }
 
@@ -659,30 +663,33 @@ export class OfferMaintenanceComponent implements OnInit {
       .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })
 
-    this.refreshData()
+
+
+    setTimeout(() => {this.refreshData()}, 200)
 
   }
 
-  draftUpdate:IJobUpdate
+  draftUpdate: IJobUpdate
 
-  updateJobDraft(updatedJobDraft){
+  updateJobDraft(updatedJobDraft) {
 
     this.draftUpdate = {
-       id: this.jobService.currentJobId,
-       name: updatedJobDraft.draftName, 
-       category: updatedJobDraft.draftCategory,
-       type: updatedJobDraft.draftType,
-       description: updatedJobDraft.draftDescription
+      id: this.jobService.currentJobId,
+      name: updatedJobDraft.draftName,
+      category: updatedJobDraft.draftCategory,
+      type: updatedJobDraft.draftType,
+      status: 'Draft',
+      description: updatedJobDraft.draftDescription
 
     }
 
 
     this.jobService.updateJob(this.draftUpdate)
-    .subscribe(data => { console.log("Updated:" + data) },
+      .subscribe(data => { console.log("Updated:" + data) },
         error => { console.error("Error: ", error) })
 
-    this.refreshData()
-    
+    setTimeout(() => {this.refreshData()}, 200)
+
   }
 
   refreshData() {
@@ -799,9 +806,11 @@ export class OfferMaintenanceComponent implements OnInit {
           this.draftsFilteredJobs = this.draftJobs;
           this.sortedDrafts = this.draftJobs.slice();
         })
-    }
-  }
 
+        
+    }
+
+  }
 
   /// Sorting
   sortedData: IJobOffer[]
