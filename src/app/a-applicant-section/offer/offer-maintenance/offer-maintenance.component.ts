@@ -118,55 +118,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
         this.currentCompany = data['Data'];
       })
 
-    // load active jobs
-    this.jobService.universalSearchCount('_',
-      this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: number) => {
-        this.totalJobs = data['Data'][0]
-        this.pagination.setPageRange(this.totalJobs)
-        this.activePaginatorSize = this.pagination.paginatorSize
-        this.activeCollectionSize = this.pagination.getCollectionSize()
-      })
+      setTimeout(() => {this.refreshData()}, 100)
 
-    this.jobService.universalSearch('_', this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: IJobOffer[]) => {
-        this.availableJobs = data['Data'];
-        this.filteredJobs = this.availableJobs;
-        this.sortedData = this.availableJobs.slice();
-      })
-
-    // load inactive jobs
-    this.jobService.universalSearchCountInactive('_',
-      this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: number) => {
-        this.totalInactiveJobs = data['Data'][0]
-        this.pagination.setPageRange(this.totalInactiveJobs)
-        this.inactivePaginatorSize = this.pagination.paginatorSize
-        this.inactiveCollectionSize = this.pagination.getCollectionSize()
-      })
-
-    this.jobService.universalSearchInactive('_', this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: IJobOffer[]) => {
-        this.inactiveJobs = data['Data'];
-        this.inactiveFilteredJobs = this.inactiveJobs;
-        this.sortedInactive = this.inactiveJobs.slice();
-      })
-
-    // load drafts
-    this.jobService.universalSearchCountDrafts()
-      .subscribe((data: number) => {
-        this.totalDrafts = data['Data'][0]
-        this.pagination.setPageRange(this.totalDrafts)
-        this.draftPaginatorSize = this.pagination.paginatorSize
-        this.draftsCollectionSize = this.pagination.getCollectionSize()
-      })
-
-    this.jobService.universalSearchDrafts('_', this.pagination.pageNumber, this.pagination.pageSize)
-      .subscribe((data: IJobOffer[]) => {
-        this.draftJobs = data['Data'];
-        this.draftsFilteredJobs = this.draftJobs;
-        this.sortedDrafts = this.draftJobs.slice();
-      })
 
     this.jobCategoryService.showCategories()
       .subscribe((data: IJobCategory[]) => {

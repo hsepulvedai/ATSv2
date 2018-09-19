@@ -4,5 +4,6 @@ export interface IJobOfferHR {
     jobStatus?:string
     jobCategory?:string,
     jobType?:string,
-    numberofApplicants?:number
+    numberofApplicants?:number,
+    active?:boolean
 }
