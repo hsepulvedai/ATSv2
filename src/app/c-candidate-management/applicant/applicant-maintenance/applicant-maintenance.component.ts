@@ -310,7 +310,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     if (this.searchBarInput === undefined) {
       this.applicantService.universalSearchInactive('_', page, this.pagination.pageSize)
         .subscribe((data: IApplicantMaintInfo[]) => {
-          this.allApplicants = data['Data'];
+          this.allPastApplicants = data['Data'];
           this.inactiveFilteredApplicants = this.allPastApplicants;
           this.sortedInactive = this.allPastApplicants
         })
@@ -318,7 +318,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
     else {
       this.applicantService.universalSearchInactive(this.searchBarInput, page, this.pagination.pageSize)
         .subscribe((data: IApplicantMaintInfo[]) => {
-          this.allApplicants = data['Data'];
+          this.allPastApplicants = data['Data'];
          this.inactiveFilteredApplicants = this.allPastApplicants;
          this.sortedInactive = this.allPastApplicants;
         })
@@ -431,7 +431,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
       firstName: updatedApplicantForm.applicantFirstName,
       lastName:updatedApplicantForm.applicantLastName,
       email: updatedApplicantForm.applicantEmail,
-      password: 'somepassword',
+      password: updatedApplicantForm.applicantPassword,
       phone: updatedApplicantForm.applicantPhoneNumber,
       addressLine: updatedApplicantForm.applicantAddressLine,
       addressLine2: updatedApplicantForm.applicantAddressLine2,
