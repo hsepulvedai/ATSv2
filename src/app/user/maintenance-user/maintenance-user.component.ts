@@ -8,7 +8,7 @@ import { UserService } from '../../shared/services/user.service';
   templateUrl: './maintenance-user.component.html',
   //styleUrls: ['./maintenance-user.component.css']
 })
-export class MaintenanceUsersComponent implements OnInit {
+export class MaintenanceUserComponent implements OnInit {
   users: IUser[]
   user:IUser
 

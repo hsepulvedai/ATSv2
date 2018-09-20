@@ -33,5 +33,9 @@ export class ApplicationService {
     return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb', application)
   }
 
+  getAllApplicationByRecruiter(recruiterId){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'ApplicationShowAllByRecruiterId', recruiterId)
+  }
+
 
 }
