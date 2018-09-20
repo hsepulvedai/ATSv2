@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { IHRApplicant } from '../../../shared/models/IHRApplicant.model'
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HrApplicantProfileService } from '../../../shared/services/hr-applicant-profile.service';
 import { IHRAction } from '../../../shared/models/IHRAction.model';
 
@@ -15,10 +15,12 @@ export class HrApplicantProfileComponent implements OnInit {
   applicant:IHRApplicant
   action: IHRAction
   actions:IHRAction[]
+  
+  closeResult: string;
 
   public show:boolean = false;
   public buttonName:any = 'Show';
-  constructor(private router : Router, private applicantService: HrApplicantProfileService) { }
+  constructor(private router : Router, private applicantService: HrApplicantProfileService,  private modalService: NgbModal) { }
 
   ngOnInit() {
 
@@ -33,6 +35,28 @@ export class HrApplicantProfileComponent implements OnInit {
       this.buttonName = "Hide";
     else
       this.buttonName = "Show";
+  }
+
+  
+  openNewAction(content, job) {
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+
+
+      (this.closeResult = `Closed with: ${result}`)
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   loadApplicantInfo(){

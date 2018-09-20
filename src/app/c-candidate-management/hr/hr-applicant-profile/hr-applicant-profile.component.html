@@ -2,6 +2,56 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+    
+           <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
+    
+            <div class="row">
+    
+             <div class="form-group col-md-6">
+                <label for="applicantName"> <strong>Name</strong></label>
+            </div>
+    
+    
+              <div class="form-group col-md-6">
+                <label for="newAction"><strong>Action</strong></label>
+                <select formControlName="newAction" id="newAction" class="form-control">
+                  <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+                </select>
+              </div>
+    
+              <div class="form-group col-md-6">
+                <label for="jobApplied"><strong>Job Applied</strong></label>
+            </div>
+    
+             <div class="form-group col-md-6">
+                <label for="actionDescription"><strong>Description</strong></label>
+                <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+              </div>
+            </div>
+    
+            <div class="modal-footer">
+              <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+                  save_alt </i> Save
+               </button>
+              
+    
+            </div>
+    
+          </form> 
+    
+    
+    
+        </div>
+    
+      </ng-template>
   
 </head>
 
@@ -106,7 +156,7 @@
                               <div class="row">
                                 <div class="col-md-6 offset-md-3">
                                   <h4>Latest Actions</h4>
-                                  <button type="button" class="btn" (click)="openAddJob(content1)" > <i
+                                  <button type="button" class="btn" (click)="openNewAction(content, job)" > <i
                                     class="material-icons">
                                     note_add
                                   </i> New Action </button>
