@@ -25,11 +25,11 @@
                     <th ></th>          
             </thead>
             <tbody>
-                <tr  *ngFor='let application of applications'>
-                <td> {{application.aplicantId}} </td>
-                <td> {{application.aplicantFirstName}} {{application.aplicantLastName}} </td>
+                <tr  *ngFor="let application of applications">
+                <td> {{application.applicantId}} </td>
+                <td> {{application.applicantFirstName}} {{application.aplicantLastName}} </td>
                 <td> {{application.applicantPhone}} </td>
-                <td> {{application.aplicantEmail}} </td>
+                <td> {{application.applicantEmail}} </td>
                 <td> {{application.jobApplied}} </td>
                 <td>  {{application.applicationStatus }}</td>
                 <td> {{application.applicationAction}}</td>
@@ -48,7 +48,7 @@
 
                     <div class=" bg-white" >
                         <h3>Pending Tasks</h3>
-                        <form [formGroup]="pendingTasks">
+                        <form >
                             <input type="checkbox" name="vehicle" value="Bike"> Call Pooh Bear<br>
                             <input type="checkbox" name="vehicle" value="Car"> Interview Christopher Robin
                       </form>

@@ -16,21 +16,20 @@ export class MaintenanceUserComponent implements OnInit {
     application: IHRApplication
     sortedData: IHRApplication[]
 
-    recruiterId:number
+    recruiterId:number = 4
 
 
   constructor(
       private router: Router,
-     private applicationService: ApplicationService
-      , private route: ActivatedRoute
+     private applicationService: ApplicationService, private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
 
-//  this.applicationService.getAllApplicationByRecruiter(this.recruiterId)
-//     .subscribe((data:IHRApplication[]) => {
-//      this.applications = data['Data'];})
+ this.applicationService.getAllApplicationByRecruiter(this.recruiterId)
+    .subscribe((data) => {
+     this.applications = data['Data'];})
      
     
     
