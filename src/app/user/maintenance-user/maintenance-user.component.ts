@@ -29,13 +29,13 @@ export class MaintenanceUserComponent implements OnInit {
 
   
 
-  // goToProfile(userId) {  
-  //     this.userService.getUserById(userId)
-  //         .subscribe((data:IUser) => {
-  //             this.user = data['Data'];
-  //             this.userService.currentUser = this.user
-  //             this.router.navigate(['employeeForm'])
-  //         })
-  // }
+//    goToProfile(userId) {  
+//       this.userService.getUserById(userId)
+//          .subscribe((data:IUser) => {
+//               this.user = data['Data'];
+//               this.userService.currentUser = this.user
+//              this.router.navigate(['hr-applicant-profile'])
+//           })
+//   }
 
 }
