@@ -3,195 +3,208 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-</head>
-
-<body>
-
-  <h3> C.1 Applicant Maintenance Screen  </h3> 
   <ng-template #content1 let-c="close" let-d="dismiss">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-add"> New Applicant </h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-    
-        
-       <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value);c('Save click')">
-    
-                    <div class="row smallrow">
-                      <div class="form-group col-sm-6">
-                        <label for="firstName"> <strong>First Name</strong></label>
-                        <input formControlName="firstName" type="text" class="form-control" id="firstName">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="lastName"> <strong>Last Name</strong></label>
-                        <input formControlName="lastName" type="text" class="form-control" id="lastName">
-                      </div>
-                    </div>
-    
-                    <div class="row smallrow">
-                      <div class="form-group col-sm-6">
-                        <label for="email"> <strong>Email</strong></label>
-                        <input formControlName="email" type="text" class="form-control" id="email">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="phone"> <strong>Phone</strong></label>
-                        <input formControlName="phone" type="text" class="form-control" id="phone">
-                      </div>
-                    </div>
-    
-                    <div class="row mdrow  ">
-                      <div class="form-group col-sm-12">
-                        <label for="addressLine"> <strong>Address</strong></label>
-                        <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
-                      </div>
-                    </div>
-                    <div class="row smallrow">
-                      <div class="form-group col-sm-12">
-                        <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
-                      </div>
-                    </div>
-    
-                    <div class="row smallrow">
-                      <div class="form-group col-sm-6">
-                        <label for="city"> <strong>City</strong></label>
-                        <input formControlName="city" type="text" class="form-control" id="city">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="state"> <strong>State/Province</strong></label>
-                        <input formControlName="state" type="text" class="form-control" id="state">
-                      </div>
-                    </div>
-    
-                    <div class="row smallrow ">
-                      <div class="form-group col-sm-6">
-                        <label for="country"> <strong>Country</strong></label>
-                        <input formControlName="country" type="text" class="form-control" id="country">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="zipCode"> <strong>Zip Code</strong></label>
-                        <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
-                      </div>
-                    </div>
-    
-    
-                    <div class="row smallrow">
-                      <div class="form-group col-sm-6">
-                        <label for="password"> <strong> Password</strong></label>
-                        <input formControlName="password" type="password" class="form-control" id="password">
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <label for="confirmPassword"> <strong> Confirm Password</strong></label>
-                        <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">
-                      </div>
-                    </div>
-    
-                
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn "><i class="material-icons">
-                                save_alt
-                                </i>Save</button>
-                          </div>
-    
-                </form>
-          
-      </div>
-      
-    </ng-template>
-
-  <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Applicant update</h4>
+      <h4 class="modal-title" id="modal-basic-add"> New Applicant </h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-  
-      <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px"  (ngSubmit)="updateApplicant(applicantEditForm.value);c('Save click')" >
-  
-    <div class="row smallrow" >
-                  <div class="form-group col-sm-6">
-                    <label for="applicantFirstName"> <strong>First Name</strong></label>
-                    <input formControlName="applicantFirstName" type="text" class="form-control" id="applicantFirstName">
-                  </div>
-                  <div class="form-group col-sm-6">
-                    <label for="applicantLastName"> <strong>Last Name</strong></label>
-                    <input formControlName="applicantLastName" type="text" class="form-control" id="applicantLastName">
-                  </div>
-                </div>
-  
-                <div class="row smallrow">
-                  <div class="form-group col-sm-6">
-                    <label for="applicantEmail"> <strong>Email</strong></label>
-                    <input formControlName="applicantEmail" type="text" class="form-control" id="applicantEmail">
-                  </div>
-                  <div class="form-group col-sm-6">
-                      <label for="applicantPassword"> <strong>Password</strong></label>
-                      <input formControlName="applicantPassword" type="password" class="form-control" id="applicantPassword">
-                  </div>
-                </div>
-  
-  
-                <div class="form-group col-sm-6">
-                    <label for="applicantPhoneNumber"> <strong>Phone Number</strong></label>
-                    <input formControlName="applicantPhoneNumber" type="text" class="form-control" id="applicantPhoneNumber">
-                </div>
-            
-  
-                <div class="row mdrow  ">
-                    <div class="form-group col-sm-12">
-                    <label for="applicantAddressLine"> <strong>Address</strong></label>
-                    <input formControlName="applicantAddressLine" type="text" class="form-control" id="applicantAddressLine" >
-                    </div>
-                </div>
-                <div class="row smallrow">
-                    <div class="form-group col-sm-12">
-                  <input formControlName="applicantAddressLine2" type="text" class="form-control" id="applicantAddressLine2">
-                  </div>
-                </div>
-  
-                <div class="row smallrow">
-                    <div class="form-group col-sm-6">
-                        <label for="applicantCity"> <strong>City</strong></label>
-                        <input formControlName="applicantCity" type="text" class="form-control" id="applicantCity">
-                      </div>
-                      <div class="form-group col-sm-6">
-                          <label for="applicantState"> <strong>State/Province</strong></label>
-                          <input formControlName="applicantState" type="text" class="form-control" id="applicantState">
-                      </div>
-                </div>
-  
-                <div class="row smallrow ">
-                    <div class="form-group col-sm-6">
-                        <label for="applicantCountry"> <strong>Country</strong></label>
-                        <input formControlName="applicantCountry" type="text" class="form-control" id="applicantCountry">
-                      </div>
-                      <div class="form-group col-sm-6">
-                          <label for="applicantZipCode"> <strong>Zip Code</strong></label>
-                          <input formControlName="applicantZipCode" type="text" class="form-control" id="applicantZipCode">
-                      </div>
-                </div>
-  
-                <div class="row smallrow"></div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn " ><i class="material-icons">
-                        save_alt
-                        </i>Save</button>
+  
+      
+     <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value);c('Save click')">
+  
+                  <div class="row smallrow">
+                    <div class="form-group col-sm-6">
+                      <label for="firstName"> <strong>First Name</strong></label>
+                      <input formControlName="firstName" type="text" class="form-control" id="firstName">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="lastName"> <strong>Last Name</strong></label>
+                      <input formControlName="lastName" type="text" class="form-control" id="lastName">
+                    </div>
                   </div>
   
-      </form>
+                  <div class="row smallrow">
+                    <div class="form-group col-sm-6">
+                      <label for="email"> <strong>Email</strong></label>
+                      <input formControlName="email" type="text" class="form-control" id="email">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="phone"> <strong>Phone</strong></label>
+                      <input formControlName="phone" type="text" class="form-control" id="phone">
+                    </div>
+                  </div>
   
+                  <div class="row mdrow  ">
+                    <div class="form-group col-sm-12">
+                      <label for="addressLine"> <strong>Address</strong></label>
+                      <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
+                    </div>
+                  </div>
+                  <div class="row smallrow">
+                    <div class="form-group col-sm-12">
+                      <input formControlName="addressLine2" type="text" class="form-control" id="addressLine2">
+                    </div>
+                  </div>
+  
+                  <div class="row smallrow">
+                    <div class="form-group col-sm-6">
+                      <label for="city"> <strong>City</strong></label>
+                      <input formControlName="city" type="text" class="form-control" id="city">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="state"> <strong>State/Province</strong></label>
+                      <input formControlName="state" type="text" class="form-control" id="state">
+                    </div>
+                  </div>
+  
+                  <div class="row smallrow ">
+                    <div class="form-group col-sm-6">
+                      <label for="country"> <strong>Country</strong></label>
+                      <input formControlName="country" type="text" class="form-control" id="country">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="zipCode"> <strong>Zip Code</strong></label>
+                      <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
+                    </div>
+                  </div>
+  
+  
+                  <div class="row smallrow">
+                    <div class="form-group col-sm-6">
+                      <label for="password"> <strong> Password</strong></label>
+                      <input formControlName="password" type="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="confirmPassword"> <strong> Confirm Password</strong></label>
+                      <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">
+                    </div>
+                  </div>
+  
+              
+
+                      <div class="modal-footer">
+                          <button type="submit" class="btn "><i class="material-icons">
+                              save_alt
+                              </i>Save</button>
+                        </div>
+  
+              </form>
+        
     </div>
-   
+    
   </ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Applicant update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px"  (ngSubmit)="updateApplicant(applicantEditForm.value);c('Save click')" >
+
+  <div class="row smallrow" >
+                <div class="form-group col-sm-6">
+                  <label for="applicantFirstName"> <strong>First Name</strong></label>
+                  <input formControlName="applicantFirstName" type="text" class="form-control" id="applicantFirstName">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="applicantLastName"> <strong>Last Name</strong></label>
+                  <input formControlName="applicantLastName" type="text" class="form-control" id="applicantLastName">
+                </div>
+              </div>
+
+              <div class="row smallrow">
+                <div class="form-group col-sm-6">
+                  <label for="applicantEmail"> <strong>Email</strong></label>
+                  <input formControlName="applicantEmail" type="text" class="form-control" id="applicantEmail">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="applicantPassword"> <strong>Password</strong></label>
+                    <input formControlName="applicantPassword" type="password" class="form-control" id="applicantPassword">
+                </div>
+              </div>
+
+
+              <div class="form-group col-sm-6">
+                  <label for="applicantPhoneNumber"> <strong>Phone Number</strong></label>
+                  <input formControlName="applicantPhoneNumber" type="text" class="form-control" id="applicantPhoneNumber">
+              </div>
+          
+
+              <div class="row mdrow  ">
+                  <div class="form-group col-sm-12">
+                  <label for="applicantAddressLine"> <strong>Address</strong></label>
+                  <input formControlName="applicantAddressLine" type="text" class="form-control" id="applicantAddressLine" >
+                  </div>
+              </div>
+              <div class="row smallrow">
+                  <div class="form-group col-sm-12">
+                <input formControlName="applicantAddressLine2" type="text" class="form-control" id="applicantAddressLine2">
+                </div>
+              </div>
+
+              <div class="row smallrow">
+                  <div class="form-group col-sm-6">
+                      <label for="applicantCity"> <strong>City</strong></label>
+                      <input formControlName="applicantCity" type="text" class="form-control" id="applicantCity">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="applicantState"> <strong>State/Province</strong></label>
+                        <input formControlName="applicantState" type="text" class="form-control" id="applicantState">
+                    </div>
+              </div>
+
+              <div class="row smallrow ">
+                  <div class="form-group col-sm-6">
+                      <label for="applicantCountry"> <strong>Country</strong></label>
+                      <input formControlName="applicantCountry" type="text" class="form-control" id="applicantCountry">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="applicantZipCode"> <strong>Zip Code</strong></label>
+                        <input formControlName="applicantZipCode" type="text" class="form-control" id="applicantZipCode">
+                    </div>
+              </div>
+
+              <div class="row smallrow"></div>
+
+              <div class="modal-footer">
+                  <button type="submit" class="btn " ><i class="material-icons">
+                      save_alt
+                      </i>Save</button>
+                </div>
+
+    </form>
+
+  </div>
+ 
+</ng-template>
+
+</head>
+
+<body>
+
+  <div class="container ">
+      <h3> C.1 Applicant Maintenance Screen  </h3> 
+
+      <label for="sortBy"><strong> Search: </strong></label><br>
+      <div class="row " style="height:3em;">
   
-  <div class="container tabsmargin">
+        <div class="col-sm-6">
+          <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
+        </div>
+  
+        <div class="col-sm-2">
+          <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
+            <i class="material-icons">search</i> Search</button>
+        </div>
+      </div>
 
       <div align="right">
           <button type="button" class="btn"  (click)="openAddApplicant(content1)" > <i class="material-icons">
@@ -203,59 +216,7 @@
       <ngb-tab title="Applicants" >
         <ng-template ngbTabContent>
               <h3> Applicants </h3>
-              <div class="row" style="margin-bottom: 2%">
-                
-                  <div class="col-sm-6">
-                    <label for="sortBy"><strong> Search: </strong></label><br>
-      
-                    <select (change)="sortDropdownChangeHandler($event)" id="sortBy" style="margin-right: 2%" class=" custom-select">
-                      <option selected> All Applicants</option>
-                      <option> Name/FirstName </option>
-                      <option> Name/LastName </option>
-                      <option> Email </option>
-                      <option> Location/City </option>
-                      <option> Location/Country </option>
-                     
-                    </select>
-                  </div>
-                  <div class="col-sm-6" style="margin-top: 3%">
-                    <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
-                      <option selected value="">Sort Type</option>
-                      <option> Sort A-Z </option>
-                      <option> Sort Z-A </option>
-                    </select> <br>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em" placeholder="Start Typing...">
-                  </div>
-                  <div class="col-sm-6">
-                    <button type="button" class=" btn " (click)="universalSearch()" >
-                      <i class="material-icons">search</i> Search</button><br>
-                  </div>
-                </div>
-      
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="filterBy"><strong> Filter by: </strong></label> <br>
-                    <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
-                       <option selected> All Applicants</option>
-                      <option> Name/FirstName </option>
-                      <option> Name/LastName </option>
-                     <option> Email </option>
-                      <option> Location/City </option>
-                      <option> Location/Country </option>
-                    </select>
-                    </div>
-                    <div class="col-md-6" style="margin-bottom: 2em">
-                    <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-top: 2em"
-                      placeholder="Start Typing...">
-                  </div>
-      
-                </div>
-
-              
+          
                 <div class="row">
                     <div class="col-md-12" style="text-align: end">
                       <p *ngIf="totalApplicants === undefined || totalApplicants === 0"> Showing 0 of 0 </p>
@@ -267,7 +228,7 @@
                  </div>
 
 
-          <div>
+   <div>
   
             <!--Table-->
             <table  matSort (matSortChange)="sortData($event)" class="table table-hover table-striped" >
@@ -353,7 +314,7 @@
                       </i>Edit </button> 
                       <button style="margin-left:10px;" type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> <i class="material-icons">
                           subdirectory_arrow_left
-                          </i> Re-Post </button> </td>
+                          </i> Add </button> </td>
                   </tr>
               </tbody>
             

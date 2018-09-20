@@ -170,6 +170,14 @@ export class ApplicantMaintenanceComponent implements OnInit {
     this.sortBy = event.target.value;
   }
 
+  
+  universalSearch() {
+
+    if (this.searchBarInput != undefined) {
+      this.refreshData()
+    }
+  }
+
 
   get listFilter(): string {
     return this._listFilter;
