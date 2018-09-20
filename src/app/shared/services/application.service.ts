@@ -34,7 +34,7 @@ export class ApplicationService {
   }
 
   getAllApplicationByRecruiter(recruiterId){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'ApplicationShowAllByRecruiterId', recruiterId)
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllByRecruiterId/', recruiterId)
   }
 
 

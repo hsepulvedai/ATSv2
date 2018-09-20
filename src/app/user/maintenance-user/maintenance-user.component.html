@@ -25,17 +25,17 @@
                     <th ></th>          
             </thead>
             <tbody>
-                <tr  *ngFor='let user of users'>
-                  <td >{{user.id}}</td>
-                  <td >{{user.firstName}} {{user.lastName}}</td>
-                  <td >{{user.email}}</td>
-                  <td >555-223-3344</td>
-                  <td >Technitian</td>
-                  <td >Submitted</td>
-                  <td >Revise Resume</td>
+                <tr  *ngFor='let application of applications'>
+                <td> {{application.aplicantId}} </td>
+                <td> {{application.aplicantFirstName}} {{application.aplicantLastName}} </td>
+                <td> {{application.applicantPhone}} </td>
+                <td> {{application.aplicantEmail}} </td>
+                <td> {{application.jobApplied}} </td>
+                <td>  {{application.applicationStatus }}</td>
+                <td> {{application.applicationAction}}</td>
                   <td  style="text-align: right;padding-right: 30px;">
                       <button type="button" class="btn btn-outline-info"
-                      (click)="goToProfile(employee.id)"><i class="material-icons">
+                      ><i class="material-icons">
                             view_headline
                             </i>View </button>
                   </td>

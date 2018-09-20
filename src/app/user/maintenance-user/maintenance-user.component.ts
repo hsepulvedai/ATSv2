@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../shared/models/user.model'
 import { Router, ActivatedRoute } from '@angular/router'
-import { UserService } from '../../shared/services/user.service';
+import { IHRApplication } from '../../shared/models/hr-application.model';
+import { ApplicationService } from '../../shared/services/application.service';
+
 
 @Component({
   selector: 'app-maintenance-user',
@@ -9,33 +10,32 @@ import { UserService } from '../../shared/services/user.service';
   //styleUrls: ['./maintenance-user.component.css']
 })
 export class MaintenanceUserComponent implements OnInit {
-  users: IUser[]
-  user:IUser
+
+
+    applications: IHRApplication[]
+    application: IHRApplication
+    sortedData: IHRApplication[]
+
+    recruiterId:number
 
 
   constructor(
       private router: Router,
-      private userService: UserService
+     private applicationService: ApplicationService
       , private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-      this.userService.getAllUsers()
-          .subscribe((data:IUser[]) => {
-              this.users = data['Data'];
-          })
+
+//  this.applicationService.getAllApplicationByRecruiter(this.recruiterId)
+//     .subscribe((data:IHRApplication[]) => {
+//      this.applications = data['Data'];})
+     
+    
+    
   }
 
   
-
-//    goToProfile(userId) {  
-//       this.userService.getUserById(userId)
-//          .subscribe((data:IUser) => {
-//               this.user = data['Data'];
-//               this.userService.currentUser = this.user
-//              this.router.navigate(['hr-applicant-profile'])
-//           })
-//   }
-
 }
+
