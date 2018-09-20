@@ -323,12 +323,12 @@ export class ApplicantMaintenanceComponent implements OnInit {
     error => { console.error("Error: ", error) })
 
     this.applicantService.showAllActiveApplicants()
-    .subscribe((data:IApplicantInfo[]) => {
+    .subscribe((data:IApplicantMaintInfo[]) => {
       this.allApplicants = data['Data'];
      }) 
 
      this.applicantService.showAllInactiveApplicants()
-     .subscribe((data:IApplicantInfo[]) => {
+     .subscribe((data:IApplicantMaintInfo[]) => {
        this.allPastApplicants = data['Data'];
       }) 
 
@@ -363,11 +363,11 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
   createApplicant(newApplicantForm){
     this.newApplicant = {
-      firstName: newApplicantForm.applicantFirstName, 
-      lastName: newApplicantForm.applicantLastName,
-      email: newApplicantForm.applicantEmail,
-      password: newApplicantForm.applicantPassword,
-      phone: newApplicantForm.applicantPhoneNumber,
+      firstName: newApplicantForm.firstName, 
+      lastName: newApplicantForm.lastName,
+      email: newApplicantForm.email,
+      password: newApplicantForm.password,
+      phone: newApplicantForm.phone,
       addressLine: newApplicantForm.addressLine,
       addressLine2: newApplicantForm.addressLine2,
       city: newApplicantForm.city,
@@ -376,9 +376,10 @@ export class ApplicantMaintenanceComponent implements OnInit {
       zipCode: newApplicantForm.zipCode
     }
 
-    this.applicantService.addApplicantMaintenance(this.newApplicant)
+
+   this.applicantService.addApplicantMaintenance(this.newApplicant)
     .subscribe(data => { console.log("POST:" + data) },
-        error => { console.error("Error: ", error) })
+      error => { console.error("Error: ", error) })
 
         this.refreshData()
    
@@ -386,10 +387,12 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
   openEdit(content, applicant) {
 
+    this.id = applicant.applicantId
 
     this.applicantEditForm.get('applicantFirstName').setValue(applicant.firstName)
     this.applicantEditForm.get('applicantLastName').setValue(applicant.lastName)
     this.applicantEditForm.get('applicantEmail').setValue(applicant.email)
+    this.applicantEditForm.get('applicantPassword').setValue(applicant.password)
     this.applicantEditForm.get('applicantPhoneNumber').setValue(applicant.phone)
     this.applicantEditForm.get('applicantAddressLine').setValue(applicant.addressLine)
     this.applicantEditForm.get('applicantAddressLine2').setValue(applicant.addressLine2)
@@ -406,15 +409,21 @@ export class ApplicantMaintenanceComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+
+    
+    this.refreshData();
   }
 
-  updateApplicant(updatedApplicantForm, applicant){
+  id:number
+
+  updateApplicant(updatedApplicantForm){
 
     this.updatedApplicant = {
-      id: applicant.id,
+      id: this.id,
       firstName: updatedApplicantForm.applicantFirstName,
       lastName:updatedApplicantForm.applicantLastName,
       email: updatedApplicantForm.applicantEmail,
+      password: 'somepassword',
       phone: updatedApplicantForm.applicantPhoneNumber,
       addressLine: updatedApplicantForm.applicantAddressLine,
       addressLine2: updatedApplicantForm.applicantAddressLine2,
@@ -425,8 +434,7 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
     }
 
-
-    this.applicantService.updateApplicant(this.updatedApplicant)
+   this.applicantService.updateApplicant(this.updatedApplicant)
 
     this.refreshData();
   }

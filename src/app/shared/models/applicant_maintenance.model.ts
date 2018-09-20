@@ -5,6 +5,7 @@ export interface IApplicantMaintInfo {
     firstName?: string, 
     lastName?: string,
     email?: string, 
+    password?:string,
     phone?: string,
     addressLine?: string,
     addressLine2?: string,

@@ -3,11 +3,11 @@ export interface IApplicantInsert {
     lastName?: string, 
     email?: string,
     password?: string,
+    phone?: string,
     addressLine?: string,
     addressLine2?: string,
     city?: string,
     stateProvince?: string,
     country?: string, 
-    zipCode?: string,
-    phone?: string
+    zipCode?: string
 }
