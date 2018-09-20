@@ -12,6 +12,7 @@ import { ApplicationService } from '../../../shared/services/application.service
 import { FormGroup, FormControl } from '@angular/forms';
 import { IJobOfferHR } from '../../../shared/models/job-offer-hr.model';
 import 'jquery'
+import { Sort } from '@angular/material';
 
 @Component({
   selector: 'app-hr-offer-detail',
@@ -53,6 +54,7 @@ export class HrOfferDetailComponent implements OnInit {
     this.applicantService.offerDetailGetApplicants(this.jobService.currentJob.jobId)
       .subscribe((data: IOfferHrEdit[]) => {
         this.applicants = data['Data'];
+        this.sortedData = this.applicants.slice()
       })
 
       // this.jobEditForm.controls['category'].setValue(job.jobCategory, {onlySelf: true})
@@ -82,4 +84,31 @@ export class HrOfferDetailComponent implements OnInit {
 
   // onEmployeeChange(event) {}
 
+ /// Sorting
+ sortedData: IOfferHrEdit[]
+
+ sortData(sort: Sort) {
+
+   const data = this.applicants.slice();
+   if (!sort.active || sort.direction === '') {
+     this.sortedData = data;
+
+     return;
+   }
+
+   this.sortedData = data.sort((a, b) => {
+     const isAsc = sort.direction === 'asc';
+     switch (sort.active) {
+       case 'applicantId': return compare(a.applicantId, b.applicantId, isAsc);
+       case 'applicantName': return compare(a.applicantFirstName, b.applicantFirstName, isAsc);
+       case 'status': return compare(a.applicationStatus, b.applicationStatus, isAsc);
+       case 'recruiter': return compare(a.employeeFirstName, b.employeeFirstName, isAsc);
+       default: return 0;
+     }
+   });
+ }
+}
+
+function compare(a, b, isAsc) {
+ return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

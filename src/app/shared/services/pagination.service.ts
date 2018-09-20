@@ -13,12 +13,6 @@ export class PaginationService {
 
   constructor() { }
 
-  // // Gets the page number from the page url string    
-  // getPageFromString(urlString: string): number {
-  //   if (urlString != null) return + urlString.substr(urlString.indexOf("page=") + 5, urlString.length);
-  //   else return -1;
-  // }
-
   setPageRange(totalRows): void {
     this.paginatorSize = Math.ceil(totalRows / this.pageSize)
   }
@@ -27,5 +21,15 @@ export class PaginationService {
     this.paginationCollectionSize = this.paginatorSize * 10
     return this.paginationCollectionSize
   }
+
+  setPageSize(newSize) {
+    this.pageSize = newSize
+  }
+
+  getPageNumber() {
+    return this.pageNumber
+  }
+
+
 
 }
