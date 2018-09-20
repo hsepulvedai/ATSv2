@@ -7,7 +7,7 @@ import { PaginationService } from '../../../shared/services/pagination.service';
 import { $ } from 'protractor';
 import { document } from 'jquery'
 import { Sort } from '@angular/material';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'offer-list',
@@ -24,11 +24,8 @@ export class OfferListComponent implements OnInit
     //private route: ActivatedRoute,
     private pagination: PaginationService) { }
 
-
-  // public data$: BehaviorSubject<any> = new BehaviorSubject({});
   private jobSubscription: Subscription = new Subscription();
   private jobTotalSubscription: Subscription = new Subscription();
-  interval
 
 
   searchActive: boolean = false
@@ -59,12 +56,6 @@ export class OfferListComponent implements OnInit
   
   ngOnInit() {
 
-    // this.interval = setInterval(() => {
-    //   this.refreshData();
-    // }, 5000)
-
- 
-
     this.pageSize = this.pagination.pageSize
 
     this.search = new FormControl();
@@ -89,7 +80,6 @@ export class OfferListComponent implements OnInit
     .subscribe((data: IJobOffer[]) => {
       this.availableJobs = data['Data'];
       this.filteredJobs = this.availableJobs;
-      console.log(this.availableJobs)
       this.sortedData = this.availableJobs.slice();
     }))
 
@@ -98,7 +88,6 @@ export class OfferListComponent implements OnInit
   ngOnDestroy() {
     this.jobTotalSubscription.unsubscribe();
     this.jobSubscription.unsubscribe
-    clearInterval(this.interval);
   }
 
   //event handler for the select element's change event
@@ -119,9 +108,8 @@ export class OfferListComponent implements OnInit
 
   universalSearch() {
 
-    console.log('hello' +this.searchBarInput+'hello')
-      this.refreshData()
-      this.loadPage(1)
+    setTimeout(() => { this.refreshData()}, 200);
+    setTimeout(() => { this.loadPage(1)}, 200);  
     
   }
 

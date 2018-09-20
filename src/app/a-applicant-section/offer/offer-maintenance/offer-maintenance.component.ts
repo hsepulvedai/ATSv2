@@ -14,7 +14,7 @@ import { IJobInsert } from '../../../shared/models/job_insert.model';
 import { IJobUpdate } from '../../../shared/models/job_update.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { Sort } from '@angular/material';
-import { Subscription, Observable, BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { JobStatusService } from '../../../shared/services/job-status.service';
 import { IJobStatus } from '../../../shared/models/job_status.model';
 
