@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
     
     { path: 'createUser', component: CreateUserComponent},
     { path: 'users/userMaintenance', component: MaintenanceUsersComponent},
-
+ 
     {path: 'offer-application', component: OfferApplicationComponent},
     {path: 'offer-list-management', component: OfferListManagementComponent},
     {path: 'hr-offer-detail', component: HrOfferDetailComponent},
