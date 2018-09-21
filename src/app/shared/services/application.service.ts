@@ -34,7 +34,11 @@ export class ApplicationService {
   }
 
   getAllApplicationByRecruiter(recruiterId){
-    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllByRecruiterId/'+ recruiterId, recruiterId)
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllByRecruiterId/'+ recruiterId)
+  }
+
+  getAllTasksByAppIdAndStatus(applicationId, status){
+    return this.http.get(environment.baseUrl + this.routePrefix + 'ApplicationShowPendingTaskByAppId/' + applicationId  + 'status=' +  status)
   }
 
 
