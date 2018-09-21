@@ -35,9 +35,9 @@
         </div>    
 
           <div class="form-group col-md-6">
-            <label for="newAction"><strong>Recruiter</strong></label>
-            <select formControlName="newAction" id="newAction" class="form-control">
-              <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+            <label for="newRecruiter"><strong>Recruiter</strong></label>
+            <select formControlName="newRecruiter" id="newRecruiter" class="form-control">
+              <option *ngFor=" let selectedRecruiter of recruiters" [ngValue]="selectedRecruiter.name">{{selectedRecruiter.name}}</option>
             </select>
           </div>
 
@@ -52,7 +52,7 @@
         </div>
 
         <div class="modal-footer">
-          <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+          <button (click)="updateRecStat(draftRecStat.value)" type="submit" class="btn "><i class="material-icons">
               save_alt </i> Save
            </button>       
         </div>    
