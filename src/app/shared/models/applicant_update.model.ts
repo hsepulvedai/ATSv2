@@ -1,13 +1,14 @@
-export interface IApplicantInsert {
+export interface IApplicantUpdate {
+    id?:number,
     firstName?: string,
     lastName?: string, 
     email?: string,
     password?: string,
-    phone?: string,
     addressLine?: string,
     addressLine2?: string,
     city?: string,
     stateProvince?: string,
     country?: string, 
-    zipCode?: string
+    zipCode?: string,
+    phone?: string
 }

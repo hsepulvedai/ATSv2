@@ -1,63 +1,62 @@
 <!doctype html>
 <html lang="en">
- 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  
-
     <title>User Maintenance</title>
 </head>
 
 <body>
-    <h1 class="titleFont">User Maintenance</h1>
+    <h1 class="titleFont">C4</h1>
 
     <div class="container" >
-
+      <div class="row">
+          <div class="col-sm-9">
         <table class="table table-hover table-striped">
-            <thead class="thead row">
-                    <th class="col-1">ID</th>
-                    <th class="col-1">Name</th>
-                    <th class="col-1">Email</th>
-                    <th class="col-1">Password</th>
-                    <th class="col-1">Role</th>
-                    <th class="col-1">Company</th>
-                    <th class="col-1">Created By</th>
-                    <th class="col-1">Created Date</th>
-                    <th class="col-1">Modified By</th>
-                    <th class="col-1">Modified Date</th>
-                    <th class="col-1">Active</th>
-                
+            <thead>
+                    <th >ID</th>
+                    <th >Name</th>
+                    <th >Email</th>
+                    <th >Phone Number</th>
+                    <th >Job Applied</th>
+                    <th >Application Status</th>
+                    <th >Next Action</th>
+                    <th ></th>          
             </thead>
             <tbody>
-                <tr class="row" *ngFor='let user of users'>
-                  <td class="col">{{user.id}}</td>
-                  <td class="col">{{user.firstName}} {{user.lastName}}</td>
-                  <td class="col">{{user.email}}</td>
-                  <td class="col">{{user.password}}</td>
-                  <td class="col">{{user.roleId}}</td>
-                  <td class="col">{{user.companyId}}</td>
-                  <td class="col">{{user.createdBy}}</td>
-                  <td class="col">{{user.createdDate | date:format}}</td>
-                  <td class="col">{{user.modifiedBy}}</td>
-                  <td class="col">{{user.modifiedDate | date:format}}</td>
-                  <td class="col">{{user.active}}</td>
-                  <td class="col" style="text-align: right;padding-right: 30px;">
+                <tr  *ngFor='let user of users'>
+                  <td >{{user.id}}</td>
+                  <td >{{user.firstName}} {{user.lastName}}</td>
+                  <td >{{user.email}}</td>
+                  <td >555-223-3344</td>
+                  <td >Technitian</td>
+                  <td >Submitted</td>
+                  <td >Revise Resume</td>
+                  <td  style="text-align: right;padding-right: 30px;">
                       <button type="button" class="btn btn-outline-info"
-                      (click)="goToProfile(employee.id)">Edit</button>
+                      (click)="goToProfile(employee.id)"><i class="material-icons">
+                            view_headline
+                            </i>View </button>
                   </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div class="col-sm-3">
+            <div style="margin-top: 30%; margin-left:30%;">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+                    <div class=" bg-white" >
+                        <h3>Pending Tasks</h3>
+                        <form [formGroup]="pendingTasks">
+                            <input type="checkbox" name="vehicle" value="Bike"> Call Pooh Bear<br>
+                            <input type="checkbox" name="vehicle" value="Car"> Interview Christopher Robin
+                      </form>
+                    </div>
+                </div>
+     </div>
+      </div>
+    </div>
 </body>
 
 </html>

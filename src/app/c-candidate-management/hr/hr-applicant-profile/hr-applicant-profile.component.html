@@ -1,322 +1,188 @@
-
+<!DOCTYPE html>
+<html>
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
     
-  <style>
-/*timeline 2 css*/
- .timeline{
-  --uiTimelineMainColor: var(--timelineMainColor, #222);
-  --uiTimelineSecondaryColor: var(--timelineSecondaryColor, #fff);
-
-  position: relative;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.timeline:before{
-  content: "";
-  width: 4px;
-  height: 100%;
-  background-color: var(--uiTimelineMainColor);
-
-  position: absolute;
-  top: 0;
-}
-
-.timeline__group{
-  position: relative;
-}
-
-.timeline__group:not(:first-of-type){
-  margin-top: 4rem;
-}
-
-.timeline__year{
-  padding: .5rem 1.5rem;
-  color: var(--uiTimelineSecondaryColor);
-  background-color: var(--uiTimelineMainColor);
-
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.timeline__box{
-  position: relative;
-  padding-top:45px ;
-}
-
-.timeline__box:not(:last-of-type){
-  margin-bottom: 30px;
-}
-
-.timeline__box:before{
-  content: "";
-  width: 100%;
-  height: 2px;
-  background-color: var(--uiTimelineMainColor);
-
-  position: absolute;
-  left: 0;
-  z-index: -1;
-}
-
-.timeline__date{
-  min-width: 65px;
-  position: absolute;
-  left: 0;
-
-  box-sizing: border-box;
-  padding: .5rem 1rem;
-  text-align: center;
-
-  background-color: var(--uiTimelineMainColor);
-  color: var(--uiTimelineSecondaryColor);
-}
-
-.timeline__day{
-  font-size: 2rem;
-  font-weight: 500;
-  display: block;
-}
-
-.timeline__month{
-  display: block;
-  font-size: .8em;
-  text-transform: uppercase;
-}
-
-.timeline__post{
-  padding: 1.5rem 2rem;
-  border-radius: 2px;
-  border-left: 3px solid var(--uiTimelineMainColor);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24);
-  background-color: var(--uiTimelineSecondaryColor);
-}
-
-@media screen and (min-width: 641px){
-
-  .timeline:before{
-    left: 30px;
-  }
-
-  .timeline__group{
-    padding-top:55px;
-  }
-
-  .timeline__box{
-    padding-left: 80px;
-  }
-
-  .timeline__box:before{
-    top: 50%;
-    transform: translateY(-50%);  
-  }  
-
-  .timeline__date{
-    top: 50%;
-    margin-top: -27px;
-  }
-}
-
-@media screen and (max-width: 640px){
-
-  .timeline:before{
-    left: 0;
-  }
-
-  .timeline__group{
-    padding-top: 40px;
-  }
-
-  .timeline__box{
-    padding-left: 20px;
-    padding-top: 70px;
-  }
-
-  .timeline__box:before{
-    top: 90px;
-  }    
-
-  .timeline__date{
-    top: 0;
-  }
-}
-
-.timeline{
-  --timelineMainColor: #25326a;
-  font-size: 16px;
-}
-
-@media screen and (min-width: 768px){
-
-  html{
-    font-size: 62.5%;
-  }
-}
-
-@media screen and (max-width: 767px){
-
-  html{
-    font-size: 55%;
-  }
-}
-
-
-
-@media screen and (min-width: 768px){
-
-  html{
-    font-size: 62.5%;
-  }
-}
-
-@media screen and (max-width: 767px){
-
-  html{
-    font-size: 50%;
-  }
-}
-
-
-  </style>
+           <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
+    
+            <div class="row">
+                <!-- Info inside {{}} is made up/ substitute with correct info-->
+    
+             <div class="form-group col-md-6">
+                <label for="applicantName"> <strong>Name </strong></label>
+            </div>
+    
+    
+              <div class="form-group col-md-6">
+                <label for="newAction"><strong>Action</strong></label>
+                <select formControlName="newAction" id="newAction" class="form-control">
+                  <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+                </select>
+              </div>
+    
+              <div class="form-group col-md-6">
+                <label for="jobApplied"><strong>Job Applied</strong></label>
+            </div>
+    
+             <div class="form-group col-md-6">
+                <label for="actionDescription"><strong>Description</strong></label>
+                <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+              </div>
+            </div>
+    
+            <div class="modal-footer">
+              <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+                  save_alt </i> Save
+               </button>
+              
+    
+            </div>
+    
+          </form> 
+    
+    
+    
+        </div>
+    
+      </ng-template>
+  
 </head>
 
-<!-- ********************************************************************************************************* -->
+
 <body>
-
-<div class="backgroundG"style="padding-top: 100px;padding-bottom:50px;">
-
-    <h1>C.1/C.2 / C.5</h1>
-    <h3 >Edit Jobs</h3>
-    <p class="descp"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus. 
-        Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, 
-        consectetur adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend,
-        sit amet consectetur sapien auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
-    </p>
-  </div>
-<div class="container-fluid
-">
-    <div  >
-                <div class="row">
-                      <div class="col-md-3">
-                          <div class="card" style="width: 18rem;">
-                              <div class="card-body" >
-                                <h3 class="card-title">Applicant Name</h3>
-                                <h6 class="card-subtitle mb-2 text-muted">Status </h6>
-                                <p class="card-text">ID:23 <br>
-                                                    Phone Number: 888-000-0000 <br>
-                                                    Address: Rainbowstreet Magic Road 123 <br>
-                                                    Job Applied: Manufacturer
-                                </p>
-                                <a href="#" class="card-link">Edit Status</a>
-                              </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="container mt-5 mb-5">
-                                <div class="row">
-                                  <div class="col-md-6 offset-md-3" >
-
-                                      <h5 class="media-heading">Comments</h5>
-                                      <textarea  style="resize: none;"class="form-control" rows="5" id="comment" value="Heellooo" maxlength="98"></textarea>
-                                      <button class="btn btn-sm" type="submit" style="margin-top: 5%;" >Edit Comments</button>
-                                      
+<div class="container">
+           <div>
+                <h1>C.2/C.3/C.5</h1>           
+              </div> 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                <div class="card descriptionbox">
+                                  <div class="card-body" >
+                        
+                                    <h5>{{job?.jobName}}</h5>                        
+                                    <div >
+                                      <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
+                                      <div><strong> {{job?.company}}</strong></div>
+                        
+                                       {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
+                        
+                                      <div><strong> Description: </strong> {{job?.description}}</div>
                                     </div>
-
                                   </div>
                                 </div>
                               </div>
-                        </div>
-
-                        <div >
-                            <button class="btn btn-sm" type="button" (click)="toggle()" style="margin-bottom: 10px">New Action</button>
-                                <div *ngIf="show" >
-                                    <form [formGroup] = "formGroupName"  >
-                                            
-                                            <select align="center"class="form-control" id="sel1" style="width : 300px">
-                                                    <option>Choose an Option</option>
-                                                    <option>Call</option>
-                                                    <option>Email</option>
-                                                    <option>Interview</option>
-                                                    <option>Other</option>
-                                            </select>
-                                            <label>Date of Action</label> 
-                                    <input type="text" class="form-control"  style="width : 281px" placeholder="Date">
-                                    <label>Description</label>
-                                    <textarea  style="resize: none;width: 300px "class="form-control" rows="5" id="description" value="description" maxlength="100"></textarea>
-                                    <button class="btn btn-sm" type="submit"  >Submit</button>     
-                                </form>   
+                              </div>
+                              <div class="row bootstrap snippets">
+                                  <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
+                                      <div class="comment-wrapper">
+                                          <div class="panel panel-info">
+                                              <div class="panel-heading">
+                                                  Comment panel
+                                              </div>
+                                              <div class="panel-body">
+                                                  <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                                  <br>
+                                                  <button type="button" class="btn pull-right">Post</button>
+                                                  <div class="clearfix"></div>
+                                                  <hr>
+                                                  <ul class="media-list">
+                                                      <li class="media">
+                                                          <a href="#" class="pull-left">                                                             
+                                                          </a>
+                                                          <div class="media-body">
+                                                              <span class="text-muted pull-right">
+                                                                  <small class="text-muted">30 min ago</small>
+                                                              </span>
+                                                              <strong class="text-success">@MartinoMont</strong>
+                                                              <p>
+                                                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                  Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing </a>.
+                                                              </p>
+                                                          </div>
+                                                      </li>
+                                                      <li class="media">
+                                                          <a href="#" class="pull-left">
+                                                              
+                                                          </a>
+                                                          <div class="media-body">
+                                                              <span class="text-muted pull-right">
+                                                                  <small class="text-muted">30 min ago</small>
+                                                              </span>
+                                                              <strong class="text-success">@LaurenceCorreil</strong>
+                                                              <p>
+                                                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                  Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
+                                                              </p>
+                                                          </div>
+                                                      </li>
+                                                      <li class="media">
+                                                          <a href="#" class="pull-left">
+                                                              
+                                                          </a>
+                                                          <div class="media-body">
+                                                              <span class="text-muted pull-right">
+                                                                  <small class="text-muted">30 min ago</small>
+                                                              </span>
+                                                              <strong class="text-success">@JohnNida</strong>
+                                                              <p>
+                                                                  Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
+                                                              </p>
+                                                          </div>
+                                                      </li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                              
+                                  </div>
+                              </div>
+                          </div>
+                          
+                      <div class="col-sm-6">
+                          <div class="container mt-5 mb-5">
+                              <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                  <h4>Latest Actions</h4>
+                                  <button type="button" class="btn" (click)="openNewAction(content, job)" > <i
+                                    class="material-icons">
+                                    note_add
+                                  </i> New Action </button>
+                                  <ul class="timeline">
+                                    <li>
+                                      <a target="_blank" href="https://www.totoprayogo.com/#">New Web Design</a>
+                                      <a href="#" class="float-right">21 March, 2014</a>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+                                    </li>
+                                    <li>
+                                      <a href="#">21 000 Job Seekers</a>
+                                      <a href="#" class="float-right">4 March, 2014</a>
+                                      <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+                                    </li>
+                                    <li>
+                                      <a href="#">Awesome Employers</a>
+                                      <a href="#" class="float-right">1 April, 2014</a>
+                                      <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
-                        </div>
-                        
-<!-- *************************************************************************************************************************** -->
+                                                 
+                      </div>
+                    </div>
+                   
 
-                                                   <!--TIMELINE DEMO2-->
-
-<!-- *************************************************************************************************************************** -->
-
-<div class="page">
-        <div class="page__demo">
-          <div class="main-container page__container">
-            <div class="timeline">
-              <div class="timeline__group">
-                <span class="timeline__year">2008</span>
-                <div class="timeline__box">
-                  <div class="timeline__date">
-                    <span class="timeline__day">2</span>
-                    <span class="timeline__month">Feb</span>
-                  </div>
-                  <div class="timeline__post">
-                    <div class="timeline__content">
-                      <p>Attends the Philadelphia Museum School of Industrial Art. Studies design with Alexey Brodovitch, art director at Harper's Bazaar, and works as his assistant.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="timeline__box">
-                  <div class="timeline__date">
-                    <span class="timeline__day">1</span>
-                    <span class="timeline__month">Sept</span>
-                  </div>
-                  <div class="timeline__post">
-                    <div class="timeline__content">
-                      <p>Started from University of Pennsylvania. This is an important stage of my career. Here I worked in the local magazine. The experience greatly affected me</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="timeline__group">
-                <span class="timeline__year">2014</span>
-                <div class="timeline__box">
-                  <div class="timeline__date">
-                    <span class="timeline__day">14</span>
-                    <span class="timeline__month">Jul</span>
-                  </div>
-                  <div class="timeline__post">
-                    <div class="timeline__content">
-                      <p>Travels to France, Italy, Spain, and Peru. After completing fashion editorial in Lima, prolongs stay to make portraits of local people in a daylight studio</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="timeline__group">
-                <span class="timeline__year">2016</span>
-                <div class="timeline__box">
-                  <div class="timeline__date">
-                    <span class="timeline__day">28</span>
-                    <span class="timeline__month">Aug</span>
-                  </div>
-                  <div class="timeline__post">
-                    <div class="timeline__content">
-                      <p>Upon moving to Brooklyn that summer, I began photographing weddings in Chicago</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
-    </body>      
+        
+      </div>    
+     </body>      
+    </html>

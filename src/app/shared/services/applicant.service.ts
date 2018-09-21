@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
 import { environment } from '../../../environments/environment';
 import { IApplicant } from '../../shared/models/applicant.model';
+import { IApplicantUpdate } from '../../shared/models/applicant_update.model';
+import { IApplicantInsert } from '../models/applicant_insert.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicantService {
+
+  applicantId: number
+  applicantPassword: string
 
   routePrefix = 'Applicant'
 
@@ -62,19 +67,19 @@ export class ApplicantService {
   // }
   
 
-  insertApplicant(newApplicant:IApplicant){
+  insertApplicant(newApplicant:IApplicantInsert){
 
 
-    return this.http.post( environment.baseUrl + this.routePrefix + 'ApplicantInsert'
+    return this.http.post( environment.baseUrl + this.routePrefix + '/ApplicantInsertFromWeb'
       , newApplicant).subscribe(
            data => {console.log("POST: ", data)},
            error => {console.log("Error", error)}
                       );
   }
 
-  updateApplicant(updatedApplicant:IApplicant){
+  updateApplicant(updatedApplicant:IApplicantUpdate){
 
-    return this.http.put( environment.baseUrl + "", updatedApplicant).subscribe(
+    return this.http.put( environment.baseUrl +this.routePrefix + '/ApplicantUpdate', updatedApplicant).subscribe(
            data => {console.log("UPDATED: ", data)},
            error => {console.log("Error", error)}
                       );
