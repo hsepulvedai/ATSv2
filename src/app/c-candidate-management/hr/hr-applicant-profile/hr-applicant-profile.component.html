@@ -9,17 +9,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-    
+        <div class="modal-body">     
            <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-    
-            <div class="row">
+                <div class="row">
                 <!-- Info inside {{}} is made up/ substitute with correct info-->
     
              <div class="form-group col-md-6">
                 <label for="applicantName"> <strong>Name </strong></label>
-            </div>
-    
+            </div>    
     
               <div class="form-group col-md-6">
                 <label for="newAction"><strong>Action</strong></label>
@@ -41,17 +38,10 @@
             <div class="modal-footer">
               <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
                   save_alt </i> Save
-               </button>
-              
-    
-            </div>
-    
-          </form> 
-    
-    
-    
-        </div>
-    
+               </button>       
+            </div>    
+          </form>     
+        </div>    
       </ng-template>
   
 </head>

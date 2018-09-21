@@ -18,6 +18,47 @@
       text-align: left;
     }
   </style>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-content"> Edit Status & Recruiter</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">     
+       <form [formGroup]="Edit" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
+            <div class="row">
+            <!-- Info inside {{}} is made up/ substitute with correct info-->
+
+         <div class="form-group col-md-6">
+            <label for="applicantName"> <strong>Name </strong></label>
+        </div>    
+
+          <div class="form-group col-md-6">
+            <label for="newAction"><strong>Recruiter</strong></label>
+            <select formControlName="newAction" id="newAction" class="form-control">
+              <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="jobApplied"><strong>Job Applied</strong></label>
+        </div>
+
+         <div class="form-group col-md-6">
+            <label for="actionDescription"><strong>Status</strong></label>
+            <select formControlName="newStatus" id="newStatus" class="form-control"></select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+              save_alt </i> Save
+           </button>       
+        </div>    
+      </form>     
+    </div>    
+  </ng-template>
 </head>
 
 <body>
@@ -83,8 +124,8 @@
             <tr>
               <th mat-sort-header="applicantId" style="text-align: left" scope="col">Applicant ID</th>
               <th mat-sort-header="applicantName" style="text-align: left" scope="col">Applicant Name</th>
-              <th mat-sort-header="status" scope="col">Application Status</th>
-              <th mat-sort-header="recruiter" scope="col">Recruiter</th>
+              <!-- <th mat-sort-header="status" scope="col">Application Status</th>
+              <th mat-sort-header="recruiter" scope="col">Recruiter</th> -->
               <th scope="col"> Resume</th>
               <th scope="col"> </th>
             </tr>
@@ -93,28 +134,26 @@
             <tr *ngFor="let applicant of sortedData">
               <td style="text-align: left" scope="row">{{applicant.applicantId}}</td>
               <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
-              <td>
+              <!-- <td>
                 <select class="form-control" id="sel1">
                   <option id="sel1op1" value="status.status" disabled="true" [selected]="true">{{applicant.applicationStatus}}</option>
                   <option id="sel1op2" *ngFor="let appStatus of applicationStatus" style="color:#25326a;">{{appStatus.status}}</option>
                 </select>
-              </td>
-              <td>
+              </td> -->
+              <!-- <td>
                 <select class="form-control" id="sel2" (ngModelChange)="onEmployeeChange($event)">
 
                   <option value="applicant.employeeFirstName + applicant.employeeLastName" disabled="true" [selected]="true">{{applicant.employeeFirstName}}
                     {{applicant.employeeLastName}}
                   </option>
                   <option *ngFor="let recruiter of employees" style="color:#25326a;"> {{recruiter.employeeFullName}}</option>
-
-
                 </select>
-              </td>
+              </td> -->
 
-              <td><a href="#">View</a></td>
+              <td><a href="#">Edit</a></td>
               <td>
-                <button class="btn btn-sm" type="button" (click)="save(applicant.applicationId)">
-                    <i class="material-icons"> save_alt </i> Save
+                <button class="btn btn-sm" type="button" (click)="openEdit(content, job)">
+                    <i class="material-icons">  </i> Edit
                 </button>
               </td>
             </tr>
