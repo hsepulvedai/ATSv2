@@ -56,15 +56,9 @@ export class ApplicantService {
     return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicantInsertFromWeb', applicant )
   }
 
-
-
-
-  
-  // getApplicantById(id:number){
-    
-  //   return this.http.get( environment.baseUrl + ''+ id);
-
-  // }
+  showApplicantById(id) {
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowById/' + id)
+  }
   
 
   insertApplicant(newApplicant:IApplicantInsert){
