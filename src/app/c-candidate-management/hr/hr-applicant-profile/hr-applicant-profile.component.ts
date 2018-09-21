@@ -15,16 +15,19 @@ import { PaginationService } from '../../../shared/services/pagination.service';
 })
 export class HrApplicantProfileComponent implements OnInit {
 
+  currentApplication
+
   applicant:IHRApplicant
   action: IHRAction
   actions:IApplicationActionShow[]
+  totalActions:number
 
 
   page: number = this.pagination.pageNumber;
   paginatorSize: number
   totalJobs: number
   paginatorCollectionSize: number
-  pageSize: number
+  pageSize: number = 5
   
   closeResult: string;
 
@@ -38,6 +41,7 @@ export class HrApplicantProfileComponent implements OnInit {
 
     this.loadActions()
   }
+
   toggle() {
     this.show = !this.show;
 
@@ -79,10 +83,44 @@ export class HrApplicantProfileComponent implements OnInit {
   // }
 
   loadActions(){
-    this.applicationActionService.getAllApplicationActions(1, 1, 5)
+
+    this.applicationActionService.countApplicationActions(1)
+    .subscribe((data:number) => {
+      this.totalActions = data['Data'][0]
+      this.pagination.setPageRange(this.totalActions)
+      this.paginatorCollectionSize = this.pagination.getCollectionSize()
+    })
+
+    this.applicationActionService.getAllApplicationActions(1, 1, this.pageSize)
+    .subscribe((data:IApplicationActionShow[]) => {
+      this.actions = data['Data']
+      console
+    })
+
+  }
+
+  loadPage(page: number) {
+
+    this.pagination.pageNumber = page
+    this.applicationActionService.getAllApplicationActions(1, page, this.pageSize)
     .subscribe((data:IApplicationActionShow[]) => {
       this.actions = data['Data']
     })
 
+  }
+
+  showMoreActions() {
+    this.pageSize = this.pageSize * 2
+    setTimeout(
+      this.loadActions()
+    , 100)
+
+    console.log(this.page)
+    console.log(this.pageSize)
+    console.log(this.page * this.pageSize)
+  }
+
+  showLessActions() {
+    this.pageSize = 5
   }
 }

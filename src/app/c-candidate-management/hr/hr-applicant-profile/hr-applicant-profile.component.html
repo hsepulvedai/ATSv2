@@ -203,9 +203,19 @@
                                 </li>
                             </ul>
 
-                            <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+                            <!-- <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
                                 [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
-                            </ngb-pagination>
+                            </ngb-pagination> -->
+
+                            <button  (click)=" showMoreActions()" type="button" class="btn" > <i class="material-icons">
+                                    expand_more
+                                </i> Show More Actions </button>
+
+                                
+                            <button  *ngIf="(page * pageSize) === totalActions" (click)="showLessActions()" type="button" class="btn"> <i class="material-icons">
+                                    expand_less
+                                </i> Show Less Actions </button>
+
                         </div>
                     </div>
                 </div>
