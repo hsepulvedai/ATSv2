@@ -55,11 +55,28 @@
         </div>
       </div>
       </div>
+
+      <div class="row">
+          <div class='col-md-6' style="text-align: start">
+              <p># of Applicants: {{totalApplicants}}</p>
+          </div>
+    
+          <div class='col-md-6'>
+              <div class="col-md-12" style="text-align: end">
+                  <p *ngIf="totalApplicants === undefined"> Showing 0 of 0 </p>
+                  <p *ngIf="!(totalApplicants === undefined || totalApplicants === 0) && (page != paginatorSize && !(paginatorSize > page))">Showing {{pageSize * page}}
+                    of {{totalApplicants}}</p>
+                  <p *ngIf="(page === paginatorSize || paginatorSize > page) && (totalApplicants != undefined || totalApplicants != 0)">Showing {{totalApplicants}} of {{totalApplicants}}</p>
+                </div>
+          </div>
+    
+    
+          </div>
      
 <div class="row">
 
+  
       <div class="col-sm-12">
-        <p># of Applicants: {{job?.numberOfApplicants}}</p>
 
         <table  matSort (matSortChange)="sortData($event)" id="matTable" class="table table-hover table-striped ">
           <thead>
@@ -103,7 +120,11 @@
             </tr>
           </tbody>
         </table>
+        <hr>
 
+        <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+          [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+        </ngb-pagination>
 
       </div>
     </div>
