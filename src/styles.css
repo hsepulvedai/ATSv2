@@ -81,6 +81,9 @@ ngb-pagination /deep/ .page-link {
     background-color: white !important;
 }
 
+.tasks{
+   float:right;
+}
 
 /*  Find way to change color on link text and current page
 ngb-pagination /deep/ .page-item.disabled {

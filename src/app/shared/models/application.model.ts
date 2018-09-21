@@ -2,16 +2,21 @@ export interface IApplication {
     id?: number,
 	jobId?: number, 
 	applicantId?: number, 
-	userId?: number, 
-	applicationStatusId?: number, 
-	resume?: File,
-	comments?: string,
+	applicationStatusId?:number,
+	resumeId?:number,
+	email?: string, 
+	phone?: string
+	employeeId?: number,
     createdBy?: string,
     createdDate?: Date,
     modifiedBy?: string,
     modifiedDate?: Date,
-    active?: boolean,
-	email?: string, 
-	phone?: string, 
-	addressId?: number
+	active?: boolean
+	addressLine?:string,
+	addressLine2?:string,
+	city?:string,
+	stateProvince?:string,
+	country?:string,
+	zipCode?:string,
+	comments?:string
 }

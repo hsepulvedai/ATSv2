@@ -39,6 +39,7 @@ export class OfferListManagementComponent implements OnInit {
   ngOnInit() {
 
     this.pageSize = this.pagination.pageSize
+    this.paginatorSize = this.pagination.paginatorSize
 
     setTimeout(() => { this.refreshData()}, 100);
 
@@ -66,6 +67,7 @@ export class OfferListManagementComponent implements OnInit {
 
   goToOfferDetail(job) {
     this.jobService.currentJob = job
+    console.log(this.jobService.currentJob)
 
     this.router.navigate(['hr-offer-detail'])
   }
