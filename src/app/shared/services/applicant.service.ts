@@ -25,8 +25,14 @@ export class ApplicantService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantSelectById/' + id)
   }
 
-  offerDetailGetApplicants(jobId) {
-    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowByJobIdHr/' + jobId);
+  offerDetailGetApplicants(jobId, pageNumber, pageSize) {
+    console.log('id=' + jobId + ' pnum=' + pageNumber + ' psize=' + pageSize)
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowByJobIdHr/' + jobId
+    + '/pageNumber=' + pageNumber + '/pageSize=' + pageSize);
+  }
+
+  offerDetailTotalApplicants(id) {
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowByJobIdHrCount/' + id)
   }
 
 
@@ -50,15 +56,9 @@ export class ApplicantService {
     return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicantInsertFromWeb', applicant )
   }
 
-
-
-
-  
-  // getApplicantById(id:number){
-    
-  //   return this.http.get( environment.baseUrl + ''+ id);
-
-  // }
+  showApplicantById(id) {
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowById/' + id)
+  }
   
 
   insertApplicant(newApplicant:IApplicantInsert){
