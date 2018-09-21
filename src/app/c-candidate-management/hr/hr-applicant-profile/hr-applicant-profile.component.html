@@ -10,13 +10,12 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-<<<<<<< HEAD
-        <div class="modal-body">
+        <!-- <<<<<<< HEAD <<<<<<< HEAD <div class="modal-body">
 
             <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
 
                 <div class="row">
-                    <!-- Info inside {{}} is made up/ substitute with correct info-->
+                    Info inside {{}} is made up/ substitute with correct info
 
                     <div class="form-group col-md-6">
                         <label for="applicantName"> <strong>Name </strong></label>
@@ -52,47 +51,46 @@
 
 
 
-        </div>
+            </div>
 
     </ng-template>
 
-=======
-        <div class="modal-body">     
-           <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-                <div class="row">
+    ======= ======= >>>>>>> b34bab6854e2b31ebdbf7c886ee4a27fba4ac12e -->
+    <div class="modal-body">
+        <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
+            <div class="row">
                 <!-- Info inside {{}} is made up/ substitute with correct info-->
-    
-             <div class="form-group col-md-6">
-                <label for="applicantName"> <strong>Name </strong></label>
-            </div>    
-    
-              <div class="form-group col-md-6">
-                <label for="newAction"><strong>Action</strong></label>
-                <select formControlName="newAction" id="newAction" class="form-control">
-                  <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
-                </select>
-              </div>
-    
-              <div class="form-group col-md-6">
-                <label for="jobApplied"><strong>Job Applied</strong></label>
+
+                <div class="form-group col-md-6">
+                    <label for="applicantName"> <strong>Name </strong></label>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="newAction"><strong>Action</strong></label>
+                    <select formControlName="newAction" id="newAction" class="form-control">
+                        <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="jobApplied"><strong>Job Applied</strong></label>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="actionDescription"><strong>Description</strong></label>
+                    <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+                </div>
             </div>
-    
-             <div class="form-group col-md-6">
-                <label for="actionDescription"><strong>Description</strong></label>
-                <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
-              </div>
-            </div>
-    
+
             <div class="modal-footer">
-              <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
-                  save_alt </i> Save
-               </button>       
-            </div>    
-          </form>     
-        </div>    
-      </ng-template>
-  
->>>>>>> b34bab6854e2b31ebdbf7c886ee4a27fba4ac12e
+                <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+                        save_alt </i> Save
+                </button>
+            </div>
+        </form>
+    </div>
+    </ng-template>
+
 </head>
 
 
@@ -199,14 +197,15 @@
                             <ul class="timeline">
                                 <li *ngFor="let action of actions">
                                     <h4>{{action.actionType}}</h4>
-                                    <p><strong>{{action.actionDate  | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm a'}}</strong></p>
+                                    <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm
+                                            a'}}</strong></p>
                                     <p>{{action.comments}}.</p>
                                 </li>
                             </ul>
-                            
-          <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-          [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
-        </ngb-pagination>
+
+                            <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+                                [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+                            </ngb-pagination>
                         </div>
                     </div>
                 </div>
