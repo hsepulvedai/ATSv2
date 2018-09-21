@@ -6,6 +6,7 @@ import { HrApplicantProfileService } from '../../../shared/services/hr-applicant
 import { IHRAction } from '../../../shared/models/IHRAction.model';
 import { ApplicationActionService } from '../../../shared/services/application-action.service';
 import { IApplicationActionShow } from '../../../shared/models/application-action-show.model';
+import { PaginationService } from '../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -17,13 +18,21 @@ export class HrApplicantProfileComponent implements OnInit {
   applicant:IHRApplicant
   action: IHRAction
   actions:IApplicationActionShow[]
+
+
+  page: number = this.pagination.pageNumber;
+  paginatorSize: number
+  totalJobs: number
+  paginatorCollectionSize: number
+  pageSize: number
   
   closeResult: string;
 
   public show:boolean = false;
   public buttonName:any = 'Show';
   constructor(private router : Router, private applicantService: HrApplicantProfileService,  
-    private modalService: NgbModal, private applicationActionService: ApplicationActionService) { }
+    private modalService: NgbModal, private applicationActionService: ApplicationActionService
+  ,private pagination:PaginationService) { }
 
   ngOnInit() {
 
@@ -73,7 +82,6 @@ export class HrApplicantProfileComponent implements OnInit {
     this.applicationActionService.getAllApplicationActions(1, 1, 5)
     .subscribe((data:IApplicationActionShow[]) => {
       this.actions = data['Data']
-      console.log(this.actions)
     })
 
   }

@@ -14,4 +14,12 @@ export class ApplicationActionService {
     return this.http.get(environment.baseUrl +  this.routePrefix + '/ApplicationActionTimeLine/' + id
     + '/pageNumber=' + pageNumber + '/pageSize=' + pageSize)
   }
+
+  countApplicationActions(id) {
+    return this.http.get(environment.baseUrl +  this.routePrefix + '/ApplicationActionTimeLineCount/' + id)
+  }
+
+  
+
+
 }
