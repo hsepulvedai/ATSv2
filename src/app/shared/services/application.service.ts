@@ -33,5 +33,32 @@ export class ApplicationService {
     return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb/Submitted', application)
   }
 
+  getAllApplicationByRecruiter(recruiterId){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllByRecruiterId/'+ recruiterId)
+  }
+
+  getAllTasksByAppIdAndStatus(applicationId, status){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowPendingTaskByAppId/' + applicationId  + '/status=' +  status)
+  }
+
+
+  universalSearch(recruiterId:number, keyword: string, pageNumber: number, pageSize: number) {
+    if (keyword === '')
+      keyword = '_'
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchByRecruiterId/' + recruiterId + '/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+
+  universalSearchCount(recruiterId:number, keyword: string, pageNumber: number, pageSize: number) {
+    if (keyword === '')
+      keyword = '_'
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchCountByRecruiterId/' + recruiterId + '/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+
+
+ 
+
+
 
 }

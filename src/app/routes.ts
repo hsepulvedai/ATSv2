@@ -8,7 +8,7 @@ import { OfferListComponent } from './a-applicant-section/offer/offer-list/offer
 import { EditApplicantComponent } from './applicant/edit-applicant/edit-applicant.component';
 import { MaintenanceApplicantComponent } from './applicant/maintenance-applicant/maintenance-applicant.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
-import { MaintenanceUsersComponent } from './user/maintenance-user/maintenance-user.component';
+import { MaintenanceUserComponent } from './user/maintenance-user/maintenance-user.component';
 import { OfferListManagementComponent } from './b-applicant-management/offer/offer-list-management/offer-list-management.component';
 import { HrOfferDetailComponent } from './b-applicant-management/offer/hr-offer-detail/hr-offer-detail.component';
 import { OfferApplicationComponent } from './a-applicant-section/offer/offer-application/offer-application.component';
@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
     { path: 'applicants/maintenance', component: MaintenanceApplicantComponent},
     
     { path: 'createUser', component: CreateUserComponent},
-    { path: 'users/userMaintenance', component: MaintenanceUsersComponent},
+    { path: 'users/userMaintenance', component: MaintenanceUserComponent},
  
     {path: 'offer-application', component: OfferApplicationComponent},
     {path: 'offer-list-management', component: OfferListManagementComponent},
