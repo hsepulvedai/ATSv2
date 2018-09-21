@@ -1,25 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
+<<<<<<< HEAD
         <div class="modal-body">
-    
+
+            <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
+
+                <div class="row">
+                    <!-- Info inside {{}} is made up/ substitute with correct info-->
+
+                    <div class="form-group col-md-6">
+                        <label for="applicantName"> <strong>Name </strong></label>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="newAction"><strong>Action</strong></label>
+                        <select formControlName="newAction" id="newAction" class="form-control">
+                            <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="jobApplied"><strong>Job Applied</strong></label>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="actionDescription"><strong>Description</strong></label>
+                        <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+                            save_alt </i> Save
+                    </button>
+
+
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+    </ng-template>
+
+=======
+        <div class="modal-body">     
            <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-    
-            <div class="row">
+                <div class="row">
                 <!-- Info inside {{}} is made up/ substitute with correct info-->
     
              <div class="form-group col-md-6">
                 <label for="applicantName"> <strong>Name </strong></label>
-            </div>
-    
+            </div>    
     
               <div class="form-group col-md-6">
                 <label for="newAction"><strong>Action</strong></label>
@@ -41,148 +86,137 @@
             <div class="modal-footer">
               <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
                   save_alt </i> Save
-               </button>
-              
-    
-            </div>
-    
-          </form> 
-    
-    
-    
-        </div>
-    
+               </button>       
+            </div>    
+          </form>     
+        </div>    
       </ng-template>
   
+>>>>>>> b34bab6854e2b31ebdbf7c886ee4a27fba4ac12e
 </head>
 
 
 <body>
-<div class="container">
-           <div>
-                <h1>C.2/C.3/C.5</h1>           
-              </div> 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                <div class="card descriptionbox">
-                                  <div class="card-body" >
-                        
-                                    <h5>{{job?.jobName}}</h5>                        
-                                    <div >
-                                      <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
-                                      <div><strong> {{job?.company}}</strong></div>
-                        
-                                       {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
-                        
-                                      <div><strong> Description: </strong> {{job?.description}}</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="row bootstrap snippets">
-                                  <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
-                                      <div class="comment-wrapper">
-                                          <div class="panel panel-info">
-                                              <div class="panel-heading">
-                                                  Comment panel
-                                              </div>
-                                              <div class="panel-body">
-                                                  <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
-                                                  <br>
-                                                  <button type="button" class="btn pull-right">Post</button>
-                                                  <div class="clearfix"></div>
-                                                  <hr>
-                                                  <ul class="media-list">
-                                                      <li class="media">
-                                                          <a href="#" class="pull-left">                                                             
-                                                          </a>
-                                                          <div class="media-body">
-                                                              <span class="text-muted pull-right">
-                                                                  <small class="text-muted">30 min ago</small>
-                                                              </span>
-                                                              <strong class="text-success">@MartinoMont</strong>
-                                                              <p>
-                                                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                  Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing </a>.
-                                                              </p>
-                                                          </div>
-                                                      </li>
-                                                      <li class="media">
-                                                          <a href="#" class="pull-left">
-                                                              
-                                                          </a>
-                                                          <div class="media-body">
-                                                              <span class="text-muted pull-right">
-                                                                  <small class="text-muted">30 min ago</small>
-                                                              </span>
-                                                              <strong class="text-success">@LaurenceCorreil</strong>
-                                                              <p>
-                                                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                  Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
-                                                              </p>
-                                                          </div>
-                                                      </li>
-                                                      <li class="media">
-                                                          <a href="#" class="pull-left">
-                                                              
-                                                          </a>
-                                                          <div class="media-body">
-                                                              <span class="text-muted pull-right">
-                                                                  <small class="text-muted">30 min ago</small>
-                                                              </span>
-                                                              <strong class="text-success">@JohnNida</strong>
-                                                              <p>
-                                                                  Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
-                                                              </p>
-                                                          </div>
-                                                      </li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </div>
-                              
-                                  </div>
-                              </div>
-                          </div>
-                          
-                      <div class="col-sm-6">
-                          <div class="container mt-5 mb-5">
-                              <div class="row">
-                                <div class="col-md-6 offset-md-3">
-                                  <h4>Latest Actions</h4>
-                                  <button type="button" class="btn" (click)="openNewAction(content, job)" > <i
-                                    class="material-icons">
-                                    note_add
-                                  </i> New Action </button>
-                                  <ul class="timeline">
-                                    <li>
-                                      <a target="_blank" href="https://www.totoprayogo.com/#">New Web Design</a>
-                                      <a href="#" class="float-right">21 March, 2014</a>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                                    </li>
-                                    <li>
-                                      <a href="#">21 000 Job Seekers</a>
-                                      <a href="#" class="float-right">4 March, 2014</a>
-                                      <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-                                    </li>
-                                    <li>
-                                      <a href="#">Awesome Employers</a>
-                                      <a href="#" class="float-right">1 April, 2014</a>
-                                      <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                                                 
-                      </div>
-                    </div>
-                   
+    <div class="container">
+        <div>
+            <h1>C.2/C.3/C.5</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card descriptionbox">
+                            <div class="card-body">
 
-        
-      </div>    
-     </body>      
-    </html>
+                                <h5>{{job?.jobName}}</h5>
+                                <div>
+                                    <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
+                                    <div><strong> {{job?.company}}</strong></div>
+
+                                    {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
+
+                                    <div><strong> Description: </strong> {{job?.description}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bootstrap snippets">
+                    <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
+                        <div class="comment-wrapper">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    Comment panel
+                                </div>
+                                <div class="panel-body">
+                                    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                    <br>
+                                    <button type="button" class="btn pull-right">Post</button>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted pull-right">
+                                                    <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@MartinoMont</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, <a
+                                                        href="#">#consecteturadipiscing </a>.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted pull-right">
+                                                    <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@LaurenceCorreil</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor <a
+                                                        href="#">#ipsumdolor </a>adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted pull-right">
+                                                    <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@JohnNida</strong>
+                                                <p>
+                                                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing
+                                                    elit.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <h4>Latest Actions</h4>
+                            <button type="button" class="btn" (click)="openNewAction(content, job)"> <i class="material-icons">
+                                    note_add
+                                </i> New Action </button>
+                            <ul class="timeline">
+                                <li *ngFor="let action of actions">
+                                    <h4>{{action.actionType}}</h4>
+                                    <p><strong>{{action.actionDate  | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm a'}}</strong></p>
+                                    <p>{{action.comments}}.</p>
+                                </li>
+                            </ul>
+                            
+          <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+          [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+        </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

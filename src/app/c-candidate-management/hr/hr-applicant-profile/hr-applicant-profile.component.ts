@@ -4,6 +4,8 @@ import { IHRApplicant } from '../../../shared/models/IHRApplicant.model'
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HrApplicantProfileService } from '../../../shared/services/hr-applicant-profile.service';
 import { IHRAction } from '../../../shared/models/IHRAction.model';
+import { ApplicationActionService } from '../../../shared/services/application-action.service';
+import { IApplicationActionShow } from '../../../shared/models/application-action-show.model';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -14,17 +16,17 @@ export class HrApplicantProfileComponent implements OnInit {
 
   applicant:IHRApplicant
   action: IHRAction
-  actions:IHRAction[]
+  actions:IApplicationActionShow[]
   
   closeResult: string;
 
   public show:boolean = false;
   public buttonName:any = 'Show';
-  constructor(private router : Router, private applicantService: HrApplicantProfileService,  private modalService: NgbModal) { }
+  constructor(private router : Router, private applicantService: HrApplicantProfileService,  
+    private modalService: NgbModal, private applicationActionService: ApplicationActionService) { }
 
   ngOnInit() {
 
-    this.loadApplicantInfo()
     this.loadActions()
   }
   toggle() {
@@ -59,19 +61,20 @@ export class HrApplicantProfileComponent implements OnInit {
     }
   }
 
-  loadApplicantInfo(){
-    this.applicantService.getHRApplicantInfo(6)
-    .subscribe((data:IHRApplicant) => {
-      this.applicant = data['Data'];
-      this.applicantService.currentApplicant = this.applicant
-    })
-  }
+  // loadApplicantInfo(){
+  //   this.applicantService.getHRApplicantInfo(6)
+  //   .subscribe((data:IHRApplicant) => {
+  //     this.applicant = data['Data'];
+  //     this.applicantService.currentApplicant = this.applicant
+  //   })
+  // }
 
   loadActions(){
-    this.applicantService.getApplicationActionsHR(6)
-        .subscribe((data:IHRAction) => {
-          this.actions = data['Data'];
-        })
+    this.applicationActionService.getAllApplicationActions(1, 1, 5)
+    .subscribe((data:IApplicationActionShow[]) => {
+      this.actions = data['Data']
+      console.log(this.actions)
+    })
 
   }
 }

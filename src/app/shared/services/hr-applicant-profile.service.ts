@@ -11,23 +11,23 @@ export class HrApplicantProfileService {
 
   currentApplicant: IHRApplicant
   routePrefix = 'Applicant'
-  routePrefix2 = 'ApplicationAction'
+  // routePrefix2 = 'ApplicationAction'
 
 
 
 
   constructor( private http:HttpClient) { }
 
-    getHRApplicantInfo(id:number) {
-      return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowHRInfo/' + id)
-    }
+    // getHRApplicantInfo(id:number) {
+    //   return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicantShowHRInfo/' + id)
+    // }
 
     // editApplicationHR(id:number) {
 
     // }
 
-    getApplicationActionsHR(id:number) {
-      return this.http.get(environment.baseUrl + this.routePrefix2 + '/ApplicationActionHRShow/' + id)
-    }
+    // getApplicationActionsHR(id:number) {
+    //   return this.http.get(environment.baseUrl + this.routePrefix2 + '/ApplicationActionHRShow/' + id)
+    // }
 
 }

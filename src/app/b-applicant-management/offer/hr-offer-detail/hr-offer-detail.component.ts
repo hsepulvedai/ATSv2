@@ -14,7 +14,7 @@ import { IJobOfferHR } from '../../../shared/models/job-offer-hr.model';
 import 'jquery'
 import { Sort } from '@angular/material';
 import { PaginationService } from '../../../shared/services/pagination.service';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-hr-offer-detail',
   templateUrl: './hr-offer-detail.component.html',
@@ -42,13 +42,14 @@ export class HrOfferDetailComponent implements OnInit {
   page: number = this.pagination.pageNumber;
 
   currentJob: IOfferHrEdit
-
+  closeResult: string;
   selectedRecruiter
   selectedApplicationStatus
 
   constructor(private jobService: JobService, private router: Router
     , private applicantService: ApplicantService, private employeeService: EmployeeService
-    , private applicationService: ApplicationService, private pagination: PaginationService) { }
+    , private applicationService: ApplicationService, private pagination: PaginationService
+    ,private modalService: NgbModal) { }
 
   ngOnInit() {
 
@@ -66,6 +67,26 @@ export class HrOfferDetailComponent implements OnInit {
     console.log(this.pageSize)
     console.log(this.page)
   }
+  openEdit(content, job) {
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+
+
+      (this.closeResult = `Closed with: ${result}`)
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
   save(applicationId, status, recruiter) {
 

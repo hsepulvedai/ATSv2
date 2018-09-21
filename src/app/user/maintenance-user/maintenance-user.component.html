@@ -4,16 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>User Maintenance</title>
+    
 </head>
 
 <body>
-    <h1 class="titleFont">C4</h1>
+    <h1>C4</h1>
 
     <div class="container" >
       <div class="row">
-          <div class="col-sm-9">
-        <table class="table table-hover table-striped">
+          <div class="col-sm-9 ">
+        <table class="table table-hover table-striped" >
             <thead>
                     <th >ID</th>
                     <th >Name</th>
@@ -33,8 +33,8 @@
                   <td >Technitian</td>
                   <td >Submitted</td>
                   <td >Revise Resume</td>
-                  <td  style="text-align: right;padding-right: 30px;">
-                      <button type="button" class="btn btn-outline-info"
+                  <td  style="padding-right: 10%;">
+                      <button type="button" class="btn btn-outline"
                       (click)="goToProfile(employee.id)"><i class="material-icons">
                             view_headline
                             </i>View </button>
@@ -43,18 +43,18 @@
             </tbody>
         </table>
     </div>
-    <div class="col-sm-3">
-            <div style="margin-top: 30%; margin-left:30%;">
+    <div class="col-sm-3 tasks" >
+            <div style=" padding-left:15%;" >
 
-                    <div class=" bg-white" >
+                    <div class=" bg-white " >
                         <h3>Pending Tasks</h3>
                         <form [formGroup]="pendingTasks">
-                            <input type="checkbox" name="vehicle" value="Bike"> Call Pooh Bear<br>
-                            <input type="checkbox" name="vehicle" value="Car"> Interview Christopher Robin
+                            <input type="checkbox"  name="vehicle" value="Bike"> Call Pooh Bear<br>
+                            <input type="checkbox"  name="vehicle" value="Car"> Interview Christopher Robin
                       </form>
                     </div>
                 </div>
-     </div>
+            </div>
       </div>
     </div>
 </body>

@@ -30,7 +30,7 @@ export class ApplicationService {
   }
 
   insertApplication(application) {
-    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb', application)
+    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb/Submitted', application)
   }
 
 

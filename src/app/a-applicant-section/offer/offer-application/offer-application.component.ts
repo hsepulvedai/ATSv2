@@ -11,9 +11,10 @@ import { UserService } from '../../../shared/user.service';
 import { ApplicantService } from '../../../shared/services/applicant.service';
 import { IApplicant } from '../../../shared/models/applicant.model';
 import { IUser } from '../../../shared/models/user.model';
+import { IApplicantApply } from '../../../shared/models/applicant-apply.model';
 
 @Component({
-  selector: 'app-offer-application',
+  selector: 'app-offer-application', 
   templateUrl: './offer-application.component.html',
   //styleUrls: ['./offer-application.component.css']
 })
@@ -35,8 +36,9 @@ export class OfferApplicationComponent implements OnInit {
   country: FormControl
   city: FormControl
   zipCode: FormControl
+  comments:FormControl
 
-  currentApplicant: IApplicantMaintInfo 
+  currentApplicant: IApplicantApply 
 
   constructor(private jobService: JobService, private router: Router,
     private applicationService: ApplicationService, private userService:UserService,
@@ -54,7 +56,7 @@ export class OfferApplicationComponent implements OnInit {
     // })
 
     this.currentApplicant = {
-      applicantId: 11,
+      applicantId: 10,
       firstName: 'Dummy',
       lastName: 'Dumms',
       email: 'dummy@mail.com',
@@ -64,13 +66,16 @@ export class OfferApplicationComponent implements OnInit {
       city:'San Juan',
       stateProvince:'Puerto Rico',
       country:'United States',
-      zipCode:'88595'
+      zipCode:'88595',
+      comments: 'These are comments. I am cool.'
     }
+  
   
 
     this.jobService.showJobOfferDetail(this.jobService.currentJobId)
       .subscribe((data: IJobOffer) => {
         this.job = data['Data'][0];
+        console.log(this.job)
       })
 
       
@@ -85,6 +90,7 @@ export class OfferApplicationComponent implements OnInit {
     this.country= new FormControl(this.currentApplicant.country)
     this.city = new FormControl(this.currentApplicant.city)
     this.zipCode = new FormControl(this.currentApplicant.zipCode)
+    this.comments = new FormControl(this.currentApplicant.comments)
 
     this.applicantInfo = new FormGroup({
       name: this.name,
@@ -95,13 +101,10 @@ export class OfferApplicationComponent implements OnInit {
       state:this.state,
       country:this.country,
       city:this.city,
-      zipCode:this.zipCode
+      zipCode:this.zipCode,
+      comments:this.comments
     })
 
-  }
-
-  loadForm() {
-    
   }
 
   submitApplication(form) {
@@ -109,16 +112,8 @@ export class OfferApplicationComponent implements OnInit {
       jobId: this.jobService.currentJobId,
       applicantId: this.currentApplicant.applicantId,
       email: form.email,
-      phone: form.phone,
-      addressLine:form.addressLine,
-      addressLine2:form.addressLine2,
-      city:form.city,
-      stateProvince:form.state,
-      country:form.country,
-      zipCode:form.zipCode,
-      comments:form.comments
+      phone: form.phone
     }
-
 
     this.applicationService.insertApplication(this.application)
       .subscribe(data => { console.log("POST:" + data) },
