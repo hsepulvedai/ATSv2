@@ -38,8 +38,27 @@ export class ApplicationService {
   }
 
   getAllTasksByAppIdAndStatus(applicationId, status){
-    return this.http.get(environment.baseUrl + this.routePrefix + 'ApplicationShowPendingTaskByAppId/' + applicationId  + 'status=' +  status)
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowPendingTaskByAppId/' + applicationId  + '/status=' +  status)
   }
+
+
+  universalSearch(recruiterId:number, keyword: string, pageNumber: number, pageSize: number) {
+    if (keyword === '')
+      keyword = '_'
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchByRecruiterId/' + recruiterId + '/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+
+  universalSearchCount(recruiterId:number, keyword: string, pageNumber: number, pageSize: number) {
+    if (keyword === '')
+      keyword = '_'
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchCountByRecruiterId/' + recruiterId + '/search='
+      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+  }
+
+
+ 
+
 
 
 }

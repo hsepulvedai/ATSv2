@@ -7,5 +7,6 @@ export interface IHRApplication {
     applicantEmail?: string, 
     jobApplied?: string, 
     applicationStatus?: string, 
-    numberOfActions?: string
+    numberOfActions?: string,
+    createdDate?: Date
 }
