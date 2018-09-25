@@ -42,7 +42,8 @@ export class MaintenanceUserComponent implements OnInit {
     tasks:ITask[]
 
     // for now 
-    recruiterId:number = 4
+    recruiterId:number = 3
+    applicationId:number = 1
 
 
     closeResult: string;
@@ -67,7 +68,7 @@ export class MaintenanceUserComponent implements OnInit {
     setTimeout(() => { this.refreshData()}, 100);
 
 
-  this.applicationService.getAllTasksByAppIdAndStatus(1, "pending")
+  this.applicationService.getAllTasksByAppIdAndStatus(this.applicationId, "pending")
       .subscribe((data) => {
         this.tasks = data['Data'];
 
