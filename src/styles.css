@@ -43,6 +43,11 @@ p {font-size: 16px;  /*Estilo general para paragraphs*/
     font-family: Poppins;
     font-size:100%;    
 }
+.nav-link:hover {
+    color: #df136f;
+    text-decoration: none;
+}
+
 .breadcrumb{  /*Controls breadcrumbs (used in B1 and B2 ) */
     background-color:white;
     width: 25%;
@@ -51,10 +56,7 @@ p {font-size: 16px;  /*Estilo general para paragraphs*/
     color: #df136f;
     text-decoration: none;
 }
-.nav-link:hover {
-    color: #df136f;
-    text-decoration: none;
-}
+
 
 .descriptionbox{ /*Description boxes for Jobs and applicants information b2 C2 and A3*/
     width: 69em;    
