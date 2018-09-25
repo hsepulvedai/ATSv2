@@ -14,7 +14,7 @@
          <div class="row">
                <div class="col-12">
                      <h1 class="margin" style="text-align: center" >A.1 Welcome to Invid Careers</h1>
-                     <h3><a routerLink="/jobs"  style="color:white">
+                     <h3><a routerLink="/jobs"class="btnWelcomeApply">
                       Apply to Jobs
                     </a></h3> 
                </div>
@@ -22,40 +22,40 @@
     </div>     
          <!-- ***************************************************************************************************** -->
      
-  <div class="container fluid">    
-    <div class="row">
-      <div class="col" >
-      <div class=" text-center" >          
-          
+  <div class="container-fluid">    
+          <div class="row">
+            <div class="col" >
+            <div class=" text-center" >          
+                
+              </div>
+            </div>
         </div>
-      </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-    <div class="text-center">    
-        <h3 class="margin" > Latest Jobs </h3><br>
-      </div>
-    </div>
-  </div>
+        <div class="row">
+          <div class="col-sm-12">
+          <div class="text-center">    
+              <h1 class="margin" style="color:#df136f; font-family: Quicksand;"> Latest Jobs </h1><br>
+            </div>
+          </div>
+        </div>
         <div class="row">
            <!-- ---------------------------------->
-          <div class="col-sm-4">
-            <h3>{{jobs[0].jobName}}</h3> <br>
+          <div class="col-sm-3 shadow" style="margin-left:10%;">
+            <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[0].jobId)">{{jobs[0].jobName}}</button></h3> <br>
             <h5  >{{jobs[0].city}},{{jobs[0].country}}
             </h5>
             <p>{{jobs[0].description}}</p>
           
           </div>
            <!-- ---------------------------------->
-          <div class="col-sm-4"> 
-              <h3>{{jobs[1].jobName}}</h3> <br>
+          <div class="col-sm-3 shadow" style="margin-left:2%; margin-right:2%;"> 
+              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[1].jobId)">{{jobs[1].jobName}}</button></h3> <br>
               <h5  >{{jobs[1].city}},{{jobs[1].country}}
               </h5>
               <p>{{jobs[1].description}}</p>
           </div>
            <!-- ---------------------------------->
-          <div class="col-sm-4"> 
-              <h3>{{jobs[2].jobName}}</h3><br>
+          <div class="col-sm-3 shadow"> 
+              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[2].jobId)">{{jobs[2].jobName}}</button></h3><br>
               <h5  >{{jobs[2].city}},{{jobs[2].country}}
               </h5>
               <p>{{jobs[2].description}}</p>

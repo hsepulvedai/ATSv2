@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
     background-color:white;
-    /* font-family:'PTSansRegular', Arial, Helvetica, sans-serif; */
+    
 }
 p {font-size: 16px;
     font-family: Quicksand;
@@ -37,19 +37,15 @@ p {font-size: 16px;
 .navbar {
 
     /*Controla la barra de navegacion como tal */
-    /* background-color: #13316e; */
-   background-color:#25326a;
-   /* height: 20%; */
+    background-color:#25326a;
    
 }
 
 .nav-link{
     /*Controla las palabras (links) en toda la aplicacion  */
-    
     color: #25326a;
     font-family: Poppins;
-    font-size:100%;
-    
+    font-size:100%;    
 }
 .breadcrumb{
     background-color:white;
@@ -81,12 +77,34 @@ ngb-pagination /deep/ .page-link {
    float:right;
 }
 
-/*  Find way to change color on link text and current page
+/*  Find way to change color on link text and current page on Firefox
 ngb-pagination /deep/ .page-item.disabled {
     color: #25326a;
     background-color: #25326a ;
 } */
 
+.btnWelcomeJobs{
+    
+    background-color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    color: #25326a;
+    font-family: Poppins;
+  
+    border: none;
+   
+}
+.btnWelcomeJobs:hover{
+    color: #df136f;
+}
+.btnWelcomeApply{
+    color:white;
+    font-family: Poppins;
+}
+.btnWelcomeApply:hover{
+    color:#df136f;
+    
+}
 
 .btn {
 
