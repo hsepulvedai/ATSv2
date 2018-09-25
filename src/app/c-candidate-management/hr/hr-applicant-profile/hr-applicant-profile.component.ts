@@ -11,6 +11,11 @@ import { ApplicantService } from '../../../shared/services/applicant.service';
 import { CommentService } from '../../../shared/services/comment.service';
 import { IComment } from '../../../shared/models/comment.model';
 import { ApplicationService } from '../../../shared/services/application.service';
+import { ITask } from '../../../shared/models/task.model';
+import { FormGroup, FormControl } from '@angular/forms';
+import { IAction } from '../../../shared/models/action.model';
+import { IActionInsert } from '../../../shared/models/action_insert.model';
+import { IApplicationInfo } from '../../../shared/models/application_info.model';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -18,6 +23,16 @@ import { ApplicationService } from '../../../shared/services/application.service
   //styleUrls: ['./hr-applicant-profile.component.css']
 })
 export class HrApplicantProfileComponent implements OnInit {
+
+
+  newActionForm: FormGroup
+  actionName: FormControl
+  actionDescription: FormControl
+  actionDate: FormControl
+
+  allActions: IAction[]
+
+
 
   commentBoxInput:string
 
@@ -29,6 +44,8 @@ export class HrApplicantProfileComponent implements OnInit {
   totalActions:number
 
   comments:IComment[]
+  pendingTasks: ITask[]
+  applicationInfo: IApplicationInfo
 
 
   page: number = this.pagination.pageNumber;
@@ -40,6 +57,8 @@ export class HrApplicantProfileComponent implements OnInit {
   
   closeResult: string;
 
+  currentAppId:number;
+
   public show:boolean = false;
   public buttonName:any = 'Show';
   constructor(private router : Router, private applicationService: ApplicationService,  
@@ -48,6 +67,40 @@ export class HrApplicantProfileComponent implements OnInit {
 
   ngOnInit() {
 
+   this.currentAppId = this.applicationService.currentApplication.applicationId;
+
+   
+   this.actionName = new FormControl()
+   this.actionDescription = new FormControl();
+   this.actionDate = new FormControl();
+    
+   this.newActionForm = new FormGroup({
+     actionName: this.actionName,
+     actionDescription: this.actionDescription,
+     actionDate: this.actionDate
+   })
+
+
+    
+  this.applicationService.getAllTasksByAppIdAndStatus(this.applicationService.currentApplication.applicationId, "pending")
+  .subscribe((data) => {
+    this.pendingTasks = data['Data'];
+
+  })
+
+  this.applicationService.getAllApplicationActions()
+      .subscribe((data) => {
+        this.allActions = data['Data'];
+        console.log(this.allActions)
+      })
+
+
+  this.applicationService.getApplicationInfoByAppId(this.applicationService.currentApplication.applicationId)
+  .subscribe((data) => {
+    this.applicationInfo = data['Data'][0];
+    console.log(this.applicationInfo)
+
+  })
 
     setTimeout(
       this.loadActions()
@@ -56,6 +109,9 @@ export class HrApplicantProfileComponent implements OnInit {
     setTimeout(
       this.loadComments()
     , 50)
+
+
+
   }
 
   toggle() {
@@ -69,7 +125,7 @@ export class HrApplicantProfileComponent implements OnInit {
   }
 
   
-  openNewAction(content, job) {
+  openNewAction(content) {
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
 
@@ -88,6 +144,20 @@ export class HrApplicantProfileComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  newAction:IActionInsert
+
+  insertAction(newActionForm){
+
+    this.newAction = {
+      action : newActionForm.actionName,
+      description: newActionForm.actionDescription,
+      createdDate: newActionForm.actionDate
+    }
+
+
+
   }
 
   insertComment() {
@@ -154,5 +224,13 @@ export class HrApplicantProfileComponent implements OnInit {
     .subscribe((data:IComment[]) => {
       this.comments = data['Data']
     })
+  }
+
+
+  selectedAction: IAction
+  
+  selectActionChangeHandler(event: any) {
+    this.selectedAction = event.target.value;
+
   }
 }
