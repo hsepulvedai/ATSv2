@@ -14,7 +14,9 @@
          <div class="row">
                <div class="col-12">
                      <h1 class="margin" style="text-align: center" >A.1 Welcome to Invid Careers</h1>
-                     <h3><a routerLink="/jobs"  style="color:white">Apply to Jobs</a></h3>
+                     <h3><a routerLink="/jobs"  style="color:white">
+                      Apply to Jobs
+                    </a></h3> 
                </div>
          </div>
     </div>     
@@ -38,31 +40,25 @@
         <div class="row">
            <!-- ---------------------------------->
           <div class="col-sm-4">
-            <h5>Job 1</h5>
-            <p class="jobsp" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus. 
-                Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend,
-                sit amet consectetur sapien auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
-            </p>
+            <h3>{{jobs[0].jobName}}</h3> <br>
+            <h5  >{{jobs[0].city}},{{jobs[0].country}}
+            </h5>
+            <p>{{jobs[0].description}}</p>
           
           </div>
            <!-- ---------------------------------->
           <div class="col-sm-4"> 
-            <h5> Job 2</h5>
-            <p class="jobsp" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus. 
-                Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend,
-                sit amet consectetur sapien auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
-            </p>
+              <h3>{{jobs[1].jobName}}</h3> <br>
+              <h5  >{{jobs[1].city}},{{jobs[1].country}}
+              </h5>
+              <p>{{jobs[1].description}}</p>
           </div>
            <!-- ---------------------------------->
           <div class="col-sm-4"> 
-            <h5>Job 3</h5>            
-            <p class="jobsp" > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor augue ut finibus maximus. 
-                Pellentesque ac diam quis tortor malesuada lobortis. Mauris venenatis congue arcu. Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Quisque vehicula in ex eu lobortis. Curabitur euismod diam a sem eleifend,
-                sit amet consectetur sapien auctor.Phasellus vel elit vitae mi mattis porta. Curabitur sodales mauris at lacus tincidunt facilisis.
-            </p>
+              <h3>{{jobs[2].jobName}}</h3><br>
+              <h5  >{{jobs[2].city}},{{jobs[2].country}}
+              </h5>
+              <p>{{jobs[2].description}}</p>
           </div>
           <!-- ---------------------------------->
         </div>

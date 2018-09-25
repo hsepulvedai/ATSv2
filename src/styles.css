@@ -13,7 +13,10 @@ body {
     background-color:white;
     /* font-family:'PTSansRegular', Arial, Helvetica, sans-serif; */
 }
-p {font-size: 16px;}
+p {font-size: 16px;
+    font-family: Quicksand;
+    text-align: justify;
+    text-justify: inter-word;}
 
 .margin {margin-bottom: 45px;}
 
