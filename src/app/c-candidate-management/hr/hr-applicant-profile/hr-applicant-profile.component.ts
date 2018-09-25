@@ -46,15 +46,14 @@ export class HrApplicantProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    this.commentService.getCommentsByApplicationId(1, 1, 5)
-    .subscribe((data:IComment[]) => {
-      this.comments = data['Data']
-      console.log(this.comments)
-    })
 
-    // this.applicantService.getApplicantById(1)
+    setTimeout(
+      this.loadActions()
+    , 50)
 
-    this.loadActions()
+    setTimeout(
+      this.loadComments()
+    , 50)
   }
 
   toggle() {
@@ -89,6 +88,21 @@ export class HrApplicantProfileComponent implements OnInit {
     }
   }
 
+  insertComment() {
+
+    var comment = {
+      id: 1,
+      employeeId:1,
+      data: this.commentBoxInput
+    }
+    this.commentService.insertComment(comment)
+    .subscribe(data => { console.log("POST:" + data) },
+    error => { console.error("Error: ", error) })
+
+    setTimeout(
+      this.loadComments(), 50)
+  }
+
   // loadApplicantInfo(){
   //   this.applicantService.getHRApplicantInfo(6)
   //   .subscribe((data:IHRApplicant) => {
@@ -99,7 +113,7 @@ export class HrApplicantProfileComponent implements OnInit {
 
   loadActions(){
 
-    this.applicationActionService.countApplicationActions(1)
+    this.applicationActionService.countApplicationActions(this.applicantService.currentApplicant)
     .subscribe((data:number) => {
       this.totalActions = data['Data'][0]
       this.pagination.setPageRange(this.totalActions)
@@ -143,5 +157,12 @@ export class HrApplicantProfileComponent implements OnInit {
     setTimeout(
       this.loadActions()
     , 50)
+  }
+
+  loadComments() {
+    this.commentService.getCommentsByApplicationId(1, 1, 5)
+    .subscribe((data:IComment[]) => {
+      this.comments = data['Data']
+    })
   }
 }
