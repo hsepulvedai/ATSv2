@@ -139,5 +139,9 @@ export class HrApplicantProfileComponent implements OnInit {
 
   showLessActions() {
     this.pageSize = 5
+    this.page = 1
+    setTimeout(
+      this.loadActions()
+    , 50)
   }
 }
