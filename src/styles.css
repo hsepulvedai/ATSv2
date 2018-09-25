@@ -1,8 +1,9 @@
+ /*Allow the use of google fonts*/
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 
-body {
+body { /*Estilo general para body tags*/
     font-family: Quicksand;
     font: 15px ;
     line-height: 1.8;
@@ -13,67 +14,64 @@ body {
     background-color:white;
     
 }
-p {font-size: 16px;
+p {font-size: 16px;  /*Estilo general para paragraphs*/
     font-family: Quicksand;
     text-align: justify;
     text-justify: inter-word;}
 
-.margin {margin-bottom: 45px;}
-
-#navtext{
-    color:white;
-}
-#navtext:hover{
-    color:#df136f;
-}
-
+.margin {margin-bottom: 45px;} 
 
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
 }
-
-
-.navbar {
-
-    /*Controla la barra de navegacion como tal */
-    background-color:#25326a;
-   
+#navtext{ /* Controls text color of navbar*/
+    color:white;
+}
+#navtext:hover{ /*Controls text color when hovered*/
+    color:#df136f;
 }
 
-.nav-link{
-    /*Controla las palabras (links) en toda la aplicacion  */
+.navbar { /*Controls navbar */
+    
+    background-color:#25326a;   
+}
+
+.nav-link{ /*Controls all links styles*/
+   
     color: #25326a;
     font-family: Poppins;
     font-size:100%;    
 }
-.breadcrumb{
+.breadcrumb{  /*Controls breadcrumbs (used in B1 and B2 ) */
     background-color:white;
     width: 25%;
 }
-.breadcrumb-item{
+.breadcrumb-item{ /*Controls breadcrumbs  */
     color: #df136f;
+    text-decoration: none;
 }
 .nav-link:hover {
     color: #df136f;
+    text-decoration: none;
 }
 
-.descriptionbox{
+.descriptionbox{ /*Description boxes for Jobs and applicants information b2 C2 and A3*/
     width: 69em;    
 }
 
-img{
+img{ /* Controls logo image on navbar*/
     width: 8em;    
     position: left;
 
 }
 
-ngb-pagination /deep/ .page-link {
+ngb-pagination /deep/ .page-link { /*Controls color for navigation*/
     color: #25326a !important;
     background-color: white !important;
 }
 
-.tasks{
+.tasks{ /* controls location of tasks item */
    float:right;
 }
 
@@ -83,7 +81,7 @@ ngb-pagination /deep/ .page-item.disabled {
     background-color: #25326a ;
 } */
 
-.btnWelcomeJobs{
+.btnWelcomeJobs{ /*  Controls the job title buttons that let user access application for specific job*/
     
     background-color: #FFFFFF;
     text-align: center;
@@ -94,19 +92,29 @@ ngb-pagination /deep/ .page-item.disabled {
     border: none;
    
 }
-.btnWelcomeJobs:hover{
+.btnWelcomeJobs:hover{ /*Gives hover effect to job title buttons  */
     color: #df136f;
 }
-.btnWelcomeApply{
+.btnWelcomeApply{ /*Controls the style of apply link under welcome */
+    text-decoration: none;
     color:white;
     font-family: Poppins;
+   
 }
-.btnWelcomeApply:hover{
+.applyBorder{ /* Adds oval border to apply link*/
+    
+    border: 1px solid white ;
+    padding: 20px;
+    border-radius: 55px;
+}
+
+.btnWelcomeApply:hover{ /*Gives hover style to apply link*/
     color:#df136f;
+    text-decoration: none;
     
 }
 
-.btn {
+.btn { /* Controls styles of overall buttons*/
 
   border-radius: 4px;
   background-color: #FFFFFF;
@@ -119,7 +127,7 @@ ngb-pagination /deep/ .page-item.disabled {
 
 }
 
-.btn:hover {
+.btn:hover { /* Hover effect of overall buttons*/
   border-radius: 4px;
   background-color: #25326a;
   border: 1px solid #FFFFFF;
@@ -129,32 +137,45 @@ ngb-pagination /deep/ .page-item.disabled {
   margin: 5px;
 }
 
-input{
+input{ /* inputs style to make them look like the rest of the buttons*/
     margin-bottom: 5em;
     color: #25326a;
     background-color: white;
 }
 
-table{
+table{ /*General styling for tables*/
     font-family: Quicksand;
     color: black;
 }
 
-th {
+th { /*General styling for table heads*/
     text-align: center;
 
 }
 
-  tr {
+  tr { /*General styling for table rows*/
     text-align: left;
   }
+  h3{
+    font-family: Quicksand;
+    color: black;
+    text-align: center;
+    padding-top: 1em;
     
-.smallrow{
+}
+h5{
+    font-family: Quicksand;
+    color: black;
+    text-align: center;
+    
+}
+    
+/* .smallrow{ 
     height: 5em;
 }
 .mdrow{
-    height: 7em;
-}
+    height: 7em; 
+}*/
 .descp {
     font-size: 16px;
     color: white;
@@ -172,31 +193,16 @@ th {
     padding-right: 0px;
     font-family: Quicksand;
 }
-h3{
-    font-family: Quicksand;
-    color: black;
-    text-align: center;
-    padding-top: 1em;
-    
-}
-h5{
-    font-family: Quicksand;
-    color: black;
-    text-align: center;
-    
-}
 
-
-.backgroundG{
-    /* background-image: linear-gradient(-90deg,#25326a,#4577bb); */
-    text-align: center;
+.backgroundG{ /*Controls small pink border on top of navbar*/
+     text-align: center;
      position:auto;
       height: 10px;
       background-color:#df136f; 
       font-weight: 100;
 }
 
-.backgroundWelcome{
+.backgroundWelcome{ /* Controls large blue banner on welcome page*/
     background-image: linear-gradient(-90deg,#25326a,	#4577bb);
     text-align: center;
      position:auto;
@@ -204,14 +210,12 @@ h5{
       color: white;
       font-family: Quicksand;
 }
-     
 
-
-.tabsmargin{
+.tabsmargin{ /*Controls the location of the tabs on A5 and C1*/
     margin-top: 10em
 }
 
-footer{
+footer{ /*General footer style*/
    margin-top: 20%;
    position: relative;
    bottom: 0;
@@ -219,13 +223,13 @@ footer{
     width: 100%;
     background-color: #25326a;
 }
-.bg-1 { 
+.bg-1 {  /*Not tbeing used, keeping the colors*/
     background-image: linear-gradient(90deg,#25326a,#4577bb);
     padding-bottom: 100px;
     color: #ffffff;
    
 }
-.bg-2 { 
+.bg-2 { /*Not tbeing used, keeping the colors*/
     background-image: linear-gradient( 	#F62459, #F47983);
     color: #ffffff;
     
