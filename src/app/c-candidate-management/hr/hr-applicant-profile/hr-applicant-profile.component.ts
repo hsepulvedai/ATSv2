@@ -10,6 +10,7 @@ import { PaginationService } from '../../../shared/services/pagination.service';
 import { ApplicantService } from '../../../shared/services/applicant.service';
 import { CommentService } from '../../../shared/services/comment.service';
 import { IComment } from '../../../shared/models/comment.model';
+import { ApplicationService } from '../../../shared/services/application.service';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -35,26 +36,26 @@ export class HrApplicantProfileComponent implements OnInit {
   totalJobs: number
   paginatorCollectionSize: number
   pageSize: number = 5
+  newPageSize:number = this.pageSize
   
   closeResult: string;
 
   public show:boolean = false;
   public buttonName:any = 'Show';
-  constructor(private router : Router, private applicantService: ApplicantService,  
+  constructor(private router : Router, private applicationService: ApplicationService,  
     private modalService: NgbModal, private applicationActionService: ApplicationActionService
   ,private pagination:PaginationService, private commentService:CommentService) { }
 
   ngOnInit() {
 
-    this.commentService.getCommentsByApplicationId(1, 1, 5)
-    .subscribe((data:IComment[]) => {
-      this.comments = data['Data']
-      console.log(this.comments)
-    })
 
-    // this.applicantService.getApplicantById(1)
+    setTimeout(
+      this.loadActions()
+    , 50)
 
-    this.loadActions()
+    setTimeout(
+      this.loadComments()
+    , 50)
   }
 
   toggle() {
@@ -89,24 +90,33 @@ export class HrApplicantProfileComponent implements OnInit {
     }
   }
 
-  // loadApplicantInfo(){
-  //   this.applicantService.getHRApplicantInfo(6)
-  //   .subscribe((data:IHRApplicant) => {
-  //     this.applicant = data['Data'];
-  //     this.applicantService.currentApplicant = this.applicant
-  //   })
-  // }
+  insertComment() {
+
+    var comment = {
+      applicationId: this.applicationService.currentApplication.applicationId,
+      employeeId: 1,
+      data: this.commentBoxInput
+    }
+
+      this.commentService.insertComment(comment)
+      .subscribe(data => { console.log("POST:" + data) },
+      error => { console.error("Error: ", error) })
+
+    setTimeout(
+      this.loadComments(), 100)
+  }
 
   loadActions(){
 
-    this.applicationActionService.countApplicationActions(1)
+    this.applicationActionService.countApplicationActions(this.applicationService.currentApplication.applicationId)
     .subscribe((data:number) => {
       this.totalActions = data['Data'][0]
       this.pagination.setPageRange(this.totalActions)
       this.paginatorCollectionSize = this.pagination.getCollectionSize()
+      console.log(this.applicationService.currentApplication.applicationId)
     })
 
-    this.applicationActionService.getAllApplicationActions(1, 1, this.pageSize)
+    this.applicationActionService.getAllApplicationActions(this.applicationService.currentApplication.applicationId, this.page, this.pageSize)
     .subscribe((data:IApplicationActionShow[]) => {
       this.actions = data['Data']
       console
@@ -117,7 +127,7 @@ export class HrApplicantProfileComponent implements OnInit {
   loadPage(page: number) {
 
     this.pagination.pageNumber = page
-    this.applicationActionService.getAllApplicationActions(1, page, this.pageSize)
+    this.applicationActionService.getAllApplicationActions(this.applicationService.currentApplication.applicationId, page, this.pageSize)
     .subscribe((data:IApplicationActionShow[]) => {
       this.actions = data['Data']
     })
@@ -125,23 +135,24 @@ export class HrApplicantProfileComponent implements OnInit {
   }
 
   showMoreActions() {
-    this.pageSize = this.pageSize * 2
+    this.newPageSize = this.newPageSize * 2
     setTimeout(
       this.loadActions()
     , 100)
-
-    // console.log(this.paginatorSize)
-
-    // console.log(this.page)
-    // console.log(this.pageSize)
-    // console.log(this.page * this.pageSize)
   }
 
   showLessActions() {
-    this.pageSize = 5
+    this.newPageSize = 5
     this.page = 1
     setTimeout(
       this.loadActions()
     , 50)
+  }
+
+  loadComments() {
+    this.commentService.getCommentsByApplicationId(this.applicationService.currentApplication.applicationId, 1, 5)
+    .subscribe((data:IComment[]) => {
+      this.comments = data['Data']
+    })
   }
 }

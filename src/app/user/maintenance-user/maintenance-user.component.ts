@@ -42,7 +42,7 @@ export class MaintenanceUserComponent implements OnInit {
     tasks:ITask[]
 
     // for now 
-    recruiterId:number = 3
+    recruiterId:number = 1
 
 
     closeResult: string;
@@ -170,7 +170,7 @@ export class MaintenanceUserComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'ID': return compare(a.applicantId, b.applicantId, isAsc);
+        case 'ID': return compare(a.applicationId, b.applicationId, isAsc);
         case 'Name': return compare(a.applicantFirstName, b.applicantFirstName, isAsc);
         case 'Job':return compare(a.jobApplied, b.jobApplied, isAsc);
         case 'Status': return compare(a.applicationStatus, b.applicationStatus, isAsc);

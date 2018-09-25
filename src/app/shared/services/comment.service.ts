@@ -16,7 +16,7 @@ export class CommentService {
   }
 
   insertComment(comment) {
-    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationCommentInsertFromWeb/', comment)
+    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationCommentInsertFromWeb/', comment)
   }
 
 
