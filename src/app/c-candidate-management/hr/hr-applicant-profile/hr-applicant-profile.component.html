@@ -70,46 +70,69 @@
 
                                     <div><strong> Description: </strong> {{job?.description}}</div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row bootstrap snippets">
-                    <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
-                        <div class="comment-wrapper">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    Comment:
-                                </div>
-
-
-                                <div class="panel-body">
-                                    <textarea class="form-control" placeholder="Write a comment..." rows="3" maxlength="95" style="resize: none"></textarea>
-                                    <br>
-                                    <button type="button" class="btn pull-right">Post</button>
-                                    <div class="clearfix"></div>
-                                    <hr>
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
-                                            </a>
-                                            <div class="media-body">
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <strong class="text-success">@MartinoMont</strong>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, <a
-                                                        href="#">#consecteturadipiscing </a>.
-                                                </p>
-                                            </div>
-                                        </li>
-
-                                        <ngb-pagination id="commentPaginator" [collectionSize]="commentPaginatorCollectionSize" [(page)]="page" [maxSize]="commentPaginatorSize" [rotate]="true"
-                                            [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
-                                        </ngb-pagination>
-
-                                    </ul>
+                              </div>
+                              </div>
+                              <div class="row bootstrap snippets">
+                                  <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
+                                      <div class="comment-wrapper">
+                                          <div class="panel panel-info">
+                                              <div class="panel-heading">
+                                                  Comment panel
+                                              </div>
+                                              <div class="panel-body">
+                                                  <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                                  <br>
+                                                  <button type="button" class="btn pull-right">Post</button>
+                                                  <div class="clearfix"></div>
+                                                  <hr>
+                                                  <ul class="media-list" *ngFor="let comment of comments" >
+                                                      <li class="media" >
+                                                          <a href="#" class="pull-left">                                                             
+                                                          </a>
+                                                          <div class="media-body">
+                                                              <span class="text-muted pull-right">
+                                                                  <small class="text-muted">{{comment.createdDate}}</small>
+                                                              </span>
+                                                              <strong class="text-success"> {{comment.employeeFirstName}}</strong>
+                                                              <p>
+                                                                 {{comment.data}}, <a href="#">#consecteturadipiscing </a>.
+                                                              </p>
+                                                          </div>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                              
+                                  </div>
+                              </div>
+                          </div>
+                          
+                      <div class="col-sm-6">
+                          <div class="container mt-5 mb-5">
+                              <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                  <h4>Latest Actions</h4>
+                                  <button type="button" class="btn" (click)="openNewAction(content, job)" > <i
+                                    class="material-icons">
+                                    note_add
+                                  </i> New Action </button>
+                                  <ul class="timeline">
+                                    <li>
+                                      <a target="_blank" href="https://www.totoprayogo.com/#">New Web Design</a>
+                                      <a href="#" class="float-right">21 March, 2014</a>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+                                    </li>
+                                    <li>
+                                      <a href="#">21 000 Job Seekers</a>
+                                      <a href="#" class="float-right">4 March, 2014</a>
+                                      <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+                                    </li>
+                                    <li>
+                                      <a href="#">Awesome Employers</a>
+                                      <a href="#" class="float-right">1 April, 2014</a>
+                                      <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
+                                    </li>
+                                  </ul>
                                 </div>
                             </div>
                         </div>
@@ -136,12 +159,12 @@
                                 </li>
                             </ul>
 
-                            <button (click)=" showMoreActions()" type="button" class="btn"> <i class="material-icons">
+                            <button *ngIf=" totalActions > pageSize"(click)="showMoreActions()" type="button" class="btn"> <i class="material-icons">
                                     expand_more
                                 </i> Show More Actions </button>
 
 
-                            <button *ngIf="(page * pageSize) === totalActions" (click)="showLessActions()" type="button" class="btn"> <i
+                            <button *ngIf="(pageSize >= totalActions)" (click)="showLessActions()" type="button" class="btn"> <i
                                     class="material-icons">
                                     expand_less
                                 </i> Show Less Actions </button>
