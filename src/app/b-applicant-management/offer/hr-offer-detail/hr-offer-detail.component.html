@@ -25,39 +25,46 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">     
-       <form [formGroup]="Edit" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-            <div class="row">
-            <!-- Info inside {{}} is made up/ substitute with correct info-->
+    <div class="modal-body">
+      <form [formGroup]="editForm" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
 
-         <div class="form-group col-md-6">
-            <label for="applicantName"> <strong>Name </strong></label>
-        </div>    
 
-          <div class="form-group col-md-6">
-            <label for="newRecruiter"><strong>Recruiter</strong></label>
-            <select formControlName="newRecruiter" id="newRecruiter" class="form-control">
-              <option *ngFor=" let selectedRecruiter of recruiters" [ngValue]="selectedRecruiter.name">{{selectedRecruiter.name}}</option>
-            </select>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="selectedApplicantName"> <strong>Applicant Name</strong></label>
+              <input formControlName="selectedApplicantName" type="text" class="form-control" id="selectedApplicantName" disabled>
+            </div>
           </div>
 
-          <div class="form-group col-md-6">
-            <label for="jobApplied"><strong>Job Applied</strong></label>
-        </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="recruiter"><strong>Recruiter</strong></label>
+              <select formControlName="recruiter" id="recruiter" class="form-control">
+                <option *ngFor=" let recruiter of employees" [ngValue]="recruiter.employeeId">{{recruiter.employeeFullName}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="status"><strong>Status</strong></label>
+              <select formControlName="status" id="status" class="form-control">
+                <option *ngFor="let status of applicationStatus" [ngValue]="status.id">{{status.status}}</option>
+              </select>
+            </div>
 
-         <div class="form-group col-md-6">
-            <label for="actionDescription"><strong>Status</strong></label>
-            <select formControlName="newStatus" id="newStatus" class="form-control"></select>
-          </div>
+          <!-- <div class="form-group col-md-6">
+            <label for="selectedJobName"><strong>Job Applied</strong></label>
+            <input formControlName="selectedJobName" type="text" class="form-control" id="selectedJobName" disabled>
+          </div> -->
+
         </div>
 
         <div class="modal-footer">
-          <button (click)="updateRecStat(draftRecStat.value)" type="submit" class="btn "><i class="material-icons">
+          <button (click)="updateRecord(editForm.value)" type="submit" class="btn "><i class="material-icons">
               save_alt </i> Save
-           </button>       
-        </div>    
-      </form>     
-    </div>    
+          </button>
+        </div>
+      </form>
+    </div>
   </ng-template>
 </head>
 
@@ -68,72 +75,72 @@
     <div class="row">
       <div class="col-sm-6">
 
-        <nav aria-label="breadcrumb"  >
+        <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="offer-list-management">List</a></li>
             <li class="breadcrumb-item active" aria-current="page">Details</li>
           </ol>
         </nav>
-        </div>
-        </div>
-    
-        <div class="row">
-        <div class="col-sm-12">
-        <div class="card descriptionbox">
-          <div class="card-body">
+      </div>
+    </div>
 
-            <h5>{{job?.jobName}}</h5>
+    <div class="row">
+      <div class="card descriptionbox">
+        <div class="card-body">
+          <h5>{{job?.jobName}}</h5>
 
+          <div>
+            <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
             <div>
-              <i class="material-icons" style="font-size: 3em; "> perm_identity </i>
-              <div><strong> {{job?.company}}</strong></div>
-
-               {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
-
-              <div><strong> Description: </strong> {{job?.description}}</div>
+              <strong> {{job?.company}}</strong>
             </div>
+
+            {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
+
+            <div><strong> Description: </strong> {{job?.description}}</div>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="row">
+      <div class='col-md-6' style="text-align: start">
+        <p># of Applicants: {{totalApplicants}}</p>
       </div>
 
-      <div class="row">
-          <div class='col-md-6' style="text-align: start">
-              <p># of Applicants: {{totalApplicants}}</p>
-          </div>
-    
-          <div class='col-md-6'>
-              <div class="col-md-12" style="text-align: end">
-                  <p *ngIf="totalApplicants === undefined"> Showing 0 of 0 </p>
-                  <p *ngIf="!(totalApplicants === undefined || totalApplicants === 0) && (page != paginatorSize && !(paginatorSize > page))">Showing {{pageSize * page}}
-                    of {{totalApplicants}}</p>
-                  <p *ngIf="(page === paginatorSize || paginatorSize > page) && (totalApplicants != undefined || totalApplicants != 0)">Showing {{totalApplicants}} of {{totalApplicants}}</p>
-                </div>
-          </div>
-    
-    
-          </div>
-     
-<div class="row">
+      <div class='col-md-6'>
+        <div class="col-md-12" style="text-align: end">
+          <p *ngIf="totalApplicants === undefined"> Showing 0 of 0 </p>
+          <p *ngIf="!(totalApplicants === undefined || totalApplicants === 0) && (page != paginatorSize && !(paginatorSize > page))">Showing
+            {{pageSize * page}} of {{totalApplicants}}</p>
+          <p *ngIf="(page === paginatorSize || paginatorSize > page) && (totalApplicants != undefined || totalApplicants != 0)">Showing
+            {{totalApplicants}} of {{totalApplicants}}</p>
+        </div>
+      </div>
+    </div>
 
-  
+    <div class="row">
+
+
       <div class="col-sm-12">
 
-        <table  matSort (matSortChange)="sortData($event)" id="matTable" class="table table-hover table-striped ">
+        <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-hover table-striped ">
           <thead>
             <tr>
-              <th mat-sort-header="applicantId" style="text-align: left" scope="col">Applicant ID</th>
-              <th mat-sort-header="applicantName" style="text-align: left" scope="col">Applicant Name</th>
-              <!-- <th mat-sort-header="status" scope="col">Application Status</th>
-              <th mat-sort-header="recruiter" scope="col">Recruiter</th> -->
-              <th scope="col"> Resume</th>
-              <th scope="col"> </th>
+              <th mat-sort-header="applicantId">Application ID</th>
+              <th mat-sort-header="applicantName">Applicant Name</th>
+              <th mat-sort-header="status">Application Status</th>
+              <th mat-sort-header="recruiter">Recruiter</th>
+              <th>Resume</th>
+              <th> </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let applicant of sortedData">
-              <td style="text-align: left" scope="row">{{applicant.applicantId}}</td>
-              <td style="text-align: left">{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
+              <td>{{applicant.applicationId}}</td>
+              <td>{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
+              <td>{{applicant.applicationStatus}}</td>
+              <td>{{applicant.employeeFirstName}} {{applicant.employeeLastName}}</td>
               <!-- <td>
                 <select class="form-control" id="sel1">
                   <option id="sel1op1" value="status.status" disabled="true" [selected]="true">{{applicant.applicationStatus}}</option>
@@ -150,10 +157,10 @@
                 </select>
               </td> -->
 
-              <td><a href="#">Edit</a></td>
+              <td><a href="#">View</a></td>
               <td>
-                <button class="btn btn-sm" type="button" (click)="openEdit(content, job)">
-                    <i class="material-icons"> edit </i> Edit
+                <button class="btn btn-sm" type="button" (click)="openEdit(content, applicant)">
+                  <i class="material-icons"> edit </i> Edit
                 </button>
               </td>
             </tr>

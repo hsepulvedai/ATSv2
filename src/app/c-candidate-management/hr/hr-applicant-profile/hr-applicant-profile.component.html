@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        <div class="modal-body">     
-           <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
+
+        <div class="modal-body">
+            <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
                 <div class="row">
-                <!-- Info inside {{}} is made up/ substitute with correct info-->
-    
-             <div class="form-group col-md-6">
-                <label for="applicantName"> <strong>Name </strong></label>
-            </div>    
-    
-              <div class="form-group col-md-6">
-                <label for="newAction"><strong>Action</strong></label>
-                <select formControlName="newAction" id="newAction" class="form-control">
-                  <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
-                </select>
-              </div>
-    
-              <div class="form-group col-md-6">
-                <label for="jobApplied"><strong>Job Applied</strong></label>
-            </div>
-    
-             <div class="form-group col-md-6">
-                <label for="actionDescription"><strong>Description</strong></label>
-                <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
-              </div>
-            </div>
-    
-            <div class="modal-footer">
-              <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
-                  save_alt </i> Save
-               </button>       
-            </div>    
-          </form>     
-        </div>    
-      </ng-template>
-  
+                    <!-- Info inside {{}} is made up/ substitute with correct info-->
+
+                    <div class="form-group col-md-6">
+                        <label for="applicantName"><strong>Name</strong></label>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="newAction"><strong>Action</strong></label>
+                        <select formControlName="newAction" id="newAction" class="form-control">
+                            <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="jobApplied"><strong>Job Applied</strong></label>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="actionDescription"><strong>Description</strong></label>
+                        <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
+                            save_alt </i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+
 </head>
 
 
 <body>
-<div class="container">
-           <div>
-                <h1>C.2/C.3/C.5</h1>           
-              </div> 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                <div class="card descriptionbox">
-                                  <div class="card-body" >
-                        
-                                    <h5>{{job?.jobName}}</h5>                        
-                                    <div >
-                                      <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
-                                      <div><strong> {{job?.company}}</strong></div>
-                        
-                                       {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
-                        
-                                      <div><strong> Description: </strong> {{job?.description}}</div>
-                                    </div>
-                                  </div>
+    <div class="container">
+        <div>
+            <h1>C.2/C.3/C.5</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card descriptionbox">
+                            <div class="card-body">
+
+                                <h5>{{job?.jobName}}</h5>
+                                <div>
+                                    <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
+                                    <div><strong> {{job?.company}}</strong></div>
+
+                                    {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
+
+                                    <div><strong> Description: </strong> {{job?.description}}</div>
                                 </div>
                               </div>
                               </div>
@@ -134,14 +134,51 @@
                                     </li>
                                   </ul>
                                 </div>
-                              </div>
                             </div>
-                                                 
-                      </div>
-                    </div>
-                   
+                        </div>
 
-        
-      </div>    
-     </body>      
-    </html>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <h4>Latest Actions</h4>
+                            <button type="button" class="btn" (click)="openNewAction(content, job)"> <i class="material-icons">
+                                    note_add
+                                </i> New Action </button>
+                            <ul class="timeline">
+                                <li *ngFor="let action of actions">
+                                    <h4>{{action.actionType}}</h4>
+                                    <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm
+                                            a'}}
+                                        </strong></p>
+                                    <p>{{action.comments}}.</p>
+                                </li>
+                            </ul>
+
+                            <button *ngIf=" totalActions > pageSize"(click)="showMoreActions()" type="button" class="btn"> <i class="material-icons">
+                                    expand_more
+                                </i> Show More Actions </button>
+
+
+                            <button *ngIf="(pageSize >= totalActions)" (click)="showLessActions()" type="button" class="btn"> <i
+                                    class="material-icons">
+                                    expand_less
+                                </i> Show Less Actions </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

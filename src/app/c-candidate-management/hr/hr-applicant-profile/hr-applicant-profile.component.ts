@@ -4,6 +4,12 @@ import { IHRApplicant } from '../../../shared/models/IHRApplicant.model'
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HrApplicantProfileService } from '../../../shared/services/hr-applicant-profile.service';
 import { IHRAction } from '../../../shared/models/IHRAction.model';
+import { ApplicationActionService } from '../../../shared/services/application-action.service';
+import { IApplicationActionShow } from '../../../shared/models/application-action-show.model';
+import { PaginationService } from '../../../shared/services/pagination.service';
+import { ApplicantService } from '../../../shared/services/applicant.service';
+import { CommentService } from '../../../shared/services/comment.service';
+import { IComment } from '../../../shared/models/comment.model';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -12,21 +18,45 @@ import { IHRAction } from '../../../shared/models/IHRAction.model';
 })
 export class HrApplicantProfileComponent implements OnInit {
 
+  commentBoxInput:string
+
+  currentApplication
+
   applicant:IHRApplicant
   action: IHRAction
-  actions:IHRAction[]
+  actions:IApplicationActionShow[]
+  totalActions:number
+
+  comments:IComment[]
+
+
+  page: number = this.pagination.pageNumber;
+  paginatorSize: number
+  totalJobs: number
+  paginatorCollectionSize: number
+  pageSize: number = 5
   
   closeResult: string;
 
   public show:boolean = false;
   public buttonName:any = 'Show';
-  constructor(private router : Router, private applicantService: HrApplicantProfileService,  private modalService: NgbModal) { }
+  constructor(private router : Router, private applicantService: ApplicantService,  
+    private modalService: NgbModal, private applicationActionService: ApplicationActionService
+  ,private pagination:PaginationService, private commentService:CommentService) { }
 
   ngOnInit() {
 
-    this.loadApplicantInfo()
+    this.commentService.getCommentsByApplicationId(1, 1, 5)
+    .subscribe((data:IComment[]) => {
+      this.comments = data['Data']
+      console.log(this.comments)
+    })
+
+    // this.applicantService.getApplicantById(1)
+
     this.loadActions()
   }
+
   toggle() {
     this.show = !this.show;
 
@@ -59,19 +89,59 @@ export class HrApplicantProfileComponent implements OnInit {
     }
   }
 
-  loadApplicantInfo(){
-    this.applicantService.getHRApplicantInfo(6)
-    .subscribe((data:IHRApplicant) => {
-      this.applicant = data['Data'];
-      this.applicantService.currentApplicant = this.applicant
-    })
-  }
+  // loadApplicantInfo(){
+  //   this.applicantService.getHRApplicantInfo(6)
+  //   .subscribe((data:IHRApplicant) => {
+  //     this.applicant = data['Data'];
+  //     this.applicantService.currentApplicant = this.applicant
+  //   })
+  // }
 
   loadActions(){
-    this.applicantService.getApplicationActionsHR(6)
-        .subscribe((data:IHRAction) => {
-          this.actions = data['Data'];
-        })
 
+    this.applicationActionService.countApplicationActions(1)
+    .subscribe((data:number) => {
+      this.totalActions = data['Data'][0]
+      this.pagination.setPageRange(this.totalActions)
+      this.paginatorCollectionSize = this.pagination.getCollectionSize()
+    })
+
+    this.applicationActionService.getAllApplicationActions(1, 1, this.pageSize)
+    .subscribe((data:IApplicationActionShow[]) => {
+      this.actions = data['Data']
+      console
+    })
+
+  }
+
+  loadPage(page: number) {
+
+    this.pagination.pageNumber = page
+    this.applicationActionService.getAllApplicationActions(1, page, this.pageSize)
+    .subscribe((data:IApplicationActionShow[]) => {
+      this.actions = data['Data']
+    })
+
+  }
+
+  showMoreActions() {
+    this.pageSize = this.pageSize * 2
+    setTimeout(
+      this.loadActions()
+    , 100)
+
+    // console.log(this.paginatorSize)
+
+    // console.log(this.page)
+    // console.log(this.pageSize)
+    // console.log(this.page * this.pageSize)
+  }
+
+  showLessActions() {
+    this.pageSize = 5
+    this.page = 1
+    setTimeout(
+      this.loadActions()
+    , 50)
   }
 }

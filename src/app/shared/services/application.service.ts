@@ -30,7 +30,7 @@ export class ApplicationService {
   }
 
   insertApplication(application) {
-    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb', application)
+    return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationInsertFromWeb/Submitted', application)
   }
 
   getAllApplicationByRecruiter(recruiterId){
@@ -56,9 +56,12 @@ export class ApplicationService {
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
+  modifyStatus(application) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicationModifyStatus/', application )
+  }
 
- 
-
-
+  modifyRecruiter(application) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicationModifyRecruiter/', application)
+  }
 
 }

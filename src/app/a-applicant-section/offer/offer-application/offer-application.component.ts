@@ -11,6 +11,7 @@ import { UserService } from '../../../shared/user.service';
 import { ApplicantService } from '../../../shared/services/applicant.service';
 import { IApplicant } from '../../../shared/models/applicant.model';
 import { IUser } from '../../../shared/models/user.model';
+import { IApplicantApply } from '../../../shared/models/applicant-apply.model';
 
 @Component({
   selector: 'app-offer-application', 
@@ -35,8 +36,9 @@ export class OfferApplicationComponent implements OnInit {
   country: FormControl
   city: FormControl
   zipCode: FormControl
+  comments:FormControl
 
-  dummyApplicant: IApplicantMaintInfo 
+  currentApplicant: IApplicantApply 
 
   constructor(private jobService: JobService, private router: Router,
     private applicationService: ApplicationService, private userService:UserService,
@@ -47,12 +49,25 @@ export class OfferApplicationComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dummyApplicant = {
-      applicantId: 6,
+    // this.applicantService.showApplicantById(1)
+    // .subscribe((data:IApplicantMaintInfo) => {
+    //   this.currentApplicant = data['Data']
+    //   console.log(this.currentApplicant)
+    // })
+
+    this.currentApplicant = {
+      applicantId: 10,
       firstName: 'Dummy',
-      lastName: 'Dumm',
-      email: 'mnpen@mail.com',
-      phone: '787-963-6654',
+      lastName: 'Dumms',
+      email: 'dummy@mail.com',
+      phone: '111-111-8888',
+      addressLine:'123 Oak St.',
+      addressLine2:'Block Z',
+      city:'San Juan',
+      stateProvince:'Puerto Rico',
+      country:'United States',
+      zipCode:'88595',
+      comments: 'These are comments. I am cool.'
     }
   
   
@@ -63,26 +78,31 @@ export class OfferApplicationComponent implements OnInit {
         console.log(this.job)
       })
 
-    this.name = new FormControl({value: this.dummyApplicant.firstName + ' ' + this.dummyApplicant.lastName, disabled:true})
-    this.email = new FormControl(this.dummyApplicant.email)
-    this.phone = new FormControl(this.dummyApplicant.phone)
-    // this.addressLine= new FormControl(this.dummyApplicant.addressLine)
-    // this.addressLine2= new FormControl(this.dummyApplicant.addressLine2)
-    // this.state= new FormControl(this.dummyApplicant.stateProvince)
-    // this.country= new FormControl(this.dummyApplicant.country)
-    // this.city = new FormControl(this.dummyApplicant.city)
-    // this.zipCode = new FormControl(this.dummyApplicant.zipCode)
+      
+    this.name = new FormControl({value: this.currentApplicant.firstName + ' ' + this.currentApplicant.lastName, disabled:true})
+    this.email = new FormControl(this.currentApplicant.email)
+    this.phone = new FormControl(this.currentApplicant.phone)
+
+    
+    this.addressLine= new FormControl(this.currentApplicant.addressLine)
+    this.addressLine2= new FormControl(this.currentApplicant.addressLine2)
+    this.state= new FormControl(this.currentApplicant.stateProvince)
+    this.country= new FormControl(this.currentApplicant.country)
+    this.city = new FormControl(this.currentApplicant.city)
+    this.zipCode = new FormControl(this.currentApplicant.zipCode)
+    this.comments = new FormControl(this.currentApplicant.comments)
 
     this.applicantInfo = new FormGroup({
       name: this.name,
       email: this.email,
       phone: this.phone,
-      // addressLine:this.addressLine,
-      // addressLine2:this.addressLine2,
-      // state:this.state,
-      // country:this.country,
-      // city:this.city,
-      // zipCode:this.zipCode
+      addressLine:this.addressLine,
+      addressLine2:this.addressLine2,
+      state:this.state,
+      country:this.country,
+      city:this.city,
+      zipCode:this.zipCode,
+      comments:this.comments
     })
 
   }
@@ -90,7 +110,7 @@ export class OfferApplicationComponent implements OnInit {
   submitApplication(form) {
     this.application = {
       jobId: this.jobService.currentJobId,
-      applicantId: this.dummyApplicant.applicantId,
+      applicantId: this.currentApplicant.applicantId,
       email: form.email,
       phone: form.phone
     }
