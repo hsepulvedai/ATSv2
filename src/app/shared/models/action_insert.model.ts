@@ -1,5 +1,7 @@
 export interface IActionInsert {
+    applicationId: number,
     action: string,
-    description: string,
-    createdDate: string
+    status: string;
+    comments: string,
+    actionDate: string
 }

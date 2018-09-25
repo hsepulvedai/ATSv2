@@ -27,10 +27,10 @@ export class HrApplicantProfileComponent implements OnInit {
 
   newActionForm: FormGroup
   actionName: FormControl
-  actionDescription: FormControl
+  actionComments: FormControl
   actionDate: FormControl
 
-  allActions: IAction[]
+  allActions: Array<String>
 
 
 
@@ -71,12 +71,12 @@ export class HrApplicantProfileComponent implements OnInit {
 
    
    this.actionName = new FormControl()
-   this.actionDescription = new FormControl();
+   this.actionComments = new FormControl();
    this.actionDate = new FormControl();
     
    this.newActionForm = new FormGroup({
      actionName: this.actionName,
-     actionDescription: this.actionDescription,
+     actionComments: this.actionComments,
      actionDate: this.actionDate
    })
 
@@ -151,9 +151,11 @@ export class HrApplicantProfileComponent implements OnInit {
   insertAction(newActionForm){
 
     this.newAction = {
+      applicationId: this.currentAppId,
       action : newActionForm.actionName,
-      description: newActionForm.actionDescription,
-      createdDate: newActionForm.actionDate
+      status: 'Scheduled',
+      comments: newActionForm.actionDescription,
+      actionDate: newActionForm.actionDate
     }
 
 
@@ -189,7 +191,6 @@ export class HrApplicantProfileComponent implements OnInit {
     this.applicationActionService.getAllApplicationActions(this.applicationService.currentApplication.applicationId, this.page, this.pageSize)
     .subscribe((data:IApplicationActionShow[]) => {
       this.actions = data['Data']
-      console
     })
 
   }

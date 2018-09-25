@@ -16,35 +16,38 @@
         <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
          <div class="row smallrow">
+
+
+
           <div class="form-group col-sm-6">
-            <label for="actionName"><strong>Category</strong></label>
+            <label for="actionName"><strong> Action</strong></label>
             <select formControlName="actionName" id="category" class="form-control" (change)="selectActionChangeHandler($event)">
               <option value="null" disabled="true" [selected]="true">- Select Action -</option>
-              <option *ngFor=" let selectedAction of allActions">{{selectedAction.action}}</option>
+              <option *ngFor=" let selectedAction of allActions">{{Selectedaction}}</option>
             </select>
           </div>
 
 
-         </div>
-
-         
-			<div class="form-group">
-                    <label for="dateOfBirth">Date of birth</label>
+           
+			<div class="form-group col-sm-6">
+                    <label for="date"><strong> Date </strong></label>
                     <div class="input-group">
-                      <input id="dateOfBirth" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                      <input id="date" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>
                    
-            
 
+         </div>
+
+        
          
         <div class="row smallrow">
           <div class="form-group col-sm-6">
-            <label for="actionDescription"><strong>Description</strong></label>
-            <textarea class="form-control" formControlName="actionDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+            <label for="actionDescription"><strong>Comments</strong></label>
+            <textarea class="form-control" formControlName="actionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
           </div>
         </div>
 
@@ -127,11 +130,22 @@
             </div>
 
     
-            <div class = "row">
+
+
+        <div class="row">
 
             
+               
+
+        
+           
+
+            <div class="col-sm-6">
+
                     <div class="col-sm-6">
-    
+                            <div class="row"> 
+
+        
                             <div style=" padding-left:15%;">
                               <div class=" bg-white ">
                                 <h4>Pending Tasks</h4>
@@ -143,13 +157,10 @@
                                 </div>
                               </div>
                             </div>
+                            </div>
                     </div>
-    
-            </div>
 
 
-        <div class="row">
-            <div class="col-sm-6">
 
                     <div class="row bootstrap snippets">
                             <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
@@ -191,8 +202,13 @@
        
 
             <div class="col-sm-6">
+
+    
                 <div class="container mt-5 mb-5">
                     <div class="row">
+
+
+
                         <div class="col-md-6 offset-md-3">
                             <h4>Latest Actions</h4>
                             <button type="button" class="btn" (click)="openNewAction(content)"> <i class="material-icons">
