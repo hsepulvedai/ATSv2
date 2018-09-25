@@ -9,12 +9,13 @@ import { ApplicantService } from '../../../shared/services/applicant.service';
 import { IEmployeeFromCompany } from '../../../shared/models/IEmployeeFromCompany';
 import { EmployeeService } from '../../../shared/services/employee.service';
 import { ApplicationService } from '../../../shared/services/application.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
 import { IJobOfferHR } from '../../../shared/models/job-offer-hr.model';
 import 'jquery'
 import { Sort } from '@angular/material';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { IApplication } from '../../../shared/models/application.model';
 @Component({
   selector: 'app-hr-offer-detail',
   templateUrl: './hr-offer-detail.component.html',
@@ -24,6 +25,12 @@ export class HrOfferDetailComponent implements OnInit {
 
   job: IJobOfferHR
   selectedJob: IJobOfferHR
+  selectedApplicant:IOfferHrEdit
+
+  // selectedRecruiter
+  // selectedStatus
+
+  currentApplicationId:number
 
   applicants: IOfferHrEdit[]
   applicationStatus: IApplicationStatus[]
@@ -34,6 +41,10 @@ export class HrOfferDetailComponent implements OnInit {
   // selectedOptions:FormGroup
   totalApplicants: number
 
+  editForm:FormGroup
+  recruiter:FormControl
+  status:FormControl
+  selectedApplicantName:FormControl
 
   searchBarInput: string
   pageSize: number
@@ -43,8 +54,11 @@ export class HrOfferDetailComponent implements OnInit {
 
   currentJob: IOfferHrEdit
   closeResult: string;
-  selectedRecruiter
+
   selectedApplicationStatus
+
+
+  updatedInfo:IApplication
 
   constructor(private jobService: JobService, private router: Router
     , private applicantService: ApplicantService, private employeeService: EmployeeService
@@ -62,15 +76,29 @@ export class HrOfferDetailComponent implements OnInit {
 
     this.currentJob = this.jobService.currentJob
 
-    setTimeout(() => { this.refreshData() }, 100);
+    setTimeout(() => { this.refreshData() }, 50);
 
-    console.log(this.pageSize)
-    console.log(this.page)
+    this.recruiter = new FormControl()
+    this.status = new FormControl()
+    this.selectedApplicantName = new FormControl ()
+
+    this.editForm = new FormGroup({
+      recruiter:this.recruiter,
+      status:this.status,
+      selectedApplicantName:this.selectedApplicantName
+    })
+
   }
-  openEdit(content, job) {
+  openEdit(content, applicant) {
+
+    
+    this.currentApplicationId = applicant.applicationId
+    
+    this.editForm.get('selectedApplicantName').setValue(applicant.applicantFirstName + ' ' + applicant.applicantLastName)
+    this.editForm.controls['recruiter'].setValue(applicant.employeeId, {onlySelf: true})
+    this.editForm.controls['status'].setValue(applicant.applicationStatusId, {onlySelf: true})
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
-
 
       (this.closeResult = `Closed with: ${result}`)
     }, (reason) => {
@@ -87,23 +115,25 @@ export class HrOfferDetailComponent implements OnInit {
     }
   }
 
+  updateRecord(form) {
 
-  save(applicationId, status, recruiter) {
+    this.updatedInfo = {
+      id: this.currentApplicationId,
+      employeeId: form.recruiter,
+      applicationStatusId:form.status
+    }
 
-    var value = document.getElementById("sel1op1").nodeValue;
-    // console.log(value)
+    // this.applicationService.modifyRecruiter(this.updatedInfo)
+    // .subscribe(data => { console.log("UPDATED:" + data) },
+    // error => { console.error("Error: ", error) })
 
-    //this.applicationService.updateApplicationStatus()
+    this.applicationService.modifyStatus(this.updatedInfo)
+    .subscribe(data => { console.log("UPDATED:" + data) },
+    error => { console.error("Error: ", error) })
 
+    setTimeout(() => { this.refreshData() }, 100);
 
   }
-
-  // getSelectedEmployee(employeeId, applicationemployeeId) {
-  //   this.selectedRecruiter = this.employees.filter(
-  //     employee => employeeId = applicationemployeeId);
-  // }
-
-  // onEmployeeChange(event) {}
 
   loadPage(page: number) {
 
@@ -139,16 +169,15 @@ export class HrOfferDetailComponent implements OnInit {
       .subscribe((data: IOfferHrEdit[]) => {
         this.applicants = data['Data'];
         this.sortedData = this.applicants.slice()
+        console.log(this.sortedData)
       })
 
 
-
-    // this.jobEditForm.controls['category'].setValue(job.jobCategory, {onlySelf: true})
-    // this.jobEditForm.controls['type'].setValue(job.jobType, {onlySelf: true})
-
-    this.employeeService.getActiveCompanyEmployees(this.jobService.currentJob.jobId)
+    // Using Company 1 for test
+    this.employeeService.getActiveCompanyEmployees(1)
       .subscribe((data: IEmployeeFromCompany[]) => {
         this.employees = data['Data'];
+        console.log(this.employees)
       })
   }
 
@@ -180,3 +209,9 @@ export class HrOfferDetailComponent implements OnInit {
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
+// function parseId (string): number {
+//   var patt = new RegExp("[0-9]+");
+//   var res = patt.exec(string).toString();
+//   return parseInt(res);
+// }

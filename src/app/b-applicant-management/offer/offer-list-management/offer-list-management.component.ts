@@ -54,6 +54,7 @@ export class OfferListManagementComponent implements OnInit {
         .subscribe((data: IJobOfferHR[]) => {
           this.jobs = data['Data'];
           this.sortedData = this.jobs
+          console.log(this.sortedData)
         })
     }
     else {

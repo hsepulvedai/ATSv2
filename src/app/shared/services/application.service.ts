@@ -56,9 +56,12 @@ export class ApplicationService {
       + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
   }
 
+  modifyStatus(application) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicationModifyStatus/', application )
+  }
 
- 
-
-
+  modifyRecruiter(application) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicationModifyRecruiter/', application)
+  }
 
 }

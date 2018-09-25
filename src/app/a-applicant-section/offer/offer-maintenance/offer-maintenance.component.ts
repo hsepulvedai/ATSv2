@@ -118,7 +118,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
         this.currentCompany = data['Data'];
       })
 
-      setTimeout(() => {this.refreshData()}, 100)
+      setTimeout(() => {this.refreshData()}, 50)
 
 
     this.jobCategoryService.showCategories()
@@ -685,6 +685,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
             this.inactiveJobs = data['Data'];
             // this.inactiveFilteredJobs = this.inactiveJobs;
             this.sortedInactive = this.inactiveJobs.slice();
+            console.log(this.inactiveJobs)
           })
       )
       // load drafts

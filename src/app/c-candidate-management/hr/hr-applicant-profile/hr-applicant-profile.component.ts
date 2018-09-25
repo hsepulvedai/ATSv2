@@ -7,6 +7,9 @@ import { IHRAction } from '../../../shared/models/IHRAction.model';
 import { ApplicationActionService } from '../../../shared/services/application-action.service';
 import { IApplicationActionShow } from '../../../shared/models/application-action-show.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
+import { ApplicantService } from '../../../shared/services/applicant.service';
+import { CommentService } from '../../../shared/services/comment.service';
+import { IComment } from '../../../shared/models/comment.model';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -15,12 +18,16 @@ import { PaginationService } from '../../../shared/services/pagination.service';
 })
 export class HrApplicantProfileComponent implements OnInit {
 
+  commentBoxInput:string
+
   currentApplication
 
   applicant:IHRApplicant
   action: IHRAction
   actions:IApplicationActionShow[]
   totalActions:number
+
+  comments:IComment[]
 
 
   page: number = this.pagination.pageNumber;
@@ -33,11 +40,19 @@ export class HrApplicantProfileComponent implements OnInit {
 
   public show:boolean = false;
   public buttonName:any = 'Show';
-  constructor(private router : Router, private applicantService: HrApplicantProfileService,  
+  constructor(private router : Router, private applicantService: ApplicantService,  
     private modalService: NgbModal, private applicationActionService: ApplicationActionService
-  ,private pagination:PaginationService) { }
+  ,private pagination:PaginationService, private commentService:CommentService) { }
 
   ngOnInit() {
+
+    this.commentService.getCommentsByApplicationId(1, 1, 5)
+    .subscribe((data:IComment[]) => {
+      this.comments = data['Data']
+      console.log(this.comments)
+    })
+
+    // this.applicantService.getApplicantById(1)
 
     this.loadActions()
   }
@@ -115,9 +130,11 @@ export class HrApplicantProfileComponent implements OnInit {
       this.loadActions()
     , 100)
 
-    console.log(this.page)
-    console.log(this.pageSize)
-    console.log(this.page * this.pageSize)
+    // console.log(this.paginatorSize)
+
+    // console.log(this.page)
+    // console.log(this.pageSize)
+    // console.log(this.page * this.pageSize)
   }
 
   showLessActions() {

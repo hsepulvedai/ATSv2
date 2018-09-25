@@ -10,17 +10,15 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <!-- <<<<<<< HEAD <<<<<<< HEAD <div class="modal-body">
 
+        <div class="modal-body">
             <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-
                 <div class="row">
-                    Info inside {{}} is made up/ substitute with correct info
+                    <!-- Info inside {{}} is made up/ substitute with correct info-->
 
                     <div class="form-group col-md-6">
-                        <label for="applicantName"> <strong>Name </strong></label>
+                        <label for="applicantName"><strong>Name</strong></label>
                     </div>
-
 
                     <div class="form-group col-md-6">
                         <label for="newAction"><strong>Action</strong></label>
@@ -43,52 +41,9 @@
                     <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
                             save_alt </i> Save
                     </button>
-
-
                 </div>
-
             </form>
-
-
-
-            </div>
-
-    </ng-template>
-
-    ======= ======= >>>>>>> b34bab6854e2b31ebdbf7c886ee4a27fba4ac12e -->
-    <div class="modal-body">
-        <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-            <div class="row">
-                <!-- Info inside {{}} is made up/ substitute with correct info-->
-
-                <div class="form-group col-md-6">
-                    <label for="applicantName"> <strong>Name </strong></label>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="newAction"><strong>Action</strong></label>
-                    <select formControlName="newAction" id="newAction" class="form-control">
-                        <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="jobApplied"><strong>Job Applied</strong></label>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="actionDescription"><strong>Description</strong></label>
-                    <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
-                        save_alt </i> Save
-                </button>
-            </div>
-        </form>
-    </div>
+        </div>
     </ng-template>
 
 </head>
@@ -124,10 +79,12 @@
                         <div class="comment-wrapper">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
-                                    Comment panel
+                                    Comment:
                                 </div>
+
+
                                 <div class="panel-body">
-                                    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                    <textarea class="form-control" placeholder="Write a comment..." rows="3" maxlength="95" style="resize: none"></textarea>
                                     <br>
                                     <button type="button" class="btn pull-right">Post</button>
                                     <div class="clearfix"></div>
@@ -147,36 +104,11 @@
                                                 </p>
                                             </div>
                                         </li>
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
 
-                                            </a>
-                                            <div class="media-body">
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <strong class="text-success">@LaurenceCorreil</strong>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor <a
-                                                        href="#">#ipsumdolor </a>adipiscing elit.
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
+                                        <ngb-pagination id="commentPaginator" [collectionSize]="commentPaginatorCollectionSize" [(page)]="page" [maxSize]="commentPaginatorSize" [rotate]="true"
+                                            [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+                                        </ngb-pagination>
 
-                                            </a>
-                                            <div class="media-body">
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <strong class="text-success">@JohnNida</strong>
-                                                <p>
-                                                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing
-                                                    elit.
-                                                </p>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -198,21 +130,19 @@
                                 <li *ngFor="let action of actions">
                                     <h4>{{action.actionType}}</h4>
                                     <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm
-                                            a'}}</strong></p>
+                                            a'}}
+                                        </strong></p>
                                     <p>{{action.comments}}.</p>
                                 </li>
                             </ul>
 
-                            <!-- <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-                                [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
-                            </ngb-pagination> -->
-
-                            <button  (click)=" showMoreActions()" type="button" class="btn" > <i class="material-icons">
+                            <button (click)=" showMoreActions()" type="button" class="btn"> <i class="material-icons">
                                     expand_more
                                 </i> Show More Actions </button>
 
-                                
-                            <button  *ngIf="(page * pageSize) === totalActions" (click)="showLessActions()" type="button" class="btn"> <i class="material-icons">
+
+                            <button *ngIf="(page * pageSize) === totalActions" (click)="showLessActions()" type="button" class="btn"> <i
+                                    class="material-icons">
                                     expand_less
                                 </i> Show Less Actions </button>
 
