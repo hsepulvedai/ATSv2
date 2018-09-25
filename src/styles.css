@@ -181,8 +181,10 @@ h5{
      position:auto;
       height: 30em;
       color: white;
-     
+      font-family: Quicksand;
 }
+     
+
 
 .tabsmargin{
     margin-top: 10em
