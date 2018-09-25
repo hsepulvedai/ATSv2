@@ -23,17 +23,15 @@
   <div class="row">
     <div class="col-sm-12">
         <div class="card descriptionbox" >
-          <div class="card-body" >
+          <div class="card-body" >           
+         <h3><strong>{{job?.jobName}}</strong></h3>  
             <div>
-         <h5 style="align-content: left">{{job?.jobName}}</h5>
-          <i class="material-icons " style="font-size: 3em; ">  perm_identity </i>
-           
-          </div>
-            <div>
-                <strong> {{job?.company}}</strong><br>        
-             <p> {{job?.city}} , {{job?.country}} / {{job?.jobCategory}} /  {{job?.jobType}} </p>
-                
-              <div><strong> Description : </strong> {{job?.description}}</div>  
+                <h5><strong> {{job?.company}}</strong></h5>       
+             <div style="font-style: italic; text-align: center;">
+              {{job?.city}} , {{job?.country}} / {{job?.jobCategory}} /  {{job?.jobType}}
+                </div>
+                <br>
+              <div style=" text-align: justify;text-justify: inter-word;"> {{job?.description}}</div>  
                 
             </div>
           </div>
