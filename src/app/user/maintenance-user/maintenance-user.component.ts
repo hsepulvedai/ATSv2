@@ -43,7 +43,6 @@ export class MaintenanceUserComponent implements OnInit {
 
     // for now 
     recruiterId:number = 3
-    applicationId:number = 1
 
 
     closeResult: string;
@@ -58,6 +57,14 @@ export class MaintenanceUserComponent implements OnInit {
   ) {
   }
 
+  
+  goToApplicationDetails(application) {
+    this.applicationService.currentApplication = application
+    console.log(this.applicationService.currentApplication)
+
+    this.router.navigate(['hr-applicant-profile'])
+  }
+
  
 
   ngOnInit() {
@@ -66,15 +73,6 @@ export class MaintenanceUserComponent implements OnInit {
     this.paginatorSize = this.pagination.paginatorSize
 
     setTimeout(() => { this.refreshData()}, 100);
-
-
-  this.applicationService.getAllTasksByAppIdAndStatus(this.applicationId, "pending")
-      .subscribe((data) => {
-        this.tasks = data['Data'];
-
-      })
-      
-
   }
 
 

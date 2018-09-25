@@ -10,6 +10,8 @@ export class ApplicationService {
 
   routePrefix = 'Application'
 
+  currentApplication 
+
   constructor(private http:HttpClient) { }
 
   updateApplicationStatus(applicationId, applicationStatusId) {
