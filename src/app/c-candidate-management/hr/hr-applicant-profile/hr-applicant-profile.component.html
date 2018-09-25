@@ -80,7 +80,7 @@
                                                   Comment panel
                                               </div>
                                               <div class="panel-body">
-                                                  <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                                  <textarea [(ngModel)]="commentBoxInput" class="form-control" placeholder="write a comment..." rows="3"></textarea>
                                                   <br>
                                                   <button type="button" class="btn pull-right"(click)=insertComment()>Post</button>
                                                   <div class="clearfix"></div>
@@ -128,12 +128,12 @@
                                 </li>
                             </ul>
 
-                            <button *ngIf=" totalActions > pageSize"(click)="showMoreActions()" type="button" class="btn"> <i class="material-icons">
+                            <button *ngIf=" totalActions > newPageSize"(click)="showMoreActions()" type="button" class="btn"> <i class="material-icons">
                                     expand_more
                                 </i> Show More Actions </button>
 
 
-                            <button *ngIf="(pageSize >= totalActions)" (click)="showLessActions()" type="button" class="btn"> <i
+                            <button *ngIf="(newPageSize > totalActions) && !(pageSize > totalActions)" (click)="showLessActions()" type="button" class="btn"> <i
                                     class="material-icons">
                                     expand_less
                                 </i> Show Less Actions </button>
