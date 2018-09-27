@@ -314,7 +314,7 @@
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-12" style="text-align: end">
-                <p *ngIf="totalDrafts === undefined || totalDrafts === 0"> Showing 0 of 0 </p>
+                <p *ngIf="totalDrafts === undefined || totalDrafts === 0"> Showing 0 of 0 </p><!--Current page of total pages available on table-->
                 <p *ngIf="!(totalDrafts === undefined || totalDrafts === 0) && !(draftPageNumber == draftPaginatorSize)">Showing
                   {{pageSize * draftPageNumber}} of {{totalDrafts}}</p>
                 <p *ngIf="draftPageNumber == draftPaginatorSize && (totalDrafts != undefined || totalDrafts != 0)">Showing
@@ -322,7 +322,7 @@
               </div>
             </div>
           </div>
-          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped"> <!--Sort table data and adds table style-->
             <thead>
               <tr>
                 <th mat-sort-header="jobName">Job Title</th>
@@ -335,7 +335,7 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let draft of sortedDrafts">
+              <tr *ngFor="let draft of sortedDrafts"><!--Sorts table data-->
                 <td> {{draft.jobName}}</td>
                 <td> {{draft.company}}</td>
                 <td> {{draft.city}}, {{draft.country}} </td>
@@ -355,6 +355,7 @@
             </tbody>
           </table>
           <hr>
+          <!--Table paginations-->
           <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-center">
           </ngb-pagination>
