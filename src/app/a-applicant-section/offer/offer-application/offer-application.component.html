@@ -8,53 +8,48 @@
   input {
      margin: 8px; 
   }
-
-  button {
+    button {
     margin-bottom: 8px;
   }
 </style> 
 </head>
+  <body>
 
-<body>
-
-<h1>A.3 Offer Application</h1>
+    <h1>A.3 Offer Application</h1>
 
 <div class="container" >
-  <div class="row">
-    <div class="col-sm-12">
-        <div class="card descriptionbox" >
-          <div class="card-body" >           
-         <h3><strong>{{job?.jobName}}</strong></h3>  
-            <div>
-                <h5><strong> {{job?.company}}</strong></h5>       
-             <div style="font-style: italic; text-align: center;">
-              {{job?.city}} , {{job?.country}} / {{job?.jobCategory}} /  {{job?.jobType}}
+        <div class="row">
+          <div class="col-sm-12">
+              <div class="card descriptionbox" > <!--Keeps the description information for the job selected-->
+                <div class="card-body" >           
+                  <h3><strong>{{job?.jobName}}</strong></h3>  
+                    <div>
+                        <h5><strong> {{job?.company}}</strong></h5>       
+                        <div style="font-style: italic; text-align: center;">
+                          {{job?.city}} , {{job?.country}} / {{job?.jobCategory}} /  {{job?.jobType}}
+                        </div>
+                            <br>
+                      <div style=" text-align: justify;text-justify: inter-word;"> {{job?.description}}</div>  
+                    </div>
                 </div>
-                <br>
-              <div style=" text-align: justify;text-justify: inter-word;"> {{job?.description}}</div>  
-                
-            </div>
-          </div>
+              </div>
           </div>
         </div>
-  </div>
         <div class="row"> 
       <div class="col-sm-12">
-        <div class="card" style="border-bottom: white;border-right: white; border-left: white;border-top: white;">
+        <div class="card" style="border-bottom: white;border-right: white; border-left: white;border-top: white;"> <!--Css to remove borders. COundl't do it directly on styles.css-->
           <div class="card-body">
             <h3 class="card-title" style="padding-bottom: 8px;">Applicant Information</h3>
-            
-            <form [formGroup]="applicantInfo">
-
-                <div class="form-group">
+              <form [formGroup]="applicantInfo"> <!--Form for application-->
+                 <div class="form-group">
                     <label for="name">Name</label>
                     <input formControlName="name" type="name" class="form-control" id="name" placeholder="Name">
-                </div>
+                 </div>
 
-                <div class="form-group">
+                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
-                </div>
+                 </div>
 
                   <div class="form-group">
                       <label for="phone">Phone</label>
@@ -86,20 +81,11 @@
                             arrow_forward_ios
                             </i>Submit Application</button> 
                     </div>
-
-
-            </form>
-
-
-
+              </form>
           </div>
-
         </div>
       </div>
-
-      
-
-      <!-- <div class="container">
+     <!-- <div class="container">
         <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="panel panel-login">
@@ -172,11 +158,8 @@
           </div>
         </div>
       </div>
-    </div> -->
-
-  
-  </div>
-  </div>
-  
-</body>
+    </div> -->  
+      </div>
+      </div>  
+    </body>
   </html>
