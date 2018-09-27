@@ -10,24 +10,22 @@
 <body >
   <!-- First Container -->
 <div class="container-fluid backgroundWelcome " style="padding-top:100px;">
-
+<!--This container belongs to top gradient banner on the page-->
          <div class="row">
                <div class="col-12">
                      <h1 class="margin" style="text-align: center" >A.1 Welcome to Invid Careers</h1>
-                     
                      <h4><a routerLink="/jobs"class="btnWelcomeApply applyBorder">
                       Apply to Jobs
-                    </a></h4> 
+                    </a></h4> <!--The <a> send the user to the list of jobs available to apply for-->
                </div>
          </div>
     </div>     
-         <!-- ***************************************************************************************************** -->
+<!-- ***************************************************************************************************** -->
      
   <div class="container-fluid">    
           <div class="row">
             <div class="col" >
-            <div class=" text-center" >          
-                
+            <div class=" text-center" >                   
               </div>
             </div>
         </div>
@@ -38,33 +36,30 @@
             </div>
           </div>
         </div>
-        <div class="row">
-           <!-- ---------------------------------->
-          <div class="col-sm-3 shadow" style="margin-left:10%;">
-            <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[0].jobId)">{{jobs[0].jobName}}</button></h3> <br>
+ 
+        <div class="row"> 
+          <div class="col-sm-3 shadow" style="margin-left:10%;"><!--First job on the top 3 jobs featured on the welcome page-->
+            <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[0].jobId)">{{jobs[0].jobName}}</button></h3> <br> <!--Name of job send user to the job's application page-->
             <h5  >{{jobs[0].city}},{{jobs[0].country}}
             </h5>
             <p>{{jobs[0].description}}</p>
           
           </div>
-           <!-- ---------------------------------->
-          <div class="col-sm-3 shadow" style="margin-left:2%; margin-right:2%;"> 
-              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[1].jobId)">{{jobs[1].jobName}}</button></h3> <br>
+           
+          <div class="col-sm-3 shadow" style="margin-left:2%; margin-right:2%;"> <!--Second job on the top 3 jobs featured on the welcome page-->
+              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[1].jobId)">{{jobs[1].jobName}}</button></h3> <br><!--Name of job send user to the job's application page-->
               <h5  >{{jobs[1].city}},{{jobs[1].country}}
               </h5>
               <p>{{jobs[1].description}}</p>
           </div>
-           <!-- ---------------------------------->
-          <div class="col-sm-3 shadow"> 
-              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[2].jobId)">{{jobs[2].jobName}}</button></h3><br>
+           
+          <div class="col-sm-3 shadow"> <!--Third job on the top 3 jobs featured on the welcome page-->
+              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[2].jobId)">{{jobs[2].jobName}}</button></h3><br><!--Name of job send user to the job's application page-->
               <h5  >{{jobs[2].city}},{{jobs[2].country}}
               </h5>
               <p>{{jobs[2].description}}</p>
-          </div>
-          <!-- ---------------------------------->
-        </div>
-    
-   
-</div>
-</body>
+            </div>
+        </div>  
+    </div>
+  </body>
 </html>
