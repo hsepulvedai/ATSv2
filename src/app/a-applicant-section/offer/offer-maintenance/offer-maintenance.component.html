@@ -18,10 +18,10 @@
             <div class="row smallrow"> <!--smallrow controls the height between form elements-->
               <div class="form-group col-sm-6">
                 <label for="jobName"> <strong>Job Title</strong></label>
-                <input formControlName="jobName" type="text" class="form-control" id="name">
+                <input formControlName="jobName" type="text" class="form-control" id="name"> <!--Input for Job Name-->
               </div>
               <div class="form-group col-sm-6">
-                <label for="jobCompany"> <strong>Company</strong></label>
+                <label for="jobCompany"> <strong>Company</strong></label><!--Input for Company Name-->
                 <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
               </div>
             </div>
@@ -30,14 +30,14 @@
                 <label for="jobCategory"><strong>Category</strong></label>
                 <select formControlName="jobCategory" id="category" class="form-control" (change)="selectJobCatChangeHandler($event)">
                   <option value="null" disabled="true" [selected]="true">- Select Category -</option>
-                  <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
+                  <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option><!--Allows a category to be chosen to represent the job being added-->
                 </select>
               </div>
               <div class="form-group col-sm-6">
-                <label for="jobType"><strong> Type</strong></label>
+                <label for="jobType"><strong> Type</strong></label> 
                 <select formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
                   <option value="null" disabled="true" [selected]="true">- Select Type -</option>
-                  <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
+                  <option *ngFor=" let selectedType of types">{{selectedType.name}}</option> <!--Allows to choose the type of job being added-->
                 </select>
               </div>
             </div>
@@ -54,11 +54,11 @@
                   class="material-icons">
                   save_alt
                 </i>Save as Draft
-              </button>
+              </button><!--Saves draft of job not completely added-->
 
               <button (click)="createJob(newJobForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
                   save_alt</i>Save
-                </button>
+                </button><!--Saves the job after it has been fully added-->
             </div>
           </form>
         </div>
@@ -70,46 +70,46 @@
       <h4 class="modal-title" id="modal-basic-title">Job update</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
-      </button>
+      </button><!--Closes modal-->
     </div>
     <div class="modal-body">
       <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateJob(jobEditForm.value);c('Save click')">
         <div class="row">
           <div class="form-group col-md-6">
             <label for="name"> <strong>Job Title</strong></label>
-            <input formControlName="name" type="text" class="form-control" id="name">
+            <input formControlName="name" type="text" class="form-control" id="name"> <!--Lets user edit job title-->
           </div>
           <div class="form-group col-md-6">
             <label for="category"><strong>Category</strong></label>
             <select formControlName="category" id="category" class="form-control">
-              <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
+              <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option> <!--Lets user edit job category-->
             </select>
           </div>
 
           <div class="form-group col-md-6">
             <label for="type"><strong>Type</strong></label>
             <select formControlName="type" id="type" class="form-control">
-              <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
+              <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option> <!--Lets user edit job type-->
             </select>
           </div>
 
           <div class="form-group col-md-6">
               <label for="status"><strong>Status</strong></label>
               <select formControlName="status" id="status" class="form-control">
-                <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">{{selectedStatus.status}}</option>
+                <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">{{selectedStatus.status}}</option><!--Lets user edit job status-->
               </select>
           </div>
 
           <div class="form-group col-md-6">
             <label for="description"><strong>Description</strong></label>
-            <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+            <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea> <!--Lets user edit job description-->
           </div>
         </div>
 
         <div class="modal-footer">
           <button type="submit" class="btn "><i class="material-icons">
               save_alt</i>Save
-          </button>
+          </button><!--Saves edited job-->
         </div>
       </form>
     </div>
@@ -127,35 +127,35 @@
         <div class="row">
           <div class="form-group col-md-6">
             <label for="draftName"> <strong>Job Title</strong></label>
-            <input formControlName="draftName" type="text" class="form-control" id="draftName">
+            <input formControlName="draftName" type="text" class="form-control" id="draftName"> <!--Lets user edit job title-->
           </div>
           <div class="form-group col-md-6">
             <label for="draftCategory"><strong>Category</strong></label>
             <select formControlName="draftCategory" id="draftCategory" class="form-control">
-              <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
+              <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option> <!--Lets user edit job category-->
             </select>
           </div>
           <div class="form-group col-md-6">
             <label for="draftType"><strong>Type</strong></label>
             <select formControlName="draftType" id="draftType" class="form-control">
-              <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
+              <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option><!--Lets user edit job type-->
             </select>
           </div>
           <div class="form-group col-md-6">
             <label for="draftDescription"><strong>Description</strong></label>
-            <textarea class="form-control" formControlName="draftDescription" name="draftDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
+            <textarea class="form-control" formControlName="draftDescription" name="draftDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea><!--Lets user edit job description-->
           </div>
         </div>
         <div class="modal-footer">
           <button (click)="deleteDraft()" type="submit" class="btn btn-outline-danger "><i class="material-icons">
               delete </i>Delete
-          </button>
+          </button> <!--Deletes job draft-->
           <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
               save_alt </i> Save
-          </button>
+          </button> <!--Saves job draft-->
           <button (click)="postDraft()" type="submit" class="btn "><i class="material-icons">
               subdirectory_arrow_left </i>Post
-          </button>
+          </button> <!--Posts job draft-->
         </div>
       </form>
     </div>
@@ -254,7 +254,7 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab title="Past Jobs">
+      <ngb-tab title="Past Jobs"> <!--Tab for past jobs-->
         <ng-template ngbTabContent>
           <h3> Past Jobs </h3>
           <div class="col-md-12">
@@ -290,7 +290,7 @@
                     <button type="button" class="btn" (click)="openEdit(content, inactiveJob)"> <i class="material-icons">
                         edit
                       </i>Edit
-                    </button>
+                    </button> <!--Submits changes to past job-->
                     <button type="button" class="btn" (click)=" setJobActive(inactiveJob.jobId)"><i class="material-icons">
                         subdirectory_arrow_left
                       </i>Post
