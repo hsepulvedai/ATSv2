@@ -86,7 +86,7 @@ ngb-pagination /deep/ .page-item.disabled {
     background-color: #25326a ;
 } */
 
-.btnWelcomeJobs{ /*  Controls the job title buttons that let user access application for specific job*/
+.btnWelcomeJobs{ /*  Controls the job title buttons that let user access application for specific job - reused in c2 c3 c5*/
     
     background-color: #FFFFFF;
     text-align: center;

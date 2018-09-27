@@ -87,51 +87,49 @@ a comments section-->
         </div>
         <div class="row">
                 <div class="col-sm-12">
-
-
                         <div class="card descriptionbox">
-                                <div class="card-body">
-            
+                                <div class="card-body"> 
+                                    <div class="row">
+                                    <div class="col-sm-6">           
                                         <div>
                                                 <h3> {{applicationInfo.applicantFirstName}} {{applicationInfo.applicantLastName}}</h3>
                                                 <p style="text-align: center">{{applicationInfo.applicantPhone}} / {{applicationInfo.applicantEmail}}</p>
                                                 <br>
-                                        </div>
-                
-            
-                                   <h3>{{applicationInfo.jobName}}</h3>
-                                   <p style="text-align: center"> {{applicationInfo.jobCategory}} ({{applicationInfo.jobType}})</p>
-                                   <p style="text-align: center">{{applicationInfo.companyName}}  ({{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}})</p>
-            
-            
-                                    <div>
-                                        <!-- <i class="material-icons" style="font-size: 3em;"> perm_identity </i> -->
-            
-             
-            
+                                        </div>    
+                                        <div style="margin-top:10%;margin-left: 20%">
                                         <div> <strong> Application ID: </strong>{{currentAppId}}</div>
                                         <div> <strong> Application Status: </strong>{{applicationInfo.applicationStatus}}</div>
                                         <div> <strong> Application Date: </strong>{{applicationInfo.dateApplied | date: 'MMMM d, y' }}</div>
                                         <br>
-            
-            
-            
+                                         </div>
+                                         <div style="margin-top:10%;margin-left: 25%">
+                                             <h4> <a class="btnWelcomeJobs" routerLink="#">View Resume</a></h4>
+                                         </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                   <h3>{{applicationInfo.jobName}}</h3>
+                                   <p style="text-align: center"> {{applicationInfo.jobCategory}} ({{applicationInfo.jobType}})</p>
+                                   <p style="text-align: center">{{applicationInfo.companyName}}  ({{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}})</p>
+                      
+                                    <div>
+                                        <!-- <i class="material-icons" style="font-size: 3em;"> perm_identity </i> -->
                                         <div><strong> Job Description: </strong> {{applicationInfo.jobDescription}}</div>
                                     </div>
+                                 </div>
                                 </div>
-                            </div>
-                         
+                                </div>
+                            </div>                         
                   </div>        
             </div>
         <div class="row">
             <div class="col-sm-6">
                     <div class="col-sm-6">
                             <div class="row">         
-                            <div style=" padding-left:15%;">
+                            <div style=" margin-left:15%; margin-top:25%">
                               <div class=" bg-white ">
                                 <h4>Pending Tasks</h4>                        
                                 <div class="list-group">                        
-                                  <a href="#" *ngFor="let task of pendingTasks" class="list-group-item"> {{task.task}} </a>
+                                  <a href="#" *ngFor="let task of pendingTasks" class="list-group-item btnWelcomeJobs"> {{task.task}} </a>
                                   </div>
                               </div>
                             </div>
