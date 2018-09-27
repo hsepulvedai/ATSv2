@@ -1,3 +1,4 @@
+<!--This page allows an applicant to enter their email and receive a brief status update on their application-->
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,12 +8,9 @@
   <body>
     <div class="container">
 <h1>A.4</h1>
-
-<div class="card">
+  <div class="card">
     <div class="card-body">
-
-        <h1>Enter email to view application status: </h1>
-  
+        <h1>Enter email to view application status: </h1>  
         <ng-template #content let-c="close" let-d="dismiss">
           <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title"> Job Status </h4>
@@ -41,10 +39,9 @@
               </form>             
            <hr>        
            <pre>{{closeResult}}</pre>
-
           </div>
         </div>
       </div>
-      </body>
+    </body>
  </html>
  
