@@ -40,16 +40,14 @@
     <div class="row">
       <div class="col-md-12" style="text-align: end">
         <p *ngIf="totalApplications === undefined || totalApplications === 0"> Showing 0 of 0 </p>
-        <p *ngIf="!(totalApplications === undefined || totalApplications === 0) && (page != paginatorSize)">Showing {{pageSize
+        <p *ngIf="!(totalApplications === undefined || totalApplications === 0) && (page != paginatorSize) 
+          && !((pageSize * page) > totalApplications)">Showing {{pageSize
           * page}} of {{totalApplications}}</p>
-        <p *ngIf="(page === paginatorSize ) && (totalApplications != undefined || totalApplications != 0)">Showing {{totalApplications}}
+        <p *ngIf="(page === paginatorSize ) && (totalApplications != undefined || totalApplications != 0) 
+          && (paginatorSize > page) || (pageSize * page) > totalApplications">Showing {{totalApplications}}
           of {{totalApplications}}</p>
       </div>
     </div>
-
-
-
-    
 
     <div class="row">
 

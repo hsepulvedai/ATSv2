@@ -70,12 +70,20 @@
                         maxlength="98" placeholder="Enter comments..."></textarea>
                     </div>
                     <div>
-                        <button  class="btn btn-sm" type="button">
+                        <!-- <button  class="btn btn-sm" type="button">
                             <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <i class="material-icons">
                                 arrow_drop_up
                                 </i>Upload Resume
-                        </button>
+                        </button> -->
+
                     </div>
+
+                    <div class="form-group">
+
+                      <label for="uploadResume">Upload Resume (file types: .pdf)</label><br>
+                      <input id ="uploadResume" type="file" (change)="onFileChanged($event)" #fileInput accept=".pdf">
+                    </div>
+
                     <div align="center">
                         <button (click)="submitApplication(applicantInfo.value)" class="btn btn-lg" type="button" style="margin: 20px;"> <i class="material-icons">
                             arrow_forward_ios

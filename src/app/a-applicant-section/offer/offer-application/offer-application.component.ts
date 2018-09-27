@@ -67,7 +67,7 @@ export class OfferApplicationComponent implements OnInit {
       stateProvince:'Puerto Rico',
       country:'United States',
       zipCode:'88595',
-      comments: 'These are comments. I am cool.'
+      // comments: 'These are comments. I am cool.'
     }
   
   

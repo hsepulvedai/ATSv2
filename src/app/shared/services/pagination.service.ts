@@ -7,7 +7,7 @@ export class PaginationService {
 
 
   public paginatorSize:number
-  public pageSize: number = 5;
+  public pageSize: number = 10;
   public pageNumber: number = 1;
   public paginationCollectionSize:number
 
