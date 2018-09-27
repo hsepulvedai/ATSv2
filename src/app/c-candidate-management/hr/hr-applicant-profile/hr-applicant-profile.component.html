@@ -5,44 +5,67 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-content"> Add Action</h4>
+            <h4 class="modal-title" id="modal-basic-title"> Add Action</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        
+        <div class="modal-body">       	
+	
+        <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
-        <div class="modal-body">
-            <form [formGroup]="AddAction" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-                <div class="row">
-                    <!-- Info inside {{}} is made up/ substitute with correct info-->
+         <div class="row smallrow">
 
-                    <div class="form-group col-md-6">
-                        <label for="applicantName"><strong>Name</strong></label>
+
+
+          <div class="form-group col-sm-6">
+            <label for="actionName"><strong> Action</strong></label>
+            <select formControlName="actionName" id="category" class="form-control" (change)="selectActionChangeHandler($event)">
+              <option value="null" disabled="true" [selected]="true">- Select Action -</option>
+              <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
+            </select>
+          </div>
+
+
+           
+			<div class="form-group col-sm-6">
+                    <label for="date"><strong> Date </strong></label>
+                    <div class="input-group">
+                      <input id="date" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                      </div>
                     </div>
+                  </div>
+                   
 
-                    <div class="form-group col-md-6">
-                        <label for="newAction"><strong>Action</strong></label>
-                        <select formControlName="newAction" id="newAction" class="form-control">
-                            <option *ngFor=" let selectedAction of actions" [ngValue]="selectedNewAction.name">{{selectedNewAction.name}}</option>
-                        </select>
-                    </div>
+         </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="jobApplied"><strong>Job Applied</strong></label>
-                    </div>
+        
+         
+        <div class="row smallrow">
+          <div class="form-group col-sm-6">
+            <label for="actionDescription"><strong>Comments</strong></label>
+            <textarea class="form-control" formControlName="actionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+          </div>
+        </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="actionDescription"><strong>Description</strong></label>
-                        <textarea class="form-control" formControlName="actionDescription" name="actionDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
-                    </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button (click)="updateJobDraft(draftEditForm.value)" type="submit" class="btn "><i class="material-icons">
-                            save_alt </i> Save
-                    </button>
-                </div>
-            </form>
+
+
+   
+
+        <div class="modal-footer">
+      
+
+          <button (click)="insertAction(newActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
+              save_alt</i>Save</button>
+
+        </div>
+
+      </form>
+
         </div>
     </ng-template>
 
@@ -54,68 +77,141 @@
         <div>
             <h1>C.2/C.3/C.5</h1>
         </div>
+
         <div class="row">
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card descriptionbox">
-                            <div class="card-body">
-
-                                <h5>{{job?.jobName}}</h5>
-                                <div>
-                                    <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
-                                    <div><strong> {{job?.company}}</strong></div>
-
-                                    {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
-
-                                    <div><strong> Description: </strong> {{job?.description}}</div>
-                                </div>
-                              </div>
-                              </div>
-                              <div class="row bootstrap snippets">
-                                  <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
-                                      <div class="comment-wrapper">
-                                          <div class="panel panel-info">
-                                              <div class="panel-heading">
-                                                  Comment panel
-                                              </div>
-                                              <div class="panel-body">
-                                                  <textarea [(ngModel)]="commentBoxInput" class="form-control" placeholder="write a comment..." rows="3"></textarea>
-                                                  <br>
-                                                  <button type="button" class="btn pull-right"(click)=insertComment()>Post</button>
-                                                  <div class="clearfix"></div>
-                                                  <hr>
-                                                  <ul class="media-list" *ngFor="let comment of comments" >
-                                                      <li class="media" >
-                                                          <a href="#" class="pull-left">                                                             
-                                                          </a>
-                                                          <div class="media-body">
-                                                              <span class="text-muted pull-right">
-                                                                  <small class="text-muted">{{comment.createdDate | date: 'MMMM d, y'}} at {{comment.createdDate | date: 'h:mm
-                                                                    a' }} </small>
-                                                              </span>
-                                                              <strong class="text-success"> @{{comment.employeeFirstName}}{{comment.employeeLastName}}</strong>
-                                                              <p>
-                                                                 {{comment.commentData}} 
-                                                              </p>
-                                                          </div>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </div>
-                              
-                                  </div>
-                              </div>
-                            </div>        
+                <div class="col-sm-6">
+          
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="users/userMaintenance">List</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Details</li>
+                    </ol>
+                  </nav>
                 </div>
+        </div>
+
+      
+
+        <div class="row">
+                <div class="col-sm-12">
+
+
+                    <div class="card descriptionbox">
+                         <div class="card-body">
+
+                            <h5>{{applicationInfo.jobName}}</h5>
+                            <div>
+                                <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
+
+                                <div><strong> {{applicationInfo.applicantFirstName}} {{applicationInfo.applicantLastName}} </strong>
+
+                                    {{applicationInfo.applicantPhone}} / {{applicationInfo.applicantEmail}} 
+                                
+                                </div>
+
+                                <div> <strong>  Application </strong>
+
+                                         {{currentAppId}} / {{applicationInfo.applicationStatus}} / {{applicationInfo.dateApplied | date: 'MMMM d, y' }}
+                                </div>
+
+                                <div><strong> {{applicationInfo.companyName}}</strong>  
+                               {{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}} / {{applicationInfo.jobCategory}} / {{applicationInfo.jobType}} 
+                            
+                            
+                            </div>
+
+                                <div><strong> Description: </strong> {{applicationInfo.jobDescription}}</div>
+                            </div>
+                          </div>
+                     </div>
+
+                         
+                  </div>        
             </div>
 
+    
+
+
+        <div class="row">
+
+            
+               
+
+        
+           
+
             <div class="col-sm-6">
+
+                    <div class="col-sm-6">
+                            <div class="row"> 
+
+        
+                            <div style=" padding-left:15%;">
+                              <div class=" bg-white ">
+                                <h4>Pending Tasks</h4>
+                        
+                                <div class="list-group">
+                        
+                                  <a href="#" *ngFor="let task of pendingTasks" class="list-group-item"> {{task.task}} </a>
+                        
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                    </div>
+
+
+
+                    <div class="row bootstrap snippets">
+                            <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
+                                <div class="comment-wrapper">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                                <h4>Comments</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <textarea [(ngModel)]="commentBoxInput" class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                            <br>
+                                            <button type="button" class="btn pull-right"(click)=insertComment()>Post</button>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                            <ul class="media-list" *ngFor="let comment of comments" >
+                                                <li class="media" >
+                                                    <a href="#" class="pull-left">                                                             
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <span class="text-muted pull-right">
+                                                            <small class="text-muted">{{comment.createdDate | date: 'MMMM d, y'}} at {{comment.createdDate | date: 'h:mm
+                                                              a' }} </small>
+                                                        </span>
+                                                        <strong class="text-success"> @{{comment.employeeFirstName}}{{comment.employeeLastName}}</strong>
+                                                        <p>
+                                                           {{comment.commentData}} 
+                                                        </p>
+                                                    </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+              
+            </div>
+
+       
+
+            <div class="col-sm-6">
+
+    
                 <div class="container mt-5 mb-5">
                     <div class="row">
+
+
+
                         <div class="col-md-6 offset-md-3">
                             <h4>Latest Actions</h4>
-                            <button type="button" class="btn" (click)="openNewAction(content, job)"> <i class="material-icons">
+                            <button type="button" class="btn" (click)="openNewAction(content)"> <i class="material-icons">
                                     note_add
                                 </i> New Action </button>
                             <ul class="timeline">
@@ -149,5 +245,4 @@
 
     </div>
 </body>
-
 </html>

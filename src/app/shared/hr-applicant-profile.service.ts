@@ -30,4 +30,8 @@ export class HrApplicantProfileService {
       return this.http.get(environment.baseUrl + this.routePrefix2 + '/ApplicationActionHRShow/' + id)
     }
 
+    getAllApplicationActions(){
+      return this.http.get(environment.baseUrl + '/ActionType/ActionTypeShowAll' )
+    }
+
 }

@@ -9,9 +9,18 @@
 </head>
 
 <body>
-  <h1>C4</h1>
+  
 
   <div class="container">
+
+    
+      <h3>C.4 Applications to manage: </h3>
+
+      <nav aria-label="breadcrumb" style="width: 20%">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">List</li>
+          </ol>
+        </nav>
 
 
 
@@ -30,11 +39,11 @@
 
     <div class="row">
       <div class="col-md-12" style="text-align: end">
-        <p *ngIf="totalApplication === undefined || totalApplication === 0"> Showing 0 of 0 </p>
-        <p *ngIf="!(totalApplication === undefined || totalApplication === 0) && (page != paginatorSize)">Showing {{pageSize
-          * page}} of {{totalJobs}}</p>
-        <p *ngIf="(page === paginatorSize ) && (totalApplication != undefined || totalApplication != 0)">Showing {{totalApplication}}
-          of {{totalApplication}}</p>
+        <p *ngIf="totalApplications === undefined || totalApplications === 0"> Showing 0 of 0 </p>
+        <p *ngIf="!(totalApplications === undefined || totalApplications === 0) && (page != paginatorSize)">Showing {{pageSize
+          * page}} of {{totalApplications}}</p>
+        <p *ngIf="(page === paginatorSize ) && (totalApplications != undefined || totalApplications != 0)">Showing {{totalApplications}}
+          of {{totalApplications}}</p>
       </div>
     </div>
 
@@ -49,7 +58,7 @@
               <th scope="col">Phone Number</th>
               <th mat-sort-header="Job" scope="col">Job Applied</th>
               <th mat-sort-header="Status" scope="col">Application Status</th>
-              <th mat-sort-header="Pending" scope="col"> Pending </th>
+              <th mat-sort-header="Pending" scope="col"> Actions </th>
               <th></th>
       
             </thead>
@@ -67,8 +76,8 @@
                   <td> {{application.applicationStatus }}</td>
                   <td> {{application.numberOfActions}}</td>
                   <td style="text-align: right;padding-right: 30px;">
-                    <button type="button" class="btn btn-outline-info" (click)="goToApplicationDetails(application)" ><i class="material-icons">
-                        view_headline
+                    <button  class="btn" (click)="goToApplicationDetails(application)" ><i class="material-icons">
+                        notes
                       </i> Details </button>
                   </td>
                 </tr>
@@ -76,22 +85,8 @@
           </table>
     </div>
 
-    <!-- <div class="col-sm-3">
-
-            <div style=" padding-left:15%;">
-              <div class=" bg-white ">
-                <h3>Pending Tasks</h3>
-        
-                <div class="list-group">
-        
-                  <a href="#" *ngFor="let task of tasks" class="list-group-item"> {{task.task}} </a>
-        
-                </div>
-              </div>
-            </div>
-    </div> -->
-
   </div>
+
 
    
 
