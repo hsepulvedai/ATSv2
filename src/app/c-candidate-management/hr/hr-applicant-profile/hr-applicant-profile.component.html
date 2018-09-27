@@ -10,8 +10,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        
-        <div class="modal-body">   
+           <div class="modal-body">   
         
         <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
@@ -24,7 +23,6 @@
               <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
             </select>
           </div>
-
           
           <div class="form-group col-sm-6">
             <label for="actionSatus"><strong> Status</strong></label>
@@ -33,10 +31,7 @@
               <option *ngFor=" let selectedStatus of allStatuses">{{selectedStatus}}</option>
             </select>
           </div>
-
          </div>
-
-
          <div class="row smallrow">
              <div class="form-group col-sm-6">
                         <label for="date"><strong> Date </strong></label>
@@ -44,22 +39,16 @@
                           <input id="date" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-                          </div>
-        
+                          </div>        
                         </div>
             </div>
-
                     
          <div class="form-group col-sm-6">
                 <label for="time"><strong> Select a time:</strong></label>
                 <input type="time" class="form-control"  formControlName="time" name="usr_time">
         </div>
-
-
         </div>
-
   
-    
         <div class="row smallrow">
           <div class="form-group col-sm-6">
             <label for="actionDescription"><strong>Comments</strong></label>
@@ -67,24 +56,15 @@
           </div>
         </div>
 
-        <div class="modal-footer">
-      
+        <div class="modal-footer">      
 
           <button (click)="insertAction(newActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
               save_alt</i>Save</button>
-
         </div>
-
       </form>
-
         </div>
-
-
     </ng-template>
-
 </head>
-
-
 <body>
     <div class="container">
         <div>
@@ -102,13 +82,8 @@
                   </nav>
                 </div>
         </div>
-
-      
-
         <div class="row">
                 <div class="col-sm-12">
-
-
                     <div class="card descriptionbox">
                          <div class="card-body">
 
@@ -129,36 +104,19 @@
 
                                 <div><strong> {{applicationInfo.companyName}}</strong>  
                                {{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}} / {{applicationInfo.jobCategory}} / {{applicationInfo.jobType}} 
-                            
-                            
+                                                        
                             </div>
-
                                 <div><strong> Description: </strong> {{applicationInfo.jobDescription}}</div>
                             </div>
                           </div>
-                     </div>
-
-                         
+                     </div>                         
                   </div>        
             </div>
-
-    
-
-
         <div class="row">
-
-            
-               
-
-        
-           
-
             <div class="col-sm-6">
 
                     <div class="col-sm-6">
-                            <div class="row"> 
-
-        
+                            <div class="row">         
                             <div style=" padding-left:15%;">
                               <div class=" bg-white ">
                                 <h4>Pending Tasks</h4>
@@ -203,23 +161,14 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
-                        
+                                </div>                        
                             </div>
-                    </div>
-              
-            </div>
+                        </div>              
+                    </div>     
 
-       
-
-            <div class="col-sm-6">
-
-    
+            <div class="col-sm-6">    
                 <div class="container mt-5 mb-5">
                     <div class="row">
-
-
-
                         <div class="col-md-6 offset-md-3">
                             <h4>Latest Actions</h4>
                             <button type="button" class="btn" (click)="openNewAction(content)"> <i class="material-icons">
@@ -244,16 +193,12 @@
                                     class="material-icons">
                                     expand_less
                                 </i> Show Less Actions </button>
-
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-
-
-
     </div>
 </body>
 </html>
