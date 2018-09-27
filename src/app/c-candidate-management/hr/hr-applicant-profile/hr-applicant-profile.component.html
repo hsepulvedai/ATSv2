@@ -1,3 +1,6 @@
+<!--This is a combination of various pages. It allows HR to view applicant/application information
+in a sinlge page like a "profile". There is a timeline that shows actions taken with this application,
+a list of pending tasks and a comments section-->
 <!DOCTYPE html>
 <html>
 
@@ -5,10 +8,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title"> Add Action</h4>
+            <h4 class="modal-title" id="modal-basic-title"> Add Action</h4><!--The modal allows user to add a new action to the timeline, can be a current action or a past action-->
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
+<<<<<<< HEAD
         </div>
 
         <div class="modal-body">
@@ -68,8 +72,46 @@
             </form>
 
         </div>
-    </ng-template>
+=======
+        </div>        
+        <div class="modal-body">     
+        <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
+         <div class="row smallrow">
 
+          <div class="form-group col-sm-6">
+            <label for="actionName"><strong> Action</strong></label>
+            <select formControlName="actionName" id="category" class="form-control" (change)="selectActionChangeHandler($event)">
+              <option value="null" disabled="true" [selected]="true">- Select Action -</option><!--Allows user to choose from a dropdown of actions-->
+              <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
+            </select>
+          </div>
+           
+			<div class="form-group col-sm-6">
+                    <label for="date"><strong> Date </strong></label>
+                    <div class="input-group">
+                      <input id="date" class="form-control" formControlName="actionDate" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button> <!--Shows date picker on modal-->
+                      </div>
+                    </div>
+                  </div>
+             </div>    
+         
+        <div class="row smallrow">
+          <div class="form-group col-sm-6">
+            <label for="actionDescription"><strong>Comments</strong></label>
+            <textarea class="form-control" formControlName="actionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea> <!--Space for user to write a comment about the action-->
+          </div>
+        </div>   
+
+        <div class="modal-footer">
+          <button (click)="insertAction(newActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons"> <!--Saves the action -->
+              save_alt</i>Save</button>
+        </div>
+      </form>
+    </div>
+>>>>>>> d520a096a3d44d17d9cb72834b89eccade145c81
+    </ng-template>
 </head>
 
 
@@ -78,8 +120,8 @@
         <div>
             <h1>C.2/C.3/C.5</h1>
         </div>
-
         <div class="row">
+<<<<<<< HEAD
             <div class="col-sm-6">
 
                 <nav aria-label="breadcrumb">
@@ -100,6 +142,23 @@
                 <div class="card descriptionbox">
                     <div class="card-body">
 
+=======
+                <div class="col-sm-6">          
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="users/userMaintenance">List</a></li> <!--Sends user back to list of applications to manage-->
+                      <li class="breadcrumb-item active" aria-current="page">Details</li> <!--Indicates to user they are in the details page-->
+                    </ol>
+                  </nav>
+                </div>
+         </div>      
+
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="card descriptionbox">
+                         <div class="card-body">
+                            <h5>{{applicationInfo.jobName}}</h5>
+>>>>>>> d520a096a3d44d17d9cb72834b89eccade145c81
                             <div>
                                     <h3> {{applicationInfo.applicantFirstName}} {{applicationInfo.applicantLastName}}</h3>
                                     <p style="text-align: center">{{applicationInfo.applicantPhone}} / {{applicationInfo.applicantEmail}}</p>
@@ -111,6 +170,7 @@
                        <p style="text-align: center"> {{applicationInfo.jobCategory}} ({{applicationInfo.jobType}})</p>
                        <p style="text-align: center">{{applicationInfo.companyName}}  ({{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}})</p>
 
+<<<<<<< HEAD
 
                         <div>
                             <!-- <i class="material-icons" style="font-size: 3em;"> perm_identity </i> -->
@@ -160,11 +220,46 @@
                                         </a>
 
                                 </div>
+=======
+                                    {{applicationInfo.applicantPhone}} / {{applicationInfo.applicantEmail}}                                 
+                                </div>
+
+                                <div> 
+                                    <strong>  Application </strong>
+                                         {{currentAppId}} / {{applicationInfo.applicationStatus}} / {{applicationInfo.dateApplied | date: 'MMMM d, y' }}
+                                </div>
+
+                                <div>
+                                    <strong> {{applicationInfo.companyName}}</strong>  
+                                        {{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}} / {{applicationInfo.jobCategory}} / {{applicationInfo.jobType}} 
+                                </div>
+
+                                <div>
+                                    <strong> Description: </strong> {{applicationInfo.jobDescription}}
+                                </div>
+                            </div>
+                          </div>
+                     </div>                         
+                  </div>        
+            </div>
+        <div class="row">
+            <div class="col-sm-6">
+                    <div class="col-sm-6">
+                            <div class="row">         
+                            <div style=" padding-left:15%;">
+                              <div class=" bg-white ">
+                                <h4>Pending Tasks</h4>                        
+                                <div class="list-group">                        
+                                  <a href="#" *ngFor="let task of pendingTasks" class="list-group-item"> {{task.task}} </a>
+                               </div>
+                              </div>
+>>>>>>> d520a096a3d44d17d9cb72834b89eccade145c81
                             </div>
                         </div>
                     </div>
                 </div>
 
+<<<<<<< HEAD
 
 
                 <div class="row bootstrap snippets">
@@ -214,6 +309,46 @@
                     <div class="row">
 
                         <div class="col-md-8 offset-md-3">
+=======
+                    <div class="row bootstrap snippets">
+                            <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
+                                <div class="comment-wrapper">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                                <h4>Comments</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <textarea [(ngModel)]="commentBoxInput" class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                            <br>
+                                            <button type="button" class="btn pull-right"(click)=insertComment()>Post</button>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                            <ul class="media-list" *ngFor="let comment of comments" >
+                                                <li class="media" >
+                                                    <a href="#" class="pull-left">                                                             
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <span class="text-muted pull-right">
+                                                            <small class="text-muted">{{comment.createdDate | date: 'MMMM d, y'}} at {{comment.createdDate | date: 'h:mm
+                                                              a' }} </small>
+                                                        </span>
+                                                        <strong class="text-success"> @{{comment.employeeFirstName}}{{comment.employeeLastName}}</strong>
+                                                        <p>
+                                                           {{comment.commentData}} 
+                                                        </p>
+                                                    </div>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>                        
+                                    </div>
+                                </div>              
+                            </div>
+            <div class="col-sm-6">    
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+>>>>>>> d520a096a3d44d17d9cb72834b89eccade145c81
                             <h4>Latest Actions</h4>
                             <button type="button" class="btn" (click)="openNewAction(content)"> <i class="material-icons">
                                     note_add
@@ -229,6 +364,7 @@
                                     <p>{{action.comments}}.</p>
                                 </li>
                             </ul>
+<<<<<<< HEAD
 
                             <button *ngIf=" totalActions > newPageSize" (click)="showMoreActions()" type="button" class="btn"> <i
                                     class="material-icons">
@@ -237,18 +373,22 @@
 
                             <button *ngIf="(newPageSize > totalActions) && !(pageSize > totalActions)" (click)="showLessActions()" type="button" class="btn">
                             <i class="material-icons">
+=======
+                            <button *ngIf=" totalActions > newPageSize"(click)="showMoreActions()" type="button" class="btn"> <i class="material-icons">
+                                    expand_more
+                                </i> Show More Actions 
+                            </button>
+                            <button *ngIf="(newPageSize > totalActions) && !(pageSize > totalActions)" (click)="showLessActions()" type="button" class="btn"> <i
+                                    class="material-icons">
+>>>>>>> d520a096a3d44d17d9cb72834b89eccade145c81
                                     expand_less
-                                </i> Show Less Actions </button>
-
+                                </i> Show Less Actions
+                             </button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
-
-
     </div>
 </body>
 

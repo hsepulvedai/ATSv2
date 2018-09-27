@@ -1,4 +1,7 @@
- /*Allow the use of google fonts*/
+/*Most styles in project are in this file. Few missing styles are in the
+  specific html's <style> or as inline styling in necessary cases*/
+
+/*Allow the use of google fonts*/
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
@@ -172,12 +175,12 @@ h5{
     
 }
     
-/* .smallrow{ 
+ .smallrow{ /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
     height: 5em;
 }
-.mdrow{
+.mdrow{ /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
     height: 7em; 
-}*/
+}
 .descp {
     font-size: 16px;
     color: white;

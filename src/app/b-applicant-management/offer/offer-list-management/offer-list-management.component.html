@@ -1,3 +1,5 @@
+<!--This page shows at a glance all jobs and the amount of applicants each of them has.
+Allows HR to access all the applications in a specific job-->
 <!DOCTYPE html>
 <html>
 
@@ -5,9 +7,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-  <style>
-    th,
-    td {
+  <style> 
+    th, td { /*Styles position of text on the table*/
       text-align: left;
     }
   </style>
@@ -19,11 +20,11 @@
       <h3>B.1 Manage Submissions</h3>
       <label for="sortBy"><strong> Search: </strong></label><br>
       <div class="row " style="height:3em;">
-          <div class="col-sm-6">
+          <div class="col-sm-6"> <!--Input allows user to search the table globally-->
             <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
           </div>
           <div class="col-sm-2">
-            <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
+            <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;"> <!--Submits the search-->
               <i class="material-icons">search</i> Search</button>
           </div>
       </div>
@@ -31,7 +32,7 @@
       <div>
         <nav aria-label="breadcrumb" style="width: 20%"> <!--Breadcrumb to navigate from B1 to B2-->
           <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">List</li>
+            <li class="breadcrumb-item active" aria-current="page">List</li> <!--Indicates to the user the they are currently on the list page-->
           </ol>
         </nav>
 
@@ -43,8 +44,13 @@
             <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0) && (paginatorSize > page) || (pageSize * page) > totalJobs">Showing {{totalJobs}} of {{totalJobs}}</p>
           </div>
         </div>
+<<<<<<< HEAD
         
         <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-striped">
+=======
+
+        <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-striped"> <!--Gives table functionality and striped design-->
+>>>>>>> d520a096a3d44d17d9cb72834b89eccade145c81
           <thead>
             <th mat-sort-header="jobId" scope="col">Job ID</th>
             <th mat-sort-header="jobName" scope="col">Job Title</th>
@@ -55,19 +61,19 @@
             <th mat-sort-header="jobPostedStatus" scope="col">Posted Status</th>
             <th scope="col"></th>
           </thead>
-          <tbody *ngIf="sortedData === undefined"> 
+          <tbody *ngIf="sortedData === undefined"> <!-- If the table has no data it tells the user there is nothing to show and so the sorting is disabled -->
             No jobs to show
           </tbody>
-          <tbody *ngIf="!(sortedData === undefined)">
-            <tr *ngFor="let job of sortedData">
+          <tbody *ngIf="!(sortedData === undefined)"> 
+            <tr *ngFor="let job of sortedData"> 
               <th scope="row">{{job.jobId}}</th>
               <td> {{job.jobName}}</td>
               <td> {{job.numberOfApplicants}} </td>
               <td> {{job.jobStatus}}</td>
               <td>{{job.jobCategory}}</td>
               <td>{{job.jobType}}</td>
-              <td *ngIf="job.active === true">Posted</td>
-              <td *ngIf="job.active === false">Not Posted</td>
+              <td *ngIf="job.active === true">Posted</td> <!--Determines if a job has been made available-->
+              <td *ngIf="job.active === false">Not Posted</td> <!--Determines if a job has been made unavailable-->
               <td><button class="btn" (click)="goToOfferDetail(job)"><i class="material-icons">
                     notes
                   </i>Details</button></td>
