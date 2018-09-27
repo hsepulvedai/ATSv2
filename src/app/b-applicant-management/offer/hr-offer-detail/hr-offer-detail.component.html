@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-  <style>
+  <style> /* These styles give the table specific aligning*/
     th {
       text-align: center;
     }
@@ -20,20 +20,18 @@
   </style>
   <ng-template #content let-c="close" let-d="dismiss"> <!--Modal used to edit recruiter assigned to specific application and it's status-->
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-content"> Edit Status & Recruiter</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <h4 class="modal-title" id="modal-basic-content"> Edit Status & Recruiter</h4> <!--This is the title on the top of the header-->
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')"> <!--This allows the modal to be closed from the top corner-->
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <form [formGroup]="editForm" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
 
-
-
           <div class="row">
             <div class="form-group col-md-6">
               <label for="selectedApplicantName"> <strong>Applicant Name</strong></label>
-              <input formControlName="selectedApplicantName" type="text" class="form-control" id="selectedApplicantName" disabled>
+              <input formControlName="selectedApplicantName" type="text" class="form-control" id="selectedApplicantName" disabled> <!--This input is disabled because it takes the applicant name directly from the application-->
             </div>
           </div>
 
@@ -41,25 +39,19 @@
             <div class="form-group col-md-6">
               <label for="recruiter"><strong>Recruiter</strong></label>
               <select formControlName="recruiter" id="recruiter" class="form-control">
-                <option *ngFor=" let recruiter of employees" [ngValue]="recruiter.employeeId">{{recruiter.employeeFullName}}</option>
+                <option *ngFor=" let recruiter of employees" [ngValue]="recruiter.employeeId">{{recruiter.employeeFullName}}</option> <!--This dropdown menu allows user to choose from a list of recruiters to assign to the current application-->
               </select>
             </div>
             <div class="form-group col-md-6">
               <label for="status"><strong>Status</strong></label>
               <select formControlName="status" id="status" class="form-control">
-                <option *ngFor="let status of applicationStatus" [ngValue]="status.id">{{status.status}}</option>
+                <option *ngFor="let status of applicationStatus" [ngValue]="status.id">{{status.status}}</option> <!-- This dropdown menu allows user to choose from different status to assign to application-->
               </select>
             </div>
-
-          <!-- <div class="form-group col-md-6">
-            <label for="selectedJobName"><strong>Job Applied</strong></label>
-            <input formControlName="selectedJobName" type="text" class="form-control" id="selectedJobName" disabled>
-          </div> -->
-
-        </div>
+          </div>
 
         <div class="modal-footer">
-          <button (click)="updateRecord(editForm.value)" type="submit" class="btn "><i class="material-icons">
+          <button (click)="updateRecord(editForm.value)" type="submit" class="btn "><i class="material-icons"> <!--This is the submit button for the modal-->
               save_alt </i> Save
           </button>
         </div>
@@ -69,16 +61,14 @@
 </head>
 
 <body>
-
   <div class="container">
     <h3>B.2/B.3</h3>
     <div class="row">
       <div class="col-sm-6">
-
         <nav aria-label="breadcrumb"> <!--Breadcrumb to navigate from B1 to B2-->
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="offer-list-management">List</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Details</li>
+            <li class="breadcrumb-item"><a href="offer-list-management">List</a></li> <!--This <a> has the route to the list of applications that comes before the current job applicants page-->
+            <li class="breadcrumb-item active" aria-current="page">Details</li> <!--This <li> tells the user the current page on the breadcrumb-->
           </ol>
         </nav>
       </div>
@@ -88,24 +78,23 @@
       <div class="col-sm-12">
       <div class="card descriptionbox"> <!--Shows job selected information-->
         <div class="card-body">
-          <h3><strong>{{job?.jobName}}</strong></h3>
+          <h3><strong>{{job?.jobName}}</strong></h3> <!--Shows job title on top of card-->
           <div>
-           <h5><strong> {{job?.company}}</strong></h5>          
+           <h5><strong> {{job?.company}}</strong></h5>  <!--Shows company name on card-->          
             <div style="font-style: italic; text-align: center;">
-            {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}
+            {{job?.city}}, {{job?.country}}/ {{job?.jobCategory}}/ {{job?.jobType}}  <!--Shows Location of job on card-->
             </div>
               <br>
-
-            <div style=" text-align: justify;text-justify: inter-word;">{{job?.description}}</div>
+            <div style=" text-align: justify;text-justify: inter-word;">{{job?.description}}</div>  <!--Shows job description on card-->
           </div>
-        </div>
+         </div>
+       </div>
       </div>
-    </div>
-    </div>
+     </div>
 
     <div class="row">
       <div class='col-md-6' style="text-align: start">
-        <p># of Applicants: {{totalApplicants}}</p>
+        <p># of Applicants: {{totalApplicants}}</p> <!-- Shows amount of applicants on this specific job-->
       </div>
 
       <div class='col-md-6'>
@@ -123,7 +112,7 @@
       <div class="col-sm-12">
         <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-hover table-striped ">
           <thead>
-            <tr>
+            <tr> <!-- Column headers on the table-->
               <th mat-sort-header="applicantId">Application ID</th>
               <th mat-sort-header="applicantName">Applicant Name</th>
               <th mat-sort-header="status">Application Status</th>
@@ -133,7 +122,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let applicant of sortedData">
+            <tr *ngFor="let applicant of sortedData"> <!-- Sorts the data on the table-->
               <td>{{applicant.applicationId}}</td>
               <td>{{applicant.applicantFirstName}} {{applicant.applicantLastName}}</td>
               <td>{{applicant.applicationStatus}}</td>
@@ -154,9 +143,9 @@
                 </select>
               </td> -->
 
-              <td><a href="#">View</a></td>
+              <td><a href="#">View</a></td> <!--Meant to be used to redirect user to resume page-->
               <td>
-                <button class="btn btn-sm" type="button" (click)="openEdit(content, applicant)">
+                <button class="btn btn-sm" type="button" (click)="openEdit(content, applicant)"><!--This button prompts the modal so the user can edit recruiter and status for a specific application-->
                   <i class="material-icons"> edit </i> Edit
                 </button>
               </td>
@@ -166,14 +155,10 @@
         <hr>
 
         <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
-          [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+          [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center"> <!--Allows for table to have pagination-->
         </ngb-pagination>
-
       </div>
     </div>
   </div>
-
-
-</body>
-
+ </body>
 </html>
