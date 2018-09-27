@@ -3,23 +3,20 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-  <ng-template #content1 let-c="close" let-d="dismiss">
+  <ng-template #content1 let-c="close" let-d="dismiss"> <!--Instructions for the modal that pops up from the add new applicant button on the top right of page-->
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-add"> New Applicant </h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-
-  
-      
+    <div class="modal-body">      
      <form [formGroup]="addApplicantForm" autocomplete="off" (ngSubmit)="createApplicant(addApplicantForm.value);c('Save click')">
   
-                  <div class="row smallrow">
+                  <div class="row smallrow"> <!--smallrow controls the height distance between the inputs and labels-->
                     <div class="form-group col-sm-6">
                       <label for="firstName"> <strong>First Name</strong></label>
-                      <input formControlName="firstName" type="text" class="form-control" id="firstName">
+                      <input formControlName="firstName" type="text" class="form-control" id="firstName"> 
                     </div>
                     <div class="form-group col-sm-6">
                       <label for="lastName"> <strong>Last Name</strong></label>
@@ -38,7 +35,7 @@
                     </div>
                   </div>
   
-                  <div class="row mdrow  ">
+                  <div class="row mdrow"> <!--mdrow (medium row) controls the height distance between the inputs and labels-->
                     <div class="form-group col-sm-12">
                       <label for="addressLine"> <strong>Address</strong></label>
                       <input formControlName="addressLine" type="text" class="form-control" id="addressLine">
@@ -70,8 +67,7 @@
                       <label for="zipCode"> <strong>Zip Code</strong></label>
                       <input formControlName="zipCode" type="text" class="form-control" id="zipCode">
                     </div>
-                  </div>
-  
+                  </div> 
   
                   <div class="row smallrow">
                     <div class="form-group col-sm-6">
@@ -83,33 +79,26 @@
                       <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">
                     </div>
                   </div>
-  
-              
+                     <div class="modal-footer">
+                         <button type="submit" class="btn "><i class="material-icons">
+                            save_alt
+                           </i>Save</button>
+                      </div>  
+      </form>      
+      </div>    
+      </ng-template>
+        <ng-template #content let-c="close" let-d="dismiss"> <!--Instructions for modal that allows user to edit applicant information-->
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Applicant update</h4> 
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
 
-                      <div class="modal-footer">
-                          <button type="submit" class="btn "><i class="material-icons">
-                              save_alt
-                              </i>Save</button>
-                        </div>
-  
-              </form>
-        
-    </div>
-    
-  </ng-template>
+          <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px"  (ngSubmit)="updateApplicant(applicantEditForm.value);c('Save click')" >
 
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Applicant update</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-
-    <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px"  (ngSubmit)="updateApplicant(applicantEditForm.value);c('Save click')" >
-
-  <div class="row smallrow" >
+          <div class="row smallrow">
                 <div class="form-group col-sm-6">
                   <label for="applicantFirstName"> <strong>First Name</strong></label>
                   <input formControlName="applicantFirstName" type="text" class="form-control" id="applicantFirstName">
@@ -138,7 +127,7 @@
               </div>
           
 
-              <div class="row mdrow  ">
+              <div class="row mdrow">
                   <div class="form-group col-sm-12">
                   <label for="applicantAddressLine"> <strong>Address</strong></label>
                   <input formControlName="applicantAddressLine" type="text" class="form-control" id="applicantAddressLine" >
@@ -161,7 +150,7 @@
                     </div>
               </div>
 
-              <div class="row smallrow ">
+              <div class="row smallrow">
                   <div class="form-group col-sm-6">
                       <label for="applicantCountry"> <strong>Country</strong></label>
                       <input formControlName="applicantCountry" type="text" class="form-control" id="applicantCountry">
@@ -179,59 +168,45 @@
                       save_alt
                       </i>Save</button>
                 </div>
-
-    </form>
-
-  </div>
- 
-</ng-template>
-
+           </form>
+       </div> 
+    </ng-template>
 </head>
 
 <body>
-
-  <div class="container ">
-      <h3> C.1 Applicant Maintenance Screen  </h3> 
-
+  <div class="container">
+      <h3> C.1 Applicant Maintenance Screen</h3> 
       <label for="sortBy"><strong> Search: </strong></label><br>
-      <div class="row " style="height:3em;">
-  
+      <div class="row " style="height:3em;">  
         <div class="col-sm-6">
           <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
-        </div>
-  
+        </div>  
         <div class="col-sm-2">
           <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
             <i class="material-icons">search</i> Search</button>
         </div>
       </div>
-
       <div align="right">
           <button type="button" class="btn"  (click)="openAddApplicant(content1)" > <i class="material-icons">
               note_add
               </i> Add New Applicant </button>  
       </div> 
-
-    <ngb-tabset>
-      <ngb-tab title="Applicants" >
+    <ngb-tabset> <!--Allows applicants to be distributed in different tabs to keep them categorized-->
+      <ngb-tab title="Applicants"> <!--Tab for current applicants-->
         <ng-template ngbTabContent>
-              <h3> Applicants </h3>
-          
+              <h3> Applicants </h3>          
                 <div class="row">
                     <div class="col-md-12" style="text-align: end">
-                      <p *ngIf="totalApplicants === undefined || totalApplicants === 0"> Showing 0 of 0 </p>
+                      <p *ngIf="totalApplicants === undefined || totalApplicants === 0"> Showing 0 of 0 </p> <!--Shows the current page out of the total number available-->
                       <p *ngIf="!(totalApplicants === undefined || totalApplicants === 0) && !(activePageNumber == activePaginatorSize)">Showing
                         {{pageSize * activePageNumber}} of {{totalApplicants}}</p>
                       <p *ngIf="activePageNumber == activePaginatorSize  && (totalApplicants != undefined || totalApplicants != 0)">Showing
                         {{totalApplicants}} of {{totalApplicants}}</p>
                     </div>
                  </div>
-
-
-   <div>
-  
+        <div> 
             <!--Table-->
-            <table  matSort (matSortChange)="sortData($event)" class="table table-hover table-striped" >
+            <table  matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
   
               <!--Table head-->
               <thead>
@@ -254,15 +229,14 @@
                   <td>{{applicant.city}}, {{applicant.country}}</td>
                   <td> <button type="button" class="btn" (click)="openEdit(content, applicant)">  <i class="material-icons">
                       edit
-                      </i>Edit </button> 
+                      </i>Edit </button> <!--Prompts the modal to edit the applicant-->
                       <button style="margin-left: 10px;"type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> <i class="material-icons">
                           subdirectory_arrow_right
-                      </i> Remove </button> </td>
+                      </i> Remove </button> </td> <!--Moves applicant to past applicants tab-->
                 </tr>
               </tbody>
             </table>
-          </div>
-  
+          </div>  
           <hr>
           <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize"
           [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
@@ -270,15 +244,13 @@
         </ng-template>
       </ngb-tab>
       <ngb-tab>
-        <ng-template ngbTabTitle > Past Applicants</ng-template>
+        <ng-template ngbTabTitle > Past Applicants</ng-template> <!--Tab for past applicants-->
         <ng-template ngbTabContent>
-          <h3> Past Applicants </h3>
-  
-          <div >
-
+          <h3> Past Applicants </h3>  
+          <div>
               <div class="row">
                   <div class="col-md-12" style="text-align: end">
-                    <p *ngIf="totalInactiveApplicants === undefined || totalInactiveApplicants === 0"> Showing 0 of 0 </p>
+                    <p *ngIf="totalInactiveApplicants === undefined || totalInactiveApplicants === 0"> Showing 0 of 0 </p> <!--Shows the current page out of the total number available-->
                     <p *ngIf="!(totalInactiveApplicants === undefined || totalInactiveApplicants === 0) && !(inactivePageNumber == inactivePaginatorSize)">Showing
                       {{pageSize * inactivePageNumber}} of {{totalInactiveApplicants}}</p>
                     <p *ngIf="inactivePageNumber == inactivePaginatorSize  && (totalInactiveApplicants != undefined || totalInactiveApplicants != 0)">Showing
@@ -286,7 +258,6 @@
                   </div>
                </div>
 
-  
             <!--Table-->
             <table  matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
   
@@ -315,25 +286,19 @@
                       <button style="margin-left:10px;" type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> <i class="material-icons">
                           subdirectory_arrow_left
                           </i> Add </button> </td>
-                  </tr>
-              </tbody>
-            
-            </table>
-      
-  
-          </div>
+                    </tr>
+                </tbody>            
+              </table> 
+            </div>
 
           <hr>
+          <!--Pagination for table -->
           <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
           [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageInactive($event)" class="d-flex justify-content-center">
-          </ngb-pagination> 
-  
+          </ngb-pagination>   
         </ng-template>
-      </ngb-tab>
-  
-    </ngb-tabset>
-  
+      </ngb-tab>  
+    </ngb-tabset>  
   </div>
-
 </body>
 </html>
