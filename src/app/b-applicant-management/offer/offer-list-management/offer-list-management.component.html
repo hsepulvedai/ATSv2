@@ -44,12 +44,12 @@
         <div class="row">
           <div class="col-md-12" style="text-align: end">
             <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
-            <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize)">Showing {{pageSize * page}}
+            <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize) && !((pageSize * page) > totalJobs)">Showing {{pageSize * page}}
               of {{totalJobs}}</p>
-            <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of {{totalJobs}}</p>
+            <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0) && (paginatorSize > page) || (pageSize * page) > totalJobs">Showing {{totalJobs}} of {{totalJobs}}</p>
           </div>
         </div>
-
+        
         <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-striped">
           <thead>
             <th mat-sort-header="jobId" scope="col">Job ID</th>

@@ -130,7 +130,9 @@ export class MaintenanceUserComponent implements OnInit {
         .subscribe((data: number) => {
           this.totalApplications = data['Data'][0]
           this.pagination.setPageRange(this.totalApplications)
+          this.paginatorSize = this.pagination.paginationCollectionSize
           this.paginatorCollectionSize = this.pagination.getCollectionSize()
+          console.log(this.totalApplications)
         }))
       this.applicationsSubscription.add(this.applicationService.universalSearch(this.recruiterId, '_', this.pagination.pageNumber, this.pageSize)
         .subscribe((data: IHRApplication[]) => {
@@ -144,7 +146,9 @@ export class MaintenanceUserComponent implements OnInit {
         .subscribe((data: number) => {
           this.totalApplications = data['Data'][0]
           this.pagination.setPageRange(this.totalApplications)
+          this.paginatorSize = this.pagination.paginationCollectionSize
           this.paginatorCollectionSize = this.pagination.getCollectionSize()
+          console.log(this.totalApplications)
         }))
 
       this.applicationsSubscription.add(this.applicationService.universalSearch(this.recruiterId, this.searchBarInput, this.pagination.pageNumber, this.pageSize)
