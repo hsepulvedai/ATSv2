@@ -123,9 +123,9 @@ export class HrOfferDetailComponent implements OnInit {
       applicationStatusId:form.status
     }
 
-    // this.applicationService.modifyRecruiter(this.updatedInfo)
-    // .subscribe(data => { console.log("UPDATED:" + data) },
-    // error => { console.error("Error: ", error) })
+    this.applicationService.modifyRecruiter(this.updatedInfo)
+    .subscribe(data => { console.log("UPDATED:" + data) },
+    error => { console.error("Error: ", error) })
 
     this.applicationService.modifyStatus(this.updatedInfo)
     .subscribe(data => { console.log("UPDATED:" + data) },
@@ -142,7 +142,7 @@ export class HrOfferDetailComponent implements OnInit {
     this.applicantService.offerDetailGetApplicants(this.currentJob.jobId, page, this.pageSize)
       .subscribe((data: IOfferHrEdit[]) => {
         this.applicants = data['Data'];
-        // this.sortedData = this.applicants.slice()
+        this.sortedData = this.applicants.slice()
       })
 
   }
@@ -172,7 +172,6 @@ export class HrOfferDetailComponent implements OnInit {
         console.log(this.sortedData)
       })
 
-
     // Using Company 1 for test
     this.employeeService.getActiveCompanyEmployees(1)
       .subscribe((data: IEmployeeFromCompany[]) => {
@@ -196,7 +195,7 @@ export class HrOfferDetailComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'applicantId': return compare(a.applicantId, b.applicantId, isAsc);
+        case 'applicantId': return compare(a.applicationId, b.applicationId, isAsc);
         case 'applicantName': return compare(a.applicantFirstName, b.applicantFirstName, isAsc);
         case 'status': return compare(a.applicationStatus, b.applicationStatus, isAsc);
         case 'recruiter': return compare(a.employeeFirstName, b.employeeFirstName, isAsc);
@@ -209,9 +208,3 @@ export class HrOfferDetailComponent implements OnInit {
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
-
-// function parseId (string): number {
-//   var patt = new RegExp("[0-9]+");
-//   var res = patt.exec(string).toString();
-//   return parseInt(res);
-// }

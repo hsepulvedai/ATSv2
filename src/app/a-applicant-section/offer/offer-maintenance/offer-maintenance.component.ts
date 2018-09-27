@@ -34,11 +34,6 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   private draftSubscription: Subscription = new Subscription();
   private draftTotalSubscription: Subscription = new Subscription();
 
-
-
-  interval
-
-
   pageSize: number = this.pagination.pageSize
 
   activePageNumber: number = this.pagination.pageNumber
@@ -102,13 +97,6 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   changeTab(event) {
     console.log(event.title)
     console.log('yes')
-  }
-
-  ngOnDestroy() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-
   }
 
   ngOnInit() {
@@ -819,6 +807,17 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  
+  ngOnDestroy() {
+    this.jobSubscription.unsubscribe()
+    this.jobTotalSubscription.unsubscribe()
+    this.jobInactiveSubscription.unsubscribe()
+    this.jobInactiveTotalSubscription.unsubscribe()
+    this.draftSubscription.unsubscribe()
+    this.draftTotalSubscription.unsubscribe()
+  }
+
 }
 
 function compare(a, b, isAsc) {

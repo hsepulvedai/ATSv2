@@ -3,11 +3,12 @@ export interface IUser {
     firstName?: string,
 	lastName?: string, 
 	email?: string, 
-	password?: string, 
+    password?: string,
+    phone?:string, 
 	roleId?: number,
     createdBy?: string,
     createdDate?: Date,
     modifiedBy?: string,
     modifiedDate?: Date,
-    active?:boolean  
+    active?:boolean
 }

@@ -91,14 +91,12 @@ export class HrApplicantProfileComponent implements OnInit {
   this.applicationService.getAllApplicationActions()
       .subscribe((data) => {
         this.allActions = data['Data'];
-        console.log(this.allActions)
       })
 
 
   this.applicationService.getApplicationInfoByAppId(this.applicationService.currentApplication.applicationId)
   .subscribe((data) => {
     this.applicationInfo = data['Data'][0];
-    console.log(this.applicationInfo)
 
   })
 
@@ -106,9 +104,15 @@ export class HrApplicantProfileComponent implements OnInit {
       this.loadActions()
     , 50)
 
-    setTimeout(
-      this.loadComments()
-    , 50)
+    // setTimeout(
+    //   this.loadComments(), 50
+    // )
+
+    this.commentService.getCommentsByApplicationId(this.applicationService.currentApplication.applicationId)
+    .subscribe((data:IComment[]) => {
+      this.comments = data['Data']
+      console.log(this.comments)
+    })
 
 
 
@@ -164,18 +168,23 @@ export class HrApplicantProfileComponent implements OnInit {
 
   insertComment() {
 
-    var comment = {
-      applicationId: this.applicationService.currentApplication.applicationId,
-      employeeId: 1,
-      data: this.commentBoxInput
+    if(this.commentBoxInput != '' && this.commentBoxInput != undefined) {
+      var comment = {
+        applicationId: this.applicationService.currentApplication.applicationId,
+        employeeId: 1,
+        data: this.commentBoxInput
+      }
+  
+        this.commentService.insertComment(comment)
+        .subscribe(data => { console.log("POST:" + data) },
+        error => { console.error("Error: ", error) })
+  
+      setTimeout(
+        this.loadComments(), 100)
     }
 
-      this.commentService.insertComment(comment)
-      .subscribe(data => { console.log("POST:" + data) },
-      error => { console.error("Error: ", error) })
+    this.commentBoxInput = '';
 
-    setTimeout(
-      this.loadComments(), 100)
   }
 
   loadActions(){
@@ -185,20 +194,10 @@ export class HrApplicantProfileComponent implements OnInit {
       this.totalActions = data['Data'][0]
       this.pagination.setPageRange(this.totalActions)
       this.paginatorCollectionSize = this.pagination.getCollectionSize()
-      console.log(this.applicationService.currentApplication.applicationId)
+      // console.log(this.applicationService.currentApplication.applicationId)
     })
 
-    this.applicationActionService.getAllApplicationActions(this.applicationService.currentApplication.applicationId, this.page, this.pageSize)
-    .subscribe((data:IApplicationActionShow[]) => {
-      this.actions = data['Data']
-    })
-
-  }
-
-  loadPage(page: number) {
-
-    this.pagination.pageNumber = page
-    this.applicationActionService.getAllApplicationActions(this.applicationService.currentApplication.applicationId, page, this.pageSize)
+    this.applicationActionService.getAllApplicationActions(this.applicationService.currentApplication.applicationId, this.page, this.newPageSize)
     .subscribe((data:IApplicationActionShow[]) => {
       this.actions = data['Data']
     })
@@ -221,12 +220,12 @@ export class HrApplicantProfileComponent implements OnInit {
   }
 
   loadComments() {
-    this.commentService.getCommentsByApplicationId(this.applicationService.currentApplication.applicationId, 1, 5)
+    this.commentService.getCommentsByApplicationId(this.applicationService.currentApplication.applicationId)
     .subscribe((data:IComment[]) => {
       this.comments = data['Data']
+      console.log(this.comments)
     })
   }
-
 
   selectedAction: IAction
   
