@@ -139,10 +139,7 @@ a list of pending tasks and a comments section-->
 
 
                         <div>
-                            <!-- <i class="material-icons" style="font-size: 3em;"> perm_identity </i> -->
-
- 
-
+                           
                             <div> <strong> Application ID: </strong>{{currentAppId}}</div>
                             <div> <strong> Application Status: </strong>{{applicationInfo.applicationStatus}}</div>
                             <div> <strong> Application Date: </strong>{{applicationInfo.dateApplied | date: 'MMMM d, y' }}</div>
@@ -154,8 +151,6 @@ a list of pending tasks and a comments section-->
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -163,14 +158,7 @@ a list of pending tasks and a comments section-->
 
 
         <div class="row">
-
-
-
-
-
-
-
-            <div class="col-sm-6">
+        <div class="col-sm-6">
 
                 <div class="col-sm-6">
                     <div class="row">
@@ -246,7 +234,7 @@ a list of pending tasks and a comments section-->
                                 </i> New Action </button>
                             <ul class="timeline">
                                 <li *ngFor="let action of actions">
-                                    <h4>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="goToApplicationDetails(application)" >
+                                    <h4>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="openActionEdit(action)" >
                                             <i class="material-icons">edit</i> </button></h4>
                                     <p>@EmployeeName</p>
                                     <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm
@@ -273,5 +261,4 @@ a list of pending tasks and a comments section-->
         </div>
     </div>
 </body>
-
 </html>
