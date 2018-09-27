@@ -230,7 +230,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let job of sortedData">
+              <tr *ngFor="let job of sortedData"> <!--Sort table data and adds table style-->
                 <td> {{job.jobName}} </td>
                 <td> {{job.company}}</td>
                 <td> {{job.city}}, {{job.country}} </td>
@@ -247,6 +247,7 @@
             </tbody>
           </table>
           <hr>
+          <!--Table pagination-->
           <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
           </ngb-pagination>
@@ -259,7 +260,7 @@
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-12" style="text-align: end">
-                <p *ngIf="totalInactiveJobs === undefined || totalInactiveJobs === 0"> Showing 0 of 0 </p>
+                <p *ngIf="totalInactiveJobs === undefined || totalInactiveJobs === 0"> Showing 0 of 0 </p><!--Current page of total pages available on table-->
                 <p *ngIf="!(totalInactiveJobs === undefined || totalInactiveJobs === 0) && !(inactivePageNumber == inactivePaginatorSize)">Showing
                   {{pageSize * inactivePageNumber}} of {{totalInactiveJobs}}</p>
                 <p *ngIf="inactivePageNumber == inactivePaginatorSize && (totalInactiveJobs != undefined || totalInactiveJobs != 0)">Showing
@@ -267,7 +268,7 @@
               </div>
             </div>
 
-            <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+            <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped"> <!--Sort table data and adds table style-->
               <thead>
                 <tr>
                   <th mat-sort-header="jobName">Job Title</th>
@@ -279,7 +280,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let inactiveJob of sortedInactive">
+                <tr *ngFor="let inactiveJob of sortedInactive"> <!--Sort table data and adds table style-->
                   <td> {{inactiveJob.jobName}}</td>
                   <td> {{inactiveJob.company}}</td>
                   <td> {{inactiveJob.city}}, {{inactiveJob.country}} </td>
@@ -301,6 +302,7 @@
               </div>
             </table>
             <hr>
+            <!--Table pagination-->
             <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
               [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageInactive($event)" class="d-flex justify-content-center">
             </ngb-pagination>
@@ -355,7 +357,7 @@
             </tbody>
           </table>
           <hr>
-          <!--Table paginations-->
+          <!--Table pagination-->
           <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-center">
           </ngb-pagination>
