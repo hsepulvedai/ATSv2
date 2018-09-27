@@ -54,8 +54,7 @@ export class ApplicationService {
   universalSearchCount(recruiterId:number, keyword: string, pageNumber: number, pageSize: number) {
     if (keyword === '')
       keyword = '_'
-    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchCountByRecruiterId/' + recruiterId + '/search='
-      + keyword + "/pageNumber=" + pageNumber + "/pageSize=" + pageSize)
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchCountByRecruiterId/' + recruiterId)
   }
 
   modifyStatus(application) {
@@ -65,5 +64,16 @@ export class ApplicationService {
   modifyRecruiter(application) {
     return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicationModifyRecruiter/', application)
   }
+
+  getApplicationInfoByAppId(applicationId){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllInfoByApplicationId/' + applicationId)
+  }
+
+  getAllApplicationActions(){
+    return this.http.get(environment.baseUrl + '/ActionType/ActionTypeShowAll')
+  }
+
+
+
 
 }

@@ -22,7 +22,7 @@ import { IApplication } from '../../../shared/models/application.model';
   //styleUrls: ['./hr-offer-detail.component.css']
 })
 export class HrOfferDetailComponent implements OnInit {
-
+ 
   job: IJobOfferHR
   selectedJob: IJobOfferHR
   selectedApplicant:IOfferHrEdit
