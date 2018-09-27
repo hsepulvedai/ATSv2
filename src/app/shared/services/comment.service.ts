@@ -12,7 +12,7 @@ export class CommentService {
   routePrefix = 'Comment'
 
   getCommentsByApplicationId(id){
-    return this.http.get(environment.baseUrl + this.routePrefix + '/CommentShowAll/' + id )
+    return this.http.get(environment.baseUrl + this.routePrefix + '/CommentShowAll/' + id)
   }
 
   insertComment(comment) {

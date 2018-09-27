@@ -65,6 +65,7 @@ export class MaintenanceUserComponent implements OnInit {
 
     this.router.navigate(['hr-applicant-profile'])
   }
+
  
 
   ngOnInit() {
@@ -73,10 +74,6 @@ export class MaintenanceUserComponent implements OnInit {
     this.paginatorSize = this.pagination.paginatorSize
 
     setTimeout(() => { this.refreshData()}, 100);
-
-
-      
-
   }
 
 
@@ -134,7 +131,9 @@ export class MaintenanceUserComponent implements OnInit {
         .subscribe((data: number) => {
           this.totalApplications = data['Data'][0]
           this.pagination.setPageRange(this.totalApplications)
+          this.paginatorSize = this.pagination.paginationCollectionSize
           this.paginatorCollectionSize = this.pagination.getCollectionSize()
+          console.log(this.totalApplications)
         }))
       this.applicationsSubscription.add(this.applicationService.universalSearch(this.recruiterId, '_', this.pagination.pageNumber, this.pageSize)
         .subscribe((data: IHRApplication[]) => {
@@ -142,13 +141,16 @@ export class MaintenanceUserComponent implements OnInit {
           this.sortedData = this.applications.slice();
         }))
     }
+    
     else {
       this.applicationsTotalSubscription.add(this.applicationService.universalSearchCount
         (this.recruiterId, this.searchBarInput, this.pagination.pageNumber, this.pageSize)
         .subscribe((data: number) => {
           this.totalApplications = data['Data'][0]
           this.pagination.setPageRange(this.totalApplications)
+          this.paginatorSize = this.pagination.paginationCollectionSize
           this.paginatorCollectionSize = this.pagination.getCollectionSize()
+          console.log(this.totalApplications)
         }))
 
       this.applicationsSubscription.add(this.applicationService.universalSearch(this.recruiterId, this.searchBarInput, this.pagination.pageNumber, this.pageSize)
@@ -174,7 +176,7 @@ export class MaintenanceUserComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
-        case 'ID': return compare(a.applicantId, b.applicantId, isAsc);
+        case 'ID': return compare(a.applicationId, b.applicationId, isAsc);
         case 'Name': return compare(a.applicantFirstName, b.applicantFirstName, isAsc);
         case 'Job':return compare(a.jobApplied, b.jobApplied, isAsc);
         case 'Status': return compare(a.applicationStatus, b.applicationStatus, isAsc);

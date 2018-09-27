@@ -1,36 +1,26 @@
-<!doctype html>
-<html lang="en">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<!--This page allows an HR employee to view applications assigned to them-->
+<!Doctype html>
+<html>
 <head>
+  <html lang="en">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 </head>
 
 <body>
-  
-
-  <div class="container">
-
-    
+  <div class="container">    
       <h3>C.4 Applications to manage: </h3>
-
       <nav aria-label="breadcrumb" style="width: 20%">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">List</li>
+            <li class="breadcrumb-item active" aria-current="page">List</li> <!--Indicates user they are in the list page-->
           </ol>
         </nav>
-
-
-
     <label for="sortBy"><strong> Search: </strong></label><br>
     <div class="row " style="height:3em;">
-
       <div class="col-sm-6">
         <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
       </div>
-
       <div class="col-sm-2">
         <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
           <i class="material-icons">search</i> Search</button>
@@ -40,15 +30,16 @@
     <div class="row">
       <div class="col-md-12" style="text-align: end">
         <p *ngIf="totalApplications === undefined || totalApplications === 0"> Showing 0 of 0 </p>
-        <p *ngIf="!(totalApplications === undefined || totalApplications === 0) && (page != paginatorSize)">Showing {{pageSize
+        <p *ngIf="!(totalApplications === undefined || totalApplications === 0) && (page != paginatorSize) 
+          && !((pageSize * page) > totalApplications)">Showing {{pageSize
           * page}} of {{totalApplications}}</p>
-        <p *ngIf="(page === paginatorSize ) && (totalApplications != undefined || totalApplications != 0)">Showing {{totalApplications}}
+        <p *ngIf="(page === paginatorSize ) && (totalApplications != undefined || totalApplications != 0) 
+          && (paginatorSize > page) || (pageSize * page) > totalApplications">Showing {{totalApplications}}
           of {{totalApplications}}</p>
       </div>
     </div>
 
     <div class="row">
-
     <div>
         <table table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-hover table-striped">
             <thead>
@@ -69,7 +60,7 @@
               <tr *ngIf="!(sortedData === undefined)">
                 <tr *ngFor="let application of sortedData">
                   <td> {{application.applicationId}} </td>
-                  <td> {{application.applicantFirstName}} {{application.aplicantLastName}} </td>
+                  <td> {{application.applicantFirstName}} {{application.applicantLastName}} </td>
                   <td> {{application.applicantEmail}} </td>
                   <td> {{application.applicantPhone}} </td>
                   <td> {{application.jobApplied}} </td>
@@ -83,19 +74,12 @@
                 </tr>
             </tbody>
           </table>
-    </div>
-
-  </div>
-
-
-   
+      </div>
+  </div>   
 
     <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
       [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
     </ngb-pagination>
-
-
   </div>
-</body>
-
+ </body>
 </html>

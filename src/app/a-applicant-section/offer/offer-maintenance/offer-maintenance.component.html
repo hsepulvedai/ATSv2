@@ -1,12 +1,11 @@
+<!--This page allows HR employee to control what jobs are available to be applied for. (Jobs shown in A2-->
 <!DOCTYPE html>
 <html>
-
-
-<head>
+  <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
-  <ng-template #content1 let-c="close" let-d="dismiss">
+  <ng-template #content1 let-c="close" let-d="dismiss"> <!--Modal that allows to add a new job-->
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-add"> New Job</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -14,12 +13,9 @@
       </button>
     </div>
     <div class="modal-body">
-
-      <p>
-        <div>
+       <div>
           <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="c('Save click')">
-
-            <div class="row smallrow">
+            <div class="row smallrow"> <!--smallrow controls the height between form elements-->
               <div class="form-group col-sm-6">
                 <label for="jobName"> <strong>Job Title</strong></label>
                 <input formControlName="jobName" type="text" class="form-control" id="name">
@@ -29,8 +25,7 @@
                 <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
               </div>
             </div>
-
-            <div class="row smallrow">
+            <div class="row smallrow"> 
               <div class="form-group col-sm-6">
                 <label for="jobCategory"><strong>Category</strong></label>
                 <select formControlName="jobCategory" id="category" class="form-control" (change)="selectJobCatChangeHandler($event)">
@@ -38,7 +33,6 @@
                   <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
                 </select>
               </div>
-
               <div class="form-group col-sm-6">
                 <label for="jobType"><strong> Type</strong></label>
                 <select formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
@@ -47,36 +41,31 @@
                 </select>
               </div>
             </div>
-
             <div class="row smallrow">
               <div class="form-group col-sm-6">
                 <label for="jobDescription"><strong>Description</strong></label>
                 <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
               </div>
             </div>
-
             <!-- <input type="submit" value="Submit" (click)="createJob(newJobForm.value)"> -->
 
             <div class="modal-footer">
               <button (click)="createDraft(newJobForm.value)" id="draft" value="draft" type="submit" class="btn btn-outline-secondary"><i
                   class="material-icons">
                   save_alt
-                </i>Save as Draft</button>
+                </i>Save as Draft
+              </button>
 
               <button (click)="createJob(newJobForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
-                  save_alt</i>Save</button>
-
+                  save_alt</i>Save
+                </button>
             </div>
-
           </form>
-
         </div>
-
     </div>
-
   </ng-template>
 
-  <ng-template #content let-c="close" let-d="dismiss">
+  <ng-template #content let-c="close" let-d="dismiss"><!--Modal that allows to edit a job-->
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Job update</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -84,17 +73,12 @@
       </button>
     </div>
     <div class="modal-body">
-
       <form [formGroup]="jobEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="updateJob(jobEditForm.value);c('Save click')">
-
         <div class="row">
-
           <div class="form-group col-md-6">
             <label for="name"> <strong>Job Title</strong></label>
             <input formControlName="name" type="text" class="form-control" id="name">
           </div>
-
-
           <div class="form-group col-md-6">
             <label for="category"><strong>Category</strong></label>
             <select formControlName="category" id="category" class="form-control">
@@ -120,27 +104,18 @@
             <label for="description"><strong>Description</strong></label>
             <textarea class="form-control" formControlName="description" name="description" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
           </div>
-
-
         </div>
 
         <div class="modal-footer">
           <button type="submit" class="btn "><i class="material-icons">
-              save_alt
-            </i>Save</button>
+              save_alt</i>Save
+          </button>
         </div>
-
       </form>
-
-
-
     </div>
-
   </ng-template>
 
-  <!-- draftEdit -->
-
-  <ng-template #contentDraft let-c="close" let-d="dismiss">
+  <ng-template #contentDraft let-c="close" let-d="dismiss"><!--Modal that allows to edit jobs in draft section-->
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-draft"> Edit Draft</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -148,37 +123,29 @@
       </button>
     </div>
     <div class="modal-body">
-
       <form [formGroup]="draftEditForm" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click')">
-
         <div class="row">
-
           <div class="form-group col-md-6">
             <label for="draftName"> <strong>Job Title</strong></label>
             <input formControlName="draftName" type="text" class="form-control" id="draftName">
           </div>
-
-
           <div class="form-group col-md-6">
             <label for="draftCategory"><strong>Category</strong></label>
             <select formControlName="draftCategory" id="draftCategory" class="form-control">
               <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
             </select>
           </div>
-
           <div class="form-group col-md-6">
             <label for="draftType"><strong>Type</strong></label>
             <select formControlName="draftType" id="draftType" class="form-control">
               <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
             </select>
           </div>
-
           <div class="form-group col-md-6">
             <label for="draftDescription"><strong>Description</strong></label>
             <textarea class="form-control" formControlName="draftDescription" name="draftDescription" rows="7" cols="45" style="margin: 10px; resize: none; margin-right:10%;"> </textarea>
           </div>
         </div>
-
         <div class="modal-footer">
           <button (click)="deleteDraft()" type="submit" class="btn btn-outline-danger "><i class="material-icons">
               delete </i>Delete
@@ -189,51 +156,36 @@
           <button (click)="postDraft()" type="submit" class="btn "><i class="material-icons">
               subdirectory_arrow_left </i>Post
           </button>
-
         </div>
-
       </form>
-
-
-
     </div>
-
   </ng-template>
-
 </head>
 
 <body>
-
-
-  <div class="container ">
+  <div class="container">
     <h3> A.5 Job Maintenance Screen</h3>
-
     <label for="sortBy"><strong> Search: </strong></label><br>
     <div class="row " style="height:3em;">
-
       <div class="col-sm-6">
         <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
       </div>
-
       <div class="col-sm-2">
         <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
           <i class="material-icons">search</i> Search</button>
       </div>
     </div>
-
-
     <div align="right">
       <button type="button" class="btn" (click)="openAddJob(content1)" > <i
           class="material-icons">
           note_add
-        </i> New Job </button>
+        </i> New Job </button><!--Button to access the add new job modal-->
     </div>
 
-    <ngb-tabset>
+    <ngb-tabset> <!--Devides jobs in categories-->
       <ngb-tab title="Available Jobs">
         <ng-template ngbTabContent>
           <h3> Available Jobs </h3>
-
           <div class="col-md-12 ">
 
             <!-- <label for="filterBy"><strong> Filter by: </strong></label> <br>
@@ -257,7 +209,7 @@
 
             <div class="row">
               <div class="col-md-12" style="text-align: end">
-                <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
+                <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p> <!--Shows current page of total pages in table-->
                 <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && !(activePageNumber == activePaginatorSize)">Showing
                   {{pageSize * activePageNumber}} of {{totalJobs}}</p>
                 <p *ngIf="activePageNumber == activePaginatorSize  && (totalJobs != undefined || totalJobs != 0)">Showing
@@ -266,7 +218,7 @@
             </div>
           </div>
 
-          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped"> <!--Sorts the data in the table-->
             <thead>
               <tr>
                 <th mat-sort-header="jobName">Job Title</th>
@@ -286,7 +238,7 @@
                 <td>{{job.jobType}}</td>
                 <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
                       edit
-                    </i>Edit </button>
+                    </i>Edit </button> <!--Button that opens the modal that allows to edit a specific job-->
                   <button type="button" class="btn" (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
                       subdirectory_arrow_right
                     </i> Un-Post </button>
@@ -304,8 +256,6 @@
       <ngb-tab title="Past Jobs">
         <ng-template ngbTabContent>
           <h3> Past Jobs </h3>
-
-
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-12" style="text-align: end">
@@ -349,21 +299,18 @@
               </tbody>
               <div class="row">
               </div>
-
             </table>
             <hr>
             <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
               [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageInactive($event)" class="d-flex justify-content-center">
             </ngb-pagination>
           </div>
-
         </ng-template>
       </ngb-tab>
 
       <ngb-tab title="Drafts(Jobs)">
         <ng-template ngbTabContent>
           <h3> Drafts </h3>
-
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-12" style="text-align: end">
@@ -398,11 +345,11 @@
                   <button type="button" class="btn" (click)="openDraftEdit(contentDraft, draft)"> <i class="material-icons">
                       edit
                     </i> Edit
-                  </button>
+                  </button><!--Button that opens the modal to edit a specific job-->
                   <button type="button" class="btn" (click)="deleteDraft(draft.jobId)"> <i class="material-icons">
                       delete
                     </i> Delete
-                  </button>
+                  </button><!--Deletes a job from the drafts-->
                 </td>
               </tr>
             </tbody>
@@ -411,15 +358,9 @@
           <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-center">
           </ngb-pagination>
-
-
-
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
-
   </div>
-
-</body>
-
+ </body>
 </html>

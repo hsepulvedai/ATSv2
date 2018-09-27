@@ -1,3 +1,6 @@
+<!--This is a combination of various pages. It allows HR to view applicant/application information
+in a sinlge page like a "profile". There is a timeline that shows actions taken with this application,
+a list of pending tasks and a comments section-->
 <!DOCTYPE html>
 <html>
 
@@ -5,18 +8,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title"> Add Action</h4>
+            <h4 class="modal-title" id="modal-basic-title"> Add Action</h4><!--The modal allows user to add a new action to the timeline, can be a current action or a past action-->
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>
-        
-        <div class="modal-body">   
-            
-           
-        <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
-         <div class="row smallrow">
+        <div class="modal-body">
+
+            <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
+
+                <div class="row smallrow">
 
           <div class="form-group col-sm-6">
             <label for="actionType"><strong> Action</strong></label>
@@ -53,189 +54,10 @@
         </div>
         </div>
 
-        <div class="row smallrow">
-          <div class="form-group col-sm-6">
-            <label for="actionDescription"><strong>Comments</strong></label>
-            <textarea class="form-control" formControlName="actionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-      
-
-          <button (click)="insertAction(newActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
-              save_alt</i>Save</button>
-
-        </div>
-
-      </form>
-
-        </div>
-    </ng-template>
-
-    <ng-template #contentEdit let-c="close" let-d="dismiss">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-edit"> Edit newAction</h4>
-                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            
-            <div class="modal-body">   
-                
-               
-            <form [formGroup]="editActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
-    
-             <div class="row smallrow">
-    
-              <div class="form-group col-sm-6">
-                <label for="newActionType"><strong> newAction</strong></label>
-                <select formControlName="newActionType" id="category" class="form-control" (change)="selectnewActionChangeHandler($event)">
-                  <option value="null" disabled="true" [selected]="true">- Select Action -</option>
-                  <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
-                </select>
-              </div>
-    
-              
-              <div class="form-group col-sm-6">
-                <label for="newActionSatus"><strong> Status</strong></label>
-                <select formControlName="newActionStatus" id="category" class="form-control" (change)="selectStatusChangeHandler($event)">
-                  <option value="null" disabled="true" [selected]="true">- Select Status -</option>
-                  <option *ngFor=" let selectedStatus of allStatuses">{{selectedStatus}}</option>
-                </select>
-              </div>
-    
-             </div>
-    
-             <div class="row smallrow">
-                 <div class="form-group col-sm-6">
-                            <label for="date"><strong> Date </strong></label>
-                            <div class="input-group">
-                              <input id="date" class="form-control"  formControlName="newActionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-                              <div class="input-group-append">
-                                <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-                              </div>
-            
                             </div>
-                  </div>            
-             <div class="form-group col-sm-6">
-                    <label for="time"><strong> Select a time:</strong></label>
-                    <input type="time" class="form-control"  formControlName="newTime" name="usr_time">
-            </div>
-            </div>
-    
-     
-            <div class="row smallrow">
-              <div class="form-group col-sm-6">
-                <label for="newActionDescription"><strong>Comments</strong></label>
-                <textarea class="form-control" formControlName="newActionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
-              </div>
-            </div>
-
-            <div class="modal-footer">
-    
-              <button (click)="editAction(editActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
-                  save_alt</i>Save</button>
-    
-            </div>
-    
-          </form>
-    
-            </div>
-        </ng-template>
-
-</head>
-
-
-<body>
-    <div class="container">
-        <div>
-            <h1>C.2/C.3/C.5</h1>
-        </div>
-
-        <div class="row">
-                <div class="col-sm-6">
-          
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="users/userMaintenance">List</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Details</li>
-                    </ol>
-                  </nav>
-                </div>
-        </div>
-
-      
-
-        <div class="row">
-                <div class="col-sm-12">
-
-
-                    <div class="card descriptionbox">
-                         <div class="card-body">
-
-                            <h5>{{applicationInfo.jobName}}</h5>
-                            <div>
-                                <i class="material-icons" style="font-size: 3em;"> perm_identity </i>
-
-                                <div><strong> {{applicationInfo.applicantFirstName}} {{applicationInfo.applicantLastName}} </strong>
-
-                                    {{applicationInfo.applicantPhone}} / {{applicationInfo.applicantEmail}} 
-                                
-                                </div>
-
-                                <div> <strong>  Application </strong>
-
-                                         {{currentAppId}} / {{applicationInfo.applicationStatus}} / {{applicationInfo.dateApplied | date: 'MMMM d, y' }}
-                                </div>
-
-                                <div><strong> {{applicationInfo.companyName}}</strong>  
-                               {{applicationInfo.companyCity}}, {{applicationInfo.companyCountry}} / {{applicationInfo.jobCategory}} / {{applicationInfo.jobType}} 
-                            
-                            
-                            </div>
-
-                                <div><strong> Description: </strong> {{applicationInfo.jobDescription}}</div>
-                            </div>
-                          </div>
-                     </div>
-
-                         
-                  </div>        
-            </div>
-
-    
-
-
-        <div class="row">
-
-            
-               
-
-        
-           
-
-            <div class="col-sm-6">
-
-                    <div class="col-sm-6">
-                            <div class="row"> 
-
-        
-                            <div style=" padding-left:15%;">
-                              <div class=" bg-white ">
-                                <h4>Pending Tasks</h4>
-                        
-                                <div class="list-group">
-                        
-                                  <a href="#" *ngFor="let task of pendingTasks" class="list-group-item"> {{task.task}} </a>
-                        
-                                </div>
-                              </div>
-                            </div>
-                            </div>
+                        </div>
                     </div>
-
-
+                </div>
 
                     <div class="row bootstrap snippets">
                             <div class="col-sm-6 col-md-offset-2 col-sm-12" style="margin-top: 25%">
@@ -264,26 +86,16 @@
                                                            {{comment.commentData}} 
                                                         </p>
                                                     </div>
-                                            </ul>
-                                        </div>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>                        
                                     </div>
-                                </div>
-                        
+                                </div>              
                             </div>
-                        </div>
-              
-            </div>
-
-       
-
-            <div class="col-sm-6">
-
-    
+            <div class="col-sm-6">    
                 <div class="container mt-5 mb-5">
                     <div class="row">
-
-
-
                         <div class="col-md-6 offset-md-3">
                             <h4>Latest Actions</h4>
                             <button type="button" class="btn" (click)="openNewAction(content)"> <i class="material-icons">
@@ -291,33 +103,30 @@
                                 </i> New Action </button>
                             <ul class="timeline">
                                 <li *ngFor="let action of actions">
-                                    <h4>{{action.actionType}}</h4>
+                                    <h4>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="goToApplicationDetails(application)" >
+                                            <i class="material-icons">edit</i> </button></h4>
+                                    <p>@EmployeeName</p>
                                     <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm
                                             a'}}
                                         </strong></p>
                                     <p>{{action.comments}}.</p>
                                 </li>
                             </ul>
-
                             <button *ngIf=" totalActions > newPageSize"(click)="showMoreActions()" type="button" class="btn"> <i class="material-icons">
                                     expand_more
-                                </i> Show More Actions </button>
-
-
+                                </i> Show More Actions 
+                            </button>
                             <button *ngIf="(newPageSize > totalActions) && !(pageSize > totalActions)" (click)="showLessActions()" type="button" class="btn"> <i
                                     class="material-icons">
                                     expand_less
-                                </i> Show Less Actions </button>
-
+                                </i> Show Less Actions
+                             </button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
-
-
     </div>
 </body>
+
 </html>
