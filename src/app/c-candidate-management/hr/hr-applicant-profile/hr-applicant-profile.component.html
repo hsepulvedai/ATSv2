@@ -23,7 +23,7 @@
             <label for="actionName"><strong> Action</strong></label>
             <select formControlName="actionName" id="category" class="form-control" (change)="selectActionChangeHandler($event)">
               <option value="null" disabled="true" [selected]="true">- Select Action -</option>
-              <option *ngFor=" let selectedAction of allActions">{{Selectedaction}}</option>
+              <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
             </select>
           </div>
 
