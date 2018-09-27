@@ -60,6 +60,7 @@ export class MaintenanceUserComponent implements OnInit {
   
   goToApplicationDetails(application) {
     this.applicationService.currentApplication = application
+    this.applicationService.currentApplication.recruiterId = this.recruiterId
     console.log(this.applicationService.currentApplication)
 
     this.router.navigate(['hr-applicant-profile'])

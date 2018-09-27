@@ -16,6 +16,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { IAction } from '../../../shared/models/action.model';
 import { IActionInsert } from '../../../shared/models/action_insert.model';
 import { IApplicationInfo } from '../../../shared/models/application_info.model';
+import { IStatus } from '../../../shared/models/status.model';
+import { IActionEdit } from '../../../shared/models/action_edit.mode';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -26,11 +28,22 @@ export class HrApplicantProfileComponent implements OnInit {
 
 
   newActionForm: FormGroup
-  actionName: FormControl
+  actionType: FormControl
+  actionStatus: FormControl
   actionComments: FormControl
   actionDate: FormControl
+  time: FormControl
 
-  allActions: Array<String>
+
+  editActionForm: FormGroup
+  newActionType: FormControl
+  newActionStatus: FormControl
+  newActionComments: FormControl
+  newActionDate: FormControl
+  newTime: FormControl
+
+  allActions: IAction[]
+  allStatuses: IStatus[]
 
 
 
@@ -57,7 +70,6 @@ export class HrApplicantProfileComponent implements OnInit {
   
   closeResult: string;
 
-  currentAppId:number;
 
   public show:boolean = false;
   public buttonName:any = 'Show';
@@ -67,17 +79,35 @@ export class HrApplicantProfileComponent implements OnInit {
 
   ngOnInit() {
 
-   this.currentAppId = this.applicationService.currentApplication.applicationId;
+   this.currentApplication = this.applicationService.currentApplication
 
-   
-   this.actionName = new FormControl()
+   this.actionType = new FormControl();
+   this.actionStatus = new FormControl();
    this.actionComments = new FormControl();
    this.actionDate = new FormControl();
+   this.time = new FormControl();
     
    this.newActionForm = new FormGroup({
-     actionName: this.actionName,
+     actionType: this.actionType,
+     actionStatus: this.actionStatus, 
      actionComments: this.actionComments,
-     actionDate: this.actionDate
+     actionDate: this.actionDate,
+     time: this.time
+   })
+
+
+   this.newActionType = new FormControl();
+   this.newActionStatus = new FormControl();
+   this.newActionComments = new FormControl();
+   this.newActionDate = new FormControl();
+   this.newTime = new FormControl();
+    
+   this.editActionForm = new FormGroup({
+     newActionType: this.newActionType,
+     newActionStatus: this.newActionStatus, 
+     newActionComments: this.newActionComments,
+     newActionDate: this.newActionDate,
+     newTime: this.newTime
    })
 
 
@@ -88,11 +118,18 @@ export class HrApplicantProfileComponent implements OnInit {
 
   })
 
-  this.applicationService.getAllApplicationActions()
+  this.applicationActionService.getAllApplicationTypes()
       .subscribe((data) => {
         this.allActions = data['Data'];
         console.log(this.allActions)
       })
+
+      this.applicationActionService.getAllApplicationStatuses()
+      .subscribe((data) => {
+        this.allStatuses = data['Data'];
+        console.log(this.allStatuses)
+      })
+  
 
 
   this.applicationService.getApplicationInfoByAppId(this.applicationService.currentApplication.applicationId)
@@ -136,6 +173,32 @@ export class HrApplicantProfileComponent implements OnInit {
     });
   }
 
+  currentAction
+
+  openEditAction(contentEdit, action) {
+
+    this.applicationActionService.currentAction = action;
+
+    this.currentAction = action
+ 
+
+    this.editActionForm.controls['newActionType'].setValue(action.action, { onlySelf: true })
+    this.editActionForm.controls['newActionStatus'].setValue(action.status, { onlySelf: true })
+    this.editActionForm.get('newActionComments').setValue(action.comments)
+    this.editActionForm.get('newActionDate').setValue(action.actionDate, 'MMMM d, y')
+    this.editActionForm.get('newTime').setValue(action.actionDate, 'h:mm' )
+  
+
+    this.modalService.open(contentEdit, { ariaLabelledBy: 'modal-basic-edit', size: 'lg' }).result.then((result) => {
+
+
+      (this.closeResult = `Closed with: ${result}`)
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -146,18 +209,54 @@ export class HrApplicantProfileComponent implements OnInit {
     }
   }
 
+
+
   newAction:IActionInsert
+  
 
   insertAction(newActionForm){
 
+    var date = newActionForm.actionDate.year + '/' + newActionForm.actionDate.month + '/' 
+              + newActionForm.actionDate.day + " " + newActionForm.time 
+
     this.newAction = {
-      applicationId: this.currentAppId,
-      action : newActionForm.actionName,
-      status: 'Scheduled',
-      comments: newActionForm.actionDescription,
-      actionDate: newActionForm.actionDate
+      applicationId: this.currentApplication.applicationId,
+      recruiterId: this.currentApplication.recruiterId,
+      action : newActionForm.actionType,
+      status: newActionForm.actionStatus,
+      comments: newActionForm.actionComments,
+      actionDate: date,
     }
 
+    console.log(this.newAction)
+
+
+   this.applicationActionService.insertAction(this.newAction)
+  .subscribe(data => { console.log("POST:" + data) },
+    error => { console.error("Error: ", error) })
+
+  }
+
+  updatedAction: IActionEdit
+
+  editAction(editActionForm){
+    var date = editActionForm.actionDate.year + '/' + editActionForm.actionDate.month + '/'
+              + editActionForm.actionDate.day + " " + editActionForm.time
+
+    
+    this.updatedAction = {
+      actionId: this.currentAction.actionId, 
+      action: editActionForm.actionType, 
+      status: editActionForm.actionStatus, 
+      comments: editActionForm.actionComments,
+      actionDate: date
+
+    }
+
+    console.log(this.updatedAction)
+
+  //  this.applicationActionService.editAction(this.updatedAction)
+    
 
 
   }
@@ -166,7 +265,7 @@ export class HrApplicantProfileComponent implements OnInit {
 
     var comment = {
       applicationId: this.applicationService.currentApplication.applicationId,
-      employeeId: 1,
+      employeeId: this.applicationService.currentApplication.recruiterId,
       data: this.commentBoxInput
     }
 
@@ -221,7 +320,7 @@ export class HrApplicantProfileComponent implements OnInit {
   }
 
   loadComments() {
-    this.commentService.getCommentsByApplicationId(this.applicationService.currentApplication.applicationId, 1, 5)
+    this.commentService.getCommentsByApplicationId(this.applicationService.currentApplication.applicationId)
     .subscribe((data:IComment[]) => {
       this.comments = data['Data']
     })
@@ -233,5 +332,12 @@ export class HrApplicantProfileComponent implements OnInit {
   selectActionChangeHandler(event: any) {
     this.selectedAction = event.target.value;
 
+  }
+
+
+  selectedStatus: IStatus
+
+  selectTypeChageHandler(event:any){
+    this.selectedStatus = event.target.value;
   }
 }

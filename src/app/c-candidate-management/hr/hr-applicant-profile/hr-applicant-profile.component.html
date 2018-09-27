@@ -11,50 +11,54 @@
             </button>
         </div>
         
-        <div class="modal-body">       	
-	
+        <div class="modal-body">   
+            
+           
         <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
          <div class="row smallrow">
 
-
-
           <div class="form-group col-sm-6">
-            <label for="actionName"><strong> Action</strong></label>
-            <select formControlName="actionName" id="category" class="form-control" (change)="selectActionChangeHandler($event)">
+            <label for="actionType"><strong> Action</strong></label>
+            <select formControlName="actionType" id="category" class="form-control" (change)="selectActionChangeHandler($event)">
               <option value="null" disabled="true" [selected]="true">- Select Action -</option>
               <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
             </select>
           </div>
 
-
-           
-			<div class="form-group col-sm-6">
-                    <label for="date"><strong> Date </strong></label>
-                    <div class="input-group">
-                      <input id="date" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-                      </div>
-                    </div>
-                  </div>
-                   
+          <div class="form-group col-sm-6">
+            <label for="actionSatus"><strong> Status</strong></label>
+            <select formControlName="actionStatus" id="category" class="form-control" (change)="selectStatusChangeHandler($event)">
+              <option value="null" disabled="true" [selected]="true">- Select Status -</option>
+              <option *ngFor=" let selectedStatus of allStatuses">{{selectedStatus}}</option>
+            </select>
+          </div>
 
          </div>
 
+         <div class="row smallrow">
+             <div class="form-group col-sm-6">
+                        <label for="date"><strong> Date </strong></label>
+                        <div class="input-group">
+                          <input id="date" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                          </div>
         
-         
+                        </div>
+              </div>            
+         <div class="form-group col-sm-6">
+                <label for="time"><strong> Select a time:</strong></label>
+                <input type="time" class="form-control"  formControlName="time" name="usr_time">
+        </div>
+        </div>
+
         <div class="row smallrow">
           <div class="form-group col-sm-6">
             <label for="actionDescription"><strong>Comments</strong></label>
             <textarea class="form-control" formControlName="actionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
           </div>
         </div>
-
-
-
-
-   
 
         <div class="modal-footer">
       
@@ -68,6 +72,77 @@
 
         </div>
     </ng-template>
+
+    <ng-template #contentEdit let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-edit"> Edit newAction</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">   
+                
+               
+            <form [formGroup]="editActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
+    
+             <div class="row smallrow">
+    
+              <div class="form-group col-sm-6">
+                <label for="newActionType"><strong> newAction</strong></label>
+                <select formControlName="newActionType" id="category" class="form-control" (change)="selectnewActionChangeHandler($event)">
+                  <option value="null" disabled="true" [selected]="true">- Select Action -</option>
+                  <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
+                </select>
+              </div>
+    
+              
+              <div class="form-group col-sm-6">
+                <label for="newActionSatus"><strong> Status</strong></label>
+                <select formControlName="newActionStatus" id="category" class="form-control" (change)="selectStatusChangeHandler($event)">
+                  <option value="null" disabled="true" [selected]="true">- Select Status -</option>
+                  <option *ngFor=" let selectedStatus of allStatuses">{{selectedStatus}}</option>
+                </select>
+              </div>
+    
+             </div>
+    
+             <div class="row smallrow">
+                 <div class="form-group col-sm-6">
+                            <label for="date"><strong> Date </strong></label>
+                            <div class="input-group">
+                              <input id="date" class="form-control"  formControlName="newActionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                              </div>
+            
+                            </div>
+                  </div>            
+             <div class="form-group col-sm-6">
+                    <label for="time"><strong> Select a time:</strong></label>
+                    <input type="time" class="form-control"  formControlName="newTime" name="usr_time">
+            </div>
+            </div>
+    
+     
+            <div class="row smallrow">
+              <div class="form-group col-sm-6">
+                <label for="newActionDescription"><strong>Comments</strong></label>
+                <textarea class="form-control" formControlName="newActionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+    
+              <button (click)="editAction(editActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
+                  save_alt</i>Save</button>
+    
+            </div>
+    
+          </form>
+    
+            </div>
+        </ng-template>
 
 </head>
 

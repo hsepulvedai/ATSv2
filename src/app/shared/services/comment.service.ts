@@ -11,8 +11,8 @@ export class CommentService {
 
   routePrefix = 'Comment'
 
-  getCommentsByApplicationId(id, pageNumber, pageSize){
-    return this.http.get(environment.baseUrl + this.routePrefix + '/CommentShowAll/' + id + '/pageNumber=' + pageNumber + '/pageSize=' + pageSize)
+  getCommentsByApplicationId(id){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/CommentShowAll/' + id )
   }
 
   insertComment(comment) {

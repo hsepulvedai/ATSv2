@@ -69,9 +69,7 @@ export class ApplicationService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllInfoByApplicationId/' + applicationId)
   }
 
-  getAllApplicationActions(){
-    return this.http.get(environment.baseUrl + '/ActionType/ActionTypeShowAll')
-  }
+
 
 
 

@@ -1,6 +1,5 @@
-export interface IActionInsert {
-    applicationId: number,
-    recruiterId: number, 
+export interface IActionEdit {
+    actionId:number,
     action: string,
     status: string;
     comments: string,
