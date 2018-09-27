@@ -46,7 +46,7 @@ p {font-size: 16px;  /*Estilo general para paragraphs*/
     font-family: Poppins;
     font-size:100%;    
 }
-.nav-link:hover {
+.nav-link:hover { /*gives hover effect to links on the navbar*/
     color: #df136f;
     text-decoration: none;
 }

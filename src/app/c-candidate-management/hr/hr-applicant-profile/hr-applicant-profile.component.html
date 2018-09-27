@@ -1,3 +1,6 @@
+<!--This pages serves as a profile type of page for the HR employee to view specific aspects of an application.
+It shows the applicant's information, a timeline with actions taken in that application, a pending tasks list and 
+a comments section-->
 <!DOCTYPE html>
 <html>
 
@@ -10,8 +13,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        
-        <div class="modal-body">   
+           <div class="modal-body">   
         
         <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
 
@@ -24,7 +26,6 @@
               <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
             </select>
           </div>
-
           
           <div class="form-group col-sm-6">
             <label for="actionSatus"><strong> Status</strong></label>
@@ -33,10 +34,7 @@
               <option *ngFor=" let selectedStatus of allStatuses">{{selectedStatus}}</option>
             </select>
           </div>
-
          </div>
-
-
          <div class="row smallrow">
              <div class="form-group col-sm-6">
                         <label for="date"><strong> Date </strong></label>
@@ -44,22 +42,16 @@
                           <input id="date" class="form-control"  formControlName="actionDate"placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-                          </div>
-        
+                          </div>        
                         </div>
             </div>
-
                     
          <div class="form-group col-sm-6">
                 <label for="time"><strong> Select a time:</strong></label>
                 <input type="time" class="form-control"  formControlName="time" name="usr_time">
         </div>
-
-
         </div>
-
   
-    
         <div class="row smallrow">
           <div class="form-group col-sm-6">
             <label for="actionDescription"><strong>Comments</strong></label>
@@ -67,24 +59,15 @@
           </div>
         </div>
 
-        <div class="modal-footer">
-      
+        <div class="modal-footer">      
 
           <button (click)="insertAction(newActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
               save_alt</i>Save</button>
-
         </div>
-
       </form>
-
         </div>
-
-
     </ng-template>
-
 </head>
-
-
 <body>
     <div class="container">
         <div>
@@ -102,9 +85,6 @@
                   </nav>
                 </div>
         </div>
-
-      
-
         <div class="row">
                 <div class="col-sm-12">
 
@@ -143,38 +123,20 @@
                          
                   </div>        
             </div>
-
-    
-
-
         <div class="row">
-
-            
-               
-
-        
-           
-
             <div class="col-sm-6">
-
                     <div class="col-sm-6">
-                            <div class="row"> 
-
-        
+                            <div class="row">         
                             <div style=" padding-left:15%;">
                               <div class=" bg-white ">
-                                <h4>Pending Tasks</h4>
-                        
-                                <div class="list-group">
-                        
+                                <h4>Pending Tasks</h4>                        
+                                <div class="list-group">                        
                                   <a href="#" *ngFor="let task of pendingTasks" class="list-group-item"> {{task.task}} </a>
-                        
-                                </div>
+                                  </div>
                               </div>
                             </div>
                             </div>
                     </div>
-
                     <div class="row bootstrap snippets">
                             <div class="col-sm-4 col-md-offset-2 col-sm-12" style="margin-top: 25%">
                                 <div class="comment-wrapper">
@@ -255,9 +217,6 @@
                     </div>
                 </div>
         </div>
-
-
-
     </div>
 </body>
 </html>

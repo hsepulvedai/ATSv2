@@ -23,8 +23,8 @@
                       <label for="lastName"> <strong>Last Name</strong></label>
                       <input formControlName="lastName" type="text" class="form-control" id="lastName">
                     </div>
-                  </div>
-  
+                  </div> 
+
                   <div class="row smallrow">
                     <div class="form-group col-sm-6">
                       <label for="email"> <strong>Email</strong></label>
@@ -35,7 +35,7 @@
                       <input formControlName="phone" type="text" class="form-control" id="phone">
                     </div>
                   </div>
-  
+
                   <div class="row mdrow"> <!--mdrow (medium row) controls the height distance between the inputs and labels-->
                     <div class="form-group col-sm-12">
                       <label for="addressLine"> <strong>Address</strong></label>
@@ -96,7 +96,6 @@
             </button>
           </div>
           <div class="modal-body">
-
           <form [formGroup]="applicantEditForm" autocomplete="off" style="margin: 20px"  (ngSubmit)="updateApplicant(applicantEditForm.value);c('Save click')" >
 
           <div class="row smallrow">
@@ -120,14 +119,10 @@
                     <input formControlName="applicantPassword" type="password" class="form-control" id="applicantPassword">
                 </div>
               </div>
-
-
               <div class="form-group col-sm-6">
                   <label for="applicantPhoneNumber"> <strong>Phone Number</strong></label>
                   <input formControlName="applicantPhoneNumber" type="text" class="form-control" id="applicantPhoneNumber">
               </div>
-          
-
               <div class="row mdrow">
                   <div class="form-group col-sm-12">
                   <label for="applicantAddressLine"> <strong>Address</strong></label>
@@ -161,9 +156,7 @@
                         <input formControlName="applicantZipCode" type="text" class="form-control" id="applicantZipCode">
                     </div>
               </div>
-
               <div class="row smallrow"></div>
-
               <div class="modal-footer">
                   <button type="submit" class="btn " ><i class="material-icons">
                       save_alt
