@@ -71,7 +71,7 @@ img{ /* Controls logo image on navbar*/
 
 }
 .imgWelcome{ /* Controls images on welcomepage*/
-    width: 25em;  
+    width: 75%;  
     
     position: center;
 }
