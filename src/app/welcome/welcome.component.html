@@ -4,6 +4,7 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
 <html lang="en">
 <head> 
   <title></title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">  
 </head>
@@ -29,9 +30,46 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12">
+              <div class="text-center">    
+                <h1 class="margin" style="color:#df136f; font-family: Quicksand;"> Working at Invid </h1><br>
+              </div>
+              <div>
+                <p class="jobsp" style="margin-left:20%; margin-right:20%">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique
+                   maximus erat eget rhoncus. Ut quis eros risus. Maecenas in dolor non massa volutpat posuere vitae id lectus. 
+                   Aliquam cursus commodo tortor nec interdum. Nam urna nibh, suscipit ac urna et, finibus facilisis metus. 
+                   Vivamus laoreet mauris vulputate, imperdiet dolor non, condimentum sapien. Pellentesque id ex non mi porta 
+                   aliquet. Vestibulum finibus varius augue, id convallis nunc mattis a. Quisque consequat ac ligula quis suscipit.
+                   Mauris viverra vulputate orci sed vulputate. Praesent nec neque et massa suscipit dapibus. Cras dapibus nisi non pulvinar posuere.  </p><br>
+                  <p class="jobsp" style="margin-left:20%; margin-right:20%">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus.
+                      Ut quis eros risus. Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo 
+                      tortor nec interdum. Nam urna nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris 
+                      vulputate, imperdiet dolor non, condimentum sapien. Pellentesque id ex non mi porta aliquet. Vestibulum 
+                      finibus varius augue, id convallis nunc mattis a. Quisque consequat ac ligula quis suscipit. Mauris viverra
+                       vulputate orci sed vulputate. Praesent nec neque et massa suscipit dapibus. Cras dapibus nisi non pulvinar posuere.
+                  </p><br>                  
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10%;margin-bottom:10%">
+            <div class="col-md 4" style="margin-left:8%">
+                <img class="imgWelcome shadow" src="../assets/teamwork.jpg"> <br>
+                <p>Team work</p>
+            </div>
+            <div class="col-md 4">
+                <img class="imgWelcome shadow" src="../assets/work.jpg"><br>
+                <p>Great development</p>
+            </div>
+            <div class="col-md 4">
+                <img class="imgWelcome shadow" src="../assets/team.jpg"><br>
+                <p>Team based development</p>
+            </div>
+          </div>
+        <div class="row">
           <div class="col-sm-12">
           <div class="text-center">    
-              <h1 class="margin" style="color:#df136f; font-family: Quicksand;"> Latest Jobs </h1><br>
+              <h1 class="margin" style="color:#df136f; font-family: Quicksand; margin-top: 5%"> Latest Jobs </h1><br>
             </div>
           </div> 
         </div>
@@ -41,8 +79,7 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
             <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[0].jobId)">{{jobs[0].jobName}}</button></h3> <br> <!--Name of job send user to the job's application page-->
             <h5  >{{jobs[0].city}},{{jobs[0].country}}
             </h5>
-            <p>{{jobs[0].description}}</p>
-          
+            <p>{{jobs[0].description}}</p>          
           </div>
            
           <div class="col-sm-3 shadow" style="margin-left:2%; margin-right:2%;"> <!--Second job on the top 3 jobs featured on the welcome page-->
@@ -58,7 +95,7 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
               </h5>
               <p>{{jobs[2].description}}</p>
             </div>
-        </div>  
+        </div>         
     </div>
   </body>
 </html>
