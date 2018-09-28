@@ -202,11 +202,6 @@ export class HrApplicantProfileComponent implements OnInit {
     this.editActionForm.controls['newActionType'].setValue(action.actionType, { onlySelf: true })
     this.editActionForm.controls['newActionStatus'].setValue(action.status, { onlySelf: true })
     this.editActionForm.get('newActionComments').setValue(action.comments)
-    this.editActionForm.controls['newActionDate'].setValue(this.date)
-    this.editActionForm.controls['newTime'].setValue(action.actionDate, 'h:mma' )
-
-
-  
 
     this.modalService.open(contentEdit, { ariaLabelledBy: 'modal-basic-edit', size: 'lg' }).result.then((result) => {
 
@@ -258,25 +253,53 @@ export class HrApplicantProfileComponent implements OnInit {
 
   updatedAction: IActionEdit
 
-  editAction(editActionForm){
-    var date = editActionForm.actionDate.year + '/' + editActionForm.actionDate.month + '/'
-              + editActionForm.actionDate.day + " " + editActionForm.time
+  
 
+  editAction(editActionForm){
+
+    
+    var olderdate = this.currentAction.actionDate
+
+  
+
+    if(editActionForm.newActionDate != null){
+      var formdate = editActionForm.newActionDate + editActionForm.newTime
+
+      var date = editActionForm.newActionDate.year + '/' + editActionForm.newActionDate.month + '/'
+      + editActionForm.newActionDate.day + " : " + editActionForm.newTime
+
+      
+    if(this.currentAction.actionDate != formdate)
+    newDate = date
+
+    }
+   
+
+
+
+    console.log(olderdate)
+    console.log(date)
+    var newDate = this.currentAction.actionDate
+    
+
+            
     
     this.updatedAction = {
       actionId: this.currentAction.actionId, 
-      action: editActionForm.actionType, 
-      status: editActionForm.actionStatus, 
-      comments: editActionForm.actionComments,
-      actionDate: date,
+      action: editActionForm.newActionType, 
+      status: editActionForm.newActionStatus, 
+      comments: editActionForm.newActionComments,
+      actionDate: newDate
 
     }
 
     console.log(this.updatedAction)
 
-  //  this.applicationActionService.editAction(this.updatedAction)
+    this.applicationActionService.editAction(this.updatedAction)
+    .subscribe(data => { console.log("UPDATE:" + data) },
+    error => { console.error("Error: ", error) })
     
-
+   this.editActionForm.reset()
 
   }
 
@@ -342,6 +365,8 @@ export class HrApplicantProfileComponent implements OnInit {
   }
 
   selectedAction: IAction
+
+
   
   selectActionChangeHandler(event: any) {
     this.selectedAction = event.target.value;
@@ -353,5 +378,12 @@ export class HrApplicantProfileComponent implements OnInit {
 
   selectTypeChageHandler(event:any){
     this.selectedStatus = event.target.value;
+  }
+
+
+  selectedDate:Date
+
+  selectDateChangeHandler(event:any){
+    this.selectedDate = event.target.value;
   }
 }
