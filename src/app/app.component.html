@@ -1,4 +1,37 @@
 <!--This html holds the code for the navbar and for the footer-->
+<!-- <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Login</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label for="username">Username</label>
+          <br> 
+          <input type="text">
+        
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <br>
+          <input type="password">
+  
+      </div>
+     
+  </form>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+          <button class="btn btn-primary">Login</button>
+          
+          <a class="btn btn-link">Register</a>
+      </div>
+    </div>
+  </ng-template> -->
+
 <link rel="stylesheet" href="" />
 
 <div class="backgroundG"></div> <!--This class holds the pink stripe on the top of the navbar-->
@@ -15,6 +48,7 @@
        <a class="nav-link nav-item" id="navtext" href="offer-list-management" >Offer List Management </a> <!--B.1 -->
       <a class="nav-link nav-item" id="navtext" href="applicant-maintenance" > Applicant Management  </a>  <!--C.1 -->
        <a class="nav-link nav-item" id="navtext" href="users/userMaintenance" > Current Offer Info  </a> <!--C.4 -->
+       <!-- <a class="nav-link nav-item" id="navtext" (click)="open(content)"> Login </a> -->
     </div>
   </div>
 </nav> 

@@ -5,6 +5,9 @@ import { IJobOfferHR } from '../shared/models/job-offer-hr.model';
 import { IJobOffer } from '../shared/models/job-offer.model';
 import { JobService } from '../shared/services/job.service';
 import { Router } from '@angular/router';
+
+
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -27,5 +30,7 @@ jobs:IJobOffer[]
     this.router.navigate(['offer-application'])
 
   }
+
+
 
 }
