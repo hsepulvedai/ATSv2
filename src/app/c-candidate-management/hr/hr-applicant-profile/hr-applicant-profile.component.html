@@ -202,10 +202,14 @@ a comments section-->
                             <div class="row">         
                             <div style=" margin-left:15%; margin-top:25%">
                               <div class=" bg-white ">
-                                <h4>Pending Tasks</h4>                        
-                                <div class="list-group">                        
-                                  <a href="#" *ngFor="let task of pendingTasks" class="list-group-item btnWelcomeJobs" style="font-size: 15px;"> {{task.task}} </a>
-                                  </div>
+                                <h4>Pending Tasks</h4> 
+                                
+                                <mat-selection-list #shoes>
+                                        <mat-list-option *ngFor="let task of pendingTasks">
+                                                <a href="#"class=" btnWelcomeJobs" style="font-size: 15px;"> {{task.task}}  </a>
+                                        </mat-list-option >
+                                      </mat-selection-list>
+
                               </div>
                             </div>
                             </div>
@@ -255,8 +259,8 @@ a comments section-->
                                     </i> New Action </button>
                                 <ul class="timeline">
                                     <li *ngFor="let action of actions">
-                                        <h4>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="openEditAction(contentEdit, action)" >
-                                                <i class="material-icons">edit</i> </button></h4>
+                                        <h5>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="openEditAction(contentEdit, action)" >
+                                                <i class="material-icons">edit</i> </button></h5>
                                         <p>@{{action.recruiter}}</p>
                                         <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm
                                                 a'}}
