@@ -1,3 +1,5 @@
+/*This is the main page for applicants. Welcome them to the site and then allows them to go to the page that
+shows all the available jobs or to the application pages for the 3 latest jobs */
 import { Component, OnInit } from '@angular/core';
 import { IJobOfferHR } from '../shared/models/job-offer-hr.model';
 import { IJobOffer } from '../shared/models/job-offer.model';

@@ -1,3 +1,5 @@
+/*This page shows at a glance all jobs and the amount of applicants each of them has.
+Allows HR to access all the applications in a specific job*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { JobService } from '../../../shared/services/job.service';

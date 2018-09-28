@@ -188,25 +188,6 @@
           <h3> Available Jobs </h3>
           <div class="col-md-12 ">
 
-            <!-- <label for="filterBy"><strong> Filter by: </strong></label> <br>
-              <div class="row">
-                <div class="col-sm-2" style="align-self: center;align-items: center; align-content: center;">
-                  <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
-                    <option selected> All Jobs</option>
-                    <option> Job Title </option>
-                    <option> Company </option>
-                    <option> Location/City </option>
-                    <option> Location/Country </option>
-                    <option> Category </option>
-                    <option> Type </option>
-                  </select>
-                </div>
-                <div class="col-sm-10" style="align-self: center;align-items: center;align-content: center;">
-                  <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
-                    placeholder="Start Typing...">
-                </div>
-              </div> -->
-
             <div class="row">
               <div class="col-md-12" style="text-align: end">
                 <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p> <!--Shows current page of total pages in table-->
@@ -278,7 +259,7 @@
                   <th mat-sort-header="jobType">Type</th>
                   <th>Actions</th>
                 </tr>
-              </thead>
+              </thead> 
               <tbody>
                 <tr *ngFor="let inactiveJob of sortedInactive"> <!--Sort table data and adds table style-->
                   <td> {{inactiveJob.jobName}}</td>

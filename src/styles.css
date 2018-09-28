@@ -147,6 +147,11 @@ input{ /* inputs style to make them look like the rest of the buttons*/
     color: #25326a;
     background-color: white;
 }
+#uploadResume{ /* input style for browse on A3 (changed text but not actual button style)*/
+    margin-bottom: 5em;
+    color: #25326a;
+    background-color: white;
+}
 
 table{ /*General styling for tables*/
     font-family: Quicksand;

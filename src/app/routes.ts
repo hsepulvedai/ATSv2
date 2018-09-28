@@ -1,6 +1,5 @@
+/*All Routes used in the project */
 import { Routes } from '@angular/router'
-
-
 import { HrTasksComponent } from './c-candidate-management/hr/hr-tasks/hr-tasks.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HrApplicantProfileComponent } from './c-candidate-management/hr/hr-applicant-profile/hr-applicant-profile.component'

@@ -1,3 +1,5 @@
+/*This page shows the list of available jobs to apply for. Can be accessed 
+  from the welcome page and through the navbar*/
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';

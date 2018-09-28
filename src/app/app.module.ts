@@ -1,9 +1,5 @@
 
-
-
-
-
-
+/*Everything used to make project work*/
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {

@@ -1,3 +1,4 @@
+/*Allows HR to view all applicants, both current and available*/
 import { Component, OnInit } from '@angular/core';
 import { IApplicantInsert } from '../../../shared/models/applicant_insert.model';
 import { Router, ActivatedRoute } from '@angular/router';
