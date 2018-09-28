@@ -80,9 +80,16 @@ export class HrApplicantProfileComponent implements OnInit {
     private modalService: NgbModal, private applicationActionService: ApplicationActionService
   ,private pagination:PaginationService, private commentService:CommentService) { }
 
+  currentAppId 
+
   ngOnInit() {
 
    this.currentApplication = this.applicationService.currentApplication
+
+   console.log(this.currentApplication)
+
+   this.currentAppId = this.currentApplication.applicationId
+   
 
    this.actionType = new FormControl();
    this.actionStatus = new FormControl();
