@@ -70,6 +70,11 @@ img{ /* Controls logo image on navbar*/
     position: left;
 
 }
+.imgWelcome{ /* Controls images on welcomepage*/
+    width: 75%;  
+    
+    position: center;
+}
 
 ngb-pagination /deep/ .page-link { /*Controls color for navigation*/
     color: #25326a !important;
