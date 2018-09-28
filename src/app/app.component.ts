@@ -1,3 +1,4 @@
+/*This  component is only used for the code for the navbar and for the footer */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'
 
@@ -9,3 +10,4 @@ import { Router } from '@angular/router'
 export class AppComponent {
   title = 'ats';
 }
+ 

@@ -1,3 +1,4 @@
+//This page allows an HR employee to view applications assigned to them
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { IHRApplication } from '../../shared/models/hr-application.model';
@@ -9,18 +10,15 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ITask } from '../../shared/models/task.model';
 
 
-@Component({
+@Component({ 
   selector: 'app-maintenance-user',
   templateUrl: './maintenance-user.component.html',
   //styleUrls: ['./maintenance-user.component.css']
 })
 export class MaintenanceUserComponent implements OnInit {
 
-
-
   private applicationsSubscription: Subscription = new Subscription();
   private applicationsTotalSubscription: Subscription = new Subscription();
-
   
   totalApplications: number
   counts: number[]

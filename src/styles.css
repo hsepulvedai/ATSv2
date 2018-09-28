@@ -86,7 +86,7 @@ ngb-pagination /deep/ .page-item.disabled {
     background-color: #25326a ;
 } */
 
-.btnWelcomeJobs{ /*  Controls the job title buttons that let user access application for specific job*/
+.btnWelcomeJobs{ /*  Controls the job title buttons that let user access application for specific job - reused in c2 c3 c5*/
     
     background-color: #FFFFFF;
     text-align: center;
@@ -143,6 +143,11 @@ ngb-pagination /deep/ .page-item.disabled {
 }
 
 input{ /* inputs style to make them look like the rest of the buttons*/
+    margin-bottom: 5em;
+    color: #25326a;
+    background-color: white;
+}
+#uploadResume{ /* input style for browse on A3 (changed text but not actual button style)*/
     margin-bottom: 5em;
     color: #25326a;
     background-color: white;

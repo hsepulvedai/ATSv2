@@ -1,4 +1,5 @@
-<!--This page shows the list of available jobs to apply for. Can be accessed from the welcome page and through the navbar-->
+<!--This page shows the list of available jobs to apply for. Can be accessed 
+  from the welcome page and through the navbar-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 </head>
-
+ 
 <body>
   <div class="container">
     <div>
@@ -18,48 +19,9 @@
       <div class="card" style="border-right: white; border-left: white;">
         <div class="card-body">
 
-          <!-- <div class="row" style="padding-bottom: 10px;">
-            <div class="col-sm-6">
-              <button *ngIf="!pageFilterActive" type="button" class="btn" (click)="pageFilterActive = true"><i class="material-icons">
-                  filter_list</i> Show page filter
-              </button>
-              <button *ngIf="pageFilterActive" type="button" class="btn" (click)="pageFilterActive = false"><i class="material-icons">
-                  filter_list</i> Hide page filter
-              </button>
-            </div>
-
-            <div class="col-sm-6">
-              <button *ngIf="!searchActive" type="button" class="btn" (click)="searchActive = true"><i class="material-icons">
-                  search</i> Show Search
-              </button>
-
-              <button *ngIf="searchActive" type="button" class="btn" (click)="searchActive = false"><i class="material-icons">
-                  search</i> Hide Search
-              </button>
-            </div>
-          </div> -->
-
-          <!-- <div class="col-md-12 " *ngIf="searchActive"> -->
-            <label for="sortBy"><strong> Search: </strong></label><br>
+          <label for="sortBy"><strong> Search: </strong></label><br>
             <div class="row " style="height:3em;">
-              <!-- <div class="col-sm-2">
-                <select (change)="sortDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
-                  <option selected> All Jobs</option>
-                  <option> Job Title </option>
-                  <option> Company </option>
-                  <option> Location/City </option>
-                  <option> Location/Country </option>
-                  <option> Category </option>
-                  <option> Type </option>
-                </select>
-              </div>
-              <div class="col-sm-2">
-                <select (change)="sortParamDropdownChangeHandler($event)" id="sortBy" class=" custom-select">
-                  <option selected value="">Sort Type</option>
-                  <option> Sort A-Z </option>
-                  <option> Sort Z-A </option>
-                </select> <br>
-              </div> -->
+              
               <div class="col-sm-6"> <!--Allows to search on table -->
                 <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:110%;">
               </div>
@@ -68,29 +30,7 @@
                   <i class="material-icons">search</i> Search</button>
               </div>
             </div>
-
-
-          <!-- <div *ngIf="pageFilterActive">
-            <label for="filterBy"><strong> Filter by: </strong></label> <br>
-            <div class="row">
-              <div class="col-sm-2" style="align-self: center;align-items: center; align-content: center;">
-                <select (change)="selectDropdownChangeHandler($event)" id="filter" class=" custom-select">
-                  <option selected> All Jobs</option>
-                  <option> Job Title </option>
-                  <option> Company </option>
-                  <option> Location/City </option>
-                  <option> Location/Country </option>
-                  <option> Category </option>
-                  <option> Type </option>
-                </select>
-              </div>
-              <div class="col-sm-10" style="align-self: center;align-items: center;align-content: center;">
-                <input [(ngModel)]='listFilter' type="search" id="searchBar" class="form-control " style="margin-bottom: 1em; margin-top: 2%"
-                  placeholder="Start Typing...">
-              </div>
-            </div>
-          </div> -->
-
+         
           <div class="row" >
             <div class="col-md-12" style="text-align: end"> <!--Div to indicate which page is being displayed out of what total number of pages on table-->
               <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>

@@ -1,3 +1,4 @@
+/*<!--This page was intended to be used to create a new user-->*/
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../shared/models/user.model'
 import { Router, ActivatedRoute } from '@angular/router'

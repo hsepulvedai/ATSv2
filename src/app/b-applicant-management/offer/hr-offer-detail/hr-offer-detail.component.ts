@@ -1,3 +1,5 @@
+/*This page shows every application for a specific job. It allows the HR 
+  employee to edit the recruiter and the status of the specific application*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IJobOffer } from '../../../shared/models/job-offer.model';

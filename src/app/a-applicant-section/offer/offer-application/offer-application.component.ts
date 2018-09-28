@@ -1,3 +1,4 @@
+//This page opens the aplication for the selected job in A2 when clicking on the apply button
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '../../../../../node_modules/@angular/forms';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
@@ -82,7 +83,7 @@ export class OfferApplicationComponent implements OnInit {
     this.name = new FormControl({value: this.currentApplicant.firstName + ' ' + this.currentApplicant.lastName, disabled:true})
     this.email = new FormControl(this.currentApplicant.email)
     this.phone = new FormControl(this.currentApplicant.phone)
-
+ 
     
     this.addressLine= new FormControl(this.currentApplicant.addressLine)
     this.addressLine2= new FormControl(this.currentApplicant.addressLine2)

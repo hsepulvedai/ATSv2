@@ -1,3 +1,4 @@
+//This page allows HR employee to control what jobs are available to be applied for. (Jobs shown in A2)
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';

@@ -1,3 +1,6 @@
+/*This pages serves as a profile type of page for the HR employee to view specific aspects of an application.
+It shows the applicant's information, a timeline with actions taken in that application, a pending tasks list and 
+a comments section*/
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { IHRApplicant } from '../../../shared/models/IHRApplicant.model'
