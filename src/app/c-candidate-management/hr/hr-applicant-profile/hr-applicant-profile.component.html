@@ -67,6 +67,81 @@ a comments section-->
       </form>
         </div>
     </ng-template>
+
+    <ng-template #contentEdit let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-edit"> Edit Action</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">   
+                
+               
+            <form [formGroup]="editActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
+    
+             <div class="row smallrow">
+    
+    
+    
+              <div class="form-group col-sm-6">
+                <label for="newActionType"><strong> Action</strong></label>
+                <select formControlName="newActionType" id="actionType" class="form-control" >
+                  <option *ngFor=" let selectedAction of allActions" [ngValue]="selectedAction">{{selectedAction}}</option>
+                </select>
+              </div>
+    
+              
+              <div class="form-group col-sm-6">
+                <label for="newActionSatus"><strong> Status</strong></label>
+                <select formControlName="newActionStatus" id="actionStatus" class="form-control">
+                  <option *ngFor=" let selectedStatus of allStatuses" [ngValue]="selectedStatus" >{{selectedStatus}}</option>
+                </select>
+              </div>
+    
+             </div>
+    
+             <div class="row smallrow">
+                 <div class="form-group col-sm-6">
+                            <label for="date"><strong> Date </strong></label>
+                            <div class="input-group">
+                              <input id="date" class="form-control"  formControlName="newActionDate" placeholder="yyyy-mm-dd" name="dp"  ngbDatepicker  #dp="ngbDatepicker">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                              </div>
+            
+                            </div>
+                  </div>            
+             <div class="form-group col-sm-6">
+                    <label for="time"><strong> Select a time:</strong></label>
+                    <input type="time" class="form-control"  formControlName="newTime" name="usr_time">
+            </div>
+            </div>
+    
+     
+             
+            <div class="row smallrow">
+              <div class="form-group col-sm-6">
+                <label for="newActionDescription"><strong>Comments</strong></label>
+                <textarea class="form-control" formControlName="newActionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+              </div>
+            </div>
+    
+    
+    
+            <div class="modal-footer">
+          
+    
+              <button (click)="editAction(editActionForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
+                  save_alt</i>Save</button>
+    
+            </div>
+    
+          </form>
+    
+            </div>
+        </ng-template>
 </head>
 <body>
     <div class="container">
@@ -192,7 +267,7 @@ a comments section-->
                                     </i> New Action </button>
                                 <ul class="timeline">
                                     <li *ngFor="let action of actions">
-                                        <h4>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="openEditAction(content, action)" >
+                                        <h4>{{action.actionType}} <button class="btn" style="border-color: transparent !important"(click)="openEditAction(contentEdit, action)" >
                                                 <i class="material-icons">edit</i> </button></h4>
                                         <p>@EmployeeName</p>
                                         <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate | date: 'h:mm

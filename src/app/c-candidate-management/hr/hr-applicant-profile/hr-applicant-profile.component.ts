@@ -17,7 +17,7 @@ import { IAction } from '../../../shared/models/action.model';
 import { IActionInsert } from '../../../shared/models/action_insert.model';
 import { IApplicationInfo } from '../../../shared/models/application_info.model';
 import { IStatus } from '../../../shared/models/status.model';
-import { IActionEdit } from '../../../shared/models/action_edit.mode';
+import { IActionEdit } from '../../../shared/models/action_edit.model';
 
 @Component({
   selector: 'app-hr-applicant-profile',
@@ -179,18 +179,30 @@ export class HrApplicantProfileComponent implements OnInit {
 
   currentAction
 
+
+  date: Date;
+
+  
+
+
   openEditAction(contentEdit, action) {
 
     this.applicationActionService.currentAction = action;
 
     this.currentAction = action
- 
 
-    this.editActionForm.controls['newActionType'].setValue(action.action, { onlySelf: true })
+
+  this.date = action.actionDate
+ 
+    console.log(action)
+
+    this.editActionForm.controls['newActionType'].setValue(action.actionType, { onlySelf: true })
     this.editActionForm.controls['newActionStatus'].setValue(action.status, { onlySelf: true })
     this.editActionForm.get('newActionComments').setValue(action.comments)
-    this.editActionForm.get('newActionDate').setValue(action.actionDate, 'MMMM d, y')
-    this.editActionForm.get('newTime').setValue(action.actionDate, 'h:mm' )
+    this.editActionForm.controls['newActionDate'].setValue(this.date)
+    this.editActionForm.controls['newTime'].setValue(action.actionDate, 'h:mma' )
+
+
   
 
     this.modalService.open(contentEdit, { ariaLabelledBy: 'modal-basic-edit', size: 'lg' }).result.then((result) => {
@@ -253,7 +265,7 @@ export class HrApplicantProfileComponent implements OnInit {
       action: editActionForm.actionType, 
       status: editActionForm.actionStatus, 
       comments: editActionForm.actionComments,
-      actionDate: date
+      actionDate: date,
 
     }
 
