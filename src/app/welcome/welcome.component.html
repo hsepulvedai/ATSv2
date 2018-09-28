@@ -52,7 +52,7 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
               </div>
             </div>
           </div>
-          <div class="row" style="margin-top:10%;margin-bottom:10%">
+          <div class="row" style="margin-top:10%;">
             <div class="col-md 4" style="margin-left:8%">
                 <img class="imgWelcome shadow" src="../assets/teamwork.jpg"> <br>
                 <p>Team work</p>
@@ -70,6 +70,7 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
           <div class="col-sm-12">
           <div class="text-center">    
               <h1 class="margin" style="color:#df136f; font-family: Quicksand; margin-top: 5%"> Latest Jobs </h1><br>
+              
             </div>
           </div> 
         </div>
@@ -79,7 +80,8 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
             <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[0].jobId)">{{jobs[0].jobName}}</button></h3> <br> <!--Name of job send user to the job's application page-->
             <h5  >{{jobs[0].city}},{{jobs[0].country}}
             </h5>
-            <p>{{jobs[0].description}}</p>          
+            <p>{{jobs[0].description}}</p>     
+            <p style="text-align: center;">*click on job title to apply</p>     
           </div>
            
           <div class="col-sm-3 shadow" style="margin-left:2%; margin-right:2%;"> <!--Second job on the top 3 jobs featured on the welcome page-->
@@ -87,6 +89,7 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
               <h5  >{{jobs[1].city}},{{jobs[1].country}}
               </h5>
               <p>{{jobs[1].description}}</p>
+              <p style="text-align: center;">*click on job title to apply</p>
           </div>
            
           <div class="col-sm-3 shadow"> <!--Third job on the top 3 jobs featured on the welcome page-->
@@ -94,7 +97,10 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
               <h5  >{{jobs[2].city}},{{jobs[2].country}}
               </h5>
               <p>{{jobs[2].description}}</p>
+              <p style="text-align: center;">*click on job title to apply</p>
             </div>
+            
+            
         </div>         
     </div>
   </body>
