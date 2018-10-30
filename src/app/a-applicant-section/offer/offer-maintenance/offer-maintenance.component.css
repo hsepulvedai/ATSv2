@@ -18,6 +18,20 @@ h3 {
   padding:.05em; */
  }
 
+ .saveDraftBtn {
+
+ }
+
+ .postBtn {
+
+ }
+
+ .deleteBtn {
+
+  border: red solid;
+
+ }
+
 
 
 /* Table sort indicators */

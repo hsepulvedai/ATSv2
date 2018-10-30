@@ -80,8 +80,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   addDropdownOptForm: FormGroup
 
   addJobTrue: boolean = false
-  editJobTrue:boolean = false
-  editDraft:boolean = false
+  editJobTrue: boolean = false
+  editDraft: boolean = false
 
 
 
@@ -100,7 +100,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     private pagination: PaginationService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
-    private modalServ:ModalService) { }
+    private modalServ: ModalService) { }
 
   ngOnInit() {
 
@@ -113,9 +113,9 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
     this.categorySubscription.add(
       this.jobCategoryService.showCategories()
-      .subscribe((data: IJobCategory[]) => {
-        this.categories = data['Data'];
-      })
+        .subscribe((data: IJobCategory[]) => {
+          this.categories = data['Data'];
+        })
     )
 
     this.jobTypeService.showTypes()
@@ -127,6 +127,18 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
       .subscribe((data: IJobStatus[]) => {
         this.allStatus = data['Data']
       })
+
+    this.jobInfoForm = this.formBuilder.group({
+      jobName: ['', Validators.required],
+      jobCompany: '',
+      jobCategory: '',
+      jobType: '',
+      jobStatus:'',
+      jobDescription: ['', Validators.maxLength(500)],
+      addCategoryInput: '',
+      addTypeInput: '',
+      addStatusInput:''
+    })
 
     this.newJobForm = this.formBuilder.group({
       jobName: ['', Validators.required],
@@ -162,7 +174,14 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   openModal(content) {
-    this.modalServ.openModal(content)
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+
+      (this.closeResult = `Closed with: ${result}`)
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
   }
 
   universalSearch() {
@@ -171,7 +190,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
       this.refreshData()
     }
   }
-  
+
 
   loadPage(page: number) {
 
@@ -250,6 +269,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   }
 
 
+
+
   currentCompany: ICompany
   selectedJobType: string = 'Default'
   selectedJobCategory: string = 'Default'
@@ -268,6 +289,11 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
   newJobForm: FormGroup
   jobEditForm: FormGroup
+
+  // new variables to try to simplify code
+  jobInfoForm:FormGroup
+  selectedTabId:string
+
 
   currentJobType: string = ''
   currentJobCategory: string = ''
@@ -309,12 +335,12 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     });
   }
 
-  modalTitle:string = "Hey"
+  modalTitle: string = "Hey"
 
 
   openAddModal(content) {
 
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-add', size: 'lg'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-add', size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -653,6 +679,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
   addCatTrue: boolean = false;
   addTypeTrue: boolean = false;
+  addStatusTrue: boolean = false;
 
   addItem(event) {
 
@@ -661,6 +688,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
       this.addCatTrue = true;
     if (key === 'addTypeBtn')
       this.addTypeTrue = true;
+    if (key === 'addStatusBtn')
+      this.addStatusTrue = true;
   }
 
   cancelAddItem(event) {
@@ -670,12 +699,14 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
       this.addCatTrue = false;
     if (key === 'cancelAddTypeBtn')
       this.addTypeTrue = false;
+    if (key === 'cancelAddStatusBtn')
+      this.addStatusTrue = false;
   }
 
   newCategory: IJobCategory
   newType: IJobType
 
-  changeDectector:ChangeDetectorRef
+  changeDectector: ChangeDetectorRef
 
 
   /// Must make the dropdown refresh.
@@ -690,30 +721,36 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
         error => { console.error("Error: ", error) },
       ))
 
-      this.refreshCategories()
+    this.refreshCategories()
 
     console.log(this.categories)
     // this.newJobForm.get('category').setValue(this.newCategory, { onlySelf: true })
 
     this.addCatTrue = false;
-    
+
     // this.newJobForm.get('addCategoryInput').setValue('', { onlySelf: true })
 
-      // $('.selectpicker').selectpicker('refresh')
+    // $('.selectpicker').selectpicker('refresh')
 
   }
 
   refreshCategories() {
     this.categorySubscription.add(
       this.jobCategoryService.showCategories()
-      .subscribe((data: IJobCategory[]) => {
-        this.categories = data['Data'];
-      })
+        .subscribe((data: IJobCategory[]) => {
+          this.categories = data['Data'];
+        })
     );
   }
 
   addJobType() {
 
+  }
+
+  setBooleansFalse() {
+    this.addCatTrue = false;
+    this.addTypeTrue = false;
+    this.addStatusTrue = false;
   }
 
 
