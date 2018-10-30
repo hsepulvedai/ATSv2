@@ -18,7 +18,12 @@ getJobCategoryById(id){
 }
 
   showCategories(){
-    return this.http.get(environment.baseUrl + this.routePrefix + "/JobCategorySelectActive");
-
+    return this.http.get(environment.baseUrl + this.routePrefix + "/JobCategorySelectActive/");
   }
+
+  insertCategory(category) {
+    return this.http.post(environment.baseUrl + this.routePrefix + '/JobCategoryInsert/', category)
+  }
+
+  
 }

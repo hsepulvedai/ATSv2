@@ -121,11 +121,9 @@ export class ApplicantMaintenanceComponent implements OnInit {
   }
 
   constructor(
-    private router: Router,
     private applicantService: ApplicantService,
-    private route: ActivatedRoute,
     private modalService: NgbModal,
-    private pagination: PaginationService
+    private pagination: PaginationService,
   ) { }
 
   //event handler for the select element's change event
@@ -334,10 +332,12 @@ export class ApplicantMaintenanceComponent implements OnInit {
 
 
     this.applicantService.addApplicantMaintenance(this.newApplicant)
-      .subscribe(data => { console.log("POST:" + data) },
-        error => { console.error("Error: ", error) })
+      .subscribe(data => { console.log("POST:" + data)
+      this.refreshData() },
+        error => { console.error("Error: ", error) }
+      )
 
-    this.refreshData()
+
 
   }
 
@@ -549,49 +549,44 @@ export class ApplicantMaintenanceComponent implements OnInit {
     }
   }
 
-  sortedData: IApplicantMaintInfo[]
-  sortedInactive: IApplicantMaintInfo[]
+   /// Sorting
 
-
-  sortData(sort: Sort) {
-
-    const aApplicants = this.allApplicants.slice();
-    const iApplicants = this.allPastApplicants.slice();
-
-
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = aApplicants;
-      this.sortedInactive = iApplicants;
-      return
-    }
-
-    this.sortedData = aApplicants.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'name': return compare(a.firstName, b.firstName, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        case 'location': return compare(a.city, b.city, isAsc)
-        default: return 0;
-      }
-    });
-
-
-
-    this.sortedInactive = iApplicants.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'name': return compare(a.firstName, b.firstName, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        case 'location': return compare(a.city, b.city, isAsc)
-        default: return 0;
-      }
-    });
-
-  }
-
-}
-
-
-function compare(a, b, isAsc) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
+   sortedData: IApplicantMaintInfo[]
+   sortedInactive: IApplicantMaintInfo[]
+ 
+   sortData(sort: Sort) {
+ 
+     const aApplicants = this.allApplicants.slice();
+     const iApplicants = this.allPastApplicants.slice();
+ 
+     if (!sort.active || sort.direction === '') {
+       this.sortedData = aApplicants;
+       this.sortedInactive = iApplicants;
+       return
+     }
+ 
+     this.sortedData = aApplicants.sort((a, b) => {
+       const isAsc = sort.direction === 'asc';
+       switch (sort.active) {
+         case 'name': return compare(a.firstName, b.firstName, isAsc);
+         case 'email': return compare(a.email, b.email, isAsc);
+         case 'location': return compare(a.city, b.city, isAsc)
+         default: return 0;
+       }
+     });
+ 
+     this.sortedInactive = iApplicants.sort((a, b) => {
+       const isAsc = sort.direction === 'asc';
+       switch (sort.active) {
+         case 'name': return compare(a.firstName, b.firstName, isAsc);
+         case 'email': return compare(a.email, b.email, isAsc);
+         case 'location': return compare(a.city, b.city, isAsc)
+         default: return 0;
+       }
+     });
+   }
+ }
+ 
+ function compare(a, b, isAsc) {
+   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+ }

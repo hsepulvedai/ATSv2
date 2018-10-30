@@ -1,59 +1,42 @@
 <!--This html holds the code for the navbar and for the footer-->
-<!-- <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Login</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-          <label for="username">Username</label>
-          <br> 
-          <input type="text">
-        
-      </div>
-      <div class="form-group">
-          <label for="password">Password</label>
-          <br>
-          <input type="password">
-  
-      </div>
-     
-  </form>
-    </div>
-    <div class="modal-footer">
-        <div class="form-group">
-          <button class="btn btn-primary">Login</button>
-          
-          <a class="btn btn-link">Register</a>
-      </div>
-    </div>
-  </ng-template> -->
-
 <link rel="stylesheet" href="" />
 
-<div class="backgroundG"></div> <!--This class holds the pink stripe on the top of the navbar-->
+<div class="backgroundG"></div>
+<!--This class holds the pink stripe on the top of the navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #25326a;">
-  <a href="welcome"> <img class="img nav-link menuUp" src="../assets/INVID_Logo_white.png"></a> <!--This line holds the logo used as a link to the main page-->
+  <a href="welcome"> <img class="img nav-link menuUp" src="../assets/INVID_Logo_white.png"></a>
+  <!--This line holds the logo used as a link to the main page-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
     <div class="navbar-nav">
-       <a class="nav-link nav-item" id="navtext" href="jobs">Offer List  </a> <!--A.2 -->
-      <a class="nav-link nav-item" id="navtext" href="offer-maintenance" >Offer Maintenance</a> <!--  A.5 -->
-       <a class="nav-link nav-item" id="navtext" href="offer-list-management" >Offer List Management </a> <!--B.1 -->
-      <a class="nav-link nav-item" id="navtext" href="applicant-maintenance" > Applicant Management  </a>  <!--C.1 -->
-       <a class="nav-link nav-item" id="navtext" href="users/userMaintenance" > Current Offer Info  </a> <!--C.4 -->
-       <!-- <a class="nav-link nav-item" id="navtext" (click)="open(content)"> Login </a> -->
+      <a class="nav-link nav-item" id="navtext" href="jobs">OFFER LIST</a>
+      <!--A.2 -->
+      <a class="nav-link nav-item" id="navtext" href="offer-maintenance">OFFER MAINTENANCE</a> <!--  A.5 -->
+      <a class="nav-link nav-item" id="navtext" href="offer-list-management">OFFER LIST MANAGEMENT</a>
+      <!--B.1 -->
+      <a class="nav-link nav-item" id="navtext" href="applicant-maintenance">APPLICANT MANAGEMENT</a>
+      <!--C.1 -->
+      <a class="nav-link nav-item" id="navtext" href="users/userMaintenance">CURRENT OFFER</a>
+      <!--C.4 -->
+      <!-- <a class="nav-link nav-item" id="navtext" (click)="open(content)"> Login </a> -->
+      <!-- <button class="btn" style="align-self: right;" [routerLink]="['/login']">LOG IN</button> -->
+
+      <!--Log In -->
+      <!-- <button class="loginBtn btn" onclick="document.getElementById('loginModal').style.display='block'">LOG IN</button> -->
+      <!-- <button class="loginBtn btn" onclick="document.getElementById('loginModal').style.display='block'">LOG IN</button> -->
+      <!-- <button class="loginBtn btn" (click)="openLogin()">LOG IN</button> -->
+      <button class="loginBtn btn" onclick="document.getElementById('loginModal').style.display='block'">LOG IN</button>
+
+
+        
     </div>
   </div>
-</nav> 
+</nav>
 
-<router-outlet></router-outlet><!-- add to make links work-->
+<router-outlet></router-outlet>
 
 <footer>
   <div class="container-fluid">
@@ -73,11 +56,11 @@
         <a>ATS</a>
       </div>
       <div class="col-sm-3">
-          <h4>Technologies</h4>
-          <a>Sharestacks</a><br>
-          <a>Leave</a><br>
-          <a>Help</a>
-        </div>
+        <h4>Technologies</h4>
+        <a>Sharestacks</a><br>
+        <a>Leave</a><br>
+        <a>Help</a>
+      </div>
 
       <div class="col-sm-3">
         <h4>Contact</h4>
@@ -85,7 +68,7 @@
         <p>Email</p>
         <p>Address</p>
       </div>
-      
+
     </div>
     <div class="row">
       <div class="col-sm-12">
@@ -94,3 +77,50 @@
     </div>
   </div>
 </footer>
+
+<!-- <app-login id="loginModal"></app-login> -->
+
+<!-- <login-modal id="loginModal"></login-modal> -->
+
+
+
+
+<div id="loginModal" class="modal">
+
+  <form class="modal-content animate" action="/action_page.php">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <i class="material-icons" style="font-size:1000%">account_circle</i>
+
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input class="form-control" type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input class="form-control" type="password" placeholder="Enter Password" name="psw" required>
+
+      <div style="text-align: center">
+        <button class="loginBtn btn" type="submit" (click)="login()">LOG IN</button>
+
+      </div>
+
+      <div style="text-align: center">
+
+          <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('loginModal')" class="btn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+
+
+
+

@@ -1,10 +1,8 @@
 /*This page shows every application for a specific job. It allows the HR 
   employee to edit the recruiter and the status of the specific application*/
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { JobService } from '../../../shared/services/job.service';
-import { IJob } from '../../../shared/models/job.model';
 import { IOfferHrEdit } from '../../../shared/models/hr-offer-edit.model'
 import { IApplicationStatus } from '../../../shared/models/application_status.model';
 import { ApplicantService } from '../../../shared/services/applicant.service';
@@ -21,18 +19,18 @@ import { IApplication } from '../../../shared/models/application.model';
 @Component({
   selector: 'app-hr-offer-detail',
   templateUrl: './hr-offer-detail.component.html',
-  //styleUrls: ['./hr-offer-detail.component.css']
+  styleUrls: ['./hr-offer-detail.component.css']
 })
 export class HrOfferDetailComponent implements OnInit {
- 
+
   job: IJobOfferHR
   selectedJob: IJobOfferHR
-  selectedApplicant:IOfferHrEdit
+  selectedApplicant: IOfferHrEdit
 
   // selectedRecruiter
   // selectedStatus
 
-  currentApplicationId:number
+  currentApplicationId: number
 
   applicants: IOfferHrEdit[]
   applicationStatus: IApplicationStatus[]
@@ -43,10 +41,10 @@ export class HrOfferDetailComponent implements OnInit {
   // selectedOptions:FormGroup
   totalApplicants: number
 
-  editForm:FormGroup
-  recruiter:FormControl
-  status:FormControl
-  selectedApplicantName:FormControl
+  editForm: FormGroup
+  recruiter: FormControl
+  status: FormControl
+  selectedApplicantName: FormControl
 
   searchBarInput: string
   pageSize: number
@@ -60,12 +58,15 @@ export class HrOfferDetailComponent implements OnInit {
   selectedApplicationStatus
 
 
-  updatedInfo:IApplication
+  updatedInfo: IApplication
 
-  constructor(private jobService: JobService, private router: Router
-    , private applicantService: ApplicantService, private employeeService: EmployeeService
-    , private applicationService: ApplicationService, private pagination: PaginationService
-    ,private modalService: NgbModal) { }
+  constructor(
+    private jobService: JobService, 
+    private applicantService: ApplicantService, 
+    private employeeService: EmployeeService,
+    private applicationService: ApplicationService, 
+    private pagination: PaginationService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
 
@@ -82,23 +83,23 @@ export class HrOfferDetailComponent implements OnInit {
 
     this.recruiter = new FormControl()
     this.status = new FormControl()
-    this.selectedApplicantName = new FormControl ()
+    this.selectedApplicantName = new FormControl()
 
     this.editForm = new FormGroup({
-      recruiter:this.recruiter,
-      status:this.status,
-      selectedApplicantName:this.selectedApplicantName
+      recruiter: this.recruiter,
+      status: this.status,
+      selectedApplicantName: this.selectedApplicantName
     })
 
   }
   openEdit(content, applicant) {
 
-    
+
     this.currentApplicationId = applicant.applicationId
-    
+
     this.editForm.get('selectedApplicantName').setValue(applicant.applicantFirstName + ' ' + applicant.applicantLastName)
-    this.editForm.controls['recruiter'].setValue(applicant.employeeId, {onlySelf: true})
-    this.editForm.controls['status'].setValue(applicant.applicationStatusId, {onlySelf: true})
+    this.editForm.controls['recruiter'].setValue(applicant.employeeId, { onlySelf: true })
+    this.editForm.controls['status'].setValue(applicant.applicationStatusId, { onlySelf: true })
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
 
@@ -122,16 +123,16 @@ export class HrOfferDetailComponent implements OnInit {
     this.updatedInfo = {
       id: this.currentApplicationId,
       employeeId: form.recruiter,
-      applicationStatusId:form.status
+      applicationStatusId: form.status
     }
 
     this.applicationService.modifyRecruiter(this.updatedInfo)
-    .subscribe(data => { console.log("UPDATED:" + data) },
-    error => { console.error("Error: ", error) })
+      .subscribe(data => { console.log("UPDATED:" + data) },
+        error => { console.error("Error: ", error) })
 
     this.applicationService.modifyStatus(this.updatedInfo)
-    .subscribe(data => { console.log("UPDATED:" + data) },
-    error => { console.error("Error: ", error) })
+      .subscribe(data => { console.log("UPDATED:" + data) },
+        error => { console.error("Error: ", error) })
 
     setTimeout(() => { this.refreshData() }, 100);
 
@@ -144,7 +145,7 @@ export class HrOfferDetailComponent implements OnInit {
     this.applicantService.offerDetailGetApplicants(this.currentJob.jobId, page, this.pageSize)
       .subscribe((data: IOfferHrEdit[]) => {
         this.applicants = data['Data'];
-        this.sortedData = this.applicants.slice()
+        // this.sortedData = this.applicants.slice()
       })
 
   }

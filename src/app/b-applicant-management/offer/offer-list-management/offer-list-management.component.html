@@ -3,42 +3,32 @@ Allows HR to access all the applications in a specific job-->
 <!DOCTYPE html>
 <html>
 
-<head>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Keep link for icons/ make sure to add to all htmls with icons-->
-
-  <style> 
-    th, td { /*Styles position of text on the table*/
-      text-align: left;
-    }
-  </style> 
-</head>
-
 <body>
-  <div class="container">
-    <div style="margin-top: 30px">
-      <!-- B.1 -->
-      <h3> Manage Submissions</h3>
-      <label for="sortBy"><strong> Search: </strong></label><br>
-      <div class="row " style="height:3em;">
-          <div class="col-sm-6"> <!--Input allows user to search the table globally-->
-            <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
+      <h3>Manage Submissions</h3>
+     
+      <div class="card-body">
+          <!-- Search Bar -->
+          <label for="sortBy"><strong> Search: </strong></label><br>
+          <div class="row " style="height:3em;">
+            <div class="col-sm-6">
+              <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:100%;">
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn searchButton" (click)="universalSearch()" style=" margin-left: 50px;">
+                <i class="material-icons">search</i> Search</button>
+            </div>
           </div>
-          <div class="col-sm-2">
-            <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;"> <!--Submits the search-->
-              <i class="material-icons">search</i> Search</button>
-          </div>
-      </div>
 
       <div>
-        <nav aria-label="breadcrumb" style="width: 20%"> <!--Breadcrumb to navigate from B1 to B2-->
+        
+        <!-- <nav aria-label="breadcrumb" style="width: 20%">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">List</li> <!--Indicates to the user the they are currently on the list page-->
+            <li class="breadcrumb-item active" aria-current="page">List</li> 
           </ol>
-        </nav>
+        </nav> -->
 
         <div class="row">
-          <div class="col-md-12" style="text-align: end"> <!--Current page out of total pages in table indicator-->
+          <div class="col-md-12" style="text-align: end"> 
             <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
             <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize) && !((pageSize * page) > totalJobs)">Showing {{pageSize * page}}
               of {{totalJobs}}</p>
@@ -46,7 +36,7 @@ Allows HR to access all the applications in a specific job-->
           </div>
         </div>
 
-        <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-striped"> <!--Gives table functionality and striped design-->
+        <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-striped">
           <thead>
             <th mat-sort-header="jobId" scope="col">Job ID</th>
             <th mat-sort-header="jobName" scope="col">Job Title</th>
@@ -57,7 +47,7 @@ Allows HR to access all the applications in a specific job-->
             <th mat-sort-header="jobPostedStatus" scope="col">Posted Status</th>
             <th scope="col"></th>
           </thead>
-          <tbody *ngIf="sortedData === undefined"> <!-- If the table has no data it tells the user there is nothing to show and so the sorting is disabled -->
+          <tbody *ngIf="sortedData === undefined"> 
             No jobs to show
           </tbody>
           <tbody *ngIf="!(sortedData === undefined)"> 
@@ -81,9 +71,9 @@ Allows HR to access all the applications in a specific job-->
         <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
           [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
         </ngb-pagination>
+
+      </div>
         
         </div>
-      </div>
-    </div>
   </body>
 </html>

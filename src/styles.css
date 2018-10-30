@@ -4,30 +4,129 @@
 /*Allow the use of google fonts*/
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 
+/* .mat-tab-group {
+    font-family: Montserrat;
+    color:#25326a;
+  } */
+
+  /* .mat-tab-group:active {
+      color:#df136f;
+  } */
+
+html {
+    font-family: Montserrat;
+}
 body { /*Estilo general para body tags*/
-    font-family: Quicksand;
-    font: 15px ;
+    /* font-family: Montserrat; */
+    font: 100% ;
     line-height: 1.8;
-    color:black;
+    color:#25326a;
     height: 100%;
     margin: 0;
     padding: 0;
     background-color:white;
     
 }
-p {font-size: 16px;  /*Estilo general para paragraphs*/
-    font-family: Quicksand;
-    text-align: justify;
-    text-justify: inter-word;}
 
-.margin {margin-bottom: 45px;} 
+h1, h2 {
+    text-align: center; 
+    font-family: Montserrat;
+    font-weight: bold;
+    color: #25326a;
+}
+
+h3 {
+    font-family: Montserrat;
+    color: #df136f;
+    text-align: center;
+    padding-top: 1em;
+    font-weight: bold;
+}
+
+h4, h5  {
+    font-family: Montserrat;
+    color: #25326a;
+    text-align: center;
+}
+
+
+p {
+    font-size: 100%;
+    font-family: Montserrat;
+    color: #25326a;
+}
+
+
+
+input{ /* inputs style to make them look like the rest of the buttons*/
+    margin-bottom: 5em;
+    color: #25326a;
+    background-color: white;
+}
+
+label {
+    color: #25326a;
+}
+
+table { /*General styling for tables*/
+    /* font-family: Quicksand; */
+    font-family: Montserrat;
+    color: #25326a;
+}
+
+th { /*General styling for table heads*/
+    text-align: left;
+    color: #25326a;
+}
+
+td {
+    font-size: 100%;
+    font-family: Montserrat;
+    color: #25326a;
+    text-align: left;
+    vertical-align: middle;
+}
+
+  tr { /*General styling for table rows*/
+    text-align: left;
+  }
+
+hr {
+    color: #25326a;
+}
+
+i {
+    vertical-align: middle;
+}
+
+.modal-header {
+    background-color:#25326a;
+  }
+
+.modal-title {
+    color:white;
+}
+
+.modal-footer {
+    color: #f2f2f2;
+}
+
+.closeX {
+    color:white;
+}
+  
+
+/* .margin {margin-bottom: 45px;}  */
 
 .container-fluid {
-    padding-top: 70px;
-    padding-bottom: 70px;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
 }
+
 #navtext{ /* Controls text color of navbar*/
     color:white;
 }
@@ -43,7 +142,7 @@ p {font-size: 16px;  /*Estilo general para paragraphs*/
 .nav-link{ /*Controls all links styles*/
    
     color: #25326a;
-    font-family: Poppins;
+    /* font-family: Poppins; */
     font-size:100%;    
 }
 .nav-link:hover { /*gives hover effect to links on the navbar*/
@@ -70,11 +169,6 @@ img{ /* Controls logo image on navbar*/
     position: left;
 
 }
-.imgWelcome{ /* Controls images on welcomepage*/
-    width: 75%;  
-    
-    position: center;
-}
 
 ngb-pagination /deep/ .page-link { /*Controls color for navigation*/
     color: #25326a !important;
@@ -91,26 +185,7 @@ ngb-pagination /deep/ .page-item.disabled {
     background-color: #25326a ;
 } */
 
-.btnWelcomeJobs{ /*  Controls the job title buttons that let user access application for specific job - reused in c2 c3 c5*/
-    
-    background-color: #FFFFFF;
-    text-align: center;
-    font-size: 20px;
-    color: #25326a;
-    font-family: Poppins;
-  
-    border: none;
-   
-}
-.btnWelcomeJobs:hover{ /*Gives hover effect to job title buttons  */
-    color: #df136f;
-}
-.btnWelcomeApply{ /*Controls the style of apply link under welcome */
-    text-decoration: none;
-    color:white;
-    font-family: Poppins;
-   
-}
+
 .applyBorder{ /* Adds oval border to apply link*/
     
     border: 1px solid white ;
@@ -118,72 +193,55 @@ ngb-pagination /deep/ .page-item.disabled {
     border-radius: 55px;
 }
 
-.btnWelcomeApply:hover{ /*Gives hover style to apply link*/
-    color:#df136f;
-    text-decoration: none;
-    
-}
+
 
 .btn { /* Controls styles of overall buttons*/
 
-  border-radius: 4px;
+  /* border-radius: 4px; */
+  border-radius: 55px !important;
   background-color: #FFFFFF;
   border: 1px solid #25326a !important;
   border-color: #25326a;
   color: #25326a;
   text-align: center;
-  font-size: 14px;
-  margin: 5px;
-
+  font-size: .87em;
+  /* padding:1rem; */
+  /* margin: 5px; */
 }
 
-.btn:hover { /* Hover effect of overall buttons*/
-  border-radius: 4px;
+.btn:hover { /* Hover effect of overall buttons*/  
   background-color: #25326a;
   border: 1px solid #FFFFFF;
   color: #FFFFFF;
-  text-align: center;
-  font-size: 14px;
-  margin: 5px;
 }
 
-input{ /* inputs style to make them look like the rest of the buttons*/
-    margin-bottom: 5em;
+
+.btn-inverse { /* Controls styles of overall buttons*/
+    border-radius: 55px !important;
+    background-color: #25326a;
+    border: 1px solid #25326a !important;
+    border-color: #25326a;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: .87em;
+    /* padding:1rem; */
+    /* margin: 5px; */
+  }
+  
+  .btn-inverse:hover { /* Hover effect of overall buttons*/  
+    background-color: #FFFFFF;
+    border: 1px solid #25326a !important;
     color: #25326a;
-    background-color: white;
-}
+  }
+
+
 #uploadResume{ /* input style for browse on A3 (changed text but not actual button style)*/
     margin-bottom: 5em;
     color: #25326a;
     background-color: white;
 }
 
-table{ /*General styling for tables*/
-    font-family: Quicksand;
-    color: black;
-}
 
-th { /*General styling for table heads*/
-    text-align: center;
-
-}
-
-  tr { /*General styling for table rows*/
-    text-align: left;
-  }
-  h3{
-    font-family: Quicksand;
-    color: black;
-    text-align: center;
-    padding-top: 1em;
-    
-}
-h5{
-    font-family: Quicksand;
-    color: black;
-    text-align: center;
-    
-}
     
  .smallrow{ /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
     height: 5em;
@@ -197,16 +255,8 @@ h5{
     text-align: justify;
     padding-left: 200px;
     padding-right: 200px;
-    font-family: Quicksand;
+    /* font-family: Quicksand; */
     padding-bottom: 50px;
-}
-.jobsp{
-    font-size: 16px;
-    color: black;
-    text-align: justify;
-    padding-left: 30px;
-    padding-right: 0px;
-    font-family: Quicksand;
 }
 
 .backgroundG{ /*Controls small pink border on top of navbar*/
@@ -217,14 +267,7 @@ h5{
       font-weight: 100;
 }
 
-.backgroundWelcome{ /* Controls large blue banner on welcome page*/
-    background-image: linear-gradient(-90deg,#25326a,	#4577bb);
-    text-align: center;
-     position:auto;
-      height: 30em;
-      color: white;
-      font-family: Quicksand;
-}
+
 
 .tabsmargin{ /*Controls the location of the tabs on A5 and C1*/
     margin-top: 10em
@@ -299,4 +342,30 @@ ul.timeline > li:before {
     border-bottom:1px dashed #efefef;
     margin-bottom:25px;
 }
+
+
+.searchBarArea {
+    padding: 2rem;
+  }
+  
+  .tableArea {
+    padding: 2rem;
+  }
+
+
+  .searchButton {
+    background-color: #25326a !important;
+    color:#FFFF;
+    border-color:#25326a !important;
+    border-radius: 50%;
+    text-align: center; 
+}
+
+.jobDescription {
+    text-align: justify ;
+    text-justify: inter-word; 
+    margin-left: 10%;
+    margin-right: 10%; 
+    padding-bottom: 2em;
+  }
      

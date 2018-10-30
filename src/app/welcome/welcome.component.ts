@@ -11,17 +11,19 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  //styleUrls: ['./welcome.component.css']
+  styleUrls: ['./welcome.component.css']
 })
+
+
 export class WelcomeComponent implements OnInit {
 jobs:IJobOffer[]
-  constructor(private jobService:JobService, private router: Router) { }
+  constructor(private jobService:JobService, private router: Router,
+  ) { }
  
   ngOnInit() {
     this.jobService.universalSearch('_', 1, 3)
         .subscribe((data: IJobOffer[]) => {
           this.jobs = data['Data'];
-         console.log(this.jobs[0]);
         })
   }
   applyButtonClicked(jobId: number) {

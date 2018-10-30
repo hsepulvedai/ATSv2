@@ -1,29 +1,28 @@
 /*This page shows the list of available jobs to apply for. Can be accessed 
   from the welcome page and through the navbar*/
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../../../shared/services/job.service';
 import { IJobOffer } from '../../../shared/models/job-offer.model';
 import { PaginationService } from '../../../shared/services/pagination.service';
-import { $ } from 'protractor';
-import { document } from 'jquery'
 import { Sort } from '@angular/material';
 import { Subscription } from 'rxjs';
+
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'offer-list',
   templateUrl: './offer-list.component.html',
   styleUrls: ['./offer-list.component.css']
 })
-export class OfferListComponent implements OnInit
-, OnDestroy 
+export class OfferListComponent implements OnInit, OnDestroy 
 {
 
   constructor
     (private router: Router,
     private jobService: JobService,
-    //private route: ActivatedRoute,
+    // private sort:SortService,
     private pagination: PaginationService) { }
 
   private jobSubscription: Subscription = new Subscription();
@@ -57,6 +56,8 @@ export class OfferListComponent implements OnInit
 
   
   ngOnInit() {
+
+    // this.dataSource.sort = this.sort;
 
     this.pageSize = this.pagination.pageSize
 
@@ -242,13 +243,12 @@ export class OfferListComponent implements OnInit
 
   }
 
-
   /// Sorting
   sortedData: IJobOffer[]
 
   sortData(sort: Sort) {
 
-    const data = this.filteredJobs.slice();
+    const data = this.availableJobs.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
@@ -271,5 +271,6 @@ export class OfferListComponent implements OnInit
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
 
 

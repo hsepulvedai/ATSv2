@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:55555/'
+  baseUrl: 'http://localhost:55555/',
+  stsAuthority: 'http://localhost:4242'
 };
 
 /*

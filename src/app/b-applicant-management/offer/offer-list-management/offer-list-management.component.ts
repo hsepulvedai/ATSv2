@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-offer-list-management',
   templateUrl: './offer-list-management.component.html',
-  // styleUrls: ['./offer-list-management.component.css']
+  styleUrls: ['./offer-list-management.component.css']
 })
 export class OfferListManagementComponent implements OnInit {
 
@@ -35,8 +35,11 @@ export class OfferListManagementComponent implements OnInit {
   paginatorCollectionSize: number
   page: number = this.pagination.pageNumber;
 
-  constructor(private router: Router, private jobService: JobService, private applicantionService: ApplicationService
-    , private pagination: PaginationService) { }
+  constructor(
+    private router: Router, 
+    private jobService: JobService, 
+    private applicantionService: ApplicationService,
+    private pagination: PaginationService) { }
 
   ngOnInit() {
 
@@ -125,7 +128,6 @@ export class OfferListManagementComponent implements OnInit {
         }))
     }
   }
-
   /// Sorting
   sortedData: IJobOfferHR[]
 
@@ -157,3 +159,4 @@ export class OfferListManagementComponent implements OnInit {
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+

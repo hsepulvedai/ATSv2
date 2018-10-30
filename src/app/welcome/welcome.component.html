@@ -1,111 +1,97 @@
 <!--This is the main page for applicants. Welcome them to the site and then allows them to go to the page that
 shows all the available jobs or to the application pages for the 3 latest jobs-->
+
+<!-- A.1 -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+
+<head>
   <title></title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> Keep link for icons/ make sure to add to all htmls with icons -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
-  <!-- First Container -->
-<div class="container-fluid backgroundWelcome " style="padding-top:100px;">
-<!--This container belongs to top gradient banner on the page-->
-         <div class="row">
-               <div class="col-12">   
-                 <!-- A.1 -->
-                     <h1 class="margin" style="text-align: center" > Welcome to Invid Careers</h1>
-                     <h4><a routerLink="/jobs"class="btnWelcomeApply applyBorder">
-                      Apply to Jobs
-                    </a></h4> <!--The <a> send the user to the list of jobs available to apply for-->
-               </div>
-         </div>
-    </div>     
-<!-- ***************************************************************************************************** -->     
-  <div class="container-fluid">    
-          <div class="row">
-            <div class="col" >
-            <div class=" text-center" >                   
-              </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-              <div class="text-center">    
-                <h1 class="margin" style="color:#df136f; font-family: Quicksand;"> Working at Invid </h1><br>
-              </div>
-              <div>
-                <p class="jobsp" style="margin-left:20%; margin-right:20%">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique
-                   maximus erat eget rhoncus. Ut quis eros risus. Maecenas in dolor non massa volutpat posuere vitae id lectus. 
-                   Aliquam cursus commodo tortor nec interdum. Nam urna nibh, suscipit ac urna et, finibus facilisis metus. 
-                   Vivamus laoreet mauris vulputate, imperdiet dolor non, condimentum sapien. Pellentesque id ex non mi porta 
-                   aliquet. Vestibulum finibus varius augue, id convallis nunc mattis a. Quisque consequat ac ligula quis suscipit.
-                   Mauris viverra vulputate orci sed vulputate. Praesent nec neque et massa suscipit dapibus. Cras dapibus nisi non pulvinar posuere.  </p><br>
-                  <p class="jobsp" style="margin-left:20%; margin-right:20%">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus.
-                      Ut quis eros risus. Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo 
-                      tortor nec interdum. Nam urna nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris 
-                      vulputate, imperdiet dolor non, condimentum sapien. Pellentesque id ex non mi porta aliquet. Vestibulum 
-                      finibus varius augue, id convallis nunc mattis a. Quisque consequat ac ligula quis suscipit. Mauris viverra
-                       vulputate orci sed vulputate. Praesent nec neque et massa suscipit dapibus. Cras dapibus nisi non pulvinar posuere.
-                  </p><br>                  
-              </div>
-            </div>
-          </div>
-          <div class="row" style="margin-top:10%;">
-            <div class="col-md 4" style="margin-left:8%">
-                <img class="imgWelcome shadow" src="../assets/teamwork.jpg"> <br>
-                <p>Team work</p>
-            </div>
-            <div class="col-md 4">
-                <img class="imgWelcome shadow" src="../assets/work.jpg"><br>
-                <p>Great development</p>
-            </div>
-            <div class="col-md 4">
-                <img class="imgWelcome shadow" src="../assets/team.jpg"><br>
-                <p>Team based development</p>
-            </div>
-          </div>
-        <div class="row">
-          <div class="col-sm-12">
-          <div class="text-center">    
-              <h1 class="margin" style="color:#df136f; font-family: Quicksand; margin-top: 5%"> Latest Jobs </h1><br>
-              
-            </div>
-          </div> 
-        </div>
- 
-        <div class="row"> 
-          <div class="col-sm-3 shadow" style="margin-left:10%;"><!--First job on the top 3 jobs featured on the welcome page-->
-            <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[0].jobId)">{{jobs[0].jobName}}</button></h3> <br> <!--Name of job send user to the job's application page-->
-            <h5  >{{jobs[0].city}},{{jobs[0].country}}
-            </h5>
-            <p>{{jobs[0].description}}</p>     
-            <p style="text-align: center;">*click on job title to apply</p>     
-          </div>
-           
-          <div class="col-sm-3 shadow" style="margin-left:2%; margin-right:2%;"> <!--Second job on the top 3 jobs featured on the welcome page-->
-              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[1].jobId)">{{jobs[1].jobName}}</button></h3> <br><!--Name of job send user to the job's application page-->
-              <h5  >{{jobs[1].city}},{{jobs[1].country}}
-              </h5>
-              <p>{{jobs[1].description}}</p>
-              <p style="text-align: center;">*click on job title to apply</p>
-          </div>
-           
-          <div class="col-sm-3 shadow"> <!--Third job on the top 3 jobs featured on the welcome page-->
-              <h3><button class="btnWelcomeJobs"(click)="applyButtonClicked(jobs[2].jobId)">{{jobs[2].jobName}}</button></h3><br><!--Name of job send user to the job's application page-->
-              <h5  >{{jobs[2].city}},{{jobs[2].country}}
-              </h5>
-              <p>{{jobs[2].description}}</p>
-              <p style="text-align: center;">*click on job title to apply</p>
-            </div>
-            
-            
-        </div>         
+  <!-- First Container - top gradient banner on the page-->
+  <div class="backgroundWelcome">
+    <h1>WELCOME TO INVID CAREERS</h1>
+    <button class="searchJobsBtn btn" [routerLink]="['/jobs']">SEARCH JOBS</button>
+  </div>
+
+  <!-- ***************************************************************************************************** -->
+  <div class="welcomeBanner">
+
+    <h2> Working at INVID </h2>
+
+    <div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus. Ut quis eros
+        risus. Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo tortor nec interdum.
+        Nam urna nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris vulputate, imperdiet dolor non,
+        condimentum sapien. Pellentesque id ex non mi porta aliquet. Vestibulum finibus varius augue, id convallis nunc mattis
+        a. Quisque consequat ac ligula quis suscipit. Mauris viverra vulputate orci sed vulputate. Praesent nec neque et
+        massa suscipit dapibus. Cras dapibus nisi non pulvinar posuere. </p><br>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus. Ut quis eros risus.
+        Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo tortor nec interdum. Nam urna
+        nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris vulputate, imperdiet dolor non, condimentum
+        sapien. Pellentesque id ex non mi porta aliquet. Vestibulum finibus varius augue, id convallis nunc mattis a. Quisque
+        consequat ac ligula quis suscipit. Mauris viverra vulputate orci sed vulputate. Praesent nec neque et massa suscipit
+        dapibus. Cras dapibus nisi non pulvinar posuere.
+      </p><br>
+
     </div>
-  </body>
+
+    </div>
+
+
+    <div class="row">
+      <div class="container" style= "padding-bottom: 7rem;">
+        <div class="card-deck">
+          <div class="card">
+            <img class="card-img-top" src="../assets/teamwork.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Teamwork</h5>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="../assets/work.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Innovative Technologies</h5>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card-img-top" src="../assets/team.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Team based development</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="latestJobs">
+
+      <h2 style="color: #25326a">Latest Jobs</h2>
+
+      <div class="row">
+
+        <div *ngFor="let job of jobs" style="padding: 2rem; text-align: center; margin: auto;">
+
+          <!-- <h3><button class="btnWelcomeJobs" (click)="applyButtonClicked(jobs.jobId)">{{job.jobName}}</button></h3> -->
+          <h4>{{job.jobName}}</h4>
+
+          <h5>{{job.city}}, {{job.country}}</h5>
+
+          <button class="applyBtn btn" (click)="applyButtonClicked(job.jobId)">Apply</button>
+        </div>
+      </div>
+    </div>
+
+</body>
+
 </html>

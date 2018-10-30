@@ -1,0 +1,87 @@
+ 
+  <ng-template let-c="close" let-d="dismiss">
+
+        <h4 class="modal-title" id="modal-basic-add"> New Job</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true" class="closeX">&times;</span>
+        </button>
+
+<!--    
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-add"> New Job</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true" class="closeX">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <form [formGroup]="newJobForm" autocomplete="off" (ngSubmit)="c('Save click')">
+          <div class="row smallrow">
+            <div class="form-group col-sm-6">
+              <label for="jobName"> <strong>Job Title</strong></label>
+              <input formControlName="jobName" type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="jobCompany"> <strong>Company</strong></label>
+              <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
+            </div>
+          </div>
+          <div class="row smallrow">
+            <div class="form-group col-sm-6">
+              <label for="jobCategory"><strong>Category</strong>
+                <button *ngIf="!addCatTrue" class="addButton" type="button" (click)="addItem($event)" ><i class="material-icons" id="addCatBtn">add</i></button>
+              </label>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button *ngIf="addCatTrue" class="addButton" type="button" (click)="cancelAddItem($event)" ><i id="cancelAddCatBtn" class="material-icons">undo</i></button>
+                  </div>
+                  <select *ngIf="!addCatTrue" formControlName="jobCategory" id="category" class="selectpicker form-control" (change)="selectJobCatChangeHandler($event)">
+                      <option value="null" disabled="true" [selected]="true">- Select Category -</option>
+                      <option *ngFor=" let selectedCategory of categories">{{selectedCategory.name}}</option>
+                  </select>
+                  <input  *ngIf="addCatTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
+                  <button *ngIf="addCatTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label for="jobType"><strong>Type</strong>
+                <button *ngIf="!addTypeTrue" class="addButton" type="button" (click)="addItem($event)" ><i id="addTypeBtn" class="material-icons">add</i></button>
+              </label>
+
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddTypeBtn" class="material-icons">undo</i></button>
+                  </div>
+                  <select *ngIf="!addTypeTrue"formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)" aria-placeholder="- Select Type -">
+                      <option value="null" disabled="true" [selected]="true">- Select Type -</option>
+                      <option *ngFor=" let selectedType of types">{{selectedType.name}}</option>
+                  </select>
+                  <input  *ngIf="addTypeTrue" formControlName="addTypeInput" type="text" class="form-control" id="company" [value]="">
+                  <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="addJobType()"><i class="material-icons">check</i></button>
+                </div>
+
+            </div>
+          </div>
+          <div class="row smallrow">
+            <div class="form-group col-sm-6">
+              <label for="jobDescription"><strong>Description</strong></label>
+              <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button (click)="createDraft(newJobForm.value)" id="draft" value="draft" type="submit" class="btn btn-outline-secondary"><i
+                class="material-icons">
+                save_alt
+              </i>Save as Draft
+            </button>
+
+            <button (click)="createJob(newJobForm.value)" id="save" value="save" type="submit" class="btn "><i class="material-icons">
+                subdirectory_arrow_left</i>Post
+            </button>
+          </div>
+        </form>
+      </div>
+    </div> -->
+  </ng-template>

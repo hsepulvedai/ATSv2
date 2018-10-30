@@ -1,0 +1,31 @@
+<div>
+
+            <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+                <thead>
+                    <th mat-sort-header="jobName">Job Title</th>
+                    <th mat-sort-header="company">Company</th>
+                    <th mat-sort-header="location">Location</th>
+                    <th mat-sort-header="jobCategory">Category</th>
+                    <th mat-sort-header="jobType">Type</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let job of sortedData">
+                        <td> {{job.jobName}} </td>
+                        <td> {{job.company}}</td>
+                        <td> {{job.city}}, {{job.country}} </td>
+                        <td> {{job.jobCategory}} </td>
+                        <td>{{job.jobType}}</td>
+                        <td> <button type="button" class="btn" (click)="openEdit(content, job)"> <i class="material-icons">
+                                    edit
+                                </i>Edit </button>
+                            <button type="button" class="btn" (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
+                                    subdirectory_arrow_right
+                                </i> Un-Post </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+
+        </div>

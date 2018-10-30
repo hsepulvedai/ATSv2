@@ -2,45 +2,41 @@
   from the welcome page and through the navbar-->
 <!DOCTYPE html>
 <html>
-<head>
+<!-- <head>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
 
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Keep link for icons/ make sure to add to all htmls with icons-->
-</head>
+</head> -->
  
 <body>
-  <div class="container">
-    <div>
       <!-- A.2 -->
-      <h3>  Search Jobs</h3>
-      <h3>Start Searching</h3>
-      <div class="card" style="border-right: white; border-left: white;">
+      <h3>Start Seaching Jobs</h3>
         <div class="card-body">
 
-          <label for="sortBy"><strong> Search: </strong></label><br>
-            <div class="row " style="height:3em;">
-              
-              <div class="col-sm-6"> <!--Allows to search on table -->
-                <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:110%;">
-              </div>
-              <div class="col-sm-2"> <!--Submits search-->
-                <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
-                  <i class="material-icons">search</i> Search</button>
-              </div>
-            </div>
-         
-          <div class="row" >
-            <div class="col-md-12" style="text-align: end"> <!--Div to indicate which page is being displayed out of what total number of pages on table-->
+             <!-- Search Bar -->
+             <label for="sortBy"><strong> Search: </strong></label><br>
+             <div class="row " style="height:3em;">
+               <div class="col-sm-6">
+                 <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:100%;">
+               </div>
+               <div class="col-sm-2">
+                 <button type="button" class="btn searchButton" (click)="universalSearch()" style=" margin-left: 50px;">
+                   <i class="material-icons">search</i> Search</button>
+               </div>
+             </div> 
+
+          <div class="row">
+            <div class="col-md-12" style="text-align: end"> 
               <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
               <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize)">Showing {{pageSize * page}} of {{totalJobs}}</p>
               <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of {{totalJobs}}</p>
             </div>
           </div>
 
-          <table matSort (matSortChange)="sortData($event)" id="example" class="table table-hover table-striped"> 
+
+         <table matSort (matSortChange)="sortData($event)" id="example" class="table table-hover table-striped">
+      
             <thead>
               <tr>
                 <th mat-sort-header="jobName">Job Title</th>
@@ -48,7 +44,7 @@
                 <th mat-sort-header="location">Location</th>
                 <th mat-sort-header="jobCategory">Category</th>
                 <th mat-sort-header="jobType">Type</th>
-                <th>Apply</th>
+                <th style="text-align: center">Apply</th>
               </tr>
             </thead>
             <tbody *ngIf="sortedData === undefined">
@@ -60,8 +56,8 @@
                 <td>{{job.company}}</td>
                 <td>{{job.city}}, {{job.country}}</td>
                 <td>{{job.jobCategory}}</td>
-                <td>{{job.jobType}}</td>
-                <td> <button type="button" class=" btn" (click)="applyButtonClicked(job.jobId)"><i class="material-icons">
+                <td >{{job.jobType}}</td>
+                <td style="text-align: center"> <button type="button" class="btn" (click)="applyButtonClicked(job.jobId)"><i class="material-icons">
                       input
                     </i> Apply</button> 
                 </td>
@@ -75,8 +71,5 @@
           </ngb-pagination>
 
         </div>
-      </div>
-    </div>
-  </div>
  </body>
 </html>

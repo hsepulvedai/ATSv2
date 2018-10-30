@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Keep link for icons/ make sure to add to all htmls with icons-->
 
   <ng-template #content1 let-c="close" let-d="dismiss"> <!--Instructions for the modal that pops up from the add new applicant button on the top right of page-->
     <div class="modal-header">
@@ -168,28 +167,29 @@
 </head>
 
 <body>
-  <div class="container">
     <!-- C.1 -->
-      <h3>  Applicant Maintenance Screen</h3> 
+      <h3>Applicant Maintenance</h3> 
+      <div class="card-body">
       <label for="sortBy"><strong> Search: </strong></label><br>
       <div class="row " style="height:3em;">  
         <div class="col-sm-6">
-          <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:110%;">
+          <input [(ngModel)]='searchBarInput' type="search" id="searchBarI" class="form-control " placeholder="Start Typing..." style="width:100%;">
         </div>  
         <div class="col-sm-2">
-          <button type="button" class="btn" (click)="universalSearch()" style=" margin-left: 50px;">
+          <button type="button" class="btn btn-inverse" (click)="universalSearch()" style=" margin-left: 50px;">
             <i class="material-icons">search</i> Search</button>
         </div>
       </div>
-      <div align="right">
-          <button type="button" class="btn"  (click)="openAddApplicant(content1)" > <i class="material-icons">
-              note_add
-              </i> Add New Applicant </button>  
+      <div>
       </div> 
     <ngb-tabset> <!--Allows applicants to be distributed in different tabs to keep them categorized-->
       <ngb-tab title="Applicants"> <!--Tab for current applicants-->
         <ng-template ngbTabContent>
-              <h3> Applicants </h3>          
+              <h3> Applicants </h3>   
+              <button type="button" class="btn btn-inverse"  (click)="openAddApplicant(content1)" > <i class="material-icons">
+                  note_add
+                  </i> Add New Applicant </button>  
+
                 <div class="row">
                     <div class="col-md-12" style="text-align: end">
                       <p *ngIf="totalApplicants === undefined || totalApplicants === 0"> Showing 0 of 0 </p> <!--Shows the current page out of the total number available-->
@@ -225,7 +225,7 @@
                   <td> <button type="button" class="btn" (click)="openEdit(content, applicant)">  <i class="material-icons">
                       edit
                       </i>Edit </button> <!--Prompts the modal to edit the applicant-->
-                      <button style="margin-left: 10px;"type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> <i class="material-icons">
+                      <button style="margin-left: 10px;" type="button" class="btn"(click)="makeApplicantInactive(applicant.applicantId)"> <i class="material-icons">
                           subdirectory_arrow_right
                       </i> Remove </button> </td> <!--Moves applicant to past applicants tab-->
                 </tr>
@@ -239,9 +239,16 @@
         </ng-template>
       </ngb-tab>
       <ngb-tab>
+
         <ng-template ngbTabTitle > Past Applicants</ng-template> <!--Tab for past applicants-->
+
+
         <ng-template ngbTabContent>
           <h3> Past Applicants </h3>  
+
+          <button type="button" class="btn btn-inverse"  (click)="openAddApplicant(content1)" > <i class="material-icons">
+              note_add
+              </i> Add New Applicant </button>  
           <div>
               <div class="row">
                   <div class="col-md-12" style="text-align: end">
@@ -270,15 +277,15 @@
   
               <!--Table body-->
               <tbody>
-                <tr *ngFor="let applicant of sortedInactive">
-                    <td>{{applicant.firstName}} {{applicant.lastName}}</td>
-                    <td>{{applicant.email }}</td>
-                    <td>{{applicant.phone}}</td>
-                    <td>{{applicant.city}}, {{applicant.country}}</td>
-                    <td> <button type="button" class="btn"(click)="openEdit(content, applicant)"> <i class="material-icons">
+                <tr *ngFor="let iapplicant of sortedInactive">
+                    <td>{{iapplicant.firstName}} {{iapplicant.lastName}}</td>
+                    <td>{{iapplicant.email }}</td>
+                    <td>{{iapplicant.phone}}</td>
+                    <td>{{iapplicant.city}}, {{iapplicant.country}}</td>
+                    <td> <button type="button" class="btn"(click)="openEdit(content, iapplicant)"> <i class="material-icons">
                       edit
                       </i>Edit </button> 
-                      <button style="margin-left:10px;" type="button" class="btn" (click)="makeApplicantActive(applicant.applicantId)"> <i class="material-icons">
+                      <button style="margin-left:10px;" type="button" class="btn" (click)="makeApplicantActive(iapplicant.applicantId)"> <i class="material-icons">
                           subdirectory_arrow_left
                           </i> Add </button> </td>
                     </tr>
@@ -294,6 +301,6 @@
         </ng-template>
       </ngb-tab>  
     </ngb-tabset>  
-  </div>
+    </div>
 </body> 
 </html>

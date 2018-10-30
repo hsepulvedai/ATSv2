@@ -7,17 +7,27 @@ import { OfferListComponent } from './a-applicant-section/offer/offer-list/offer
 import { EditApplicantComponent } from './applicant/edit-applicant/edit-applicant.component';
 import { MaintenanceApplicantComponent } from './applicant/maintenance-applicant/maintenance-applicant.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
-import { MaintenanceUserComponent } from './user/maintenance-user/maintenance-user.component';
+import { MaintenanceUserComponent } from './c-candidate-management/maintenance-user/maintenance-user.component';
 import { OfferListManagementComponent } from './b-applicant-management/offer/offer-list-management/offer-list-management.component';
 import { HrOfferDetailComponent } from './b-applicant-management/offer/hr-offer-detail/hr-offer-detail.component';
 import { OfferApplicationComponent } from './a-applicant-section/offer/offer-application/offer-application.component';
 import { OfferTrackingComponent } from './a-applicant-section/offer/offer-tracking/offer-tracking.component';
 import { OfferMaintenanceComponent } from './a-applicant-section/offer/offer-maintenance/offer-maintenance.component';
 import { ApplicantMaintenanceComponent } from './c-candidate-management/applicant/applicant-maintenance/applicant-maintenance.component';
-import { SortOverviewExampleComponent } from './a-applicant-section/offer/TestingMaterial/sort-overview-example/sort-overview-example.component';
+import { LoginComponent } from './user/login/login.component'
+import { Error404Component } from './errors/404.component'
+import { TestComponent } from './test/test.component';
+
 export const appRoutes: Routes = [
 
+    
+
+    { path:'test' , component: TestComponent},
+    
+    { path: 'login', component: LoginComponent},
+
     { path: 'jobs', component: OfferListComponent },
+    { path: 'offer-application', component: OfferApplicationComponent },
   
     { path: 'editApplicant', component: EditApplicantComponent},
     { path: 'applicants/maintenance', component: MaintenanceApplicantComponent},
@@ -25,19 +35,16 @@ export const appRoutes: Routes = [
     { path: 'createUser', component: CreateUserComponent},
     { path: 'users/userMaintenance', component: MaintenanceUserComponent},
  
-    {path: 'offer-application', component: OfferApplicationComponent},
     {path: 'offer-list-management', component: OfferListManagementComponent},
     {path: 'hr-offer-detail', component: HrOfferDetailComponent},
     {path: 'offer-tracking', component: OfferTrackingComponent},
     {path: 'offer-maintenance', component: OfferMaintenanceComponent},
     {path: 'applicant-maintenance', component: ApplicantMaintenanceComponent},
-
-    {path: 'sort-overview-example', component: SortOverviewExampleComponent},
-
-    
+ 
     { path: 'hr-tasks', component: HrTasksComponent},
     { path: 'welcome', component: WelcomeComponent},
     { path: 'hr-applicant-profile', component: HrApplicantProfileComponent},
+    { path : '404', component: Error404Component },
     { path: '', redirectTo: 'welcome', pathMatch: 'full'}
     
 ]

@@ -25,7 +25,7 @@ import { IActionEdit } from '../../../shared/models/action_edit.model';
 @Component({
   selector: 'app-hr-applicant-profile',
   templateUrl: './hr-applicant-profile.component.html',
-  //styleUrls: ['./hr-applicant-profile.component.css']
+  styleUrls: ['./hr-applicant-profile.component.css']
 })
 export class HrApplicantProfileComponent implements OnInit {
 

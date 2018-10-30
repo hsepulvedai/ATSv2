@@ -1,0 +1,11 @@
+h3 {
+    font-family: Montserrat;
+    color: #df136f;
+    text-align: center;
+    padding-top: 1em;
+    font-weight: bold;
+}
+
+th, td { /*Styles position of text on the table*/
+    text-align: left;
+  }
