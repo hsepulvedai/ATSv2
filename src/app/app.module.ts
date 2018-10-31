@@ -39,6 +39,7 @@ import { MaintenanceTabComponent } from './common/maintenance-tab.component';
 import { LoginModalComponent } from './shared/modals/login-modal/login-modal.component';
 import { EditModalComponent } from './shared/modals/edit-modal/edit-modal.component';
 import { AddJobModalComponent } from './shared/modals/add-job-modal/add-job-modal.component';
+import { OfferMaintenanceTableComponent } from './common/tables/offer-maintenance-table/offer-maintenance-table.component';
 
 
 
@@ -66,6 +67,7 @@ import { AddJobModalComponent } from './shared/modals/add-job-modal/add-job-moda
     LoginModalComponent,
     EditModalComponent,
     AddJobModalComponent,
+    OfferMaintenanceTableComponent,
 
   ],
   imports: [

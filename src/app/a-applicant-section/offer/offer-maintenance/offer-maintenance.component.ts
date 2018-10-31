@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 import { JobStatusService } from '../../../shared/services/job-status.service';
 import { IJobStatus } from '../../../shared/models/job_status.model';
 import { ModalService } from '../../../shared/services/modal.service';
+import { IJob } from '../../../shared/models/job.model';
 
 @Component({
   selector: 'app-offer-maintenance',
@@ -37,7 +38,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   private categorySubscription: Subscription = new Subscription();
   private typeSubscription: Subscription = new Subscription();
 
-  // Used to calculate job count on page
+  // Used to calculate job count on page HTML
   pageSize = this.pagination.pageSize
 
 
@@ -54,18 +55,17 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   inactivePaginatorSize: number
   draftPaginatorSize: number
 
-  draftEditForm: FormGroup
+  // draftEditForm: FormGroup
 
 
-  totalJobs: number
+  totalActiveJobs: number
   paginatorCollectionSize: number
 
   searchBarInput: string
-  sortBy: string
 
   availableJobs: IJobOffer[]
 
-  job: IJobOffer
+  // job: IJobOffer
 
   pageInactive: number = this.pagination.pageNumber;
   paginatorSizeInactive: number
@@ -77,19 +77,12 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   draftsFilteredJobs: IJobOffer[]
   draftJobs: IJobOffer[]
 
-  addDropdownOptForm: FormGroup
+  // addDropdownOptForm: FormGroup
 
   addJobTrue: boolean = false
   editJobTrue: boolean = false
-  editDraft: boolean = false
+  editDraftTrue: boolean = false
 
-
-
-
-  // changeTab(event) {
-  //   console.log(event.title)
-  //   console.log('yes')
-  // }
 
   constructor(
     private jobService: JobService,
@@ -99,11 +92,11 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     private jobStatusService: JobStatusService,
     private pagination: PaginationService,
     private modalService: NgbModal,
-    private formBuilder: FormBuilder,
-    private modalServ: ModalService) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
+    // Must change to the employee's company when auth is set
     this.companyService.getCompanyById(1)
       .subscribe((data: ICompany) => {
         this.currentCompany = data['Data'];
@@ -130,67 +123,92 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
     this.jobInfoForm = this.formBuilder.group({
       jobName: ['', Validators.required],
-      jobCompany: '',
-      jobCategory: '',
-      jobType: '',
-      jobStatus:'',
+      jobCompany: [''],
+      jobCategory:['', Validators.required],
+      jobType: ['', Validators.required],
+      jobStatus: [''],
       jobDescription: ['', Validators.maxLength(500)],
       addCategoryInput: '',
       addTypeInput: '',
-      addStatusInput:''
+      addStatusInput: ''
     })
 
-    this.newJobForm = this.formBuilder.group({
-      jobName: ['', Validators.required],
-      jobCompany: '',
-      jobCity: '',
-      jobCountry: '',
-      jobCategory: '',
-      jobType: '',
-      jobDescription: ['', Validators.maxLength(500)],
-      addCategoryInput: '',
-      addTypeInput: ''
-    })
+    // this.newJobForm = this.formBuilder.group({
+    //   jobName: ['', Validators.required],
+    //   jobCompany: '',
+    //   jobCity: '',
+    //   jobCountry: '',
+    //   jobCategory: '',
+    //   jobType: '',
+    //   jobDescription: ['', Validators.maxLength(500)],
+    //   addCategoryInput: '',
+    //   addTypeInput: ''
+    // })
 
-    this.jobEditForm = this.formBuilder.group({
-      name: '',
-      category: '',
-      type: '',
-      status: '',
-      description: ''
-    })
+    // this.jobEditForm = this.formBuilder.group({
+    //   name: '',
+    //   category: '',
+    //   type: '',
+    //   status: '',
+    //   description: ''
+    // })
 
-    this.draftEditForm = this.formBuilder.group({
-      draftName: '',
-      draftCategory: '',
-      draftType: '',
-      draftDescription: ''
-    })
+    // this.draftEditForm = this.formBuilder.group({
+    //   draftName: '',
+    //   draftCategory: '',
+    //   draftType: '',
+    //   draftDescription: ''
+    // })
 
-    this.addDropdownOptForm = this.formBuilder.group({
-      input: ''
-    })
+    // this.addDropdownOptForm = this.formBuilder.group({
+    //   input: ''
+    // })
 
   }
 
-  openModal(content) {
+  openModal(content, job, event) {
 
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+    if (event.target.id === 'editJobButton' || event.target.id === 'editDraftBtn') {
+      this.jobInfoForm.get('jobName').setValue(job.jobName)
+      this.jobInfoForm.controls['jobStatus'].setValue(job.jobStatus, { onlySelf: true })
+      this.jobInfoForm.controls['jobCategory'].setValue(job.jobCategory, { onlySelf: true })
+      this.jobInfoForm.controls['jobType'].setValue(job.jobType, { onlySelf: true })
+      this.jobInfoForm.get('jobDescription').setValue(job.description)
+      this.jobService.setCurrentJobId(job.jobId)
+    }
 
-      (this.closeResult = `Closed with: ${result}`)
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    if (event.target.id === 'editJobButton')
+      this.editJobTrue = true;
 
+    if (event.target.id === 'addJobBtn')
+      this.addJobTrue = true;
+
+    if (event.target.id === 'editDraftBtn')
+      this.editDraftTrue = true;
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => { (this.closeResult = `Closed with: ${result}`) }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this.addJobTrue = false
+        this.editJobTrue = false
+        this.editDraftTrue = false
+        this.jobInfoForm.reset();
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC)
+      return 'by pressing ESC';
+    else if (reason === ModalDismissReasons.BACKDROP_CLICK)
+      return 'by clicking on a backdrop';
+    else
+      return `with: ${reason}`;
   }
 
   universalSearch() {
 
-    if (this.searchBarInput != undefined) {
+    if (this.searchBarInput != undefined) 
       this.refreshData()
-    }
   }
-
 
   loadPage(page: number) {
 
@@ -256,21 +274,6 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   }
 
 
-  openAddOption(content) {
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
-
-
-      (this.closeResult = `Closed with: ${result}`)
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-
-  }
-
-
-
-
   currentCompany: ICompany
   selectedJobType: string = 'Default'
   selectedJobCategory: string = 'Default'
@@ -280,6 +283,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   inactiveJobs: IJobOffer[]
 
   currentJobId: number
+  currentJob: IJob
 
   categories: IJobCategory[]
   types: IJobType[]
@@ -287,75 +291,18 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
   closeResult: string;
 
-  newJobForm: FormGroup
-  jobEditForm: FormGroup
+  // newJobForm: FormGroup
+  // jobEditForm: FormGroup
 
   // new variables to try to simplify code
-  jobInfoForm:FormGroup
-  selectedTabId:string
+  jobInfoForm: FormGroup
+  selectedTabId: string
 
 
   currentJobType: string = ''
   currentJobCategory: string = ''
 
   updatedJob: IJobUpdate
-
-  openEdit(content, job) {
-
-    this.jobEditForm.get('name').setValue(job.jobName)
-    this.jobEditForm.controls['category'].setValue(job.jobCategory, { onlySelf: true })
-    this.jobEditForm.controls['type'].setValue(job.jobType, { onlySelf: true })
-    this.jobEditForm.get('description').setValue(job.description)
-    this.jobEditForm.controls['status'].setValue(job.jobStatus, { onlySelf: true })
-
-    this.jobService.setCurrentJobId(job.jobId)
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
-
-
-      (this.closeResult = `Closed with: ${result}`)
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  openDraftEdit(content, job) {
-
-    this.draftEditForm.get('draftName').setValue(job.jobName)
-    this.draftEditForm.controls['draftCategory'].setValue(job.jobCategory, { onlySelf: true })
-    this.draftEditForm.controls['draftType'].setValue(job.jobType, { onlySelf: true })
-    this.draftEditForm.get('draftDescription').setValue(job.description)
-
-    this.jobService.setCurrentJobId(job.jobId)
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-draft', size: 'lg' }).result.then((result) => {
-      (this.closeResult = `Closed with: ${result}`)
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  modalTitle: string = "Hey"
-
-
-  openAddModal(content) {
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-add', size: 'lg' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
 
   createJob(newJobForm) {
@@ -374,7 +321,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
     setTimeout(() => { this.refreshData() }, 200)
 
-    this.newJobForm.reset();
+    // this.newJobForm.reset();
   }
 
   createDraft(newJobForm) {
@@ -449,55 +396,66 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectJobCatChangeHandler(event: any) {
-    //update the ui
-    this.selectedJobCategory = event.target.value;
-  }
+  // selectJobCatChangeHandler(event: any) {
+  //   //update the ui
+  //   this.selectedJobCategory = event.target.value;
+  // }onChnage bootstra
 
 
-  selectJobStatChangeHandler(event: any) {
-    this.selectedJobStatus = event.target.value;
-  }
+  // selectJobStatChangeHandler(event: any) {
+  //   this.selectedJobStatus = event.target.value;
+  // }
 
-
-  // TODO: Check this method
-  updateJob(updatedJobForm) {
+  updateJob(updatedJobForm, event) {
 
     this.updatedJob = {
       id: this.jobService.currentJobId,
-      name: updatedJobForm.name,
-      category: updatedJobForm.category,
-      type: updatedJobForm.type,
-      status: updatedJobForm.status,
-      description: updatedJobForm.description
+      name: updatedJobForm.jobName,
+      company: updatedJobForm.jobCompany,
+      category: updatedJobForm.jobCategory,
+      type: updatedJobForm.jobType,
+      status: updatedJobForm.jobStatus,
+      description: updatedJobForm.jobDescription
     }
 
-    this.jobService.updateJob(this.updatedJob)
-      .subscribe(data => { console.log("Updated:" + data) },
-        error => { console.error("Error: ", error) })
 
-    setTimeout(() => { this.refreshData() }, 200)
+    if (event.target.id === 'saveJobBtn') {
+      this.jobService.updateJob(this.updatedJob)
+        .subscribe(data => { console.log("Updated:" + data) },
+          error => { console.error("Error: ", error) })
+    }
+
+    if (event.target.id === 'saveDraftBtn') {
+      this.updatedJob.status = 'Draft'
+      this.jobService.updateJob(this.updatedJob)
+        .subscribe(data => { console.log("Updated:" + data) },
+          error => { console.error("Error: ", error) })
+    }
+
+
+
+    setTimeout(() => { this.refreshData() })
   }
 
   draftUpdate: IJobUpdate
 
-  updateJobDraft(updatedJobDraft) {
+  // updateJobDraft(updatedJobDraft) {
 
-    this.draftUpdate = {
-      id: this.jobService.currentJobId,
-      name: updatedJobDraft.draftName,
-      category: updatedJobDraft.draftCategory,
-      type: updatedJobDraft.draftType,
-      status: 'Draft',
-      description: updatedJobDraft.draftDescription
-    }
+  //   this.draftUpdate = {
+  //     id: this.jobService.currentJobId,
+  //     name: updatedJobDraft.draftName,
+  //     category: updatedJobDraft.draftCategory,
+  //     type: updatedJobDraft.draftType,
+  //     status: 'Draft',
+  //     description: updatedJobDraft.draftDescription
+  //   }
 
-    this.jobService.updateJob(this.draftUpdate)
-      .subscribe(data => { console.log("Updated:" + data) },
-        error => { console.error("Error: ", error) })
+  //   this.jobService.updateJob(this.draftUpdate)
+  //     .subscribe(data => { console.log("Updated:" + data) },
+  //       error => { console.error("Error: ", error) })
 
-    setTimeout(() => { this.refreshData() }, 200)
-  }
+  //   setTimeout(() => { this.refreshData() }, 200)
+  // }
 
   refreshData() {
 
@@ -507,8 +465,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
         this.jobService.universalSearchCount('_',
           this.pagination.pageNumber, this.pagination.pageSize)
           .subscribe((data: number) => {
-            this.totalJobs = data['Data'][0]
-            this.pagination.setPageRange(this.totalJobs)
+            this.totalActiveJobs = data['Data'][0]
+            this.pagination.setPageRange(this.totalActiveJobs)
             this.activePaginatorSize = this.pagination.paginatorSize
             this.activeCollectionSize = this.pagination.getCollectionSize()
           })
@@ -567,8 +525,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
       this.jobService.universalSearchCount(this.searchBarInput,
         this.pagination.pageNumber, this.pagination.pageSize)
         .subscribe((data: number) => {
-          this.totalJobs = data['Data'][0]
-          this.pagination.setPageRange(this.totalJobs)
+          this.totalActiveJobs = data['Data'][0]
+          this.pagination.setPageRange(this.totalActiveJobs)
           this.activePaginatorSize = this.pagination.paginatorSize
           this.activeCollectionSize = this.pagination.getCollectionSize()
         })
@@ -712,7 +670,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   /// Must make the dropdown refresh.
   addCategory() {
     this.newCategory = {
-      name: this.newJobForm.controls.addCategoryInput.value,
+      // name: this.newJobForm.controls.addCategoryInput.value,
       createdBy: 'DummyUser'
     }
 

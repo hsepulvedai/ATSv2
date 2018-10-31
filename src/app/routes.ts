@@ -17,12 +17,13 @@ import { ApplicantMaintenanceComponent } from './c-candidate-management/applican
 import { LoginComponent } from './user/login/login.component'
 import { Error404Component } from './errors/404.component'
 import { TestComponent } from './test/test.component';
+import { OfferMaintenanceTableComponent } from './common/tables/offer-maintenance-table/offer-maintenance-table.component';
 
 export const appRoutes: Routes = [
 
     
 
-    { path:'test' , component: TestComponent},
+    { path:'test' , component: OfferMaintenanceTableComponent},
     
     { path: 'login', component: LoginComponent},
 
