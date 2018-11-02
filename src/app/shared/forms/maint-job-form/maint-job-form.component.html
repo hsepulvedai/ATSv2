@@ -1,0 +1,94 @@
+<div>
+  <!-- <ng-template let-c="close" let-d="dismiss"> -->
+
+
+<form [formGroup]="jobInfoForm" autocomplete="off">
+    <div class="row smallrow">
+      <div class="form-group col-sm-6">
+        <label for="jobName"> <strong>Job Title</strong></label>
+        <input formControlName="jobName" type="text" class="form-control" id="name" placeholder="Enter job title...">
+      </div>
+      <div class="form-group col-sm-6">
+        <label for="jobCompany"> <strong>Company</strong></label>
+        <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="company">
+      </div>
+    </div>
+    <div class="row smallrow">
+      <div class="form-group col-sm-6">
+        <label for="jobCategory"><strong>Category</strong>
+          <button *ngIf="!addCatTrue" class="addButton" type="button" (click)="addItem($event)"><i class="material-icons"
+              id="addCatBtn">add</i></button>
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button *ngIf="addCatTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddCatBtn"
+                class="material-icons">undo</i></button>
+          </div>
+          <select *ngIf="!addCatTrue" formControlName="jobCategory" id="category" class="selectpicker form-control" (change)="selectJobCatChangeHandler($event)">
+            <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
+            <!-- <option *ngIf="selectedCategory == undefined" value="null" disabled="true" [selected]="true">- Select Category -</option> -->
+          </select>
+          <input *ngIf="addCatTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
+          <button *ngIf="addCatTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
+        </div>
+      </div>
+
+      <div class="form-group col-sm-6">
+        <label for="jobType"><strong>Type</strong>
+          <button *ngIf="!addTypeTrue" class="addButton" type="button" (click)="addItem($event)"><i id="addTypeBtn" class="material-icons">add</i></button>
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddTypeBtn"
+                class="material-icons">undo</i></button>
+          </div>
+          <select *ngIf="!addTypeTrue" formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)"
+            aria-placeholder="- Select Type -">
+            <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
+            <!-- <option *ngIf="selectedType == undefined "value="null" disabled="true" [selected]="true">- Select Type -</option> -->
+          </select>
+          <input *ngIf="addTypeTrue" formControlName="addTypeInput" type="text" class="form-control" id="company" [value]="">
+          <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="addJobType()"><i class="material-icons">check</i></button>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label for="jobDescription"><strong>Description</strong></label>
+        <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+      </div>
+
+      <div *ngIf="editJobTrue" class="form-group col-md-6">
+        <label for="status"><strong>Status</strong>
+          <button *ngIf="!addStatusTrue" class="addButton" type="button" (click)="addItem($event)"><i id="addStatusBtn"
+              class="material-icons">add</i></button>
+        </label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddStatusBtn"
+                class="material-icons">undo</i></button>
+          </div>
+          <select *ngIf="!addStatusTrue" formControlName="jobStatus" id="status" class="form-control">
+            <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">{{selectedStatus.status}}</option>
+            <!-- <option *ngIf="selectedStatus == undefined" value="null" disabled="true" [selected]="true">- Select Status -</option> -->
+          </select>
+          <input *ngIf="addStatusTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
+          <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      
+      <ng-content></ng-content>
+      <ng-content></ng-content>
+      <ng-content></ng-content>
+      <ng-content></ng-content>
+      <ng-content></ng-content>
+      <ng-content></ng-content>
+
+    </div>
+  </form>
+<!-- </ng-template> -->
+</div>
