@@ -3,7 +3,7 @@
 
   <div class="modal-header">
 
-    <h4 *ngIf="addJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Add Job</h4>
+    <!-- <h4 *ngIf="addJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Add Job</h4> -->
     <h4 *ngIf="editJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Edit Job</h4>
     <h4 *ngIf="editDraftTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Edit Draft</h4>
 
@@ -14,7 +14,40 @@
 
   <div class="modal-body">
     <div>
-      <form [formGroup]="jobInfoForm" autocomplete="off" (ngSubmit)="c('Save click'); setBooleansFalse(); jobInfoForm.reset();">
+
+    <maint-job-form [company]="currentCompany.name"  (submittedForm)="submittedForm">
+        <button *ngIf="addJobTrue" (click)="createDraft(newJobForm.value); setBooleansFalse();" id="draft" value="draft" type="submit"
+        class="btn"><i class="material-icons">
+          save_alt
+        </i>Save as Draft
+      </button>
+      <button *ngIf="editDraftTrue" (click)="deleteDraft()" type="submit" class="btn"><i class="material-icons">
+          delete </i>Delete
+      </button>
+      <button *ngIf="editJobTrue" id="saveJobBtn" (click)="updateJob(jobInfoForm.value, $event);" type="submit" class="btn"><i
+          id="saveJobBtn" class="material-icons">
+          save_alt</i>Save
+      </button>
+      <button *ngIf="editDraftTrue" id="saveDraftBtn" (click)="updateJob(jobInfoForm.value, $event);" type="submit" class="btn"><i
+          id="saveDraftBtn" class="material-icons">
+          save_alt</i>Save
+      </button>
+      <!-- <button *ngIf="addJobTrue" (click)="createJob(jobInfoForm.value); setBooleansFalse();" id="save" value="save" type="submit"
+        class="btn " [disabled]="!jobInfoForm.valid"><i class="material-icons">
+          subdirectory_arrow_left</i>Post
+      </button> -->
+      <button *ngIf="addJobTrue" (click)="test(); setBooleansFalse(); c('Save click'); jobInfoForm.reset();" id="save" value="save" type="submit"
+      class="btn "><i class="material-icons">
+        subdirectory_arrow_left</i>Post
+    </button>
+      <button *ngIf="editDraftTrue" (click)="postDraft(); setBooleansFalse();" id="save" value="save" type="submit" class="btn "
+        [disabled]="!jobInfoForm.valid"><i class="material-icons">
+          subdirectory_arrow_left</i>Post
+      </button>
+    </maint-job-form>
+
+
+      <!-- <form [formGroup]="jobInfoForm" autocomplete="off" (ngSubmit)="c('Save click'); setBooleansFalse(); jobInfoForm.reset();">
         <div class="row smallrow">
           <div class="form-group col-sm-6">
             <label for="jobName"> <strong>Job Title</strong></label>
@@ -38,7 +71,6 @@
               </div>
               <select *ngIf="!addCatTrue" formControlName="jobCategory" id="category" class="selectpicker form-control" (change)="selectJobCatChangeHandler($event)">
                 <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
-                <!-- <option *ngIf="selectedCategory == undefined" value="null" disabled="true" [selected]="true">- Select Category -</option> -->
               </select>
               <input *ngIf="addCatTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
               <button *ngIf="addCatTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
@@ -57,7 +89,6 @@
               <select *ngIf="!addTypeTrue" formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)"
                 aria-placeholder="- Select Type -">
                 <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
-                <!-- <option *ngIf="selectedType == undefined "value="null" disabled="true" [selected]="true">- Select Type -</option> -->
               </select>
               <input *ngIf="addTypeTrue" formControlName="addTypeInput" type="text" class="form-control" id="company" [value]="">
               <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="addJobType()"><i class="material-icons">check</i></button>
@@ -83,7 +114,6 @@
               </div>
               <select *ngIf="!addStatusTrue" formControlName="jobStatus" id="status" class="form-control">
                 <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">{{selectedStatus.status}}</option>
-                <!-- <option *ngIf="selectedStatus == undefined" value="null" disabled="true" [selected]="true">- Select Status -</option> -->
               </select>
               <input *ngIf="addStatusTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
               <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
@@ -117,7 +147,7 @@
               subdirectory_arrow_left</i>Post
           </button>
         </div>
-      </form>
+      </form> -->
     </div>
   </div>
 </ng-template>

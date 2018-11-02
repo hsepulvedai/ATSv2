@@ -4,6 +4,13 @@ import { JobService } from '../../../shared/services/job.service';
 import { PaginationService } from '../../../shared/services/pagination.service';
 import { Sort } from '@angular/material';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup } from '@angular/forms';
+import { ModalService } from '../../../shared/services/modal.service';
+
+
+
 @Component({
   selector: 'offer-maintenance-table',
   templateUrl: './offer-maintenance-table.component.html',
@@ -38,7 +45,7 @@ export class OfferMaintenanceTableComponent implements OnInit {
   searchBarInput:string
 
   constructor(
-    private jobService:JobService, private pagination:PaginationService
+    private jobService:JobService, private pagination:PaginationService, private modalService:ModalService
   ) { }
 
   ngOnInit() {
@@ -132,8 +139,37 @@ export class OfferMaintenanceTableComponent implements OnInit {
 
   }
 
+  closeResult:string
+  addJobTrue: boolean = false
+  editJobTrue: boolean = false
+  editDraftTrue: boolean = false
+  jobInfoForm:FormGroup
 
-  
+
+  openModal(content, job, event) {
+
+    // if (event.target.id === 'editJobButton' || event.target.id === 'editDraftBtn') {
+    //   this.jobInfoForm.get('jobName').setValue(job.jobName)
+    //   this.jobInfoForm.controls['jobStatus'].setValue(job.jobStatus, { onlySelf: true })
+    //   this.jobInfoForm.controls['jobCategory'].setValue(job.jobCategory, { onlySelf: true })
+    //   this.jobInfoForm.controls['jobType'].setValue(job.jobType, { onlySelf: true })
+    //   this.jobInfoForm.get('jobDescription').setValue(job.description)
+    //   this.jobService.setCurrentJobId(job.jobId)
+    // }
+
+    if (event.target.id === 'editJobButton')
+      this.editJobTrue = true;
+
+    if (event.target.id === 'addJobBtn')
+      this.addJobTrue = true;
+
+    if (event.target.id === 'editDraftBtn')
+      this.editDraftTrue = true;
+
+      this.modalService.openModal(content)
+
+  }
+
 
   /// Sorting
   sortedData: IJobOffer[]

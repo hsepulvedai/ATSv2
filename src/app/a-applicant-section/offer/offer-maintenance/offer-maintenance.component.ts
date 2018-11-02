@@ -7,7 +7,7 @@ import { IJobCategory } from '../../../shared/models/job_category.model';
 import { JobCategoryService } from '../../../shared/services/job-category.service';
 import { IJobType } from '../../../shared/models/job_type.model';
 import { JobTypeService } from '../../../shared/services/job-type.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../../shared/services/company.service';
 import { ICompany } from '../../../shared/models/company.model';
 import { IJobInsert } from '../../../shared/models/job_insert.model';
@@ -36,7 +36,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   private draftTotalSubscription: Subscription = new Subscription();
 
   private categorySubscription: Subscription = new Subscription();
-  private typeSubscription: Subscription = new Subscription();
+  // private typeSubscription: Subscription = new Subscription();
 
   // Used to calculate job count on page HTML
   pageSize = this.pagination.pageSize
@@ -56,13 +56,9 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   inactiveCollectionSize: number
   draftsCollectionSize: number
 
-
   activePaginatorSize: number
   inactivePaginatorSize: number
   draftPaginatorSize: number
-
-  // draftEditForm: FormGroup
-
 
   totalActiveJobs: number
   paginatorCollectionSize: number
@@ -89,6 +85,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   editJobTrue: boolean = false
   editDraftTrue: boolean = false
 
+  addJobFormTitle:string = "Add Job"
+
 
   constructor(
     private jobService: JobService,
@@ -97,8 +95,9 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     private companyService: CompanyService,
     private jobStatusService: JobStatusService,
     private pagination: PaginationService,
-    private modalService: NgbModal,
-    private formBuilder: FormBuilder) { }
+    // private modalService: NgbModal,
+    private formBuilder: FormBuilder,
+  private modalService:ModalService) { }
 
   ngOnInit() {
 
@@ -110,22 +109,22 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
     setTimeout(() => { this.refreshData() }, 50)
 
-    this.categorySubscription.add(
-      this.jobCategoryService.showCategories()
-        .subscribe((data: IJobCategory[]) => {
-          this.categories = data['Data'];
-        })
-    )
+    // this.categorySubscription.add(
+    //   this.jobCategoryService.showCategories()
+    //     .subscribe((data: IJobCategory[]) => {
+    //       this.categories = data['Data'];
+    //     })
+    // )
 
-    this.jobTypeService.showTypes()
-      .subscribe((data: IJobType[]) => {
-        this.types = data['Data']
-      })
+    // this.jobTypeService.showTypes()
+    //   .subscribe((data: IJobType[]) => {
+    //     this.types = data['Data']
+    //   })
 
-    this.jobStatusService.showAllStatus()
-      .subscribe((data: IJobStatus[]) => {
-        this.allStatus = data['Data']
-      })
+    // this.jobStatusService.showAllStatus()
+    //   .subscribe((data: IJobStatus[]) => {
+    //     this.allStatus = data['Data']
+    //   })
 
     this.jobInfoForm = this.formBuilder.group({
       jobName: ['', Validators.required],
@@ -192,23 +191,25 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     if (event.target.id === 'editDraftBtn')
       this.editDraftTrue = true;
 
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => { (this.closeResult = `Closed with: ${result}`) }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        this.addJobTrue = false
-        this.editJobTrue = false
-        this.editDraftTrue = false
-        this.jobInfoForm.reset();
-      });
+      this.modalService.openModal(content)
+
+    // this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => { (this.closeResult = `Closed with: ${result}`) }, (reason) => {
+    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    //     this.addJobTrue = false
+    //     this.editJobTrue = false
+    //     this.editDraftTrue = false
+    //     this.jobInfoForm.reset();
+    //   });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC)
-      return 'by pressing ESC';
-    else if (reason === ModalDismissReasons.BACKDROP_CLICK)
-      return 'by clicking on a backdrop';
-    else
-      return `with: ${reason}`;
-  }
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC)
+  //     return 'by pressing ESC';
+  //   else if (reason === ModalDismissReasons.BACKDROP_CLICK)
+  //     return 'by clicking on a backdrop';
+  //   else
+  //     return `with: ${reason}`;
+  // }
 
   universalSearch() {
 
@@ -407,7 +408,7 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   // selectJobCatChangeHandler(event: any) {
   //   //update the ui
   //   this.selectedJobCategory = event.target.value;
-  // }onChnage bootstra
+  // }
 
 
   // selectJobStatChangeHandler(event: any) {
@@ -717,6 +718,12 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
     this.addCatTrue = false;
     this.addTypeTrue = false;
     this.addStatusTrue = false;
+  }
+
+  submittedForm
+
+  test() {
+    console.log(this.submittedForm.value)
   }
 
 

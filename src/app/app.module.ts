@@ -41,6 +41,7 @@ import { EditModalComponent } from './shared/modals/edit-modal/edit-modal.compon
 import { AddJobModalComponent } from './shared/modals/add-job-modal/add-job-modal.component';
 import { OfferMaintenanceTableComponent } from './common/tables/offer-maintenance-table/offer-maintenance-table.component';
 import { MaintBtnGroupComponent } from './common/buttons/maint-btn-group/maint-btn-group.component';
+import { MaintJobFormComponent } from './shared/forms/maint-job-form/maint-job-form.component';
 
 
 
@@ -70,6 +71,7 @@ import { MaintBtnGroupComponent } from './common/buttons/maint-btn-group/maint-b
     AddJobModalComponent,
     OfferMaintenanceTableComponent,
     MaintBtnGroupComponent,
+    MaintJobFormComponent,
 
   ],
   imports: [
