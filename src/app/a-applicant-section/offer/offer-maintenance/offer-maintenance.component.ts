@@ -42,6 +42,12 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
   pageSize = this.pagination.pageSize
 
 
+  titleAvailaleTable:string = 'Available Jobs'
+  titleInactiveTable:string = 'Past Jobs'
+  titleDraftsTable:string = 'Drafts'
+  
+
+
   activePageNumber: number = this.pagination.pageNumber
   inactivePageNumber: number = this.pagination.pageNumber
   draftPageNumber: number = this.pagination.pageNumber
@@ -306,6 +312,8 @@ export class OfferMaintenanceComponent implements OnInit, OnDestroy {
 
 
   createJob(newJobForm) {
+
+    // console.log('This is ' +this.sortedData)
 
     this.createdJob = {
       jobName: newJobForm.jobName,

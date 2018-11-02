@@ -149,19 +149,17 @@
     <ngb-tab title="Available Jobs">
       <ng-template ngbTabContent>
 
-        <h3> Available Jobs </h3>
+        <!-- <h3> Available Jobs </h3> -->
 
-        <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);">
+        <button addBtn id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);" style="margin-top: 2em;">
           <i id="addJobBtn" class="material-icons">
             note_add
           </i> New Job </button>
 
-        <offer-maintenance-table [jobs]="sortedData" [totalJobs]="totalActiveJobs" [pageNumber]="activePageNumber" [paginatorSize]="activePaginatorSize"
-          [collectionSize]="activeCollectionSize" [pageSize]="pageSize">
+        <offer-maintenance-table [title]="titleAvailaleTable" [jobs]="sortedData" [totalJobs]="totalActiveJobs" [pageNumber]="activePageNumber"
+          [paginatorSize]="activePaginatorSize" [collectionSize]="activeCollectionSize" [pageSize]="pageSize">
 
-          <!-- <div ngIf*="sortedData === undefined"> No jobs to show</div> -->
-
-          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+          <!-- <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
             <thead tableHeader>
               <th mat-sort-header="jobName">Job Title</th>
               <th mat-sort-header="company">Company</th>
@@ -170,7 +168,10 @@
               <th mat-sort-header="jobType">Type</th>
               <th>Actions</th>
             </thead>
-            <tbody tableBody>
+            <tbody *ngIf="sortedData === undefined">
+                No jobs to show
+              </tbody>
+              <tbody *ngIf="!(sortedData === undefined)">
               <tr *ngFor="let job of sortedData">
                 <td> {{job.jobName}} </td>
                 <td> {{job.company}}</td>
@@ -188,7 +189,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </offer-maintenance-table>
 
       </ng-template>
@@ -197,17 +198,18 @@
     <ngb-tab title="Past Jobs">
       <ng-template ngbTabContent>
 
-        <h3> Past Jobs </h3>
+        <!-- <h3> Past Jobs </h3> -->
 
-        <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);">
+        <button addBtn id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);" style="margin-top: 2em;">
           <i id="addJobBtn" class="material-icons">
             note_add
           </i> New Job </button>
 
-        <offer-maintenance-table [jobs]="sortedInactive" [totalJobs]="totalInactiveJobs" [pageNumber]="inactivePageNumber" [paginatorSize]="inactivePaginatorSize"
-          [collectionSize]="inactiveCollectionSize" [pageSize]="pageSize">
+        <offer-maintenance-table [title]="titleInactiveTable" [jobs]="sortedInactive" [totalJobs]="totalInactiveJobs" [pageNumber]="inactivePageNumber"
+          [paginatorSize]="inactivePaginatorSize" [collectionSize]="inactiveCollectionSize" [pageSize]="pageSize">
+        
 
-          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+          <!-- <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
             <thead>
               <th mat-sort-header="jobName">Job Title</th>
               <th mat-sort-header="company">Company</th>
@@ -235,7 +237,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </offer-maintenance-table>
         <hr>
 
@@ -245,18 +247,17 @@
     <ngb-tab title="Drafts(Jobs)">
       <ng-template ngbTabContent>
 
-        <h3> Drafts </h3>
+        <!-- <h3> Drafts </h3> -->
 
-
-        <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);">
+        <button addBtn id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);" style="margin-top: 2em;">
           <i id="addJobBtn" class="material-icons">
             note_add
           </i> New Job </button>
 
-          <offer-maintenance-table [jobs]="sortedDrafts" [totalJobs]="totalDraftJobs" [pageNumber]="draftPageNumber" [paginatorSize]="draftPaginatorSize"
-          [collectionSize]="draftCollectionSize" [pageSize]="pageSize">
+        <offer-maintenance-table [title]="titleDraftsTable" [jobs]="sortedDrafts" [totalJobs]="totalDrafts" [pageNumber]="draftPageNumber"
+          [paginatorSize]="draftPaginatorSize" [collectionSize]="draftCollectionSize" [pageSize]="pageSize">
 
-          <div template>
+          <!-- <div template>
 
               <button id="editDraftBtn" type="button" class="btn" (click)="openModal(jobInfoContent, draft, $event)"> <i
                 id="editDraftBtn" class="material-icons">
@@ -268,9 +269,9 @@
               </i> Delete
             </button>
 
-          </div>
+          </div> -->
 
-        <!-- <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+          <!-- <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
           <thead>
             <th mat-sort-header="jobName">Job Title</th>
             <th mat-sort-header="company">Company</th>

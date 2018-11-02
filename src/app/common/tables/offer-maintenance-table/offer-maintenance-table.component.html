@@ -1,4 +1,16 @@
 <div>
+<div>
+    <h3>{{title}}</h3>
+    <ng-content></ng-content>
+</div>
+<div>
+    <ng-content select="addBtn"></ng-content>
+</div>
+
+
+
+
+  <!-- <ng-content></ng-content> -->
 
 <div class="col-md-12" style="text-align: end">
   <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
@@ -7,11 +19,7 @@
   <p *ngIf="pageNumber == paginatorSize  && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of {{totalJobs}}</p>
 </div>
 
-<div>
-  <ng-content></ng-content>
-</div>
-
-<!-- <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+<table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
   <thead>
     <th mat-sort-header="jobName">Job Title</th>
     <th mat-sort-header="company">Company</th>
@@ -28,14 +36,29 @@
       <td> {{job.jobCategory}} </td>
       <td>{{job.jobType}}</td>
       <td>
-          <maint-btn-group>
-              <ng-content></ng-content>
-          </maint-btn-group>
+          <!-- <button id="editJobButton" type="button" class="btn" (click)="openModal(jobInfoContent, job, $event)"> <i
+            id="editJobButton" class="material-icons">
+            edit
+          </i>Edit 
+        </button> -->
+        <ng-content></ng-content>
+        <button *ngIf="title ==='Available Jobs' "type="button" class="btn" (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
+            subdirectory_arrow_right
+          </i> Un-Post
+         </button>
+         <button *ngIf="title === 'Past Jobs'" type="button" class="btn" (click)="setJobActive(job.jobId)"> <i class="material-icons">
+            subdirectory_arrow_left
+          </i> Post
+         </button>
+         <button *ngIf="title === 'Drafts'" type="button" class="btn" (click)="deleteDraft(draft.jobId)"> <i class="material-icons">
+            delete
+          </i> Delete
+        </button>
       </td>
       
     </tr>
   </tbody>
-</table> -->
+</table>
 <hr>
 <ngb-pagination id="paginator" [collectionSize]="collectionSize" [(page)]="pageNumber" [maxSize]="paginatorSize" [rotate]="true"
   [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
