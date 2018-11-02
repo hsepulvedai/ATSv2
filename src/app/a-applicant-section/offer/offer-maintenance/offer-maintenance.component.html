@@ -1,183 +1,168 @@
 <!--This page allows HR employee to control what jobs are available to be applied for. (Jobs shown in A2-->
-  <ng-template #jobInfoContent let-c="close" let-d="dismiss">
+<ng-template #jobInfoContent let-c="close" let-d="dismiss">
 
-    <div class="modal-header">
+  <div class="modal-header">
 
-      <h4 *ngIf="addJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Add Job</h4>
-      <h4 *ngIf="editJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Edit Job</h4>
-      <h4 *ngIf="editDraftTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Edit Draft</h4>
+    <h4 *ngIf="addJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Add Job</h4>
+    <h4 *ngIf="editJobTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Edit Job</h4>
+    <h4 *ngIf="editDraftTrue" class="modal-title" id="modal-basic-add" ([ngModel])="modalTitle">Edit Draft</h4>
 
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click'); setBooleansFalse();">
-        <span aria-hidden="true" class="closeX">&times;</span>
-      </button>
-    </div>
-
-    <div class="modal-body">
-      <div>
-        <form [formGroup]="jobInfoForm" autocomplete="off" (ngSubmit)="c('Save click'); setBooleansFalse(); jobInfoForm.reset();">
-          <div class="row smallrow">
-            <div class="form-group col-sm-6">
-              <label for="jobName"> <strong>Job Title</strong></label>
-              <input formControlName="jobName" type="text" class="form-control" id="name" placeholder="Enter job title...">
-            </div>
-            <div class="form-group col-sm-6">
-              <label for="jobCompany"> <strong>Company</strong></label>
-              <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
-            </div>
-          </div>
-          <div class="row smallrow">
-            <div class="form-group col-sm-6">
-              <label for="jobCategory"><strong>Category</strong>
-                <button *ngIf="!addCatTrue" class="addButton" type="button" (click)="addItem($event)"><i class="material-icons"
-                    id="addCatBtn">add</i></button>
-              </label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <button *ngIf="addCatTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddCatBtn"
-                      class="material-icons">undo</i></button>
-                </div>
-                <select *ngIf="!addCatTrue" formControlName="jobCategory" id="category" class="selectpicker form-control" (change)="selectJobCatChangeHandler($event)">
-                    <option *ngFor=" let selectedCategory of categories"  [ngValue]="selectedCategory.name" >{{selectedCategory.name}}</option>
-                    <!-- <option *ngIf="selectedCategory == undefined" value="null" disabled="true" [selected]="true">- Select Category -</option> -->
-                </select>
-                <input *ngIf="addCatTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
-                <button *ngIf="addCatTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
-              </div>
-            </div>
-
-            <div class="form-group col-sm-6">
-              <label for="jobType"><strong>Type</strong>
-                <button *ngIf="!addTypeTrue" class="addButton" type="button" (click)="addItem($event)"><i id="addTypeBtn"
-                    class="material-icons">add</i></button>
-              </label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddTypeBtn"
-                      class="material-icons">undo</i></button>
-                </div>
-                <select *ngIf="!addTypeTrue" formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)"
-                  aria-placeholder="- Select Type -">
-                  <option *ngFor=" let selectedType of types"  [ngValue]="selectedType.name">{{selectedType.name}}</option>
-                  <!-- <option *ngIf="selectedType == undefined "value="null" disabled="true" [selected]="true">- Select Type -</option> -->
-                </select>
-                <input *ngIf="addTypeTrue" formControlName="addTypeInput" type="text" class="form-control" id="company" [value]="">
-                <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="addJobType()"><i class="material-icons">check</i></button>
-              </div>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label for="jobDescription"><strong>Description</strong></label>
-              <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
-            </div>
-
-            <div *ngIf="editJobTrue" class="form-group col-md-6">
-              <label for="status"><strong>Status</strong>
-                <button *ngIf="!addStatusTrue" class="addButton" type="button" (click)="addItem($event)"><i id="addStatusBtn"
-                    class="material-icons">add</i></button>
-              </label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddStatusBtn"
-                      class="material-icons">undo</i></button>
-                </div>
-                <select *ngIf="!addStatusTrue" formControlName="jobStatus" id="status" class="form-control">
-                  <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">{{selectedStatus.status}}</option>
-                  <!-- <option *ngIf="selectedStatus == undefined" value="null" disabled="true" [selected]="true">- Select Status -</option> -->
-                </select>
-                <input *ngIf="addStatusTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
-                <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button *ngIf="addJobTrue" (click)="createDraft(newJobForm.value); setBooleansFalse();" id="draft" value="draft" type="submit" class="btn"><i
-                class="material-icons">
-                save_alt
-              </i>Save as Draft
-            </button>
-            <button *ngIf="editDraftTrue" (click)="deleteDraft()" type="submit" class="btn"><i class="material-icons">
-                delete </i>Delete
-            </button>
-            <button *ngIf="editJobTrue" id="saveJobBtn" (click)="updateJob(jobInfoForm.value, $event);" type="submit" class="btn"><i id="saveJobBtn" class="material-icons">
-                save_alt</i>Save
-            </button>
-            <button *ngIf="editDraftTrue" id="saveDraftBtn" (click)="updateJob(jobInfoForm.value, $event);" type="submit" class="btn"><i id="saveDraftBtn" class="material-icons">
-                save_alt</i>Save
-            </button>
-            <button *ngIf="addJobTrue" (click)="createJob(newJobForm.value); setBooleansFalse();" id="save" value="save" type="submit" class="btn " [disabled]="!jobInfoForm.valid"><i
-              class="material-icons">
-              subdirectory_arrow_left</i>Post
-          </button>
-          <button *ngIf="editDraftTrue" (click)="postDraft(); setBooleansFalse();" id="save" value="save" type="submit" class="btn " [disabled]="!jobInfoForm.valid"><i
-            class="material-icons">
-            subdirectory_arrow_left</i>Post
-        </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </ng-template>
-
-  <!-- A.5 -->
-
-  <h3> Job Maintenance</h3>
-  <div class="card-body">
-    <!-- Search Bar -->
-    <label for="sortBy"><strong> Search: </strong></label><br>
-    <div class="row " style="height:3em;">
-      <div class="col-sm-6">
-        <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:100%;">
-      </div>
-      <div class="col-sm-2">
-        <button type="button" class="btn searchButton" (click)="universalSearch();" style=" margin-left: 50px;">
-          <i class="material-icons">search</i> Search</button>
-      </div>
-    </div>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click'); setBooleansFalse();">
+      <span aria-hidden="true" class="closeX">&times;</span>
+    </button>
   </div>
 
-  <div class="tableArea">
-
-    <!-- Get the information to try to simplify the tabs -->
-    <!-- First, try to get the active tab id -->
-      <!-- https://ng-bootstrap.github.io/#/components/tabset/api#NgbTabset -->
-
-    <ngb-tabset id="NgbTabTitle">
-      <ngb-tab title="Available Jobs">
-        <ng-template ngbTabContent>
-
-          <h3> Available Jobs </h3>
-
-          <!--  test(NgbTabTitle); -->
-
-          <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);" > 
-            <i id="addJobBtn" class="material-icons">
-              note_add
-            </i> New Job </button>
-
-            <offer-maintenance-table [jobs]="sortedData" [totalJobs]="totalActiveJobs" [pageNumber]="activePageNumber" 
-              [paginatorSize]="activePaginatorSize" [collectionSize]="activeCollectionSize" [pageSize]="pageSize">
-                <!-- <button id="editJobButton"type="button" class="btn" (click)="openModal(jobInfoContent, job, $event)"> <i id="editJobButton" class="material-icons">
-                    edit
-                  </i>Edit </button>
-              <button type="button" class="btn" (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
-                  subdirectory_arrow_right
-                </i> Un-Post </button> -->
-            </offer-maintenance-table>
-
-<!-- 
-          <div class="col-md-12" style="text-align: end">
-            <p *ngIf="totalActiveJobs === undefined || totalActiveJobs === 0"> Showing 0 of 0 </p>
-            <p *ngIf="!(totalActiveJobs === undefined || totalActiveJobs === 0) && !(activePageNumber == activePaginatorSize)">Showing
-              {{pageSize * activePageNumber}} of {{totalActiveJobs}}</p>
-            <p *ngIf="activePageNumber == activePaginatorSize  && (totalActiveJobs != undefined || totalActiveJobs != 0)">Showing {{totalActiveJobs}}
-              of {{totalActiveJobs}}</p>
+  <div class="modal-body">
+    <div>
+      <form [formGroup]="jobInfoForm" autocomplete="off" (ngSubmit)="c('Save click'); setBooleansFalse(); jobInfoForm.reset();">
+        <div class="row smallrow">
+          <div class="form-group col-sm-6">
+            <label for="jobName"> <strong>Job Title</strong></label>
+            <input formControlName="jobName" type="text" class="form-control" id="name" placeholder="Enter job title...">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="jobCompany"> <strong>Company</strong></label>
+            <input formControlName="jobCompany" type="text" class="form-control" id="company" disabled [value]="currentCompany.name">
+          </div>
+        </div>
+        <div class="row smallrow">
+          <div class="form-group col-sm-6">
+            <label for="jobCategory"><strong>Category</strong>
+              <button *ngIf="!addCatTrue" class="addButton" type="button" (click)="addItem($event)"><i class="material-icons"
+                  id="addCatBtn">add</i></button>
+            </label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button *ngIf="addCatTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddCatBtn"
+                    class="material-icons">undo</i></button>
+              </div>
+              <select *ngIf="!addCatTrue" formControlName="jobCategory" id="category" class="selectpicker form-control" (change)="selectJobCatChangeHandler($event)">
+                <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">{{selectedCategory.name}}</option>
+                <!-- <option *ngIf="selectedCategory == undefined" value="null" disabled="true" [selected]="true">- Select Category -</option> -->
+              </select>
+              <input *ngIf="addCatTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
+              <button *ngIf="addCatTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
+            </div>
           </div>
 
+          <div class="form-group col-sm-6">
+            <label for="jobType"><strong>Type</strong>
+              <button *ngIf="!addTypeTrue" class="addButton" type="button" (click)="addItem($event)"><i id="addTypeBtn" class="material-icons">add</i></button>
+            </label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddTypeBtn"
+                    class="material-icons">undo</i></button>
+              </div>
+              <select *ngIf="!addTypeTrue" formControlName="jobType" id="type" class="form-control" (change)="selectJobTypeChangeHandler($event)"
+                aria-placeholder="- Select Type -">
+                <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
+                <!-- <option *ngIf="selectedType == undefined "value="null" disabled="true" [selected]="true">- Select Type -</option> -->
+              </select>
+              <input *ngIf="addTypeTrue" formControlName="addTypeInput" type="text" class="form-control" id="company" [value]="">
+              <button *ngIf="addTypeTrue" class="addButton" type="button" (click)="addJobType()"><i class="material-icons">check</i></button>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="jobDescription"><strong>Description</strong></label>
+            <textarea class="form-control" formControlName="jobDescription" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+          </div>
+
+          <div *ngIf="editJobTrue" class="form-group col-md-6">
+            <label for="status"><strong>Status</strong>
+              <button *ngIf="!addStatusTrue" class="addButton" type="button" (click)="addItem($event)"><i id="addStatusBtn"
+                  class="material-icons">add</i></button>
+            </label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="cancelAddItem($event)"><i id="cancelAddStatusBtn"
+                    class="material-icons">undo</i></button>
+              </div>
+              <select *ngIf="!addStatusTrue" formControlName="jobStatus" id="status" class="form-control">
+                <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">{{selectedStatus.status}}</option>
+                <!-- <option *ngIf="selectedStatus == undefined" value="null" disabled="true" [selected]="true">- Select Status -</option> -->
+              </select>
+              <input *ngIf="addStatusTrue" formControlName="addCategoryInput" type="text" class="form-control" id="company" [value]="">
+              <button *ngIf="addStatusTrue" class="addButton" type="button" (click)="addCategory()"><i class="material-icons">check</i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button *ngIf="addJobTrue" (click)="createDraft(newJobForm.value); setBooleansFalse();" id="draft" value="draft" type="submit"
+            class="btn"><i class="material-icons">
+              save_alt
+            </i>Save as Draft
+          </button>
+          <button *ngIf="editDraftTrue" (click)="deleteDraft()" type="submit" class="btn"><i class="material-icons">
+              delete </i>Delete
+          </button>
+          <button *ngIf="editJobTrue" id="saveJobBtn" (click)="updateJob(jobInfoForm.value, $event);" type="submit" class="btn"><i
+              id="saveJobBtn" class="material-icons">
+              save_alt</i>Save
+          </button>
+          <button *ngIf="editDraftTrue" id="saveDraftBtn" (click)="updateJob(jobInfoForm.value, $event);" type="submit" class="btn"><i
+              id="saveDraftBtn" class="material-icons">
+              save_alt</i>Save
+          </button>
+          <button *ngIf="addJobTrue" (click)="createJob(newJobForm.value); setBooleansFalse();" id="save" value="save" type="submit"
+            class="btn " [disabled]="!jobInfoForm.valid"><i class="material-icons">
+              subdirectory_arrow_left</i>Post
+          </button>
+          <button *ngIf="editDraftTrue" (click)="postDraft(); setBooleansFalse();" id="save" value="save" type="submit" class="btn "
+            [disabled]="!jobInfoForm.valid"><i class="material-icons">
+              subdirectory_arrow_left</i>Post
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<!-- A.5 -->
+
+<h3> Job Maintenance</h3>
+<div class="card-body">
+  <!-- Search Bar -->
+  <label for="sortBy"><strong> Search: </strong></label><br>
+  <div class="row " style="height:3em;">
+    <div class="col-sm-6">
+      <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:100%;">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn searchButton" (click)="universalSearch();" style=" margin-left: 50px;">
+        <i class="material-icons">search</i> Search</button>
+    </div>
+  </div>
+</div>
+
+<div class="tableArea">
+
+  <!-- Get the information to try to simplify the tabs -->
+  <!-- First, try to get the active tab id -->
+  <!-- https://ng-bootstrap.github.io/#/components/tabset/api#NgbTabset -->
+
+  <ngb-tabset id="NgbTabTitle">
+    <ngb-tab title="Available Jobs">
+      <ng-template ngbTabContent>
+
+        <h3> Available Jobs </h3>
+
+        <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);">
+          <i id="addJobBtn" class="material-icons">
+            note_add
+          </i> New Job </button>
+
+        <offer-maintenance-table [jobs]="sortedData" [totalJobs]="totalActiveJobs" [pageNumber]="activePageNumber" [paginatorSize]="activePaginatorSize"
+          [collectionSize]="activeCollectionSize" [pageSize]="pageSize">
+
+          <!-- <div ngIf*="sortedData === undefined"> No jobs to show</div> -->
+
           <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
-            <thead>
+            <thead tableHeader>
               <th mat-sort-header="jobName">Job Title</th>
               <th mat-sort-header="company">Company</th>
               <th mat-sort-header="location">Location</th>
@@ -185,17 +170,18 @@
               <th mat-sort-header="jobType">Type</th>
               <th>Actions</th>
             </thead>
-            <tbody>
+            <tbody tableBody>
               <tr *ngFor="let job of sortedData">
                 <td> {{job.jobName}} </td>
                 <td> {{job.company}}</td>
                 <td> {{job.city}}, {{job.country}} </td>
                 <td> {{job.jobCategory}} </td>
                 <td>{{job.jobType}}</td>
-                <td> 
-                    <button id="editJobButton"type="button" class="btn" (click)="openModal(jobInfoContent, job, $event)"> <i id="editJobButton" class="material-icons">
-                        edit
-                      </i>Edit </button>
+                <td>
+                  <button id="editJobButton" type="button" class="btn" (click)="openModal(jobInfoContent, job, $event)"> <i
+                      id="editJobButton" class="material-icons">
+                      edit
+                    </i>Edit </button>
                   <button type="button" class="btn" (click)=" setJobInactive(job.jobId)"> <i class="material-icons">
                       subdirectory_arrow_right
                     </i> Un-Post </button>
@@ -203,31 +189,23 @@
               </tr>
             </tbody>
           </table>
-          <hr>
-          <ngb-pagination id="paginator" [collectionSize]="activeCollectionSize" [(page)]="activePageNumber" [maxSize]="activePaginatorSize"
-            [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
-          </ngb-pagination>-->
-        </ng-template>
-      </ngb-tab> 
+        </offer-maintenance-table>
 
-      <ngb-tab title="Past Jobs">
-        <ng-template ngbTabContent>
+      </ng-template>
+    </ngb-tab>
 
-          <h3> Past Jobs </h3>
+    <ngb-tab title="Past Jobs">
+      <ng-template ngbTabContent>
 
+        <h3> Past Jobs </h3>
 
-          <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);" > 
-              <i id="addJobBtn" class="material-icons">
-                note_add
-              </i> New Job </button>
+        <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);">
+          <i id="addJobBtn" class="material-icons">
+            note_add
+          </i> New Job </button>
 
-          <div class="col-md-12" style="text-align: end">
-            <p *ngIf="totalInactiveJobs === undefined || totalInactiveJobs === 0"> Showing 0 of 0 </p>
-            <p *ngIf="!(totalInactiveJobs === undefined || totalInactiveJobs === 0) && !(inactivePageNumber == inactivePaginatorSize)">Showing
-              {{pageSize * inactivePageNumber}} of {{totalInactiveJobs}}</p>
-            <p *ngIf="inactivePageNumber == inactivePaginatorSize && (totalInactiveJobs != undefined || totalInactiveJobs != 0)">Showing
-              {{totalInactiveJobs}} of {{totalInactiveJobs}}</p>
-          </div>
+        <offer-maintenance-table [jobs]="sortedInactive" [totalJobs]="totalInactiveJobs" [pageNumber]="inactivePageNumber" [paginatorSize]="inactivePaginatorSize"
+          [collectionSize]="inactiveCollectionSize" [pageSize]="pageSize">
 
           <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
             <thead>
@@ -258,67 +236,74 @@
               </tr>
             </tbody>
           </table>
-          <hr>
-          <ngb-pagination id="paginator" [collectionSize]="inactiveCollectionSize" [(page)]="inactivePageNumber" [maxSize]="inactivePaginatorSize"
-            [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageInactive($event)" class="d-flex justify-content-center">
-          </ngb-pagination>
-        </ng-template>
-      </ngb-tab>
+        </offer-maintenance-table>
+        <hr>
 
-      <ngb-tab title="Drafts(Jobs)">
-        <ng-template ngbTabContent>
+      </ng-template>
+    </ngb-tab>
 
-          <h3> Drafts </h3>
+    <ngb-tab title="Drafts(Jobs)">
+      <ng-template ngbTabContent>
+
+        <h3> Drafts </h3>
 
 
-          <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);" > 
-              <i id="addJobBtn" class="material-icons">
-                note_add
-              </i> New Job </button>
+        <button id="addJobBtn" type="button" class="btn btn-inverse" (click)="openModal(jobInfoContent, job, $event);">
+          <i id="addJobBtn" class="material-icons">
+            note_add
+          </i> New Job </button>
 
-          <div class="col-md-12" style="text-align: end">
-            <p *ngIf="totalDrafts === undefined || totalDrafts === 0"> Showing 0 of 0 </p>
-            <p *ngIf="!(totalDrafts === undefined || totalDrafts === 0) && !(draftPageNumber == draftPaginatorSize)">Showing
-              {{pageSize * draftPageNumber}} of {{totalDrafts}}</p>
-            <p *ngIf="draftPageNumber == draftPaginatorSize && (totalDrafts != undefined || totalDrafts != 0)">Showing {{totalDrafts}}
-              of {{totalDrafts}}</p>
+          <offer-maintenance-table [jobs]="sortedDrafts" [totalJobs]="totalDraftJobs" [pageNumber]="draftPageNumber" [paginatorSize]="draftPaginatorSize"
+          [collectionSize]="draftCollectionSize" [pageSize]="pageSize">
+
+          <div template>
+
+              <button id="editDraftBtn" type="button" class="btn" (click)="openModal(jobInfoContent, draft, $event)"> <i
+                id="editDraftBtn" class="material-icons">
+                edit
+              </i> Edit
+            </button>
+            <button type="button" class="btn" (click)="deleteDraft(draft.jobId)"> <i class="material-icons">
+                delete
+              </i> Delete
+            </button>
+
           </div>
 
-          <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
-            <thead>
-              <th mat-sort-header="jobName">Job Title</th>
-              <th mat-sort-header="company">Company</th>
-              <th mat-sort-header="location">Location</th>
-              <th mat-sort-header="jobCategory">Category</th>
-              <th mat-sort-header="jobType">Type</th>
-              <th>Actions</th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let draft of sortedDrafts">
-                <td> {{draft.jobName}}</td>
-                <td> {{draft.company}}</td>
-                <td> {{draft.city}}, {{draft.country}} </td>
-                <td> {{draft.jobCategory}} </td>
-                <td>{{draft.jobType}}</td>
-                <td>
-                  <button id="editDraftBtn" type="button" class="btn" (click)="openModal(jobInfoContent, draft, $event)"> <i id="editDraftBtn" class="material-icons">
-                      edit
-                    </i> Edit
-                  </button>
-                  <button type="button" class="btn" (click)="deleteDraft(draft.jobId)"> <i class="material-icons">
-                      delete
-                    </i> Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <hr>
-          <ngb-pagination id="paginator" [collectionSize]="draftsCollectionSize" [(page)]="draftPageNumber" [maxSize]="draftPaginatorSize"
-            [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPageDrafts($event)" class="d-flex justify-content-center">
-          </ngb-pagination>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+        <!-- <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+          <thead>
+            <th mat-sort-header="jobName">Job Title</th>
+            <th mat-sort-header="company">Company</th>
+            <th mat-sort-header="location">Location</th>
+            <th mat-sort-header="jobCategory">Category</th>
+            <th mat-sort-header="jobType">Type</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let draft of sortedDrafts">
+              <td> {{draft.jobName}}</td>
+              <td> {{draft.company}}</td>
+              <td> {{draft.city}}, {{draft.country}} </td>
+              <td> {{draft.jobCategory}} </td>
+              <td>{{draft.jobType}}</td>
+              <td>
+                <button id="editDraftBtn" type="button" class="btn" (click)="openModal(jobInfoContent, draft, $event)"> <i
+                    id="editDraftBtn" class="material-icons">
+                    edit
+                  </i> Edit
+                </button>
+                <button type="button" class="btn" (click)="deleteDraft(draft.jobId)"> <i class="material-icons">
+                    delete
+                  </i> Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+        </offer-maintenance-table>
+        <hr>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 
-  </div>
+</div>

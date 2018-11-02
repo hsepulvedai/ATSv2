@@ -11,7 +11,6 @@ import { Sort } from '@angular/material';
 })
 export class OfferMaintenanceTableComponent implements OnInit {
 
-  // TODO: make sure the table info shows up when the table is loaded
   // TODO: Fix so that every row has the buttons
 
   @Input()
@@ -40,6 +39,7 @@ export class OfferMaintenanceTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadPage(this.pageNumber)
   }
 
   loadPage(page: number) {

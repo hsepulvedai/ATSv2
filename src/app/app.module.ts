@@ -40,6 +40,7 @@ import { LoginModalComponent } from './shared/modals/login-modal/login-modal.com
 import { EditModalComponent } from './shared/modals/edit-modal/edit-modal.component';
 import { AddJobModalComponent } from './shared/modals/add-job-modal/add-job-modal.component';
 import { OfferMaintenanceTableComponent } from './common/tables/offer-maintenance-table/offer-maintenance-table.component';
+import { MaintBtnGroupComponent } from './common/buttons/maint-btn-group/maint-btn-group.component';
 
 
 
@@ -68,6 +69,7 @@ import { OfferMaintenanceTableComponent } from './common/tables/offer-maintenanc
     EditModalComponent,
     AddJobModalComponent,
     OfferMaintenanceTableComponent,
+    MaintBtnGroupComponent,
 
   ],
   imports: [
