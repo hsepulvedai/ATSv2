@@ -1,0 +1,320 @@
+<!--This pages serves as a profile type of page for the HR employee to view specific aspects of an application.
+It shows the applicant's information, a timeline with actions taken in that application, a pending tasks list and 
+a comments section-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"> Add Action</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="newActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
+
+                <div class="row smallrow">
+
+                    <div class="form-group col-sm-6">
+                        <label for="actionType"><strong> Action</strong></label>
+                        <select formControlName="actionType" id="name" class="form-control" (change)="selectActionChangeHandler($event)">
+                            <option value="null" disabled="true" [selected]="true">- Select Action -</option>
+                            <option *ngFor=" let selectedAction of allActions">{{selectedAction}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="actionSatus"><strong> Status</strong></label>
+                        <select formControlName="actionStatus" id="status" class="form-control" (change)="selectStatusChangeHandler($event)">
+                            <option value="null" disabled="true" [selected]="true">- Select Status -</option>
+                            <option *ngFor=" let selectedStatus of allStatuses">{{selectedStatus}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
+                        <label for="date"><strong> Date </strong></label>
+                        <div class="input-group">
+                            <input id="date" class="form-control" formControlName="actionDate" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="time"><strong> Select a time:</strong></label>
+                        <input type="time" class="form-control" formControlName="time" name="usr_time">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="actionDescription"><strong>Comments</strong></label>
+                        <textarea class="form-control" formControlName="actionComments" name="description" rows="4" cols="10" style="resize: none;"
+                            maxlength="99"> </textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button (click)="insertAction(newActionForm.value)" id="save" value="save" type="submit" class="btn ">
+                        <i class="material-icons">save_alt</i>Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+
+    <ng-template #editCommentContent let-c="close" let-d="dismiss">
+
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Edit Comment</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true" class="closeX">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="editCommentForm">
+                    <textarea class="form-control" formControlName="editCommentText" name="editCommentText" style="resize: none;" maxlength="99" value="currentComment" class="form-control" placeholder="Write a comment..."
+                    rows="2"></textarea>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn"><i class="material-icons">
+                    save_alt
+                </i>Save
+            </button>
+        </div>
+
+    </ng-template>
+
+
+
+    <ng-template #contentEdit let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-edit"> Edit Action</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+
+            <form [formGroup]="editActionForm" autocomplete="off" (ngSubmit)="c('Save click')">
+
+                <div class="row smallrow">
+
+                    <div class="form-group col-sm-6">
+                        <label for="newActionType"><strong> Action</strong></label>
+                        <select formControlName="newActionType" id="actionType" class="form-control">
+                            <option *ngFor=" let selectedAction of allActions" [ngValue]="selectedAction">{{selectedAction}}</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-sm-6">
+                        <label for="newActionSatus"><strong> Status</strong></label>
+                        <select formControlName="newActionStatus" id="actionStatus" class="form-control">
+                            <option *ngFor=" let selectedStatus of allStatuses" [ngValue]="selectedStatus">{{selectedStatus}}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row smallrow">
+                    <div class="form-group col-sm-6">
+                        <label for="date"><strong> Date: {{this.currentAction.actionDate | date: 'MMMM d, y' }}</strong></label>
+                        <div class="input-group">
+                            <input id="date" class="form-control" formControlName="newActionDate" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="time"><strong> Time: {{this.currentAction.actionDate | date: 'h:mm a' }} </strong></label>
+                        <input type="time" class="form-control" formControlName="newTime" name="usr_time">
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="newActionDescription"><strong>Comments</strong></label>
+                        <textarea class="form-control" formControlName="newActionComments" name="description" rows="4" cols="10" style="resize: none;"> </textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="modal-footer">
+
+
+                    <button (click)="editAction(editActionForm.value)" id="save" value="save" type="submit" class="btn "><i
+                            class="material-icons">
+                            save_alt</i>Save</button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </ng-template>
+</head>
+
+<body>
+    <div class="card-body">
+        <!-- <div>
+            <h1>C.2/C.3/C.5</h1>
+        </div> -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/applications">List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+
+        <div class="card-body">
+            <div align="center">
+                <i class="material-icons" style="font-size: 10rem; color: #25326a "> person </i>
+            </div>
+            <h3> {{application?.applicantFirstName}} {{application?.applicantLastName}}</h3>
+            <p style="text-align: center">{{application?.applicantPhone}} / {{application?.applicantEmail}}</p>
+
+            <p style="text-align: center"><a class="btnWelcomeJobs" routerLink="#">View Resume</a></p>
+            <br>
+
+            <div class="jobDescription" align="left">
+
+                <p> <strong>Application ID: </strong>{{application?.applicationId}}</p>
+                <p> <strong>Date Applied: </strong>{{application?.dateApplied | date: 'MMMM d, y' }}</p>
+                <p> <strong>Application Status: </strong>{{application?.applicationStatus}}</p>
+
+                <!-- <p> <strong>Consideration: </strong></p>
+                <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                        <button type="button" class="btn">Yes</button>
+                        <button type="button" class="btn">Maybe</button>
+                        <button type="button" class="btn">No</button>
+                </div> -->
+
+                <div>
+                        <label> <strong>Consideration: </strong></label>
+                        <mat-radio-group *ngIf="application != undefined">
+                            <p>{{application.consideration}}</p>
+                          <mat-radio-button [checked]="application.consideration == 'Yes'">Yes</mat-radio-button>
+                          <mat-radio-button [checked]="application.consideration == 'No'">No</mat-radio-button>
+                          <mat-radio-button [checked]="application.consideration == 'Maybe'">Maybe</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+
+                <br>
+            </div>
+
+
+            <h3>{{application?.jobName}}</h3>
+            <h5><strong>{{application?.companyName}}</strong></h5>
+            <p style="font-style: italic; text-align: center;"> {{application?.companyCity}}, {{application?.companyCountry}}
+                {{application?.jobCategory}} / {{application?.jobType}}</p>
+            <p class="jobDescription">{{application?.jobDescription}}</p>
+
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class=" bg-white ">
+                            <h4>Pending Tasks</h4>
+
+                            <mat-selection-list #shoes>
+                                <mat-list-option *ngFor="let task of pendingTasks">
+                                    <a href="#" class=" btnWelcomeJobs" style="font-size: 15px;"> {{task.task}} </a>
+                                </mat-list-option>
+                            </mat-selection-list>
+                            <br>
+
+                            <div class="comment-wrapper">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h4>Comments</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <textarea style="resize: none;" maxlength="99" [(ngModel)]="commentBoxInput" class="form-control" placeholder="Write a comment..."
+                                            rows="2"></textarea>
+                                        <br>
+                                        <button type="button" class="btn pull-right" (click)="insertComment(); loadComments();">Post</button>
+                                        <div class="clearfix"></div>
+                                        <hr>
+                                        <ul class="media-list" *ngFor="let comment of comments">
+                                            <li class="media">
+                                                <a href="#" class="pull-left">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="text-muted pull-right">
+                                                            <button id="editComment" class="btn-noHover" style="border-color: transparent !important" (click)="openModal(editCommentContent,comment,$event);">
+                                                                    <i id="editComment"  class="material-icons" style="vertical-align: middle; font-size: 1em;margin-right: .4rem;">edit</i>
+                                                            </button>
+                                                        <small class="text-muted">{{comment.createdDate | date: 'MMMM d,
+                                                            y'}} at {{comment.createdDate | date: 'h:mm a' }} </small>
+                                                            <span class="text" style="color: #df136f"> @{{comment.employeeFirstName}}{{comment.employeeLastName}} </span> <br>
+                                                            <span style="color:#25326a">
+                                                                    {{comment.commentData}}
+                                                            </span>
+                                                        </div>
+                                                </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mt-5 mb-5">
+                            <div class="row">
+
+                                <div class="col-md-8 offset-md-3">
+                                    <h4>Latest Actions</h4>
+                                    <button type="button" class="btn" (click)="openNewAction(content)">
+                                        <i class="material-icons">
+                                            note_add
+                                        </i> New Action </button>
+                                    <ul class="timeline">
+                                        <li *ngFor="let action of actions">
+                                            <h5 style="text-align: left;"><strong>{{action.actionType}}</strong>
+                                                <button class="btn-noHover" style="border-color: transparent !important" (click)="openEditAction(contentEdit, action)">
+                                                    <i class="material-icons">edit</i> </button></h5>
+                                            <p>@{{action.recruiter}}</p>
+                                            <p><strong>{{action.actionDate | date: 'MMMM d, y' }} - {{action.actionDate |
+                                                    date: 'h:mm a'}}
+                                                </strong></p>
+                                            <p>{{action.comments}}.</p>
+                                        </li>
+                                    </ul>
+
+                                    <button *ngIf=" totalActions > newPageSize" (click)="showMoreActions()" type="button" class="btn"> <i
+                                            class="material-icons">
+                                            expand_more
+                                        </i> Show More Actions </button>
+
+                                    <button *ngIf="(newPageSize > totalActions) && !(pageSize > totalActions)" (click)="showLessActions()" type="button" class="btn">
+                                        <i class="material-icons">
+                                            expand_less
+                                        </i> Show Less Actions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

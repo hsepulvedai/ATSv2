@@ -1,0 +1,16 @@
+.addButton {
+    color:#df136f;
+    background: transparent;
+    border: none;
+}
+
+.searchJobsBtn {
+    width: 25%;  
+    font-size: 200%;
+}
+
+/* form {
+    margin: 0 auto; 
+    width:200%;
+} */
+

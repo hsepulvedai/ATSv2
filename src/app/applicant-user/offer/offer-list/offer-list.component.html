@@ -1,0 +1,63 @@
+<!--This page shows the list of available jobs to apply for. Can be accessed 
+  from the welcome page and through the navbar-->
+
+<!-- A.2 -->
+<h3>Start Seaching Jobs</h3>
+<div class="card-body">
+
+  <!-- Search Bar -->
+  <label for="sortBy"><strong> Search: </strong></label><br>
+  <div class="row " style="height:3em;">
+    <div class="col-sm-6">
+      <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..."
+        style="width:100%;">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn searchButton" (click)="universalSearch()" style=" margin-left: 50px;">
+        <i class="material-icons">search</i> Search</button>
+    </div>
+  </div>
+  <!-- Job count -->
+  <div class="row">
+    <div class="col-md-12" style="text-align: end">
+      <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
+      <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize)">Showing {{pageSize * page}}
+        of {{totalJobs}}</p>
+      <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0)">Showing {{totalJobs}} of
+        {{totalJobs}}</p>
+    </div>
+  </div>
+  <!-- Job table -->
+  <table matSort (matSortChange)="sortData($event)" id="example" class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th mat-sort-header="name">Job Title</th>
+        <th mat-sort-header="company">Company</th>
+        <th mat-sort-header="location">Location</th>
+        <th mat-sort-header="jobCategory">Category</th>
+        <th mat-sort-header="jobType">Type</th>
+        <th style="text-align: center">Apply</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="sortedData === undefined">
+      No jobs to show
+    </tbody>
+    <tbody *ngIf="!(sortedData === undefined)">
+      <tr align="center" *ngFor="let job of sortedData">
+        <td>{{job.jobName}}</td>
+        <td>{{job.company}}</td>
+        <td>{{job.city}}, {{job.country}}</td>
+        <td>{{job.jobCategory}}</td>
+        <td>{{job.jobType}}</td>
+        <td style="text-align: center"> <button type="button" class="btn" routerLink="/jobs/{{job.jobId}}/apply"> 
+          <i class="material-icons">input</i> Apply</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <!-- Table pagination -->
+  <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize"
+    [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+  </ngb-pagination>
+</div>

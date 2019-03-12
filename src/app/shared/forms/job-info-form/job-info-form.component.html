@@ -1,0 +1,163 @@
+<div class="container">
+  <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom" #stepper>
+    <!-- 1st step: Create Job Form -->
+    <mat-step [stepControl]="jobInfo" label="Job Information">
+      <div class="modal-body">
+        <form [formGroup]="jobInfoForm" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click');">
+          <div class="row" style="text-align: left;">
+            <div class="form-group col-md-6">
+              <label for="name"> <strong>Job Title</strong></label>
+              <input formControlName="jobName" type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group col-md-6" style="text-align: right">
+              <label for="active"> <strong>Active</strong></label>
+              <mat-checkbox *ngIf="!editDraftTrue" style="margin-left: .5em;" [checked]="false"
+                formControlName="activeJob"></mat-checkbox>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="company"> <strong>Company</strong></label>
+              <input formControlName="jobCompany" type="text" class="form-control" id="company">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="category"><strong>Category</strong>
+                <button class="addButton" (click)="addItem($event)" type="button"><i id="addCatBtn"
+                    class="material-icons">add</i></button>
+              </label>
+              <select formControlName="jobCategory" id="category" class="form-control">
+                <option *ngFor=" let selectedCategory of jobCategories" [ngValue]="selectedCategory.name">
+                  {{selectedCategory.name}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="city"> <strong>City</strong></label>
+              <input formControlName="jobCity" type="text" class="form-control" id="city">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="country"> <strong>Country</strong></label>
+              <input formControlName="jobCountry" type="text" class="form-control" id="country">
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="type"><strong>Type</strong>
+                <button class="addButton"><i class="material-icons">add</i></button>
+              </label>
+              <select formControlName="jobType" id="type" class="form-control">
+                <option *ngFor=" let selectedType of jobTypes" [ngValue]="selectedType.name">{{selectedType.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="status"><strong>Status</strong>
+                <button class="addButton"><i class="material-icons">add</i></button>
+              </label>
+              <select formControlName="jobStatus" id="status" class="form-control">
+                <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">
+                  {{selectedStatus.status}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="description"><strong>Description</strong></label>
+              <textarea class="form-control" formControlName="jobDescription" name="description" rows="7" cols="45"
+                style="resize: none;"> </textarea>
+            </div>
+          </div>
+        </form>
+        <div class="align-center">
+          <button class="btn" matStepperNext type="button">Next</button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+
+        <button *ngIf="editJobTrue" id="saveJobBtn" type="submit" class="btn" (click)="updateJob(jobInfoForm.value);">
+          <i class="material-icons">save_alt</i>Save
+        </button>
+
+        <button *ngIf="addJobTrue" id="saveDraftBtn" type="submit" class="btn"
+          (click)="createDraft(jobInfoForm.value);">
+          <i class="material-icons">save_alt</i>Save as Draft
+        </button>
+
+        <button *ngIf="addJobTrue" id="postNewJobBtn" type="submit" class="btn" (click)="createJob(jobInfoForm.value);">
+          <i class="material-icons">save_alt</i>Create and Post
+        </button>
+
+        <button *ngIf="editDraftTrue" id="postNewJobBtn" type="submit" class="btn" (click)="postDraft()">
+          <i class="material-icons">save_alt</i>Post
+        </button>
+
+      </div>
+
+    </mat-step>
+
+    <!-- 2nd step: Skills -->
+    <mat-step [stepControl]="jobSkills" label="Job Skills">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="addButton col" type="button" (click)="addSkillToList()"><i id="addSkillBtn"
+              class="material-icons">add</i>Add
+            Skill</button>
+        </div>
+        <input [(ngModel)]="skillInput" type="text" class="form-control col" id="skillInputBox"
+          placeholder="Add a Skill...">
+      </div>
+      <table id="skillTable" class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th> </th>
+            <th>Skill</th>
+            <th>Requirement</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="skills.length == 0">
+            <td> Add skills on input box above</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="align-center" *ngFor="let skill of skills">
+            <td>
+              <i class="material-icons" style="color: red" (click)="pressRemove()"
+                *ngIf="!pressedRemove">remove_circle</i>
+              <button class="btn btn-outline-secondary" *ngIf="pressedRemove" (click)="pressRemove()">Cancel</button>
+              <button class="btn btn-outline-danger" *ngIf="pressedRemove"
+                (click)="pressRemove(); removeSkill(skill)">Remove</button>
+            </td>
+            <td>{{skill.Skill}}</td>
+            <td>
+              <mat-checkbox [checked]="skill.Required" (change)="changeRequirement(skill, $event)"></mat-checkbox>
+            </td>
+            <td>
+              <mat-slider thumbLabel min="0" max="4" step="1" [(ngModel)]="skill.Weight"
+                (change)="changeWeight(skill, $event)"></mat-slider>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page"
+        [maxSize]="paginatorSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"
+        (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+      </ngb-pagination> -->
+
+      <div style="text-align: center;">
+        <br>
+        <button class="btn" type="button" matStepperPrevious style="margin: .5em">Back</button>
+        <button class="btn" matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <div class="container align-center">
+    <button [disabled]="!jobInfoForm.valid" id="postBtn" class="bigBtn btn btn-lg searchJobsBtn"
+      (click)="onFormSubmit(jobInfoForm.value)">Submit
+    </button>
+  </div>
+</div>

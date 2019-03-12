@@ -1,0 +1,131 @@
+<div class="container align-center">
+  <div class="card-body" *ngIf="applicantLoaded | async">
+    <i class="material-icons" style="font-size:1000%">account_circle</i>
+
+    <h3 style="color: #df136f"><strong>123 {{test}} 
+        {{currentApplicant.lastName}}</strong>
+      <i style="color: #25326a" class="material-icons"> edit</i>
+    </h3>
+    <div>
+      <h5><strong>Computer Scientist / Programmer</strong></h5>
+      <p style="font-style: italic; text-align: center;">
+        INVID / University of Puerto Rico
+      </p>
+      <br>
+      <p style="text-align: justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod lacus non ipsum
+        commodo,
+        efficitur dignissim sapien consequat. Curabitur feugiat ligula non nisl fermentum ultrices.
+        Morbi id metus erat. Sed eget erat dui. Nam molestie, dolor vel ultricies auctor, mauris massa
+        sagittis ante, tristique vehicula risus felis ac dolor.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="card-body row">
+  <div class="col-6">
+    <div class="list-group" id="list-tab" role="tablist">
+      <ngb-tabset>
+        <ngb-tab title="Applied Jobs">
+          <ng-template ngbTabContent>
+            <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+              <thead>
+                <th>Application ID</th>
+                <th mat-sort-header="jobName">Job Title</th>
+                <th mat-sort-header="company">Company</th>
+                <th mat-sort-header="jobType">Type</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of applications">
+                  <td>#{{a.id}}</td>
+                  <td>{{a.jobName}}</td>
+                  <td>{{a.companyName}}</td>
+                  <td>{{a.jobType}} </td>
+                  <td><button class="btn" (click)="selectJob(a.jobId)">
+                      <i style="color: #25326a" class="material-icons">
+                        keyboard_arrow_right</i>
+                    </button></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Suggested Jobs">
+
+          <ng-template ngbTabContent>
+            <p>This would load jobs realted to the applicant skills (a function yet to be implemented)
+              and job categories of previus job applied.
+            </p>
+          </ng-template>
+
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+
+  <div class="col-6">
+  </div>
+</div>
+
+
+<!-- <div class="card-body  row">
+    <div class="col-md-6">
+        <ngb-tabset>
+            <ngb-tab title="Applied Jobs">
+              <ng-template ngbTabContent>
+                  <table matSort (matSortChange)="sortData($event)" class="table table-hover table-striped">
+                      <thead>
+                        <th>Application ID</th>
+                        <th mat-sort-header="jobName">Job Title</th>
+                        <th mat-sort-header="company">Company</th>
+                        <th mat-sort-header="jobType">Type</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let a of applications">
+                          <td>{{a.applicationId}}</td>
+                          <td> {{a.jobName}}</td>
+                          <td> {{a.companyName}}</td>
+                          <td> {{a.jobType}} </td>
+                        </tr>
+                      </tbody>
+                    </table>
+      
+              </ng-template>
+            </ngb-tab>
+      
+            <ngb-tab title="Suggested Jobs">
+      
+              <ng-template ngbTabContent>
+                <p>This would load jobs realted to the applicant skills (a function yet to be implemented)
+                  and job categories of previus job applied.
+                </p>
+              </ng-template>
+      
+            </ngb-tab>
+      
+          </ngb-tabset>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="container" style="padding-top:2rem;">
+            <div class="card-body">
+              <h3 style="color: #df136f"><strong>Security Guard</strong></h3>
+              <div>
+                <h5><strong>Demo Company</strong></h5>
+                <p style="font-style: italic; text-align: center;">
+                  San Juan, PR / Security / Part-Time</p>
+                <br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod lacus non
+                  ipsum commodo, efficitur dignissim sapien consequat. Curabitur feugiat ligula non
+                  nisl fermentum ultrices. Morbi id metus erat. Sed eget erat dui. Nam molestie, dolor
+                  vel ultricies auctor, mauris massa sagittis ante, tristique vehicula risus felis ac dolor. </p>
+              </div>
+            </div>
+      
+          </div>
+    </div>
+</div> -->

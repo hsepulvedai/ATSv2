@@ -1,0 +1,72 @@
+<!--This page shows at a glance all jobs and the amount of applicants each of them has.
+Allows HR to access all the applications in a specific job-->
+<!DOCTYPE html>
+<html>
+
+<body>
+      <h3>Manage Submissions</h3>
+     
+      <div class="card-body">
+          <!-- Search Bar -->
+          <label for="sortBy"><strong> Search: </strong></label><br>
+          <div class="row " style="height:3em;">
+            <div class="col-sm-6">
+              <input [(ngModel)]='searchBarInput' type="search" id="searchBar" class="form-control " placeholder="Start Typing..." style="width:100%;">
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn searchButton" (click)="universalSearch()" style=" margin-left: 50px;">
+                <i class="material-icons">search</i> Search</button>
+            </div>
+          </div>
+      <div>
+
+        <div class="row">
+          <div class="col-md-12" style="text-align: end"> 
+            <p *ngIf="totalJobs === undefined || totalJobs === 0"> Showing 0 of 0 </p>
+            <p *ngIf="!(totalJobs === undefined || totalJobs === 0) && (page != paginatorSize) && !((pageSize * page) > totalJobs)">Showing {{pageSize * page}}
+              of {{totalJobs}}</p>
+            <p *ngIf="(page === paginatorSize ) && (totalJobs != undefined || totalJobs != 0) && (paginatorSize > page) || (pageSize * page) > totalJobs">Showing {{totalJobs}} of {{totalJobs}}</p>
+          </div>
+        </div>
+
+        <table matSort (matSortChange)="sortData($event)" id="matTable" class="table table-striped">
+          <thead>
+            <th mat-sort-header="jobId" scope="col">Job ID</th>
+            <th mat-sort-header="jobName" scope="col">Job Title</th>
+            <th mat-sort-header="jobApplicants" scope="col"># of Applicants</th>
+            <th mat-sort-header="jobStatus" scope="col">Status</th>
+            <th mat-sort-header="jobCategory" scope="col">Category</th>
+            <th mat-sort-header="jobType" scope="col">Type</th>
+            <th mat-sort-header="jobPostedStatus" scope="col">Posted Status</th>
+            <th scope="col"></th>
+          </thead>
+          <tbody *ngIf="sortedData === undefined"> 
+            No jobs to show
+          </tbody>
+          <tbody *ngIf="!(sortedData === undefined)"> 
+            <tr *ngFor="let job of sortedData"> 
+              <th scope="row"><a href="/jobs/{{job.jobId}}">{{job.jobId}}</a></th>
+              <td><a href="/jobs/{{job.jobId}}">{{job.jobName}}</a></td> <!-- Link will lead to a page where all the job information is available and has the ability to edit job info. -->
+              <td> <a href="/jobs/{{job.jobId}}/submissions">{{job.numberOfApplicants}}</a></td>
+              <td> {{job.jobStatus}}</td>
+              <td>{{job.jobCategory}}</td>
+              <td>{{job.jobType}}</td>
+              <td *ngIf="job.active === true">Posted</td> <!--Determines if a job has been made available-->
+              <td *ngIf="job.active === false">Not Posted</td> <!--Determines if a job has been made unavailable-->
+              <td><button class="btn" routerLink="/jobs/{{job.jobId}}/submissions"><i class="material-icons">
+                    notes
+                  </i>Details</button></td>
+                </tr>
+          </tbody>
+        </table>
+        <hr>
+        <!--Paginator for table-->
+        <ngb-pagination id="paginator" [collectionSize]="paginatorCollectionSize" [(page)]="page" [maxSize]="paginatorSize" [rotate]="true"
+          [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage($event)" class="d-flex justify-content-center">
+        </ngb-pagination>
+
+      </div>
+        
+        </div>
+  </body>
+</html>

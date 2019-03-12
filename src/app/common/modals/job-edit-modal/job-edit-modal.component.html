@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modalClose('Cross click')">
+    <span aria-hidden="true" class="closeX">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="jobInfoForm" autocomplete="off" style="margin: 20px" (ngSubmit)="c('Save click');">
+    <div class="row" style="text-align: left;">
+      <div class="form-group col-md-6">
+        <label for="name"> <strong>Job Title</strong></label>
+        <input formControlName="jobName" type="text" class="form-control" id="name">
+      </div>
+      <div class="form-group col-md-6" style="text-align: right">
+        <label for="active"> <strong>Active</strong></label>
+        <mat-checkbox *ngIf="!editDraftTrue" style="margin-left: .5em;" [checked]="true" formControlName="activeJob"></mat-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="company"> <strong>Company</strong></label>
+        <input formControlName="jobCompany" type="text" class="form-control" id="company">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="category"><strong>Category</strong>
+          <button class="addButton" (click)="addItem($event)" type="button"><i id="addCatBtn"
+              class="material-icons">add</i></button>
+        </label>
+        <select formControlName="jobCategory" id="category" class="form-control">
+          <option *ngFor=" let selectedCategory of categories" [ngValue]="selectedCategory.name">
+            {{selectedCategory.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="city"> <strong>City</strong></label>
+        <input formControlName="jobCity" type="text" class="form-control" id="city">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="country"> <strong>Country</strong></label>
+        <input formControlName="jobCountry" type="text" class="form-control" id="country">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="type"><strong>Type</strong>
+          <button class="addButton"><i class="material-icons">add</i></button>
+        </label>
+        <select formControlName="jobType" id="type" class="form-control">
+          <option *ngFor=" let selectedType of types" [ngValue]="selectedType.name">{{selectedType.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="status"><strong>Status</strong>
+          <button class="addButton"><i class="material-icons">add</i></button>
+        </label>
+        <select formControlName="jobStatus" id="status" class="form-control">
+          <option *ngFor=" let selectedStatus of allStatus" [ngValue]="selectedStatus.status">
+            {{selectedStatus.status}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="description"><strong>Description</strong></label>
+        <textarea class="form-control" formControlName="jobDescription" name="description" rows="7" cols="45"
+          style="resize: none;"> </textarea>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+
+  <button *ngIf="editJobTrue" id="saveJobBtn" type="submit" class="btn"
+    (click)="updateJob(jobInfoForm.value);">
+    <i class="material-icons">save_alt</i>Save
+  </button>
+
+  <button *ngIf="addJobTrue" id="saveDraftBtn" type="submit" class="btn" (click)="createDraft(jobInfoForm.value);">
+    <i class="material-icons">save_alt</i>Save as Draft
+  </button>
+
+  <button *ngIf="addJobTrue" id="postNewJobBtn" type="submit" class="btn" (click)="createJob(jobInfoForm.value);">
+    <i class="material-icons">save_alt</i>Create and Post
+  </button>
+
+  <button *ngIf="editDraftTrue" id="postNewJobBtn" type="submit" class="btn" (click)="postDraft()">
+    <i class="material-icons">save_alt</i>Post
+  </button>
+
+</div>

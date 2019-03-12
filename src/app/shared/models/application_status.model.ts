@@ -5,5 +5,5 @@ export interface IApplicationStatus {
     createdDate?: Date,
     modifiedBy?: string,
     modifiedDate?: Date,
-    active?:boolean
+    active?:boolean,
 }

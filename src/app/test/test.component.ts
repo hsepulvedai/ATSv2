@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '../shared/services/job.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Skill } from '../shared/models/skill';
+import { IJobType } from '../shared/models/job_type.model';
+import { IJobCategory } from '../shared/models/job_category.model';
+import { JobCategoryService } from '../shared/services/job-category.service';
+import { JobTypeService } from '../shared/services/job-type.service';
+import { Route, Router } from '@angular/router';
+import { IJob } from '../shared/models/job.model';
 
 @Component({
   selector: 'app-test',
@@ -9,25 +16,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class TestComponent implements OnInit {
 
-  testForm:FormGroup
+ constructor(){}
 
-  constructor(private fb:FormBuilder) { }
-
-  ngOnInit() {
-    this.testForm = this.fb.group({
-      name:''
-    })
-  }
-
-
-  addTrue:boolean = false;
-
-  addItem(){
-    this.addTrue = true;
-  }
-
-  cancelAddItem(){
-    this.addTrue = false;
-  }
+ ngOnInit(){
+   
+ }
 
 }

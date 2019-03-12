@@ -1,0 +1,43 @@
+<div class="container" style="padding-top:2rem;">
+  <div class="card-body" *ngIf="jobLoaded | async">
+    <h3 style="color: #df136f"><strong>{{job.jobName}}</strong>
+        <i class="material-icons" style="color: #25326a; margin-left: .5em;"
+        (click)="openModal(jobInfoContent)">edit</i>
+    </h3>
+    <div>
+      <h5><strong> {{job.company}}</strong></h5>
+      <p style="font-style: italic; text-align: center;">
+        {{job.city}} , {{job.country}} / {{job.jobCategory}} / {{job.jobType}}</p>
+      <br>
+      <p>{{job.description}}</p>
+    </div>
+
+    <br>
+
+    <p><strong>Required Skills</strong></p>
+    <ul>
+      <li *ngFor="let skill of reqSkills">{{skill}}</li>
+    </ul>
+
+    <p><strong>Other Skills</strong></p>
+    <ul>
+      <li *ngFor="let skill of otherSkills">{{skill}}</li>
+    </ul>
+
+    <div style="text-align: center">
+        <button class="btn btn-inverse"  (click)="openModal(jobInfoContent)">Edit Job Information</button>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #jobInfoContent let-c="close" let-d="dismiss">
+  <job-edit-modal modalType="edit" modalTitle="Job Update" jobId="{{job.jobId}}" jobName="{{job.jobName}}" 
+  company="{{job.company}} "country="{{job.country}}" 
+  city="{{job.city}}" country="{{job.country}}" category="{{job.jobCategory}}"
+  type="{{job.jobType}}" status="{{job.jobStatus}}" description="{{job.description}}" isActive={{job.active}}></job-edit-modal>
+</ng-template>
+
+<!-- <ng-template #jobInfoContent let-c="close" let-d="dismiss">
+  <job-edit-modal modalType="edit" modalTitle="Job Update" job="job"></job-edit-modal>
+</ng-template> -->

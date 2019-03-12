@@ -26,7 +26,6 @@ export class ApplicationService {
     return this.http.get(environment.baseUrl + '/ApplicationStatus/ApplicationStatusSelectActive' )
   }
 
-
   getCount(id){
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationCountById/'+ id )
   }
@@ -39,10 +38,13 @@ export class ApplicationService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllByRecruiterId/'+ recruiterId)
   }
 
+  getAllApplicationByApplicant(applicantId){
+    return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowByApplicantId/'+ applicantId)
+  }
+
   getAllTasksByAppIdAndStatus(applicationId, status){
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowPendingTaskByAppId/' + applicationId  + '/status=' +  status)
   }
-
 
   universalSearch(recruiterId:number, keyword: string, pageNumber: number, pageSize: number) {
     if (keyword === '')
@@ -57,6 +59,8 @@ export class ApplicationService {
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationUniversalSearchCountByRecruiterId/' + recruiterId)
   }
 
+  
+
   modifyStatus(application) {
     return this.http.patch(environment.baseUrl + this.routePrefix + '/ApplicationModifyStatus/', application )
   }
@@ -68,10 +72,4 @@ export class ApplicationService {
   getApplicationInfoByAppId(applicationId){
     return this.http.get(environment.baseUrl + this.routePrefix + '/ApplicationShowAllInfoByApplicationId/' + applicationId)
   }
-
-
-
-
-
-
 }

@@ -6,14 +6,6 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title></title>
-  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> Keep link for icons/ make sure to add to all htmls with icons -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-
 <body>
   <!-- First Container - top gradient banner on the page-->
   <div class="backgroundWelcome">
@@ -27,70 +19,66 @@ shows all the available jobs or to the application pages for the 3 latest jobs--
     <h2> Working at INVID </h2>
 
     <div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus. Ut quis eros
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus. Ut quis
+        eros
         risus. Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo tortor nec interdum.
-        Nam urna nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris vulputate, imperdiet dolor non,
-        condimentum sapien. Pellentesque id ex non mi porta aliquet. Vestibulum finibus varius augue, id convallis nunc mattis
+        Nam urna nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris vulputate, imperdiet dolor
+        non,
+        condimentum sapien. Pellentesque id ex non mi porta aliquet. Vestibulum finibus varius augue, id convallis nunc
+        mattis
         a. Quisque consequat ac ligula quis suscipit. Mauris viverra vulputate orci sed vulputate. Praesent nec neque et
         massa suscipit dapibus. Cras dapibus nisi non pulvinar posuere. </p><br>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus. Ut quis eros risus.
-        Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo tortor nec interdum. Nam urna
-        nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris vulputate, imperdiet dolor non, condimentum
-        sapien. Pellentesque id ex non mi porta aliquet. Vestibulum finibus varius augue, id convallis nunc mattis a. Quisque
-        consequat ac ligula quis suscipit. Mauris viverra vulputate orci sed vulputate. Praesent nec neque et massa suscipit
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tristique maximus erat eget rhoncus. Ut quis
+        eros risus.
+        Maecenas in dolor non massa volutpat posuere vitae id lectus. Aliquam cursus commodo tortor nec interdum. Nam
+        urna
+        nibh, suscipit ac urna et, finibus facilisis metus. Vivamus laoreet mauris vulputate, imperdiet dolor non,
+        condimentum
+        sapien. Pellentesque id ex non mi porta aliquet. Vestibulum finibus varius augue, id convallis nunc mattis a.
+        Quisque
+        consequat ac ligula quis suscipit. Mauris viverra vulputate orci sed vulputate. Praesent nec neque et massa
+        suscipit
         dapibus. Cras dapibus nisi non pulvinar posuere.
       </p><br>
-
     </div>
+  </div>
 
+  <div class="row">
+    <div class="container" style="padding-bottom: 7rem;">
+      <div class="card-deck">
+        <div class="card">
+          <img class="card-img-top" src="../assets/teamwork.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Teamwork</h5>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img-top" src="../assets/work.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Innovative Technologies</h5>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img-top" src="../assets/team.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Team based development</h5>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-
+  <div class="latestJobs">
+    <h2 style="color: #25326a">Latest Jobs</h2>
     <div class="row">
-      <div class="container" style= "padding-bottom: 7rem;">
-        <div class="card-deck">
-          <div class="card">
-            <img class="card-img-top" src="../assets/teamwork.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Teamwork</h5>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="../assets/work.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Innovative Technologies</h5>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="../assets/team.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Team based development</h5>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="latestJobs">
-
-      <h2 style="color: #25326a">Latest Jobs</h2>
-
-      <div class="row">
-
-        <div *ngFor="let job of jobs" style="padding: 2rem; text-align: center; margin: auto;">
-
-          <!-- <h3><button class="btnWelcomeJobs" (click)="applyButtonClicked(jobs.jobId)">{{job.jobName}}</button></h3> -->
-          <h4>{{job.jobName}}</h4>
-
-          <h5>{{job.city}}, {{job.country}}</h5>
-
-          <button class="applyBtn btn" (click)="applyButtonClicked(job.jobId)">Apply</button>
-        </div>
+      <div *ngFor="let job of jobs" style="padding: 2rem; text-align: center; margin: auto;">
+        <h4>{{job.jobName}}</h4>
+        <h5>{{job.city}}, {{job.country}}</h5>
+        <button class="applyBtn btn" routerLink="/jobs/{{job.jobId}}/apply">Apply</button>
       </div>
     </div>
+  </div>
 
 </body>
 

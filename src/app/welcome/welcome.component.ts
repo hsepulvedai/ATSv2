@@ -1,12 +1,9 @@
-/*This is the main page for applicants. Welcome them to the site and then allows them to go to the page that
-shows all the available jobs or to the application pages for the 3 latest jobs */
+/*This is the main page for applicants. Welcome them to the site and then allows them to go 
+  to the page that shows all the available jobs or to the application pages for the 3 latest jobs */
+
 import { Component, OnInit } from '@angular/core';
-import { IJobOfferHR } from '../shared/models/job-offer-hr.model';
-import { IJobOffer } from '../shared/models/job-offer.model';
 import { JobService } from '../shared/services/job.service';
-import { Router } from '@angular/router';
-
-
+import { IJob } from '../shared/models/job.model';
 
 @Component({
   selector: 'app-welcome',
@@ -14,25 +11,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./welcome.component.css']
 })
 
-
 export class WelcomeComponent implements OnInit {
-jobs:IJobOffer[]
-  constructor(private jobService:JobService, private router: Router,
-  ) { }
+jobs:IJob[]
+  constructor(private jobService:JobService) { }
  
   ngOnInit() {
     this.jobService.universalSearch('_', 1, 3)
-        .subscribe((data: IJobOffer[]) => {
+        .subscribe((data: IJob[]) => {
           this.jobs = data['Data'];
-        })
+        });
   }
-  applyButtonClicked(jobId: number) {
-
-    this.jobService.currentJobId = jobId;
-    this.router.navigate(['offer-application'])
-
-  }
-
-
-
 }

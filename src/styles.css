@@ -2,38 +2,32 @@
   specific html's <style> or as inline styling in necessary cases*/
 
 /*Allow the use of google fonts*/
+
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-
-/* .mat-tab-group {
-    font-family: Montserrat;
-    color:#25326a;
-  } */
-
-  /* .mat-tab-group:active {
-      color:#df136f;
-  } */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html {
     font-family: Montserrat;
 }
-body { /*Estilo general para body tags*/
+
+body {
+    /*Estilo general para body tags*/
     /* font-family: Montserrat; */
-    font: 100% ;
+    font: 100%;
     line-height: 1.8;
-    color:#25326a;
+    color: #25326a;
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color:white;
-    
+    background-color: white;
 }
 
 h1, h2 {
-    text-align: center; 
+    text-align: center;
     font-family: Montserrat;
     font-weight: bold;
     color: #25326a;
@@ -47,22 +41,20 @@ h3 {
     font-weight: bold;
 }
 
-h4, h5  {
+h4, h5 {
     font-family: Montserrat;
     color: #25326a;
     text-align: center;
 }
 
-
-p {
+p, li, label {
     font-size: 100%;
     font-family: Montserrat;
     color: #25326a;
 }
 
-
-
-input{ /* inputs style to make them look like the rest of the buttons*/
+input {
+    /* inputs style to make them look like the rest of the buttons*/
     margin-bottom: 5em;
     color: #25326a;
     background-color: white;
@@ -72,13 +64,15 @@ label {
     color: #25326a;
 }
 
-table { /*General styling for tables*/
+table {
+    /*General styling for tables*/
     /* font-family: Quicksand; */
     font-family: Montserrat;
     color: #25326a;
 }
 
-th { /*General styling for table heads*/
+th {
+    /*General styling for table heads*/
     text-align: left;
     color: #25326a;
 }
@@ -91,12 +85,17 @@ td {
     vertical-align: middle;
 }
 
-  tr { /*General styling for table rows*/
+tr {
+    /*General styling for table rows*/
     text-align: left;
-  }
+}
 
 hr {
     color: #25326a;
+}
+
+a {
+    color: #df136f;
 }
 
 i {
@@ -104,11 +103,11 @@ i {
 }
 
 .modal-header {
-    background-color:#25326a;
-  }
+    background-color: #25326a;
+}
 
 .modal-title {
-    color:white;
+    color: white;
 }
 
 .modal-footer {
@@ -116,9 +115,8 @@ i {
 }
 
 .closeX {
-    color:white;
+    color: white;
 }
-  
 
 /* .margin {margin-bottom: 45px;}  */
 
@@ -127,56 +125,66 @@ i {
     padding-bottom: 2.5rem;
 }
 
-#navtext{ /* Controls text color of navbar*/
-    color:white;
-}
-#navtext:hover{ /*Controls text color when hovered*/
-    color:#df136f;
+#navtext {
+    /* Controls text color of navbar*/
+    color: white;
 }
 
-.navbar { /*Controls navbar */
-    
-    background-color:#25326a;   
+#navtext:hover {
+    /*Controls text color when hovered*/
+    color: #df136f;
 }
 
-.nav-link{ /*Controls all links styles*/
-   
+.navbar {
+    /*Controls navbar */
+    background-color: #25326a;
+}
+
+.nav-link {
+    /*Controls all links styles*/
     color: #25326a;
     /* font-family: Poppins; */
-    font-size:100%;    
+    font-size: 100%;
 }
-.nav-link:hover { /*gives hover effect to links on the navbar*/
+
+.nav-link:hover {
+    /*gives hover effect to links on the navbar*/
     color: #df136f;
     text-decoration: none;
 }
 
-.breadcrumb{  /*Controls breadcrumbs (used in B1 and B2 ) */
-    background-color:white;
+.breadcrumb {
+    /*Controls breadcrumbs (used in B1 and B2 ) */
+    background-color: white;
     width: 25%;
 }
-.breadcrumb-item{ /*Controls breadcrumbs  */
+
+.breadcrumb-item {
+    /*Controls breadcrumbs  */
     color: #df136f;
     text-decoration: none;
 }
 
-
-.descriptionbox{ /*Description boxes for Jobs and applicants information b2 C2 and A3*/
-    width: 69em;    
+.descriptionbox {
+    /*Description boxes for Jobs and applicants information b2 C2 and A3*/
+    width: 69em;
 }
 
-img{ /* Controls logo image on navbar*/
-    width: 8em;    
+img {
+    /* Controls logo image on navbar*/
+    width: 8em;
     position: left;
-
 }
 
-ngb-pagination /deep/ .page-link { /*Controls color for navigation*/
+ngb-pagination /deep/ .page-link {
+    /*Controls color for navigation*/
     color: #25326a !important;
     background-color: white !important;
 }
 
-.tasks{ /* controls location of tasks item */
-   float:right;
+.tasks {
+    /* controls location of tasks item */
+    float: right;
 }
 
 /*  Find way to change color on link text and current page on Firefox
@@ -185,38 +193,36 @@ ngb-pagination /deep/ .page-item.disabled {
     background-color: #25326a ;
 } */
 
-
-.applyBorder{ /* Adds oval border to apply link*/
-    
-    border: 1px solid white ;
+.applyBorder {
+    /* Adds oval border to apply link*/
+    border: 1px solid white;
     padding: 20px;
     border-radius: 55px;
 }
 
-
-
-.btn { /* Controls styles of overall buttons*/
-
-  /* border-radius: 4px; */
-  border-radius: 55px !important;
-  background-color: #FFFFFF;
-  border: 1px solid #25326a !important;
-  border-color: #25326a;
-  color: #25326a;
-  text-align: center;
-  font-size: .87em;
-  /* padding:1rem; */
-  /* margin: 5px; */
+.btn, .btn-noHover {
+    /* Controls styles of overall buttons*/
+    /* border-radius: 4px; */
+    border-radius: 55px !important;
+    background-color: #FFFFFF;
+    border: 1px solid #25326a !important;
+    border-color: #25326a;
+    color: #25326a;
+    text-align: center;
+    font-size: .87em;
+    /* padding:1rem; */
+    /* margin: 5px; */
 }
 
-.btn:hover { /* Hover effect of overall buttons*/  
-  background-color: #25326a;
-  border: 1px solid #FFFFFF;
-  color: #FFFFFF;
+.btn:hover {
+    /* Hover effect of overall buttons*/
+    background-color: #25326a;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
 }
 
-
-.btn-inverse { /* Controls styles of overall buttons*/
+.btn-inverse {
+    /* Controls styles of overall buttons*/
     border-radius: 55px !important;
     background-color: #25326a;
     border: 1px solid #25326a !important;
@@ -226,30 +232,33 @@ ngb-pagination /deep/ .page-item.disabled {
     font-size: .87em;
     /* padding:1rem; */
     /* margin: 5px; */
-  }
-  
-  .btn-inverse:hover { /* Hover effect of overall buttons*/  
+}
+
+.btn-inverse:hover {
+    /* Hover effect of overall buttons*/
     background-color: #FFFFFF;
     border: 1px solid #25326a !important;
     color: #25326a;
-  }
+}
 
-
-#uploadResume{ /* input style for browse on A3 (changed text but not actual button style)*/
+#uploadResume {
+    /* input style for browse on A3 (changed text but not actual button style)*/
     margin-bottom: 5em;
     color: #25326a;
     background-color: white;
 }
 
-
-    
- .smallrow{ /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
+.smallrow {
+    /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
     height: 5em;
 }
-.mdrow{ /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
-    height: 7em; 
+
+.mdrow {
+    /*used in C1 A5 to control the position of the inputs in the add new applicant modal*/
+    height: 7em;
 }
-.descp {
+
+.desc{
     font-size: 16px;
     color: white;
     text-align: justify;
@@ -259,45 +268,50 @@ ngb-pagination /deep/ .page-item.disabled {
     padding-bottom: 50px;
 }
 
-.backgroundG{ /*Controls small pink border on top of navbar*/
-     text-align: center;
-     position:auto;
-      height: 10px;
-      background-color:#df136f; 
-      font-weight: 100;
+.backgroundG {
+    /*Controls small pink border on top of navbar*/
+    text-align: center;
+    position: auto;
+    height: 10px;
+    background-color: #df136f;
+    font-weight: 100;
 }
 
-
-
-.tabsmargin{ /*Controls the location of the tabs on A5 and C1*/
+.tabsmargin {
+    /*Controls the location of the tabs on A5 and C1*/
     margin-top: 10em
 }
 
-footer{ /*General footer style*/
-   margin-top: 20%;
-   position: relative;
-   bottom: 0;
-    color:white;
+footer {
+    /*General footer style*/
+    margin-top: 20%;
+    position: relative;
+    bottom: 0;
+    color: white;
     width: 100%;
     background-color: #25326a;
 }
-.bg-1 {  /*Not tbeing used, keeping the colors*/
-    background-image: linear-gradient(90deg,#25326a,#4577bb);
+
+.bg-1 {
+    /*Not tbeing used, keeping the colors*/
+    background-image: linear-gradient(90deg, #25326a, #4577bb);
     padding-bottom: 100px;
     color: #ffffff;
-   
 }
-.bg-2 { /*Not tbeing used, keeping the colors*/
-    background-image: linear-gradient( 	#F62459, #F47983);
+
+.bg-2 {
+    /*Not tbeing used, keeping the colors*/
+    background-image: linear-gradient( #F62459, #F47983);
     color: #ffffff;
-    
 }
 
 /*Timeline design*/
+
 ul.timeline {
     list-style-type: none;
     position: relative;
 }
+
 ul.timeline:before {
     content: ' ';
     background: #d4d9df;
@@ -308,11 +322,13 @@ ul.timeline:before {
     height: 100%;
     z-index: 400;
 }
-ul.timeline > li {
+
+ul.timeline>li {
     margin: 20px 0;
     padding-left: 20px;
 }
-ul.timeline > li:before {
+
+ul.timeline>li:before {
     content: ' ';
     background: white;
     display: inline-block;
@@ -328,44 +344,45 @@ ul.timeline > li:before {
 /* Comments section styles*/
 
 .comment-wrapper .panel-body {
-    max-height:650px;
-    overflow:auto;
+    max-height: 650px;
+    overflow: auto;
 }
 
 .comment-wrapper .media-list .media img {
-    width:64px;
-    height:64px;
-    border:2px solid #e5e7e8;
+    width: 64px;
+    height: 64px;
+    border: 2px solid #e5e7e8;
 }
 
 .comment-wrapper .media-list .media {
-    border-bottom:1px dashed #efefef;
-    margin-bottom:25px;
+    border-bottom: 1px dashed #efefef;
+    margin-bottom: 25px;
 }
-
 
 .searchBarArea {
     padding: 2rem;
-  }
-  
-  .tableArea {
+}
+
+.tableArea {
     padding: 2rem;
-  }
+}
 
-
-  .searchButton {
+.searchButton {
     background-color: #25326a !important;
-    color:#FFFF;
-    border-color:#25326a !important;
+    color: #FFFF;
+    border-color: #25326a !important;
     border-radius: 50%;
-    text-align: center; 
+    text-align: center;
 }
 
 .jobDescription {
-    text-align: justify ;
-    text-justify: inter-word; 
+    text-align: justify;
+    text-justify: inter-word;
     margin-left: 10%;
-    margin-right: 10%; 
+    margin-right: 10%;
     padding-bottom: 2em;
-  }
-     
+}
+
+.align-center {
+    text-align: center;
+}

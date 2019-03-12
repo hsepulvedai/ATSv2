@@ -8,7 +8,31 @@ import { IUser } from '../../shared/models/user.model';
 })
 export class UserService {
 
-  currentUser:IUser
+  // Information of a dummy User that exists within the database
+  // It emulates a logged in applicant user
+  currentUser:IUser = {
+    id:14,
+    firstName: 'Stuart',
+    lastName: 'Little',
+    email: 'slittle@gmail.com',
+    password: 'mousepower',
+    phone: '115-995-9999',
+    roleId: 3,
+    active: true
+  }
+
+  // // Information of a dummy User that exists within the database
+  // // It emulates a logged in recuiter user
+  // currentUser:IUser = {
+  //   id: 9,
+  //   firstName: 'Albert',
+  //   lastName: 'Einstein',
+  //   email: 'einst@gmail.com',
+  //   password: 'eequalsmcsquare',
+  //   phone: 'jjj1233',
+  //   roleId: 4,
+  //   active: true
+  // }
 
   routePrefix = 'Users'
 

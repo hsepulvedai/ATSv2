@@ -19,6 +19,10 @@ export class CommentService {
     return this.http.post(environment.baseUrl + this.routePrefix + '/ApplicationCommentInsertFromWeb/', comment)
   }
 
+  editComment(comment) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + '/CommentEdit/' + comment.id, comment)
+  }
+
 
 
 

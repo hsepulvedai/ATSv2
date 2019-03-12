@@ -4,5 +4,6 @@ export interface IJobInsert {
     jobCategory?:string,
     jobType?: string,
     jobDescription?: string
-    
+    jobStatus?:string
+    jobSkills?:string[]
 }

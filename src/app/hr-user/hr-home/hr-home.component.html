@@ -1,0 +1,91 @@
+<h3> Human Resources Management</h3>
+<br>
+
+<div class="container">
+  <div class="card-group">
+    <div class="card mb-3 menuCard"
+    [routerLink]="['/jobs/create']">
+      <div class="card-header" style="text-align: center">
+        <i class="material-icons" style="font-size: 400%;">note_add</i>
+        <div class="card-body">
+          <h5 class="card-title">Create New Job</h5>
+          <p class="card-text">
+            Create a new job with all the job informations and the skills required.
+            
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3 menuCard" [routerLink]="['/jobs/submissions']">
+      <div class="card-header" style="text-align: center">
+        <i class="material-icons" style="font-size: 400%;">assignment</i>
+        <div class="card-body">
+          <h5 class="card-title">Submission List</h5>
+          <p class="card-text">
+            View general information and the number of applications for each job.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3 menuCard" [routerLink]="['/jobs/maintenance']">
+      <div class="card-header" style="text-align: center">
+        <i class="material-icons" style="font-size: 250%;">assignment</i>
+        <i class="material-icons" style="font-size: 400%;">edit</i>
+        <div class="card-body">
+          <h5 class="card-title">Job Maintenance</h5>
+          <p class="card-text">
+            View and edit job information and skills. Post or un-post a job.
+            
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3" style="min-width: 20rem;" [routerLink]="['/applications']">
+      <div class="card-header" style="text-align: center">
+        <i class="material-icons" style="font-size: 400%;">assignment_ind</i>
+        <div class="card-body">
+          <h5 class="card-title">Application List</h5>
+          <p class="card-text">
+              View the lastest applications recieved.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card mb-3" style="min-width: 20rem;" [routerLink]="['/application/management']">
+      <div class="card-header" style="text-align: center">
+          <i class="material-icons" style="font-size: 250%;">assignment</i>
+        <i class="material-icons" style="font-size: 400%;">remove_red_eye</i>
+        <div class="card-body">
+          <h5 class="card-title">Application Overview</h5>
+          <p class="card-text">Some quick example text to build on the panel title and make up the bulk of the panel's
+            content.</p>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="card mb-3" style="min-width: 20rem;" [routerLink]="['/application/management']">
+      <div class="card-header" style="text-align: center">
+        <i class="material-icons" style="font-size: 250%;">assignment_ind</i>
+        <i class="material-icons" style="font-size: 400%;">edit</i>
+        <div class="card-body">
+          <h5 class="card-title">Application Management</h5>
+          <p class="card-text">Some quick example text to build on the panel title and make up the bulk of the panel's
+            content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3" style="min-width: 20rem;" [routerLink]="['/hr/tasks']">
+      <div class="card-header" style="text-align: center">
+        <i class="material-icons" style="font-size: 400%;">list</i>
+        <div class="card-body">
+          <h5 class="card-title">Tasks</h5>
+          <p class="card-text">
+            View the lastest pending, delayed and completed tasks for all applications.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

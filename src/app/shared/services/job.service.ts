@@ -3,15 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { IJob } from '../../shared/models/job.model'
 
 import { environment } from '../../../environments/environment';
-import { IJobUpdate } from '../models/job_update.model';
-import { IJobOfferHR } from '../models/job-offer-hr.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
 
-  currentJob: IJobOfferHR
+  currentJob: IJob
   currentJobId: number
 
   routePrefix = "Job/"
@@ -81,8 +79,8 @@ export class JobService {
     return this.http.delete(environment.baseUrl + this.routePrefix + 'JobDraftDelete/' + id)
   }
 
-  updateJob(job: IJobUpdate) {
-    return this.http.put(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
+  updateJob(job: IJob) {
+    return this.http.patch(environment.baseUrl + this.routePrefix + 'JobEditAll', job)
   }
 
   // Sorting
